@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 /**
  * Created by Thomas on 01-09-15.
  */
-public class Player {
+public class Player implements Sprite {
     protected int tX;
     protected int tY;
     protected Image tImage;
