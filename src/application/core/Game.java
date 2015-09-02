@@ -10,10 +10,12 @@ public class Game {
     protected LevelFactory levelFactory;
     protected int levelNumber;
     protected Level level;
+    protected Player tPlayer;
 
     public Game() {
         levelFactory = new LevelFactory();
         levelNumber = 0;
+        tPlayer = new Player();
     }
 
     public void setScore(int value) {
@@ -33,6 +35,10 @@ public class Game {
     public void newGame() {
         levelNumber = 0;
         nextLevel();
+    }
+
+    public Player getPlayer() {
+        return tPlayer;
     }
 
 
