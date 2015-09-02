@@ -31,26 +31,6 @@ public class LevelController {
         gameCanvas.setHeight(Main.getHeight());
 
         draw();
-
-//        Task task = new Task<Void>() {
-//            @Override
-//            public Void call() throws Exception {
-//                int i = 0;
-//                while (true) {
-//                    final int finalI = i;
-//                    Platform.runLater(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                        }
-//                    });
-//                    i++;
-//                    Thread.sleep(1000);
-//                }
-//            }
-//        };
-//        Thread th = new Thread(task);
-//        th.setDaemon(true);
-//        th.start();
     }
 
     protected void draw() {
@@ -62,9 +42,23 @@ public class LevelController {
             long lastTime = System.nanoTime();
             public void handle(long currentNanoTime)
             {
-                long time = System.nanoTime() - lastTime;
+                //Manage framerate
+                double time = (System.nanoTime() - lastTime) / 1000000;
                 lastTime = System.nanoTime();
+                System.out.println(time);
+                if (time < 16.66) {
+                    try {
+                        Thread.sleep((int) (16.66 - time));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //---------------
+
+                //Clear screen
                 gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
+
+                //Draw all objects
                 drawAliens(gc);
                 drawPlayer(gc);
                 drawProjectiles(gc);
@@ -84,7 +78,13 @@ public class LevelController {
         gc.drawImage( player.getImage(), player.getX(), player.getY() );
     }
 
-    protected void drawProjectiles(GraphicsContext gc) {}
+    protected void drawProjectiles(GraphicsContext gc) {
+        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
+        for (Projectile projectile: projectiles) {
+            projectile.move();
+            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
+        }
+    }
 
 
 
