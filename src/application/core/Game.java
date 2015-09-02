@@ -21,6 +21,7 @@ public class Game {
     protected boolean tPaused;
     protected boolean tRightArrow;
     protected boolean tLeftArrow;
+    protected boolean tSpace;
     protected ArrayList<Projectile> tProjectiles;
 
 
@@ -30,7 +31,6 @@ public class Game {
         tPlayer = new Player();
         tProjectiles = new ArrayList<Projectile>();
         tPaused = false;
-        tLeftArrow = false;
     }
 
     public void setScore(int value) {
@@ -61,6 +61,9 @@ public class Game {
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = true;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
+                } else if (code == KeyCode.SPACE) {
+                    tSpace = true;
+                    Main.game.getPlayer().fireButtonPressed(tSpace);
                 }
 
             }
@@ -77,6 +80,9 @@ public class Game {
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = false;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
+                } else if (code == KeyCode.SPACE) {
+                    tSpace = false;
+                    Main.game.getPlayer().fireButtonPressed(tSpace);
                 }
             }
         });
