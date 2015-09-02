@@ -75,7 +75,6 @@ public class Main extends Application {
         return tWidth;
     }
 
-
     public static int getHeight() {
         return tHeight;
     }
