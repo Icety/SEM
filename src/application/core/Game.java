@@ -48,7 +48,11 @@ public class Game {
                 if (code == KeyCode.ESCAPE) {
                     // show menu
                 } else if (code == KeyCode.P) {
-                    tPaused = true;
+                   if ( tPaused = true) {
+                       tPaused = false;
+                   } else if (tPaused = false) {
+                       tPaused = true;
+                   }
                 }
             }
         });
