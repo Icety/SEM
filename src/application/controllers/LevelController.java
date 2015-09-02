@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.Main;
 import application.core.Alien;
+import application.core.Player;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -56,8 +57,6 @@ public class LevelController {
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 
-
-
         new AnimationTimer()
         {
             long lastTime = System.nanoTime();
@@ -67,6 +66,8 @@ public class LevelController {
                 lastTime = System.nanoTime();
                 gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
                 drawAliens(gc);
+                drawPlayer(gc);
+                drawProjectiles(gc);
             }
         }.start();
     }
@@ -78,9 +79,12 @@ public class LevelController {
         }
     }
 
-    protected void redrawPlayer() {}
+    protected void drawPlayer(GraphicsContext gc) {
+        Player player = Main.game.getPlayer();
+        gc.drawImage( player.getImage(), player.getX(), player.getY() );
+    }
 
-    protected void redrawProjectiles() {}
+    protected void drawProjectiles(GraphicsContext gc) {}
 
 
 
