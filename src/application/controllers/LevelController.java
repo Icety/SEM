@@ -61,7 +61,7 @@ public class LevelController {
 //        th.start();
     }
 
-    protected void redrawAliens() {
+    protected void draw() {
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 
