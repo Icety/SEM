@@ -8,7 +8,9 @@ import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -16,10 +18,17 @@ import java.util.ArrayList;
  */
 public class LevelController {
 
+    @FXML
+    private Canvas gameCanvas;
+
     ArrayList<Alien> tAliens = Main.game.getLevel().getAliens();;
 
     @FXML
     private void initialize() {
+
+        gameCanvas.setWidth(Main.getWidth());
+        gameCanvas.setHeight(Main.getHeight());
+
         for (Alien alien: tAliens) {
             //Todo: Draw alien at good location
         }
@@ -54,16 +63,16 @@ public class LevelController {
 
     protected void redrawAliens() {
 
-        Canvas canvas = new Canvas(512, 512);
-
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 
         final long startNanoTime = System.nanoTime();
+
 
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
+                gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
                 for (Alien alien: tAliens) {
                     alien.move();
                     gc.drawImage( alien.getImage(), alien.getX(), alien.getY() );

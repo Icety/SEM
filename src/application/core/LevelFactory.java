@@ -1,6 +1,7 @@
 package application.core;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -26,7 +27,7 @@ public class LevelFactory {
     public ArrayList<Alien> loadAliens() {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
         try {
-            File file = new File("levels.xml");
+            File file = new File("src\\application\\levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(file);
@@ -36,11 +37,16 @@ public class LevelFactory {
             //Start xml parsing
 
             NodeList alienList = doc.getElementsByTagName("alien");
-            Alien alien;
+            Alien alien = new Alien();
             for (int temp = 0; temp < alienList.getLength(); temp++) {
                 Node node = alienList.item(temp);
-                alien = new Alien();
-                alien.readXml(node);
+                Element eElement = (Element) node;
+                switch (eElement.getElementsByTagName("type").item(0).getTextContent()) {
+                    case "small":
+                        alien = new SmallAlien();
+                        break;
+                }
+                alien.readXml(eElement);
                 aliens.add(alien);
             }
         } catch (Exception e) {

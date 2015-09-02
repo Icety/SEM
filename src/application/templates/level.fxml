@@ -10,7 +10,10 @@
 <?xml-stylesheet type="text/css" href="style.css"?>
 
 
+<?import javafx.scene.canvas.Canvas?>
+
 <BorderPane fx:controller="application.controllers.LevelController" prefHeight="400.0" prefWidth="600.0"
             xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:id="main">
+    <Canvas fx:id="gameCanvas" height="512.0" width="512.0"></Canvas>
 </BorderPane>
 

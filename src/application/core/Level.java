@@ -21,4 +21,12 @@ public class Level {
     public void setStartPlayer() {
         tPlayer = new Player();
     }
+
+    public String toString() {
+        String result = "Level with the following aliens: \n";
+        for (Alien alien: tAliens) {
+            result += alien.toString() +"\n";
+        }
+        return result;
+    }
 }

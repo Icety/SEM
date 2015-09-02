@@ -16,6 +16,8 @@ public class Main extends Application {
     public static Stage primaryStage;
     public static BorderPane pane;
     public static Game game;
+    protected static int tWidth = 512;
+    protected static int tHeight = 512;
 
 
     @Override
@@ -40,12 +42,14 @@ public class Main extends Application {
         try {
             // Load new screen
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource(fxml + ".fxml"));
+            loader.setLocation(Main.class.getResource("templates/" + fxml + ".fxml"));
             BorderPane pane = null;
             pane = loader.load();
 
             //Set the id of the pane to be used by the css
             pane.setId("pane");
+            pane.setPrefWidth(Main.tWidth);
+            pane.setPrefHeight(Main.tHeight);
 
             // Load Style
             File f = new File("src/application/style.css");
@@ -65,5 +69,14 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static int getWidth() {
+        return tWidth;
+    }
+
+
+    public static int getHeight() {
+        return tHeight;
     }
 }

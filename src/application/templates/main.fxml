@@ -16,7 +16,7 @@
     <center>
         <VBox fx:id="startscreen">
             <children>
-                <Button fx:id="nieuwspelButton" text="Nieuw Spel" mnemonicParsing="false" >
+                <Button fx:id="newGameButton" text="Nieuw Spel" mnemonicParsing="false" >
                 </Button>
                 <Label text="&#xD;"></Label>
                 <Button fx:id="exitButton" text="Sluit af" mnemonicParsing="false">
