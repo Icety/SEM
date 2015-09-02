@@ -60,7 +60,6 @@ public class Game {
                     tLeftArrow = true;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    System.out.println("space bar pressed");
                     Main.game.getPlayer().fireButtonPressed(true);
                 }
 
@@ -78,7 +77,6 @@ public class Game {
                     tLeftArrow = false;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    System.out.println("space bar released");
                     Main.game.getPlayer().fireButtonPressed(false);
                 }
             }

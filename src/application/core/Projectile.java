@@ -11,7 +11,7 @@ public class Projectile implements Sprite {
     protected int tY;
     protected Image tImage;
     protected int tDirection = 1;
-    protected int tSpeed = 1;
+    protected int tSpeed = 15;
 
     public int getX() {
         return tX;
@@ -37,5 +37,10 @@ public class Projectile implements Sprite {
         if( tY + tImage.getHeight() > Main.getHeight()) {
             //delete projectile;
         }
+    }
+
+    public String toString() {
+        String result = "Projectile on coords: "+ tX +", "+ tY;
+        return result;
     }
 }

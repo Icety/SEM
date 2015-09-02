@@ -13,6 +13,6 @@ public class PlayerProjectile extends Projectile {
         tDirection = -1;
         tImage = new Image(new File("src/application/images/playerProjectile.png").toURI().toString());
         tX = x - (int)tImage.getWidth() / 2;
-        tY = y - (int)tImage.getHeight();
+        tY = y;
     }
 }

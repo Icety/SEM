@@ -17,7 +17,7 @@ public class Player implements Sprite {
     protected int tHealth;
     protected AnimationTimer tTimer;
     protected long tLastShot = 0;
-    protected int tReloadTime = 1000;
+    protected int tReloadTime = 150;
     protected int tSpeed = 5;
 
     protected boolean tShoot, tGoLeft, tGoRight;
@@ -39,6 +39,7 @@ public class Player implements Sprite {
                     moveRight();
                 }
                 if(tShoot && time > tReloadTime) {
+                    System.out.println("Shoot");
                     tLastShot = System.nanoTime();
                     Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
                     Main.game.addProjectile(projectile);

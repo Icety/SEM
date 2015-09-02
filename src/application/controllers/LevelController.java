@@ -63,9 +63,9 @@ public class LevelController {
 
                 Main.game.update();
                 //Draw all objects
+                drawProjectiles(gc);
                 drawAliens(gc);
                 drawPlayer(gc);
-                drawProjectiles(gc);
             }
         }.start();
     }
