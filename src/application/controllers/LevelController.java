@@ -29,16 +29,7 @@ public class LevelController {
         gameCanvas.setWidth(Main.getWidth());
         gameCanvas.setHeight(Main.getHeight());
 
-        for (Alien alien: tAliens) {
-            //Todo: Draw alien at good location
-        }
-
-        //Todo: Draw player
-
-
-        redrawAliens();
-        redrawPlayer();
-        redrawProjectiles();
+        draw();
 
 //        Task task = new Task<Void>() {
 //            @Override
@@ -65,20 +56,26 @@ public class LevelController {
 
         GraphicsContext gc = gameCanvas.getGraphicsContext2D();
 
-        final long startNanoTime = System.nanoTime();
 
 
         new AnimationTimer()
         {
+            long lastTime = System.nanoTime();
             public void handle(long currentNanoTime)
             {
+                long time = System.nanoTime() - lastTime;
+                lastTime = System.nanoTime();
                 gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
-                for (Alien alien: tAliens) {
-                    alien.move();
-                    gc.drawImage( alien.getImage(), alien.getX(), alien.getY() );
-                }
+                drawAliens(gc);
             }
         }.start();
+    }
+
+    protected void drawAliens(GraphicsContext gc) {
+        for (Alien alien: tAliens) {
+            alien.move();
+            gc.drawImage( alien.getImage(), alien.getX(), alien.getY() );
+        }
     }
 
     protected void redrawPlayer() {}
