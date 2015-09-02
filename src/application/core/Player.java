@@ -4,6 +4,8 @@ import application.Main;
 import javafx.scene.image.Image;
 import org.w3c.dom.Element;
 
+import java.io.File;
+
 /**
  * Created by Thomas on 01-09-15.
  */
@@ -13,10 +15,15 @@ public class Player implements Sprite {
     protected Image tImage;
     protected int tHealth;
 
-    public void readXml(Element eElement) {
-        tX = 50;
-        tY = 150;
+    public Player() {
+        tImage = new Image(new File("src/application/images/smallAlien.png").toURI().toString());
+        tX = (int)(Main.getWidth()/2 - tImage.getWidth()/2);
+        tY = (int)(Main.getHeight()-tImage.getHeight()-50);
         tHealth = 1;
+    }
+
+    public void readXml(Element eElement) {
+      //Unused
     }
 
     public int getX() {
