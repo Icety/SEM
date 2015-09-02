@@ -27,14 +27,8 @@ public class Game {
         levelNumber = 0;
         tPlayer = new Player();
         tProjectiles = new ArrayList<Projectile>();
+        tPaused = false;
     }
-
-//    private void installEventHandler() {
-//        eventHandler =
-//        };
-//    }
-
-
 
     public void setScore(int value) {
         score += value;
@@ -48,13 +42,15 @@ public class Game {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
+                System.out.println(code);
+                System.out.println(tPaused);
                 if (code == KeyCode.ESCAPE) {
                     // show menu
-                } else if (code == KeyCode.P) {
-                   if ( tPaused = true) {
-                       tPaused = false;
-                   } else if (tPaused = false) {
+                } else if (code == KeyCode.P){
+                   if ( !tPaused ) {
                        tPaused = true;
+                   } else {
+                       tPaused = false;
                    }
                 }
             }
