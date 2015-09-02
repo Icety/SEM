@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.ArrayList;
+import application.core.Projectile;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -48,7 +49,6 @@ public class LevelController {
                 //Manage framerate
                 double time = (System.nanoTime() - lastTime) / 1000000;
                 lastTime = System.nanoTime();
-                System.out.println(time);
                 if (time < 16.66) {
                     try {
                         Thread.sleep((int) (16.66 - time));
