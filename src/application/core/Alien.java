@@ -8,7 +8,7 @@ import org.w3c.dom.Node;
 /**
  * Created by Thomas on 01-09-15.
  */
-public class Alien {
+public class Alien implements Sprite {
     protected int tX;
     protected int tY;
     protected Image tImage;
