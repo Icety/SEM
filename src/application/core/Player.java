@@ -16,25 +16,30 @@ public class Player implements Sprite {
     protected Image tImage;
     protected int tHealth;
     protected AnimationTimer tTimer;
+    protected long tLastShot = 0;
+    protected int tReloadTime = 1000;
 
-    boolean tShoot, tGoLeft, tGoRight;
+    protected boolean tShoot, tGoLeft, tGoRight;
 
     public Player() {
         tImage = new Image(new File("src/application/images/smallAlien.png").toURI().toString());
         tX = (int)(Main.getWidth()/2 - tImage.getWidth()/2);
-        tY = (int)(Main.getHeight()-tImage.getHeight()-50);
+        tY = (int)(Main.getHeight()-tImage.getHeight()-20);
         tHealth = 1;
+
         tTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
+                double time = (System.nanoTime() - tLastShot) / 1000000;
                 if(tGoLeft) {
                     moveLeft();
                 }
                 else if(tGoRight) {
                     moveRight();
                 }
-                else if(tShoot) {
-                    //shoot
+                else if(tShoot && time > tReloadTime) {
+                    tLastShot = System.nanoTime();
+                    Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
                 }
                 try {
                     Thread.sleep(15);
@@ -43,6 +48,7 @@ public class Player implements Sprite {
                 }
             }
         };
+        tTimer.start();
     }
 
     public void readXml(Element eElement) {
@@ -83,5 +89,9 @@ public class Player implements Sprite {
 
     public void rightArrowPressed(boolean pressed) {
         tGoRight = pressed;
+    }
+
+    public void fireButtonPressed(boolean pressed) {
+        tShoot = pressed;
     }
 }
