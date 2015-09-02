@@ -1,0 +1,42 @@
+/* Basis van ieder scherm */
+#pane {
+    -fx-background-image: url("background.jpg");
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: 100.0% 100.0%;
+}
+
+/*
+ * Beginscherm
+ */
+#startscreen {
+    -fx-background-color: rgba(0.0, 0.0, 0.0, 0.3);
+    -fx-max-width: 300.0px;
+    -fx-max-height: 400.0px;
+    -fx-background-radius: 30.0;
+    -fx-padding: 90.0, 35.0, 0.0, 0.0;
+}
+
+Button {
+    -fx-background-color: linear-gradient(#4f4fff, #171752),
+    linear-gradient(#4848f7, #171752),
+    linear-gradient(#4848f7, #171752),
+    linear-gradient(#4848f7 0.0%, #171752 50.0%, #0f0f27 100.0%),
+    linear-gradient(from 0.0% 0.0% to 15.0% 50.0%, rgba(255.0, 255.0, 255.0, 0.9), rgba(255.0, 255.0, 255.0, 0.0));
+    -fx-background-radius: 30.0;
+    -fx-background-insets: 0.0, 1.0, 2.0, 3.0, 0.0;
+    -fx-text-fill: #e0e2ef;
+    -fx-font-weight: bold;
+    -fx-font-size: 20.0px;
+    -fx-padding: 10.0 20.0 10.0 20.0;
+    -fx-alignment: center;
+    -fx-min-width: 200.0px;
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-background-color: linear-gradient(#171752, #4848f7),
+    linear-gradient(#171752, #4848f7),
+    linear-gradient(#171752, #4848f7),
+    linear-gradient(#171752 0.0%, #171752 50.0%, #4848f7 100.0%),
+    linear-gradient(from 0.0% 0.0% to 15.0% 50.0%, rgba(255.0, 255.0, 255.0, 0.9), rgba(255.0, 255.0, 255.0, 0.0));
+}
