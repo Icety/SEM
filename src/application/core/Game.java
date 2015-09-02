@@ -41,6 +41,13 @@ public class Game {
         return tPlayer;
     }
 
-
-
+    public void update() {
+        for (Alien alien: getLevel().getAliens()) {
+            alien.move();
+        }
+        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
+        for (Projectile projectile: projectiles) {
+            projectile.move();
+        }
+    }
 }

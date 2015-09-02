@@ -22,7 +22,7 @@ public class LevelController {
     @FXML
     private Canvas gameCanvas;
 
-    ArrayList<Alien> tAliens = Main.game.getLevel().getAliens();;
+    ArrayList<Alien> tAliens = Main.game.getLevel().getAliens();
 
     @FXML
     private void initialize() {
@@ -61,6 +61,7 @@ public class LevelController {
                 //Clear screen
                 gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
 
+                Main.game.update();
                 //Draw all objects
                 drawAliens(gc);
                 drawPlayer(gc);
@@ -71,7 +72,6 @@ public class LevelController {
 
     protected void drawAliens(GraphicsContext gc) {
         for (Alien alien: tAliens) {
-            alien.move();
             gc.drawImage( alien.getImage(), alien.getX(), alien.getY() );
         }
     }
@@ -82,11 +82,10 @@ public class LevelController {
     }
 
     protected void drawProjectiles(GraphicsContext gc) {
-//        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
-//        for (Projectile projectile: projectiles) {
-//            projectile.move();
-//            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
-//        }
+        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
+        for (Projectile projectile: projectiles) {
+            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
+        }
     }
 
 
