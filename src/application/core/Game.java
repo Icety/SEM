@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+import java.util.ArrayList;
+
 /**
  * Created by Thomas on 01-09-15.
  */
@@ -17,13 +19,14 @@ public class Game {
     protected Level level;
     protected Player tPlayer;
     protected boolean tPaused;
+    protected ArrayList<Projectile> tProjectiles;
 
 
     public Game() {
         levelFactory = new LevelFactory();
         levelNumber = 0;
         tPlayer = new Player();
-
+        tProjectiles = new ArrayList<Projectile>();
     }
 
 //    private void installEventHandler() {
@@ -83,6 +86,10 @@ public class Game {
 
     public boolean isPaused(){
         return tPaused;
+    }
+
+    public ArrayList<Projectile> getProjectiles() {
+        return tProjectiles;
     }
 
 

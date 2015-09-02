@@ -10,6 +10,8 @@ public class Projectile implements Sprite {
     protected int tX;
     protected int tY;
     protected Image tImage;
+    protected int tDirection = 1;
+    protected int tSpeed = 1;
 
     public int getX() {
         return tX;
@@ -23,15 +25,15 @@ public class Projectile implements Sprite {
         return tImage;
     }
 
-    public void moveUp() {
-        tY++;
+    public void setDirection(int direction) {
+        tDirection = direction;
+    }
+
+    public void move() {
+        tY += tDirection * tSpeed;
         if( tY + tImage.getHeight() < 0) {
             //delete projectile;
         }
-    }
-
-    public void moveDown() {
-        tY--;
         if( tY + tImage.getHeight() > Main.getHeight()) {
             //delete projectile;
         }
