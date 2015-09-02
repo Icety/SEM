@@ -18,6 +18,7 @@ public class Player implements Sprite {
     protected AnimationTimer tTimer;
     protected long tLastShot = 0;
     protected int tReloadTime = 1000;
+    protected int tSpeed = 5;
 
     protected boolean tShoot, tGoLeft, tGoRight;
 
@@ -68,13 +69,13 @@ public class Player implements Sprite {
     }
 
     protected void moveLeft() {
-        if ( !((tX - tImage.getWidth() - 10) < 0 )) {
-            tX--;
+        if ( (tX) > 10 ) {
+            tX -= tSpeed;
         }
     }
     protected void moveRight() {
         if ( !((tX + tImage.getWidth() + 10) > Main.getWidth() )) {
-            tX++;
+            tX += tSpeed;
         }
     }
 
