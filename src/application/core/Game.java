@@ -55,7 +55,6 @@ public class Game {
                     }
                 } else if (code == KeyCode.RIGHT) {
                     tRightArrow = true;
-                    System.out.println("Right arrow pressed");
                     Main.game.getPlayer(). rightArrowPressed(tRightArrow);
 
                 } else if (code == KeyCode.LEFT) {
@@ -74,7 +73,6 @@ public class Game {
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
                 if(code == KeyCode.RIGHT) {
-                    System.out.println("Right arrow released");
                     tRightArrow = false;
                     Main.game.getPlayer(). rightArrowPressed(tRightArrow);
                 } else if (code == KeyCode.LEFT) {
