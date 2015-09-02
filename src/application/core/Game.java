@@ -56,14 +56,14 @@ public class Game {
                 } else if (code == KeyCode.RIGHT) {
                     tRightArrow = true;
                     System.out.println("Right arrow pressed");
-                    Main.game.getPlayer(). rightArrowPressed(tRightArrow);
+                    Main.game.getPlayer().rightArrowPressed(tRightArrow);
 
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = true;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    tSpace = true;
-                    Main.game.getPlayer().fireButtonPressed(tSpace);
+                    System.out.println("space bar pressed");
+                    Main.game.getPlayer().fireButtonPressed(true);
                 }
 
             }
@@ -73,16 +73,16 @@ public class Game {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
-                if(code == KeyCode.RIGHT) {
+                if (code == KeyCode.RIGHT) {
                     System.out.println("Right arrow released");
                     tRightArrow = false;
-                    Main.game.getPlayer(). rightArrowPressed(tRightArrow);
+                    Main.game.getPlayer().rightArrowPressed(tRightArrow);
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = false;
                     Main.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    tSpace = false;
-                    Main.game.getPlayer().fireButtonPressed(tSpace);
+                    System.out.println("space bar released");
+                    Main.game.getPlayer().fireButtonPressed(false);
                 }
             }
         });
@@ -117,6 +117,10 @@ public class Game {
 
     public ArrayList<Projectile> getProjectiles() {
         return tProjectiles;
+    }
+
+    public void addProjectile(Projectile projectile) {
+        tProjectiles.add(projectile);
     }
 
 

@@ -38,9 +38,10 @@ public class Player implements Sprite {
                 else if(tGoRight) {
                     moveRight();
                 }
-                else if(tShoot && time > tReloadTime) {
+                if(tShoot && time > tReloadTime) {
                     tLastShot = System.nanoTime();
                     Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
+                    Main.game.addProjectile(projectile);
                 }
                 try {
                     Thread.sleep(15);
