@@ -42,6 +42,9 @@ public class LevelController {
             long lastTime = System.nanoTime();
             public void handle(long currentNanoTime)
             {
+                if (Main.game.isPaused()) {
+                    return;
+                }
                 //Manage framerate
                 double time = (System.nanoTime() - lastTime) / 1000000;
                 lastTime = System.nanoTime();
@@ -79,11 +82,11 @@ public class LevelController {
     }
 
     protected void drawProjectiles(GraphicsContext gc) {
-        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
-        for (Projectile projectile: projectiles) {
-            projectile.move();
-            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
-        }
+//        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
+//        for (Projectile projectile: projectiles) {
+//            projectile.move();
+//            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
+//        }
     }
 
 
