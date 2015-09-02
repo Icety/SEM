@@ -42,8 +42,6 @@ public class Game {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
-                System.out.println(code);
-                System.out.println(tPaused);
                 if (code == KeyCode.ESCAPE) {
                     // show menu
                 } else if (code == KeyCode.P){
