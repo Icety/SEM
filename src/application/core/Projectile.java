@@ -3,6 +3,8 @@ package application.core;
 import application.Main;
 import javafx.scene.image.Image;
 
+import java.awt.*;
+
 /**
  * Created by Niek on 9/2/2015.
  */
@@ -37,10 +39,25 @@ public class Projectile implements Sprite {
         if( tY + tImage.getHeight() > Main.getHeight()) {
             //delete projectile;
         }
+        checkCollision();
     }
 
     public String toString() {
         String result = "Projectile on coords: "+ tX +", "+ tY;
         return result;
+    }
+
+    public void checkCollision() {
+        Rectangle ProjectileBox = new Rectangle(getX(),getY(),(int)getImage().getWidth(),(int)getImage().getHeight());
+        for(Alien a: Main.game.getLevel().getAliens()) {
+            int bA = 5;
+            int hA = 10;
+            Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
+            if(AlienBox.getBounds().intersects(ProjectileBox)) {
+                Main.game.getLevel().removeAlien(a);
+                Main.game.removeProjectile(this);
+                return;
+            }
+        }
     }
 }
