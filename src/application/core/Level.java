@@ -29,4 +29,8 @@ public class Level {
         }
         return result;
     }
+
+    public void removeAlien(Alien a) {
+        tAliens.remove(a);
+    }
 }

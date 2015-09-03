@@ -118,5 +118,7 @@ public class Game {
         tProjectiles.add(projectile);
     }
 
-
+    public void removeProjectile(Projectile projectile) {
+        tProjectiles.remove(projectile);
+    }
 }
