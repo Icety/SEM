@@ -16,6 +16,7 @@
     -fx-padding: 90.0, 35.0, 0.0, 0.0;
 }
 
+
 Button {
     -fx-background-color: linear-gradient(#4f4fff, #171752),
     linear-gradient(#4848f7, #171752),
@@ -40,3 +41,12 @@ Button:hover {
     linear-gradient(#171752 0.0%, #171752 50.0%, #4848f7 100.0%),
     linear-gradient(from 0.0% 0.0% to 15.0% 50.0%, rgba(255.0, 255.0, 255.0, 0.9), rgba(255.0, 255.0, 255.0, 0.0));
 }
+
+Label {
+
+    :score
+    -fx-text-fill: #e0e2ef;
+    -fx-font-weight: bold;
+    -fx-font-size: 20.0px;
+}
+

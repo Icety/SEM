@@ -54,8 +54,15 @@ public class Projectile implements Sprite {
             int hA = 10;
             Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
             if(AlienBox.getBounds().intersects(ProjectileBox)) {
+                //delete the alien.
                 Main.game.getLevel().removeAlien(a);
-                Main.game.removeProjectile(this);
+                if (this instanceof PlayerProjectile) {
+                    Main.game.removeProjectile(this);
+                }
+                if (a instanceof SmallAlien) {
+                        Main.game.setScore(10);
+                        System.out.println(Main.game.score);
+                }
                 return;
             }
         }

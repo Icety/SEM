@@ -37,6 +37,8 @@ public class Game {
         score += value;
     }
 
+    public int getScore() { return score; }
+
     protected void nextLevel() {
         levelNumber++;
         level = levelFactory.buildLevel(levelNumber);

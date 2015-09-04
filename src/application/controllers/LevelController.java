@@ -11,9 +11,14 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import application.core.Projectile;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
+
+import javax.xml.soap.Text;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -28,9 +33,9 @@ public class LevelController {
     @FXML
     private void initialize() {
 
+
         gameCanvas.setWidth(Main.getWidth());
         gameCanvas.setHeight(Main.getHeight());
-
         draw();
     }
 
@@ -66,6 +71,9 @@ public class LevelController {
                 drawProjectiles(gc);
                 drawAliens(gc);
                 drawPlayer(gc);
+                gc.setFill(Color.RED);
+
+                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), 450, 50);
             }
         }.start();
     }
