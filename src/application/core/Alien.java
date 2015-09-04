@@ -12,6 +12,9 @@ public class Alien implements Sprite {
     protected int tX;
     protected int tY;
     protected Image tImage;
+    protected int tHealth;
+    protected int tHitScore;
+    protected int tKillScore;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -36,6 +39,13 @@ public class Alien implements Sprite {
             tY += tImage.getHeight() + 10;
             tX = 10;
         }
+        shoot();
+    }
+
+    public void shoot() {
+        if(Math.random()*100>98) {
+            Main.game.addProjectile(new smallProjectile(tX + (int)(tImage.getWidth()/2),(int)(tY+tImage.getHeight())));
+        }
     }
 
     public String toString() {
@@ -43,5 +53,16 @@ public class Alien implements Sprite {
         return result;
     }
 
+    public void hit() {
+        tHealth--;
+        if(tHealth <= 0) {
+            //delete the alien.
+            Main.game.getLevel().removeAlien(this);
+
+            Main.game.setScore(tKillScore);
+        } else {
+            Main.game.setScore(tHitScore);
+        }
+    }
 
 }

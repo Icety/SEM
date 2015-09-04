@@ -73,7 +73,7 @@ public class LevelController {
                 drawPlayer(gc);
                 gc.setFill(Color.RED);
 
-                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), 450, 50);
+                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), Main.getWidth()-140, 50);
             }
         }.start();
     }
