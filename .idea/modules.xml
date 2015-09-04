@@ -3,9 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SEM.iml" filepath="$PROJECT_DIR$/SEM.iml" />
-      <module fileurl="file://$PROJECT_DIR$/maven-plugins-master/github-core/github-maven-core.iml" filepath="$PROJECT_DIR$/maven-plugins-master/github-core/github-maven-core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/maven-plugins-master/github-maven-plugins-parent.iml" filepath="$PROJECT_DIR$/maven-plugins-master/github-maven-plugins-parent.iml" />
-      <module fileurl="file://$PROJECT_DIR$/maven-plugins-master/github-site-plugin/site-maven-plugin.iml" filepath="$PROJECT_DIR$/maven-plugins-master/github-site-plugin/site-maven-plugin.iml" />
     </modules>
   </component>
 </project>
