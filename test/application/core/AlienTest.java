@@ -32,7 +32,7 @@ public class AlienTest {
      * Initialized variables for tests and read from a XML file written for these tests.
      */
     @Before
-    public void initializationOfTestProcess() {
+    public void setUp() {
         testAlien = new Alien();
         try {
             File file = new File("test/application/core/testLevels.xml");
