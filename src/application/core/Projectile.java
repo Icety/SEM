@@ -58,7 +58,7 @@ public class Projectile implements Sprite {
             Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
             if(AlienBox.getBounds().intersects(ProjectileBox)) {
                 //This is a redundant check...
-                /**
+                /*
                 if (this instanceof PlayerProjectile) {
                     Main.game.removeProjectile(this);
                 }
@@ -68,7 +68,7 @@ public class Projectile implements Sprite {
                         Main.game.setScore(10);
                         System.out.println(Main.game.score);
                 }
-                 **/
+                */
 
                 //Let The alien and projectile take damage
                 this.hit(a);
