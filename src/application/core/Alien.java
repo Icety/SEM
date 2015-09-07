@@ -43,9 +43,19 @@ public class Alien implements Sprite {
     }
 
     public void shoot() {
-        if (Math.random() * 100 > 98) {
+        if (Math.random() * 100 > 98 && isLowerLevel()) {
             Main.game.addProjectile(new smallProjectile(tX + (int) (tImage.getWidth() / 2), (int) (tY + tImage.getHeight())));
         }
+    }
+
+    private boolean isLowerLevel() {
+        int y = 0;
+        for(Alien a: Main.game.getLevel().getAliens()) {
+            if(a.getY() > y ) {
+                y = a.getY();
+            }
+        }
+        return y == tY;
     }
 
     public String toString() {
