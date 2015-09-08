@@ -33,6 +33,9 @@ public class Player extends Sprite {
             Projectile projectile = new PlayerProjectile(tX + tWidth/2, tY - 10);
             //projectile.addHit(getPlayer());
             Main.sGame.addProjectile(projectile);
+
+            //temporary while key has to be released to fire
+            tShoot = false;
         }
         try {
             Thread.sleep(15);

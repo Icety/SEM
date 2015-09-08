@@ -4,6 +4,7 @@ import application.Main;
 import application.core.Alien;
 import application.core.Game;
 import application.core.Player;
+import application.core.Projectile;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -47,6 +48,10 @@ public class Levels extends BasicGameState {
         }
         Player p = Main.sGame.getPlayer();
         p.getImage().draw(p.getX(), p.getY());
+
+        for (Projectile projectile: Main.sGame.getProjectiles()) {
+            projectile.getImage().draw(projectile.getX(), projectile.getY());
+        }
     }
 
     @Override
