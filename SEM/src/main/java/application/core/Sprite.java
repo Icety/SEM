@@ -22,6 +22,14 @@ public class Sprite {
         return tY;
     }
 
+    public void settX(int x) {
+        tX = x;
+    }
+
+    public void settY(int y) {
+        tY = y;
+    }
+
     public Image getImage() throws SlickException {
         if (tImage == null) {
             tImage = new Image("src/main/java/application/images/" + tImageString);

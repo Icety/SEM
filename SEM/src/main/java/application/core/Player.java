@@ -14,11 +14,13 @@ public class Player extends Sprite {
     protected boolean tShoot, tGoLeft, tGoRight;
 
     public Player() {
-        tImageString = "smallAlien.png";
+        tImageString = "Space_Invaders_cannon.png";
         tHealth = 3;
+        tHeight = 50;
     }
 
     public void update(long time) {
+
         if(tGoLeft) {
             moveLeft();
         }
@@ -40,7 +42,8 @@ public class Player extends Sprite {
     }
 
     protected void moveLeft() {
-        if ( (tX) > 10 ) {
+        System.out.println(tX);
+        if ( (tX ) > 10 ) {
             tX -= tSpeed;
         }
     }

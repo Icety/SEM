@@ -3,12 +3,12 @@ package application.controllers;
 import application.Main;
 import application.core.Alien;
 import application.core.Game;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import application.core.Player;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import java.util.ArrayList;
 
@@ -27,6 +27,11 @@ public class Levels extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
+
+        Player p = Main.sGame.getPlayer();
+        p.settX(Main.sGame.getWidth() / 2);
+        p.settY(Main.sGame.getHeight()  - (p.getHeight() + 50));
+
     }
 
     @Override
@@ -40,6 +45,8 @@ public class Levels extends BasicGameState {
         for (Alien alien: Main.sGame.getLevel().getAliens()) {
             (alien.getImage()).draw(alien.getX(), alien.getY());
         }
+        Player p = Main.sGame.getPlayer();
+        p.getImage().draw(p.getX(), p.getY());
     }
 
     @Override
@@ -51,6 +58,40 @@ public class Levels extends BasicGameState {
     @Override
     public int getID() {
         return tId;
+    }
+
+    public void keyPressed(int key, char c) {
+        switch(key) {
+            case Input.KEY_LEFT:
+                Main.sGame.getPlayer().leftArrowPressed(true);
+                System.out.println("LEFT");
+                break;
+            case Input.KEY_RIGHT:
+                Main.sGame.getPlayer().rightArrowPressed(true);
+                break;
+            case Input.KEY_SPACE:
+                //TODO
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void keyReleased(int key, char c) {
+        switch(key) {
+            case Input.KEY_LEFT:
+                Main.sGame.getPlayer().leftArrowPressed(false);
+                System.out.println("LEFT");
+                break;
+            case Input.KEY_RIGHT:
+                Main.sGame.getPlayer().rightArrowPressed(false);
+                break;
+            case Input.KEY_SPACE:
+                Main.sGame.getPlayer().fireButtonPressed(true);
+                break;
+            default:
+                break;
+        }
     }
 
 

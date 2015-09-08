@@ -35,12 +35,13 @@ public class Projectile extends Sprite {
 
     public void checkCollision() throws SlickException {
         Rectangle ProjectileBox = new Rectangle(getX(),getY(),tWidth,tHeight);
-        for(Alien a: Main.sGame.getLevel().getAliens()) {
-            int bA = 5;
-            int hA = 10;
-            Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getWidth()-(2*bA),(int)a.getHeight()-(2*hA));
-            if(AlienBox.getBounds().intersects(ProjectileBox)) {
-                //This is a redundant check...
+        if (this instanceof PlayerProjectile) {
+            for(Alien a: Main.sGame.getLevel().getAliens()) {
+                int bA = 5;
+                int hA = 10;
+                Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getWidth()-(2*bA),(int)a.getHeight()-(2*hA));
+                if(AlienBox.getBounds().intersects(ProjectileBox)) {
+                    //This is a redundant check...
                 /*
                 if (this instanceof PlayerProjectile) {
                     OldMain.game.removeProjectile(this);
@@ -53,11 +54,13 @@ public class Projectile extends Sprite {
                 }
                 */
 
-                //Let The alien and projectile take damage
-                this.hit(a);
-                return;
+                    //Let The alien and projectile take damage
+                    this.hit(a);
+                    return;
+                }
             }
         }
+
     }
 
     public boolean isRemoved() {
