@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.layout.*?>
+<?xml-stylesheet type="text/css" href="style.css"?>
+
+
+<BorderPane fx:controller="application.controllers.MainController" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+    </top>
+    <center>
+        <VBox fx:id="startscreen">
+            <children>
+                <Button fx:id="newGameButton" text="Nieuw Spel" mnemonicParsing="false" >
+                </Button>
+                <Label text="&#xD;"></Label>
+                <Button fx:id="exitButton" text="Sluit af" mnemonicParsing="false">
+                </Button>
+                <Label text="&#xD;"></Label>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>
+
