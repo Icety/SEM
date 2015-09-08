@@ -36,16 +36,16 @@ public class Levels extends BasicGameState {
         g.setColor(Color.white);
 
         g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), container.getWidth() - 140, 50);
+
+        for (Alien alien: Main.sGame.getLevel().getAliens()) {
+            (alien.getImage()).draw(alien.getX(), alien.getY());
+        }
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
         Main.sGame.update();
-
-        for (Alien alien: Main.sGame.getLevel().getAliens()) {
-            (alien.getImage()).draw(alien.getX(), alien.getY());
-        }
     }
 
     @Override
