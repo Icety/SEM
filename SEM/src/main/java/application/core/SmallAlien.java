@@ -1,6 +1,5 @@
 package application.core;
 
-import application.Main;
 import javafx.scene.image.Image;
 
 import java.io.File;

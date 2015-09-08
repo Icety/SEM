@@ -1,24 +1,16 @@
 package application.controllers;
 
-import application.Main;
+import application.OldMain;
 import application.core.Alien;
 import application.core.Player;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 
-import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 import application.core.Projectile;
-import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
-
-import javax.xml.soap.Text;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -28,14 +20,14 @@ public class LevelController {
     @FXML
     private Canvas gameCanvas;
 
-    ArrayList<Alien> tAliens = Main.game.getLevel().getAliens();
+    ArrayList<Alien> tAliens = OldMain.game.getLevel().getAliens();
 
     @FXML
     private void initialize() {
 
 
-        gameCanvas.setWidth(Main.getWidth());
-        gameCanvas.setHeight(Main.getHeight());
+        gameCanvas.setWidth(OldMain.getWidth());
+        gameCanvas.setHeight(OldMain.getHeight());
         draw();
     }
 
@@ -48,7 +40,7 @@ public class LevelController {
             long lastTime = System.nanoTime();
             public void handle(long currentNanoTime)
             {
-                if (Main.game.isPaused()) {
+                if (OldMain.game.isPaused()) {
                     return;
                 }
                 //Manage framerate
@@ -67,17 +59,17 @@ public class LevelController {
                 //---------------
 
                 //Clear screen
-                gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
+                gc.clearRect(0, 0, OldMain.getWidth(), OldMain.getHeight());
 
-//                Main.game.update();
-//                //Draw all objects
-//                drawProjectiles(gc);
-//                drawAliens(gc);
-//                drawPlayer(gc);
-//                gc.setFill(Color.RED);
+                OldMain.game.update();
+                //Draw all objects
+                drawProjectiles(gc);
+                drawAliens(gc);
+                drawPlayer(gc);
+                gc.setFill(Color.RED);
 
-                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), Main.getWidth() - 140, 50);
-                gc.fillText(("FPS: " + Integer.toString(fps)), Main.getWidth()-140, 70);
+                gc.fillText(("SCORE: " + Integer.toString(OldMain.game.getScore())), OldMain.getWidth() - 140, 50);
+                gc.fillText(("FPS: " + Integer.toString(fps)), OldMain.getWidth()-140, 70);
             }
         }.start();
     }
@@ -89,12 +81,12 @@ public class LevelController {
     }
 
     protected void drawPlayer(GraphicsContext gc) {
-        Player player = Main.game.getPlayer();
+        Player player = OldMain.game.getPlayer();
         gc.drawImage( player.getImage(), player.getX(), player.getY() );
     }
 
     protected void drawProjectiles(GraphicsContext gc) {
-        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
+        ArrayList<Projectile> projectiles = OldMain.game.getProjectiles();
         for (Projectile projectile: projectiles) {
             gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
         }

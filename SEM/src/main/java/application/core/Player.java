@@ -1,21 +1,12 @@
 package application.core;
 
-import application.Main;
-import javafx.animation.AnimationTimer;
-import javafx.scene.image.Image;
-import org.w3c.dom.Element;
-
-import java.io.File;
+import application.OldMain;
 
 /**
  * Created by Thomas on 01-09-15.
  */
-public class Player implements Sprite {
-    protected int tX;
-    protected int tY;
-    protected Image tImage;
+public class Player extends Sprite {
     protected int tHealth;
-    protected AnimationTimer tTimer;
     protected long tLastShot = 0;
     protected int tReloadTime = 150;
     protected int tSpeed = 5;
@@ -23,52 +14,36 @@ public class Player implements Sprite {
     protected boolean tShoot, tGoLeft, tGoRight;
 
     public Player() {
-        tImage = new Image(new File("src/application/images/smallAlien.png").toURI().toString());
-        tX = (int)(Main.getWidth()/2 - tImage.getWidth()/2);
-        tY = (int)(Main.getHeight()-tImage.getHeight()-20);
+        tImage ="smallAlien.png";
         tHealth = 3;
-
-        tTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                double time = (System.nanoTime() - tLastShot) / 1000000;
-                if(tGoLeft) {
-                    moveLeft();
-                }
-                else if(tGoRight) {
-                    moveRight();
-                }
-                if(tShoot && time > tReloadTime) {
-                    System.out.println("Shoot");
-                    tLastShot = System.nanoTime();
-                    Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
-                    //projectile.addHit(getPlayer());
-                    Main.game.addProjectile(projectile);
-                }
-                try {
-                    Thread.sleep(15);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-        tTimer.start();
     }
 
-    public void readXml(Element eElement) {
-      //Unused
+    @Override
+    public void setGraphics(int width, int height, int screenWidth, int screenHeight) {
+        super.setGraphics(width, height, screenWidth, screenHeight);
+        tX = screenWidth / 2;
+        tY = screenHeight - height - 10;
     }
 
-    public int getX() {
-        return tX;
-    }
-
-    public int getY() {
-        return tY;
-    }
-
-    public Image getImage() {
-        return tImage;
+    public void update(long time) {
+        if(tGoLeft) {
+            moveLeft();
+        }
+        else if(tGoRight) {
+            moveRight();
+        }
+        if(tShoot && time > tReloadTime) {
+            System.out.println("Shoot");
+            tLastShot = System.nanoTime();
+            Projectile projectile = new PlayerProjectile(tX + tWidth/2, tY - 10);
+            //projectile.addHit(getPlayer());
+            OldMain.game.addProjectile(projectile);
+        }
+        try {
+            Thread.sleep(15);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     protected void moveLeft() {
@@ -77,7 +52,7 @@ public class Player implements Sprite {
         }
     }
     protected void moveRight() {
-        if ( !((tX + tImage.getWidth() + 10) > Main.getWidth() )) {
+        if ( !((tX + tWidth + 10) > OldMain.getWidth() )) {
             tX += tSpeed;
         }
     }

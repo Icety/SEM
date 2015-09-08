@@ -1,17 +1,13 @@
 package application.core;
 
-import application.Main;
+import application.OldMain;
 import javafx.scene.image.Image;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 
 /**
  * Created by Thomas on 01-09-15.
  */
-public class Alien implements Sprite {
-    protected int tX;
-    protected int tY;
-    protected Image tImage;
+public class Alien extends Sprite {
     protected int tHealth;
     protected int tHitScore;
     protected int tKillScore;
@@ -22,22 +18,10 @@ public class Alien implements Sprite {
         tY = Integer.parseInt(eElement.getElementsByTagName("y").item(0).getTextContent());
     }
 
-    public int getX() {
-        return tX;
-    }
-
-    public int getY() {
-        return tY;
-    }
-
-    public Image getImage() {
-        return tImage;
-    }
-
     public void move() {
         tX++;
-        if ((tX + tImage.getWidth() + 10) > Main.getWidth()) {
-            tY += tImage.getHeight() + 10;
+        if ((tX + 10) > OldMain.getWidth()) {
+            tY += 10;
             tX = 10;
         }
         shoot();
@@ -45,13 +29,13 @@ public class Alien implements Sprite {
 
     public void shoot() {
         if (Math.random() * 100 > 98 && isLowerLevel()) {
-            Main.game.addProjectile(new smallProjectile(tX + (int) (tImage.getWidth() / 2), (int) (tY + tImage.getHeight())));
+            OldMain.game.addProjectile(new smallProjectile(tX, tY));
         }
     }
 
     private boolean isLowerLevel() {
         int y = 0;
-        for(Alien a: Main.game.getLevel().getAliens()) {
+        for(Alien a: OldMain.game.getLevel().getAliens()) {
             if(a.getY() > y ) {
                 y = a.getY();
             }
@@ -74,9 +58,9 @@ public class Alien implements Sprite {
             //delete the alien.
             tRemoved = true;
 
-            Main.game.setScore(tKillScore);
+            OldMain.game.setScore(tKillScore);
         } else {
-            Main.game.setScore(tHitScore);
+            OldMain.game.setScore(tHitScore);
         }
     }
 }

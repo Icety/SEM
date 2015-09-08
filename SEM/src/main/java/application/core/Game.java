@@ -1,7 +1,6 @@
 package application.core;
 
-import application.Main;
-import application.core.Player;
+import application.OldMain;
 
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
@@ -18,6 +17,8 @@ public class Game {
     protected int levelNumber;
     protected Level tLevel;
     protected Player tPlayer;
+    protected int tScreenWidth;
+    protected int tScreenHeight;
     protected boolean tPaused;
     protected boolean tRightArrow;
     protected boolean tLeftArrow;
@@ -25,9 +26,11 @@ public class Game {
     protected ArrayList<Projectile> tProjectiles;
 
 
-    public Game() {
+    public Game(int width, int height) {
         levelFactory = new LevelFactory();
         levelNumber = 0;
+        tScreenWidth = width;
+        tScreenHeight = height;
         tPlayer = new Player();
         tProjectiles = new ArrayList<Projectile>();
         tPaused = false;
@@ -43,12 +46,12 @@ public class Game {
         tLevel = levelFactory.buildLevel(levelNumber);
         if (tLevel == null) {
             tPaused = true;
-            Main.loadScene("won");
+            OldMain.loadScene("won");
             return;
         }
         tPaused = false;
-        Main.loadScene("level");
-        Main.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+        OldMain.loadScene("level");
+        OldMain.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
@@ -62,29 +65,29 @@ public class Game {
                     }
                 } else if (code == KeyCode.RIGHT) {
                     tRightArrow = true;
-                    Main.game.getPlayer(). rightArrowPressed(tRightArrow);
+                    OldMain.game.getPlayer(). rightArrowPressed(tRightArrow);
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = true;
-                    Main.game.getPlayer().leftArrowPressed(tLeftArrow);
+                    OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    Main.game.getPlayer().fireButtonPressed(true);
+                    OldMain.game.getPlayer().fireButtonPressed(true);
                 }
 
             }
         });
 
-        Main.primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+        OldMain.primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
                 KeyCode code = event.getCode();
                 if (code == KeyCode.RIGHT) {
                     tRightArrow = false;
-                    Main.game.getPlayer().rightArrowPressed(tRightArrow);
+                    OldMain.game.getPlayer().rightArrowPressed(tRightArrow);
                 } else if (code == KeyCode.LEFT) {
                     tLeftArrow = false;
-                    Main.game.getPlayer().leftArrowPressed(tLeftArrow);
+                    OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
                 } else if (code == KeyCode.SPACE) {
-                    Main.game.getPlayer().fireButtonPressed(false);
+                    OldMain.game.getPlayer().fireButtonPressed(false);
                 }
             }
         });

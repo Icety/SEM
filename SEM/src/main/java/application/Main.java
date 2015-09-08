@@ -1,81 +1,108 @@
+//package application;
+//
+///**
+// * Created by Thomas on 08-09-15.
+// */
+///*
+//* To change this template, choose Tools | Templates
+//* and open the template in the editor.
+//*/
+//
+//        import org.newdawn.slick.AppGameContainer;
+//        import org.newdawn.slick.BasicGame;
+//        import org.newdawn.slick.GameContainer;
+//        import org.newdawn.slick.Graphics;
+//        import org.newdawn.slick.SlickException;
+//
+///**
+// * @author panos
+// */
+//public class NewMain extends BasicGame
+//{
+//    public NewMain()
+//    {
+//        super("Super Awesome Cool Fun Explosive Space Invaders");
+//    }
+//
+//    public static void main(String[] arguments)
+//    {
+//        try
+//        {
+//            AppGameContainer app = new AppGameContainer(new NewMain());
+//            app.setDisplayMode(1024, 1024, false);
+//            app.start();
+//        }
+//        catch (SlickException e)
+//        {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public void init(GameContainer container) throws SlickException
+//    {
+//    }
+//
+//    @Override
+//    public void update(GameContainer container, int delta) throws SlickException
+//    {
+//    }
+//
+//    public void render(GameContainer container, Graphics g) throws SlickException
+//    {
+//    }
+//}
 package application;
 
-import java.io.File;
-import java.io.IOException;
-
+import application.controllers.Levels;
+import application.controllers.Menu;
 import application.core.Game;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
+import org.newdawn.slick.AppGameContainer;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.StateBasedGame;
 
+public class Main extends StateBasedGame {
 
+    // Game state identifiers
+    public static final int MENU = 0;
+    public static final int LEVELS = 1;
+    public static final int PAUSE = 2;
+    public static final int END = 3;
 
-public class Main extends Application {
-    public static Stage primaryStage;
-    public static BorderPane pane;
-    public static Game game;
-    protected static int tWidth = 512;
-    protected static int tHeight = 512;
+    // Application Properties
+    public static final int WIDTH   = 640;
+    public static final int HEIGHT  = 480;
+    public static final int FPS     = 60;
+    public static final double VERSION = 1.0;
 
+    public Game tGame;
 
-    @Override
-    public void start(Stage primaryStage) {
-        Main.primaryStage = primaryStage;
-        Main.primaryStage.setTitle("Super Awesome Cool Fun Explosive Space Invaders");
-        Main.primaryStage.setFullScreen(true);
-        Main.primaryStage.setFullScreenExitHint("");
-        Main.primaryStage.show();
-        Main.primaryStage.setResizable(false);
+    // Class Constructor
+    public Main(String appName) {
+        super(appName);
 
-        loadScene("main");
-
-        Main.game = new Game();
+        tGame = new Game(WIDTH, HEIGHT);
     }
 
-    /**
-     * Method which loads a new scene
-     */
-    public static void loadScene(String fxml) {
+    // Initialize your game states (calls init method of each gamestate, and set's the state ID)
+    public void initStatesList(GameContainer gc) throws SlickException {
+        // The first state added will be the one that is loaded first, when the application is launched
+        this.addState(new Menu(MENU));
+        this.addState(new Levels(LEVELS));
+//        this.addState(new EndGame(END));
+    }
 
+    // OldMain Method
+    public static void main(String[] args) {
         try {
-            // Load new screen
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("templates/" + fxml + ".fxml"));
-            BorderPane pane = null;
-            pane = loader.load();
-
-            //Set the id of the pane to be used by the css
-            pane.setId("pane");
-            pane.setPrefWidth(Main.tWidth);
-            pane.setPrefHeight(Main.tHeight);
-
-            // Load Style
-            File f = new File("src/application/style.css");
-            pane.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
-
-            if (Main.primaryStage.getScene() == null) {
-                Main.primaryStage.setScene(new Scene(pane));
-            }
-            else {
-                Main.primaryStage.getScene().setRoot(pane);
-            }
-            Main.primaryStage.show();
-        } catch (IOException e) {
+            AppGameContainer app = new AppGameContainer(new Main("My Game v" + VERSION));
+            app.setDisplayMode(WIDTH, HEIGHT, false);
+            app.setTargetFrameRate(FPS);
+            app.setShowFPS(true);
+            app.start();
+        } catch(SlickException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    public static int getWidth() {
-        return tWidth;
-    }
-
-    public static int getHeight() {
-        return tHeight;
     }
 }

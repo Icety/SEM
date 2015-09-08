@@ -25,7 +25,6 @@ public class Menu extends BasicGameState{
             throws SlickException {
         tGame = game;
         tBackground = new Image("src/main/java/application/images/background.jpg");
-
     }
 
     @Override

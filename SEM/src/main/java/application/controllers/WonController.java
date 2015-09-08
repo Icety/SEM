@@ -1,6 +1,6 @@
 package application.controllers;
 
-import application.Main;
+import application.OldMain;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -19,7 +19,7 @@ public class WonController {
     private void initialize() {
 
         newGameButton.setOnAction((event) -> {
-            Main.game.newGame();
+            OldMain.game.newGame();
         });
 
         exitButton.setOnAction((event) -> {
