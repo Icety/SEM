@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import application.OldMain;
 
 /**
@@ -14,15 +15,8 @@ public class Player extends Sprite {
     protected boolean tShoot, tGoLeft, tGoRight;
 
     public Player() {
-        tImage ="smallAlien.png";
+        tImageString = "smallAlien.png";
         tHealth = 3;
-    }
-
-    @Override
-    public void setGraphics(int width, int height, int screenWidth, int screenHeight) {
-        super.setGraphics(width, height, screenWidth, screenHeight);
-        tX = screenWidth / 2;
-        tY = screenHeight - height - 10;
     }
 
     public void update(long time) {
@@ -37,7 +31,7 @@ public class Player extends Sprite {
             tLastShot = System.nanoTime();
             Projectile projectile = new PlayerProjectile(tX + tWidth/2, tY - 10);
             //projectile.addHit(getPlayer());
-            OldMain.game.addProjectile(projectile);
+            Main.sGame.addProjectile(projectile);
         }
         try {
             Thread.sleep(15);

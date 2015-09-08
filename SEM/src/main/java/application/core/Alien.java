@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import application.OldMain;
 import javafx.scene.image.Image;
 import org.w3c.dom.Element;
@@ -29,13 +30,13 @@ public class Alien extends Sprite {
 
     public void shoot() {
         if (Math.random() * 100 > 98 && isLowerLevel()) {
-            OldMain.game.addProjectile(new smallProjectile(tX, tY));
+            Main.sGame.addProjectile(new smallProjectile(tX, tY));
         }
     }
 
     private boolean isLowerLevel() {
         int y = 0;
-        for(Alien a: OldMain.game.getLevel().getAliens()) {
+        for(Alien a: Main.sGame.getLevel().getAliens()) {
             if(a.getY() > y ) {
                 y = a.getY();
             }

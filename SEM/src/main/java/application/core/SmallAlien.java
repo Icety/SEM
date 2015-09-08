@@ -10,7 +10,7 @@ import java.io.File;
 public class SmallAlien extends Alien {
 
     public SmallAlien() {
-        tImage = new Image(new File("src/application/images/smallAlien.png").toURI().toString());
+        tImageString = "smallAlien.png";
         super.tHealth = 2;
         super.tHitScore = 10;
         super.tKillScore = 50;

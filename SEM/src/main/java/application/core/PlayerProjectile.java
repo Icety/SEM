@@ -9,9 +9,11 @@ import java.io.File;
  */
 public class PlayerProjectile extends Projectile {
 
+
+
     public PlayerProjectile(int x, int y) {
         tDirection = -1;
-        tImage = new Image(new File("src/application/images/playerProjectile.png").toURI().toString());
+        tImageString = "playerProjectile.png";
         tX = x - (int)tImage.getWidth() / 2;
         tY = y;
     }

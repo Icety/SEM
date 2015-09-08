@@ -5,6 +5,7 @@ import application.OldMain;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.newdawn.slick.SlickException;
 
 import java.util.ArrayList;
 
@@ -108,7 +109,7 @@ public class Game {
         return tPlayer;
     }
 
-    public void update() {
+    public void update() throws SlickException {
         for (Alien alien: tLevel.getAliens()) {
             if (alien.isRemoved()) {
                 tLevel.removeAlien(alien);
@@ -139,6 +140,14 @@ public class Game {
 
     public void addProjectile(Projectile projectile) {
         tProjectiles.add(projectile);
+    }
+
+    public int getHeight() {
+        return tScreenHeight;
+    }
+
+    public int getWidth() {
+        return tScreenWidth;
     }
 
 //    public void removeProjectile(Projectile projectile) {

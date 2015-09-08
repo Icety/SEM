@@ -11,6 +11,9 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -33,9 +36,7 @@ public class Levels extends BasicGameState {
         tMain = (Main) game;
         tAliens = tMain.tGame.getLevel().getAliens();
 
-        for (Alien alien: tAliens) {
-            Image image = setImage(alien);
-        }
+
     }
 
     @Override
@@ -53,7 +54,7 @@ public class Levels extends BasicGameState {
         tMain.tGame.update();
 
         for (Alien alien: tAliens) {
-                gc.drawImage( alien.getImage(), alien.getX(), alien.getY() );
+            (alien.getImage()).draw( alien.getX(), alien.getY() );
         }
     }
 
@@ -76,17 +77,4 @@ public class Levels extends BasicGameState {
 //        }
 //    }
 
-    protected Image setImage(Sprite sprite) throws SlickException {
-        int index = tKnownImages.indexOf(sprite.getImage());
-        if (index == -1) {
-            //Add the image to the list
-            Image image = new Image("src/main/java/application/images/" + sprite.getImage());
-            tKnownImages.add(sprite.getImage());
-            tImages.add(image);
-            return image;
-        }
-        else {
-            return tImages.get(index);
-        }
-    }
 }

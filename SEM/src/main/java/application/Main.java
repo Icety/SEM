@@ -76,6 +76,8 @@ public class Main extends StateBasedGame {
     public static final int FPS     = 60;
     public static final double VERSION = 1.0;
 
+    public static Game sGame;
+
     public Game tGame;
 
     // Class Constructor
@@ -83,6 +85,7 @@ public class Main extends StateBasedGame {
         super(appName);
 
         tGame = new Game(WIDTH, HEIGHT);
+        sGame = tGame;
     }
 
     // Initialize your game states (calls init method of each gamestate, and set's the state ID)

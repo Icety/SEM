@@ -2,6 +2,7 @@ package application.core;
 
 
 import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  * Created by Thomas on 02-09-15.
@@ -10,7 +11,8 @@ public class Sprite {
     int tX;
     int tY;
     int tWidth, tHeight, tScreenWidth, tScreenHeight;
-    String tImage;
+    Image tImage = null;
+    String tImageString;
 
     public int getX() {
         return tX;
@@ -20,14 +22,10 @@ public class Sprite {
         return tY;
     }
 
-    public String getImage() {
+    public Image getImage() throws SlickException {
+        if (tImage == null) {
+            tImage = new Image("src/main/java/application/images/" + tImageString);
+        }
         return tImage;
-    }
-
-    public void setGraphics(int width, int height, int screenWidth, int screenHeight) {
-        tWidth = width;
-        tHeight = height;
-        tScreenWidth = screenWidth;
-        tScreenHeight = screenHeight;
     }
 }
