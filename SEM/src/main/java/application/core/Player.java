@@ -42,7 +42,7 @@ public class Player implements Sprite {
                     System.out.println("Shoot");
                     tLastShot = System.nanoTime();
                     Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
-                    projectile.addHit(getPlayer());
+                    //projectile.addHit(getPlayer());
                     Main.game.addProjectile(projectile);
                 }
                 try {
