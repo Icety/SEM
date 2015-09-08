@@ -26,7 +26,7 @@ public class Player implements Sprite {
         tImage = new Image(new File("src/application/images/smallAlien.png").toURI().toString());
         tX = (int)(Main.getWidth()/2 - tImage.getWidth()/2);
         tY = (int)(Main.getHeight()-tImage.getHeight()-20);
-        tHealth = 1;
+        tHealth = 3;
 
         tTimer = new AnimationTimer() {
             @Override
@@ -42,6 +42,7 @@ public class Player implements Sprite {
                     System.out.println("Shoot");
                     tLastShot = System.nanoTime();
                     Projectile projectile = new PlayerProjectile(tX + (int)tImage.getWidth()/2, tY - 10);
+                    projectile.addHit(getPlayer());
                     Main.game.addProjectile(projectile);
                 }
                 try {
@@ -96,5 +97,19 @@ public class Player implements Sprite {
 
     public void fireButtonPressed(boolean pressed) {
         tShoot = pressed;
+    }
+
+    public void hit() {
+        tHealth--;
+        if (tHealth <= 0) {
+            //delete the alien.
+            System.out.println("U DEAD");
+        } else {
+            System.out.println("U HIT BRUH");
+        }
+    }
+
+    public Player getPlayer() {
+        return this;
     }
 }
