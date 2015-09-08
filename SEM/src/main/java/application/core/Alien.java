@@ -15,6 +15,7 @@ public class Alien implements Sprite {
     protected int tHealth;
     protected int tHitScore;
     protected int tKillScore;
+    protected boolean tRemoved;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -35,7 +36,7 @@ public class Alien implements Sprite {
 
     public void move() {
         tX++;
-        if ( (tX + tImage.getWidth() + 10) > Main.getWidth() ) {
+        if ((tX + tImage.getWidth() + 10) > Main.getWidth()) {
             tY += tImage.getHeight() + 10;
             tX = 10;
         }
@@ -43,26 +44,39 @@ public class Alien implements Sprite {
     }
 
     public void shoot() {
-        if(Math.random()*100>98) {
-            Main.game.addProjectile(new smallProjectile(tX + (int)(tImage.getWidth()/2),(int)(tY+tImage.getHeight())));
+        if (Math.random() * 100 > 98 && isLowerLevel()) {
+            Main.game.addProjectile(new smallProjectile(tX + (int) (tImage.getWidth() / 2), (int) (tY + tImage.getHeight())));
         }
     }
 
+    private boolean isLowerLevel() {
+        int y = 0;
+        for(Alien a: Main.game.getLevel().getAliens()) {
+            if(a.getY() > y ) {
+                y = a.getY();
+            }
+        }
+        return y == tY;
+    }
+
     public String toString() {
-        String result = "Alien on coords: "+ tX +", "+ tY;
+        String result = "Alien on coords: " + tX + ", " + tY;
         return result;
+    }
+
+    public boolean isRemoved() {
+        return tRemoved;
     }
 
     public void hit() {
         tHealth--;
-        if(tHealth <= 0) {
+        if (tHealth <= 0) {
             //delete the alien.
-            Main.game.getLevel().removeAlien(this);
+            tRemoved = true;
 
             Main.game.setScore(tKillScore);
         } else {
             Main.game.setScore(tHitScore);
         }
     }
-
 }

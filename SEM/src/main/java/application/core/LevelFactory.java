@@ -18,13 +18,17 @@ public class LevelFactory {
     public Level buildLevel(int levelNumber) {
         Level level = new Level();
 
-        level.addAliens(loadAliens());
+        ArrayList<Alien> aliens = loadAliens(levelNumber);
+        if (aliens == null) {
+            return null;
+        }
+        level.addAliens(aliens);
         level.setStartPlayer();
 
         return level;
     }
 
-    public ArrayList<Alien> loadAliens() {
+    public ArrayList<Alien> loadAliens(int levelNumber) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
         try {
             File file = new File("src\\application\\levels.xml");
@@ -35,8 +39,15 @@ public class LevelFactory {
             doc.getDocumentElement().normalize();
 
             //Start xml parsing
+            NodeList levels = doc.getElementsByTagName("level");
 
-            NodeList alienList = doc.getElementsByTagName("alien");
+            if (levels.getLength() <= levelNumber) {
+                return null;
+            }
+
+            Element level = (Element) levels.item(levelNumber);
+
+            NodeList alienList = level.getElementsByTagName("alien");
             Alien alien = new Alien();
             for (int temp = 0; temp < alienList.getLength(); temp++) {
                 Node node = alienList.item(temp);

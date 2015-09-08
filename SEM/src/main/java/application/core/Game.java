@@ -16,7 +16,7 @@ public class Game {
     protected int score;
     protected LevelFactory levelFactory;
     protected int levelNumber;
-    protected Level level;
+    protected Level tLevel;
     protected Player tPlayer;
     protected boolean tPaused;
     protected boolean tRightArrow;
@@ -40,8 +40,13 @@ public class Game {
     public int getScore() { return score; }
 
     protected void nextLevel() {
-        levelNumber++;
-        level = levelFactory.buildLevel(levelNumber);
+        tLevel = levelFactory.buildLevel(levelNumber);
+        if (tLevel == null) {
+            tPaused = true;
+            Main.loadScene("won");
+            return;
+        }
+        tPaused = false;
         Main.loadScene("level");
         Main.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -83,10 +88,12 @@ public class Game {
                 }
             }
         });
+
+        levelNumber++;
     }
 
     public Level getLevel() {
-        return level;
+        return tLevel;
     }
 
     public void newGame() {
@@ -99,12 +106,23 @@ public class Game {
     }
 
     public void update() {
-        for (Alien alien: getLevel().getAliens()) {
+        for (Alien alien: tLevel.getAliens()) {
+            if (alien.isRemoved()) {
+                tLevel.removeAlien(alien);
+                return;
+            }
             alien.move();
         }
-        ArrayList<Projectile> projectiles = Main.game.getProjectiles();
-        for (Projectile projectile: projectiles) {
+        for (Projectile projectile: tProjectiles  ) {
+            if (projectile.isRemoved()) {
+                tProjectiles.remove(projectile);
+                return;
+            }
             projectile.move();
+        }
+        //If all aliens are dead
+        if (tLevel.getAliens().size() == 0) {
+            nextLevel();
         }
     }
 
@@ -120,7 +138,7 @@ public class Game {
         tProjectiles.add(projectile);
     }
 
-    public void removeProjectile(Projectile projectile) {
-        tProjectiles.remove(projectile);
-    }
+//    public void removeProjectile(Projectile projectile) {
+//        tProjectiles.remove(projectile);
+//    }
 }

@@ -9,9 +9,6 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
 
-
-
-
     public ArrayList<Alien> getAliens() {
         return tAliens;
     }
@@ -31,6 +28,7 @@ public class Level {
         }
         return result;
     }
+
 
     public void removeAlien(Alien a) {
         tAliens.remove(a);

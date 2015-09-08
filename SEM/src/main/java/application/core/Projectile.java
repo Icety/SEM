@@ -16,7 +16,8 @@ public class Projectile implements Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 15;
     protected int tHealth = 1;
-    protected ArrayList<Alien> tHitList = new ArrayList<>();
+    protected boolean tRemoved = false;
+    protected ArrayList<Sprite> tHitList = new ArrayList<>();
 
     public int getX() {
         return tX;
@@ -36,11 +37,8 @@ public class Projectile implements Sprite {
 
     public void move() {
         tY += tDirection * tSpeed;
-        if( tY + tImage.getHeight() < 0) {
-            //delete projectile;
-        }
-        if( tY + tImage.getHeight() > Main.getHeight()) {
-            //delete projectile;
+        if( (tY + tImage.getHeight() < 0) || (tY + tImage.getHeight() > Main.getHeight()) ) {
+            tRemoved = true;
         }
         checkCollision();
     }
@@ -58,7 +56,7 @@ public class Projectile implements Sprite {
             Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
             if(AlienBox.getBounds().intersects(ProjectileBox)) {
                 //This is a redundant check...
-                /**
+                /*
                 if (this instanceof PlayerProjectile) {
                     Main.game.removeProjectile(this);
                 }
@@ -68,13 +66,23 @@ public class Projectile implements Sprite {
                         Main.game.setScore(10);
                         System.out.println(Main.game.score);
                 }
-                 **/
+                */
 
                 //Let The alien and projectile take damage
                 this.hit(a);
                 return;
             }
         }
+
+        Player p = Main.game.getPlayer();
+        Rectangle PlayerBox = new Rectangle(p.getX(),p.getY(),(int)p.getImage().getWidth(),(int)p.getImage().getHeight());
+        if(PlayerBox.getBounds().intersects(ProjectileBox)) {
+            this.hit(p);
+        }
+    }
+
+    public boolean isRemoved() {
+        return tRemoved;
     }
 
     private void hit(Alien a) {
@@ -83,8 +91,23 @@ public class Projectile implements Sprite {
             tHitList.add(a);
             tHealth--;
             if (tHealth <= 0) {
-                Main.game.removeProjectile(this);
+                tRemoved = true;
             }
         }
+    }
+
+    private void hit(Player p) {
+        if(!tHitList.contains(p)) {
+            p.hit();
+            tHitList.add(p);
+            tHealth--;
+            if (tHealth <= 0) {
+                tRemoved = true;
+            }
+        }
+    }
+
+    public void addHit(Player player) {
+        tHitList.add(player);
     }
 }
