@@ -14,5 +14,8 @@ public class SmallAlien extends Alien {
         super.tHealth = 2;
         super.tHitScore = 10;
         super.tKillScore = 50;
+
+        tWidth = 50;
+        tHeight = 50;
     }
 }

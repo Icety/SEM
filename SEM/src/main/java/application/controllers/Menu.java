@@ -3,6 +3,7 @@ package application.controllers;
 /**
  * Created by Thomas on 08-09-15.
  */
+import application.Main;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -58,6 +59,7 @@ public class Menu extends BasicGameState{
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_1:
+                Main.sGame.nextLevel();
                 tGame.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:

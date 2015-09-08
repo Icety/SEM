@@ -1,10 +1,6 @@
 package application.core;
 
-import application.OldMain;
-
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import application.Main;
 import org.newdawn.slick.SlickException;
 
 import java.util.ArrayList;
@@ -43,56 +39,8 @@ public class Game {
 
     public int getScore() { return score; }
 
-    protected void nextLevel() {
+    public void nextLevel() {
         tLevel = levelFactory.buildLevel(levelNumber);
-        if (tLevel == null) {
-            tPaused = true;
-            OldMain.loadScene("won");
-            return;
-        }
-        tPaused = false;
-        OldMain.loadScene("level");
-        OldMain.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                KeyCode code = event.getCode();
-                if (code == KeyCode.ESCAPE) {
-                    // show menu
-                } else if (code == KeyCode.P) {
-                    if (!tPaused) {
-                        tPaused = true;
-                    } else {
-                        tPaused = false;
-                    }
-                } else if (code == KeyCode.RIGHT) {
-                    tRightArrow = true;
-                    OldMain.game.getPlayer(). rightArrowPressed(tRightArrow);
-                } else if (code == KeyCode.LEFT) {
-                    tLeftArrow = true;
-                    OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
-                } else if (code == KeyCode.SPACE) {
-                    OldMain.game.getPlayer().fireButtonPressed(true);
-                }
-
-            }
-        });
-
-        OldMain.primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                KeyCode code = event.getCode();
-                if (code == KeyCode.RIGHT) {
-                    tRightArrow = false;
-                    OldMain.game.getPlayer().rightArrowPressed(tRightArrow);
-                } else if (code == KeyCode.LEFT) {
-                    tLeftArrow = false;
-                    OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
-                } else if (code == KeyCode.SPACE) {
-                    OldMain.game.getPlayer().fireButtonPressed(false);
-                }
-            }
-        });
-
         levelNumber++;
     }
 

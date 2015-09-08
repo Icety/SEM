@@ -1,19 +1,15 @@
 package application.controllers;
 
 import application.Main;
-import application.OldMain;
 import application.core.Alien;
-import application.core.Sprite;
-import application.core.Player;
-import application.core.Projectile;
-import javafx.scene.canvas.GraphicsContext;
-import org.newdawn.slick.*;
+import application.core.Game;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 /**
@@ -23,8 +19,6 @@ public class Levels extends BasicGameState {
     protected Main tMain; // stored for later use
     protected int tId;
     protected ArrayList<Alien> tAliens;
-    protected ArrayList<String> tKnownImages;
-    protected ArrayList<Image> tImages;
 
     public Levels(int id) {
         tId = id;
@@ -33,10 +27,6 @@ public class Levels extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
-        tMain = (Main) game;
-        tAliens = tMain.tGame.getLevel().getAliens();
-
-
     }
 
     @Override
@@ -45,16 +35,16 @@ public class Levels extends BasicGameState {
 
         g.setColor(Color.white);
 
-        g.drawString(("SCORE: " + Integer.toString(OldMain.game.getScore())), OldMain.getWidth() - 140, 50);
+        g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), container.getWidth() - 140, 50);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        tMain.tGame.update();
+        Main.sGame.update();
 
-        for (Alien alien: tAliens) {
-            (alien.getImage()).draw( alien.getX(), alien.getY() );
+        for (Alien alien: Main.sGame.getLevel().getAliens()) {
+            (alien.getImage()).draw(alien.getX(), alien.getY());
         }
     }
 
@@ -76,5 +66,46 @@ public class Levels extends BasicGameState {
 //            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
 //        }
 //    }
+
+//    OldMain.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+//        @Override
+//        public void handle(KeyEvent event) {
+//            KeyCode code = event.getCode();
+//            if (code == KeyCode.ESCAPE) {
+//                // show menu
+//            } else if (code == KeyCode.P) {
+//                if (!tPaused) {
+//                    tPaused = true;
+//                } else {
+//                    tPaused = false;
+//                }
+//            } else if (code == KeyCode.RIGHT) {
+//                tRightArrow = true;
+//                OldMain.game.getPlayer(). rightArrowPressed(tRightArrow);
+//            } else if (code == KeyCode.LEFT) {
+//                tLeftArrow = true;
+//                OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
+//            } else if (code == KeyCode.SPACE) {
+//                OldMain.game.getPlayer().fireButtonPressed(true);
+//            }
+//
+//        }
+//    });
+//
+//    OldMain.primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
+//        @Override
+//        public void handle(KeyEvent event) {
+//            KeyCode code = event.getCode();
+//            if (code == KeyCode.RIGHT) {
+//                tRightArrow = false;
+//                OldMain.game.getPlayer().rightArrowPressed(tRightArrow);
+//            } else if (code == KeyCode.LEFT) {
+//                tLeftArrow = false;
+//                OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
+//            } else if (code == KeyCode.SPACE) {
+//                OldMain.game.getPlayer().fireButtonPressed(false);
+//            }
+//        }
+//    });
 
 }

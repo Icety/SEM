@@ -1,8 +1,6 @@
 package application.core;
 
 import application.Main;
-import application.OldMain;
-import javafx.scene.image.Image;
 import org.newdawn.slick.SlickException;
 
 import java.awt.*;
@@ -24,7 +22,7 @@ public class Projectile extends Sprite {
 
     public void move() throws SlickException {
         tY += tDirection * tSpeed;
-        if( (tY + tImage.getHeight() < 0) || (tY + tImage.getHeight() > Main.sGame.getHeight()) ) {
+        if( (tY < 0) || (tY > Main.sGame.getHeight()) ) {
             tRemoved = true;
         }
         checkCollision();
@@ -36,11 +34,11 @@ public class Projectile extends Sprite {
     }
 
     public void checkCollision() throws SlickException {
-        Rectangle ProjectileBox = new Rectangle(getX(),getY(),(int)tImage.getWidth(),tImage.getHeight());
+        Rectangle ProjectileBox = new Rectangle(getX(),getY(),tWidth,tHeight);
         for(Alien a: Main.sGame.getLevel().getAliens()) {
             int bA = 5;
             int hA = 10;
-            Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
+            Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getWidth()-(2*bA),(int)a.getHeight()-(2*hA));
             if(AlienBox.getBounds().intersects(ProjectileBox)) {
                 //This is a redundant check...
                 /*

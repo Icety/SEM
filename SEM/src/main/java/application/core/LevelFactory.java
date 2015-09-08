@@ -31,7 +31,7 @@ public class LevelFactory {
     public ArrayList<Alien> loadAliens(int levelNumber) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
         try {
-            File file = new File("src\\application\\levels.xml");
+            File file = new File("src\\main\\java\\application\\levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document doc = dBuilder.parse(file);

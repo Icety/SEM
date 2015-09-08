@@ -13,9 +13,12 @@ public class smallProjectile extends Projectile {
         //tImage = new Image(new File("src/application/images/smallbullet.png").toURI().toString());
         tDirection = 1;
         //Should have a different image
-        tImage = new Image(new File("src/application/images/playerProjectile.png").toURI().toString());
-        tX = x - (int)tImage.getWidth() / 2;
+        tImageString = "playerProjectile.png";
+        tX = x;
         tY = y;
         tSpeed = 5;
+
+        tWidth = 10;
+        tHeight = 25;
     }
 }

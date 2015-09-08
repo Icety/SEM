@@ -108,7 +108,7 @@ public class AlienTest {
     @Test
     public void testMoveWhileLoadingAMockedImage() throws Exception {
         testAlien.readXml(testElement);
-        testAlien.tImage = testImage;
+        //testAlien.tImage = testImage;
         testAlien.move();
 
         assertEquals(2, testAlien.getX());

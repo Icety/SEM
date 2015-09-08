@@ -16,5 +16,8 @@ public class PlayerProjectile extends Projectile {
         tImageString = "playerProjectile.png";
         tX = x - (int)tImage.getWidth() / 2;
         tY = y;
+
+        tWidth = 10;
+        tHeight = 25;
     }
 }

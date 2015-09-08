@@ -1,7 +1,6 @@
 package application.core;
 
 import application.Main;
-import application.OldMain;
 import javafx.scene.image.Image;
 import org.w3c.dom.Element;
 
@@ -21,7 +20,7 @@ public class Alien extends Sprite {
 
     public void move() {
         tX++;
-        if ((tX + 10) > OldMain.getWidth()) {
+        if ((tX + 10) > Main.sGame.getWidth()) {
             tY += 10;
             tX = 10;
         }
@@ -59,9 +58,9 @@ public class Alien extends Sprite {
             //delete the alien.
             tRemoved = true;
 
-            OldMain.game.setScore(tKillScore);
+            Main.sGame.setScore(tKillScore);
         } else {
-            OldMain.game.setScore(tHitScore);
+            Main.sGame.setScore(tHitScore);
         }
     }
 }

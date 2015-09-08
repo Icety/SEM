@@ -1,7 +1,6 @@
 package application.core;
 
 import application.Main;
-import application.OldMain;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -46,7 +45,7 @@ public class Player extends Sprite {
         }
     }
     protected void moveRight() {
-        if ( !((tX + tWidth + 10) > OldMain.getWidth() )) {
+        if ( !((tX + tWidth + 10) > Main.sGame.getWidth() )) {
             tX += tSpeed;
         }
     }

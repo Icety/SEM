@@ -29,7 +29,7 @@ public class ProjectileTest {
         testProjectile = new Projectile();
         testProjectile.tX = 1;
         testProjectile.tY = 1;
-        testProjectile.tImage = testImage;
+        //testProjectile.tImage = testImage;
     }
 
     /**

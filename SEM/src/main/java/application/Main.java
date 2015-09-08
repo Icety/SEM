@@ -108,4 +108,8 @@ public class Main extends StateBasedGame {
             e.printStackTrace();
         }
     }
+
+    public void loadScene(String scene) {
+
+    }
 }

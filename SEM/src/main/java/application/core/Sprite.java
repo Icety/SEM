@@ -28,4 +28,12 @@ public class Sprite {
         }
         return tImage;
     }
+
+    public int getWidth() {
+        return tWidth;
+    }
+
+    public int getHeight() {
+        return tHeight;
+    }
 }
