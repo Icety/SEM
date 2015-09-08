@@ -17,7 +17,7 @@ public class Projectile implements Sprite {
     protected int tSpeed = 15;
     protected int tHealth = 1;
     protected boolean tRemoved = false;
-    protected ArrayList<Alien> tHitList = new ArrayList<>();
+    protected ArrayList<Sprite> tHitList = new ArrayList<>();
 
     public int getX() {
         return tX;
@@ -73,6 +73,12 @@ public class Projectile implements Sprite {
                 return;
             }
         }
+
+        Player p = Main.game.getPlayer();
+        Rectangle PlayerBox = new Rectangle(p.getX(),p.getY(),(int)p.getImage().getWidth(),(int)p.getImage().getHeight());
+        if(PlayerBox.getBounds().intersects(ProjectileBox)) {
+            this.hit(p);
+        }
     }
 
     public boolean isRemoved() {
@@ -88,5 +94,20 @@ public class Projectile implements Sprite {
                 tRemoved = true;
             }
         }
+    }
+
+    private void hit(Player p) {
+        if(!tHitList.contains(p)) {
+            p.hit();
+            tHitList.add(p);
+            tHealth--;
+            if (tHealth <= 0) {
+                tRemoved = true;
+            }
+        }
+    }
+
+    public void addHit(Player player) {
+        tHitList.add(player);
     }
 }
