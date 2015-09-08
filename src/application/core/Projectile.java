@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import javafx.animation.AnimationTimer;
 import javafx.scene.image.Image;
 
 import java.awt.*;
@@ -16,7 +17,7 @@ public class Projectile implements Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 15;
     protected int tHealth = 1;
-    protected ArrayList<Alien> tHitList = new ArrayList<>();
+    protected ArrayList<Sprite> tHitList = new ArrayList<>();
 
     public int getX() {
         return tX;
@@ -57,23 +58,16 @@ public class Projectile implements Sprite {
             int hA = 10;
             Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getImage().getWidth()-(2*bA),(int)a.getImage().getHeight()-(2*hA));
             if(AlienBox.getBounds().intersects(ProjectileBox)) {
-                //This is a redundant check...
-                /**
-                if (this instanceof PlayerProjectile) {
-                    Main.game.removeProjectile(this);
-                }
-
-                //This is also a redundant check...
-                if (a instanceof SmallAlien) {
-                        Main.game.setScore(10);
-                        System.out.println(Main.game.score);
-                }
-                 **/
-
                 //Let The alien and projectile take damage
                 this.hit(a);
                 return;
             }
+        }
+        Player p = Main.game.getPlayer();
+        Rectangle PlayerBox = new Rectangle(p.getX(),p.getY(),(int)p.getImage().getWidth(),(int)p.getImage().getHeight());
+        if(PlayerBox.getBounds().intersects(ProjectileBox)) {
+            //Let The alien and projectile take damage
+            this.hit(p);
         }
     }
 
@@ -86,5 +80,20 @@ public class Projectile implements Sprite {
                 Main.game.removeProjectile(this);
             }
         }
+    }
+
+    private void hit(Player p) {
+        if(!tHitList.contains(p)) {
+            p.hit();
+           // tHitList.add(p);
+            tHealth--;
+            if (tHealth <= 0) {
+                Main.game.removeProjectile(this);
+            }
+        }
+    }
+
+    public void addHit(Player p) {
+        tHitList.add(p);
     }
 }

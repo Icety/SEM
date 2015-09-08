@@ -9,9 +9,6 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
 
-
-
-
     public ArrayList<Alien> getAliens() {
         return tAliens;
     }
