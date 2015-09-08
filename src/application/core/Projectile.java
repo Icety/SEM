@@ -16,6 +16,7 @@ public class Projectile implements Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 15;
     protected int tHealth = 1;
+    protected boolean tRemoved = false;
     protected ArrayList<Alien> tHitList = new ArrayList<>();
 
     public int getX() {
@@ -36,11 +37,8 @@ public class Projectile implements Sprite {
 
     public void move() {
         tY += tDirection * tSpeed;
-        if( tY + tImage.getHeight() < 0) {
-            //delete projectile;
-        }
-        if( tY + tImage.getHeight() > Main.getHeight()) {
-            //delete projectile;
+        if( (tY + tImage.getHeight() < 0) || (tY + tImage.getHeight() > Main.getHeight()) ) {
+            tRemoved = true;
         }
         checkCollision();
     }
@@ -77,13 +75,17 @@ public class Projectile implements Sprite {
         }
     }
 
+    public boolean isRemoved() {
+        return tRemoved;
+    }
+
     private void hit(Alien a) {
         if(!tHitList.contains(a)) {
             a.hit();
             tHitList.add(a);
             tHealth--;
             if (tHealth <= 0) {
-                Main.game.removeProjectile(this);
+                tRemoved = true;
             }
         }
     }

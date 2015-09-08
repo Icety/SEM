@@ -52,28 +52,32 @@ public class LevelController {
                     return;
                 }
                 //Manage framerate
-                double time = (System.nanoTime() - lastTime) / 1000000;
-                lastTime = System.nanoTime();
-                if (time < 16.66) {
+                double time = (currentNanoTime - lastTime) / 1000000;
+                lastTime = currentNanoTime;
+                System.out.println(time);
+                if (time < 16.66 && 1==2) {
                     try {
                         Thread.sleep((int) (16.66 - time));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
+
+                int fps = (int) (1000 / time);
                 //---------------
 
                 //Clear screen
                 gc.clearRect(0, 0, Main.getWidth(), Main.getHeight());
 
-                Main.game.update();
-                //Draw all objects
-                drawProjectiles(gc);
-                drawAliens(gc);
-                drawPlayer(gc);
-                gc.setFill(Color.RED);
+//                Main.game.update();
+//                //Draw all objects
+//                drawProjectiles(gc);
+//                drawAliens(gc);
+//                drawPlayer(gc);
+//                gc.setFill(Color.RED);
 
-                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), Main.getWidth()-140, 50);
+                gc.fillText(("SCORE: " + Integer.toString(Main.game.getScore())), Main.getWidth() - 140, 50);
+                gc.fillText(("FPS: " + Integer.toString(fps)), Main.getWidth()-140, 70);
             }
         }.start();
     }

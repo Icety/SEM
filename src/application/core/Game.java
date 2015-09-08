@@ -107,9 +107,17 @@ public class Game {
 
     public void update() {
         for (Alien alien: tLevel.getAliens()) {
+            if (alien.isRemoved()) {
+                tLevel.removeAlien(alien);
+                return;
+            }
             alien.move();
         }
         for (Projectile projectile: tProjectiles  ) {
+            if (projectile.isRemoved()) {
+                tProjectiles.remove(projectile);
+                return;
+            }
             projectile.move();
         }
         //If all aliens are dead
@@ -130,7 +138,7 @@ public class Game {
         tProjectiles.add(projectile);
     }
 
-    public void removeProjectile(Projectile projectile) {
-        tProjectiles.remove(projectile);
-    }
+//    public void removeProjectile(Projectile projectile) {
+//        tProjectiles.remove(projectile);
+//    }
 }

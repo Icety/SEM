@@ -15,6 +15,7 @@ public class Alien implements Sprite {
     protected int tHealth;
     protected int tHitScore;
     protected int tKillScore;
+    protected boolean tRemoved;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -53,11 +54,15 @@ public class Alien implements Sprite {
         return result;
     }
 
+    public boolean isRemoved() {
+        return tRemoved;
+    }
+
     public void hit() {
         tHealth--;
         if (tHealth <= 0) {
             //delete the alien.
-            Main.game.getLevel().removeAlien(this);
+            tRemoved = true;
 
             Main.game.setScore(tKillScore);
         } else {
