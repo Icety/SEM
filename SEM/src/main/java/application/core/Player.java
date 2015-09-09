@@ -84,4 +84,8 @@ public class Player extends Sprite {
     public Player getPlayer() {
         return this;
     }
+
+    public int getHealth() {
+        return tHealth;
+    }
 }

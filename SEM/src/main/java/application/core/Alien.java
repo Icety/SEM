@@ -28,19 +28,20 @@ public class Alien extends Sprite {
     }
 
     public void shoot() {
-        if (Math.random() * 100 > 98 && isLowerLevel()) {
-            Main.sGame.addProjectile(new smallProjectile(tX, tY));
+        if (Math.random() * 100 > 99.5 && isLowerLevel()) {
+            Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
         }
     }
 
     private boolean isLowerLevel() {
-        int y = 0;
         for(Alien a: Main.sGame.getLevel().getAliens()) {
-            if(a.getY() > y ) {
-                y = a.getY();
+            if(a.getX() > (tX - tWidth /2) || (tX + tWidth /2)  > a.getX()) {
+                if(a.getY() > tY) {
+                    return false;
+                }
             }
         }
-        return y == tY;
+        return true;
     }
 
     public String toString() {

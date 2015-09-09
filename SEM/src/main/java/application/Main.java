@@ -71,8 +71,8 @@ public class Main extends StateBasedGame {
     public static final int END = 3;
 
     // Application Properties
-    public static final int WIDTH   = 640;
-    public static final int HEIGHT  = 480;
+    public static final int WIDTH   = 1400;
+    public static final int HEIGHT  = 1050;
     public static final int FPS     = 60;
     public static final double VERSION = 1.0;
 
