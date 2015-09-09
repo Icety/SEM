@@ -31,10 +31,6 @@ public class Levels extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
-        Player p = Main.sGame.getPlayer();
-        p.settX(Main.sGame.getWidth() / 2);
-        p.settY(Main.sGame.getHeight() - (p.getHeight() + 50));
-
         tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
 
     }
@@ -49,13 +45,13 @@ public class Levels extends BasicGameState {
         g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), container.getWidth() - 140, 50);
 
         for (Alien alien: Main.sGame.getLevel().getAliens()) {
-            (alien.getImage()).draw(alien.getX(), alien.getY());
+            (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
         }
         Player p = Main.sGame.getPlayer();
-        p.getImage().draw(p.getX(), p.getY());
+        p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
 
         for (Projectile projectile: Main.sGame.getProjectiles()) {
-            projectile.getImage().draw(projectile.getX(), projectile.getY());
+            projectile.getImage().draw(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight());
         }
     }
 
@@ -65,6 +61,9 @@ public class Levels extends BasicGameState {
         Main.sGame.update();
         if (Main.sGame.hasWon()) {
             game.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        }
+        if (Main.sGame.hasLost()) {
+            game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
         }
         if (Main.sGame.getLevel().getBackground().equals(tBackgroundString)) {
             tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);

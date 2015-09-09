@@ -14,6 +14,7 @@ public class Won extends BasicGameState{
     private StateBasedGame tGame; // stored for later use
     protected int tId;
     protected Image tBackground;
+    protected Image tWon;
 
     public Won(int id) {
         tId = id;
@@ -24,15 +25,16 @@ public class Won extends BasicGameState{
             throws SlickException {
         tGame = game;
         tBackground = new Image("src/main/java/application/images/background.jpg");
+        tWon = new Image("src/main/java/application/images/youwon.gif");
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+        tWon.draw(0, 0, container.getWidth(), container.getHeight());
 
         g.setColor(Color.white);
-        g.drawString("Je hebt gewonnen!", 50, 10);
 
         g.drawString("1. Play Game", 50, 100);
         g.drawString("2. High Scores", 50, 120);

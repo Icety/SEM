@@ -24,6 +24,7 @@ public class Game {
     protected boolean tLeftArrow;
     protected boolean tSpace;
     protected boolean tWon = false;
+    protected boolean tLost = false;
     protected ArrayList<Projectile> tProjectiles;
 
 
@@ -68,7 +69,7 @@ public class Game {
     public void update() throws SlickException {
         //needs right time implemented
         if(tPlayer.getHealth() <= 0) {
-            System.exit(0);
+            tLost = true;
         }
         tPlayer.update();
 
@@ -119,6 +120,10 @@ public class Game {
 
     public boolean hasWon() {
         return tWon;
+    }
+
+    public boolean hasLost() {
+        return tLost;
     }
 
 //    public void removeProjectile(Projectile projectile) {
