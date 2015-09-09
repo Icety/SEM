@@ -14,7 +14,7 @@ public class Projectile extends Sprite {
     protected int tSpeed = 15;
     protected int tHealth = 1;
     protected boolean tRemoved = false;
-    protected ArrayList<Alien> tHitList = new ArrayList<>();
+    protected ArrayList<Sprite> tHitList = new ArrayList<>();
 
     public void setDirection(int direction) {
         tDirection = direction;
@@ -59,7 +59,16 @@ public class Projectile extends Sprite {
                     return;
                 }
             }
+        } else {
+            Player p = Main.sGame.getPlayer();
+            int bA = 5;
+            int hA = 10;
+            Rectangle PlayerBox = new Rectangle(p.getX()+bA,p.getY()+5,(int)p.getWidth()-(2*bA),(int)p.getHeight()-(2*hA));
+            if(PlayerBox.getBounds().intersects(ProjectileBox)) {
+                this.hit(p);
+            }
         }
+
 
     }
 
@@ -67,9 +76,13 @@ public class Projectile extends Sprite {
         return tRemoved;
     }
 
-    private void hit(Alien a) {
+    private void hit(Sprite a) {
         if(!tHitList.contains(a)) {
-            a.hit();
+            if (a instanceof Alien) {
+                ((Alien) a).hit();
+            } else {
+                ((Player) a).hit();
+            }
             tHitList.add(a);
             tHealth--;
             if (tHealth <= 0) {

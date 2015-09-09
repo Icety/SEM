@@ -59,7 +59,11 @@ public class Game {
 
     public void update() throws SlickException {
         //needs right time implemented
+        if(tPlayer.getHealth() <= 0) {
+            System.exit(0);
+        }
         tPlayer.update();
+
         for (Alien alien: tLevel.getAliens()) {
             if (alien.isRemoved()) {
                 tLevel.removeAlien(alien);
