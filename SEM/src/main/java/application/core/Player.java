@@ -16,26 +16,25 @@ public class Player extends Sprite {
     public Player() {
         tImageString = "Space_Invaders_cannon.png";
         tHealth = 3;
-        tHeight = 50;
+        tHeight = 70;
+        tWidth = 112;
     }
 
-    public void update(long time) {
-
+    public void update() {
         if(tGoLeft) {
             moveLeft();
         }
         else if(tGoRight) {
             moveRight();
         }
+        long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
-            System.out.println("Shoot");
             tLastShot = System.nanoTime();
-            Projectile projectile = new PlayerProjectile(tX + tWidth/2, tY - 10);
-            //projectile.addHit(getPlayer());
+            Projectile projectile = new PlayerProjectile(tX + 10, tY - 10);
             Main.sGame.addProjectile(projectile);
-
-            //temporary while key has to be released to fire
-            tShoot = false;
+            projectile = new PlayerProjectile(tX + tWidth - 10, tY - 10);
+            Main.sGame.addProjectile(projectile);
+            //projectile.addHit(getPlayer());
         }
         try {
             Thread.sleep(15);
@@ -45,7 +44,6 @@ public class Player extends Sprite {
     }
 
     protected void moveLeft() {
-        System.out.println(tX);
         if ( (tX ) > 10 ) {
             tX -= tSpeed;
         }

@@ -69,12 +69,12 @@ public class Levels extends BasicGameState {
         switch(key) {
             case Input.KEY_LEFT:
                 Main.sGame.getPlayer().leftArrowPressed(true);
-                System.out.println("LEFT");
                 break;
             case Input.KEY_RIGHT:
                 Main.sGame.getPlayer().rightArrowPressed(true);
                 break;
             case Input.KEY_SPACE:
+                Main.sGame.getPlayer().fireButtonPressed(true);
                 //TODO
                 break;
             default:
@@ -86,13 +86,12 @@ public class Levels extends BasicGameState {
         switch(key) {
             case Input.KEY_LEFT:
                 Main.sGame.getPlayer().leftArrowPressed(false);
-                System.out.println("LEFT");
                 break;
             case Input.KEY_RIGHT:
                 Main.sGame.getPlayer().rightArrowPressed(false);
                 break;
             case Input.KEY_SPACE:
-                Main.sGame.getPlayer().fireButtonPressed(true);
+                Main.sGame.getPlayer().fireButtonPressed(false);
                 break;
             default:
                 break;
