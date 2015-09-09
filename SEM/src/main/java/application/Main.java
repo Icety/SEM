@@ -55,8 +55,11 @@
 package application;
 
 import application.controllers.Levels;
+import application.controllers.Lost;
 import application.controllers.Menu;
+import application.controllers.Won;
 import application.core.Game;
+import application.core.Player;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
@@ -67,8 +70,8 @@ public class Main extends StateBasedGame {
     // Game state identifiers
     public static final int MENU = 0;
     public static final int LEVELS = 1;
-    public static final int PAUSE = 2;
-    public static final int END = 3;
+    public static final int WON = 2;
+    public static final int LOST = 3;
 
     // Application Properties
     public static final int WIDTH   = 1400;
@@ -93,7 +96,8 @@ public class Main extends StateBasedGame {
         // The first state added will be the one that is loaded first, when the application is launched
         this.addState(new Menu(MENU));
         this.addState(new Levels(LEVELS));
-//        this.addState(new EndGame(END));
+        this.addState(new Won(WON));
+        this.addState(new Lost(LOST));
     }
 
     // OldMain Method
@@ -109,7 +113,11 @@ public class Main extends StateBasedGame {
         }
     }
 
-    public void loadScene(String scene) {
-
+    public static void newGame() {
+        sGame = new Game(WIDTH, HEIGHT);
+        sGame.nextLevel();
+        Player p = Main.sGame.getPlayer();
+        p.settX(Main.sGame.getWidth() / 2);
+        p.settY(Main.sGame.getHeight() - (p.getHeight() + 50));
     }
 }

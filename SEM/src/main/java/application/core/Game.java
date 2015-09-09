@@ -1,7 +1,10 @@
 package application.core;
 
 import application.Main;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import java.util.ArrayList;
 
@@ -20,6 +23,8 @@ public class Game {
     protected boolean tRightArrow;
     protected boolean tLeftArrow;
     protected boolean tSpace;
+    protected boolean tWon = false;
+    protected boolean tLost = false;
     protected ArrayList<Projectile> tProjectiles;
 
 
@@ -44,6 +49,10 @@ public class Game {
         levelNumber++;
     }
 
+    public boolean hasNextLevel() {
+        return levelFactory.levelExists(levelNumber);
+    }
+
     public Level getLevel() {
         return tLevel;
     }
@@ -60,7 +69,7 @@ public class Game {
     public void update() throws SlickException {
         //needs right time implemented
         if(tPlayer.getHealth() <= 0) {
-            System.exit(0);
+            tLost = true;
         }
         tPlayer.update();
 
@@ -81,7 +90,12 @@ public class Game {
         }
         //If all aliens are dead
         if (tLevel.getAliens().size() == 0) {
-            nextLevel();
+            if (hasNextLevel()) {
+                nextLevel();
+            }
+            else {
+                tWon = true;
+            }
         }
     }
 
@@ -103,6 +117,14 @@ public class Game {
 
     public int getWidth() {
         return tScreenWidth;
+    }
+
+    public boolean hasWon() {
+        return tWon;
+    }
+
+    public boolean hasLost() {
+        return tLost;
     }
 
 //    public void removeProjectile(Projectile projectile) {
