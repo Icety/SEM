@@ -24,7 +24,7 @@ public class Won extends BasicGameState{
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tGame = game;
-        tBackground = new Image("src/main/java/application/images/background.jpg");
+        tBackground = new Image("src/main/java/application/images/moving.jpg");
         tWon = new Image("src/main/java/application/images/youwon.gif");
     }
 

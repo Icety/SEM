@@ -21,7 +21,7 @@ public class Levels extends BasicGameState {
     protected int tId;
     protected ArrayList<Alien> tAliens;
     protected Image tBackground;
-    protected String tBackgroundString = "background.jpg";
+    protected String tBackgroundString = "moving.jpg";
     protected boolean pause = false;
 
     public Levels(int id) {

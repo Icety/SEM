@@ -1,6 +1,8 @@
 package application.core;
 
 import application.Main;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -30,6 +32,12 @@ public class Player extends Sprite {
         long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
+            try {
+                laserSound();
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+
             Projectile projectile = new PlayerProjectile(tX + tWidth/2 , tY );
             Main.sGame.addProjectile(projectile);
         }
@@ -54,6 +62,12 @@ public class Player extends Sprite {
     public String toString() {
         String result = "Player on coords: " + tX + ", " + tY;
         return result;
+    }
+
+
+    public void laserSound() throws SlickException {
+        Sound laser = new Sound("src/main/java/application/sound/laser.wav");
+        laser.play();
     }
 
     public void leftArrowPressed(boolean pressed) {
