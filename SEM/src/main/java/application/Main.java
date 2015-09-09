@@ -62,6 +62,7 @@ import application.core.Game;
 import application.core.Player;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -82,6 +83,7 @@ public class Main extends StateBasedGame {
     public static Game sGame;
 
     public Game tGame;
+    public Music tBackgroundmusic;
 
     // Class Constructor
     public Main(String appName) {
@@ -98,6 +100,8 @@ public class Main extends StateBasedGame {
         this.addState(new Levels(LEVELS));
         this.addState(new Won(WON));
         this.addState(new Lost(LOST));
+        tBackgroundmusic = new Music("src/main/java/application/sound/backgroundmusic.wav");
+        tBackgroundmusic.loop();
     }
 
     // OldMain Method
