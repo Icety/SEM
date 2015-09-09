@@ -25,6 +25,7 @@ public class Game {
     protected boolean tSpace;
     protected boolean tWon = false;
     protected boolean tLost = false;
+    protected boolean mothershipAlive;
     protected ArrayList<Projectile> tProjectiles;
 
 
@@ -76,6 +77,11 @@ public class Game {
         for (Alien alien: tLevel.getAliens()) {
             if (alien.isRemoved()) {
                 tLevel.removeAlien(alien);
+
+                //Check if mothership is alive
+                if (alien instanceof MothershipAlien) {
+                    mothershipAlive = false;
+                }
                 return;
             }
             alien.move();
@@ -102,7 +108,7 @@ public class Game {
             projectile.move();
         }
         //If all aliens are dead
-        if (tLevel.getAliens().size() == 0) {
+        if (tLevel.getAliens().size() == 0 || (tLevel.getAliens().size() == 1 && !mothershipAlive)) {
             if (hasNextLevel()) {
                 nextLevel();
             }

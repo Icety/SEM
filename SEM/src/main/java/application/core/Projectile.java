@@ -41,19 +41,6 @@ public class Projectile extends Sprite {
                 int hA = 10;
                 Rectangle AlienBox = new Rectangle(a.getX()+bA,a.getY()+5,(int)a.getWidth()-(2*bA),(int)a.getHeight()-(2*hA));
                 if(AlienBox.getBounds().intersects(ProjectileBox)) {
-                    //This is a redundant check...
-                /*
-                if (this instanceof PlayerProjectile) {
-                    OldMain.game.removeProjectile(this);
-                }
-
-                //This is also a redundant check...
-                if (a instanceof SmallAlien) {
-                        OldMain.game.setScore(10);
-                        System.out.println(OldMain.game.score);
-                }
-                */
-
                     //Let The alien and projectile take damage
                     this.hit(a);
                     return;

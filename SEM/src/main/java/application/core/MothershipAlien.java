@@ -25,4 +25,8 @@ public class MothershipAlien extends Alien{
             tDirection *= -1;
         }
     }
+
+    public boolean isAlive() {
+        return tHealth > 0;
+    }
 }

@@ -22,6 +22,7 @@ public class Levels extends BasicGameState {
     protected ArrayList<Alien> tAliens;
     protected Image tBackground;
     protected String tBackgroundString = "background.jpg";
+    protected boolean pause = false;
 
     public Levels(int id) {
         tId = id;
@@ -38,49 +39,58 @@ public class Levels extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
+        container.setPaused(pause);
+        if (!pause) {
+            Player p = Main.sGame.getPlayer();
+            int lives = p.getHealth();
 
-        Player p = Main.sGame.getPlayer();
-        int lives = p.getHealth();
+            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
 
-        tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+            g.setColor(Color.white);
 
-        g.setColor(Color.white);
+            //Display Score in top left.
+            g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), 140, 50);
 
-        //Display Score in top left.
-        g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), 140, 50);
+            //Display Lives in top right.
+            g.drawString("LIVES: ", container.getWidth() - 500, 50);
+            for (int i = 1; i <= lives; i++) {
+                p.getImage().draw(container.getWidth() - 500 + i * 110, 10, p.getWidth(), p.getHeight());
+            }
 
-        //Display Lives in top right.
-        g.drawString("LIVES: ", container.getWidth() - 500, 50);
-        for (int i = 1; i <= lives; i++) {
-            p.getImage().draw(container.getWidth() - 500 + i * 110, 10, p.getWidth(), p.getHeight());
-        }
+            //Draw all aliens
+            for (Alien alien : Main.sGame.getLevel().getAliens()) {
+                (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+            }
 
+            //Draw the player
+            p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
 
-
-        for (Alien alien: Main.sGame.getLevel().getAliens()) {
-            (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
-        }
-        p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-
-        for (Projectile projectile: Main.sGame.getProjectiles()) {
-            projectile.getImage().draw(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight());
+            //Draw projectiles
+            for (Projectile projectile : Main.sGame.getProjectiles()) {
+                projectile.getImage().draw(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight());
+            }
+        } else {
+            g.drawString("PAUSED", container.getWidth() /2, container.getHeight() /2);
         }
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        Main.sGame.update();
-        if (Main.sGame.hasWon()) {
-            game.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        if (!pause) {
+            Main.sGame.update();
+            if (Main.sGame.hasWon()) {
+                game.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            }
+            if (Main.sGame.hasLost()) {
+                game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            }
+            if (Main.sGame.getLevel().getBackground().equals(tBackgroundString)) {
+                tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+                tBackgroundString = Main.sGame.getLevel().getBackground();
+            }
         }
-        if (Main.sGame.hasLost()) {
-            game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-        }
-        if (Main.sGame.getLevel().getBackground().equals(tBackgroundString)) {
-            tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
-            tBackgroundString = Main.sGame.getLevel().getBackground();
-        }
+
     }
 
     @Override
@@ -116,6 +126,9 @@ public class Levels extends BasicGameState {
             case Input.KEY_SPACE:
                 Main.sGame.getPlayer().fireButtonPressed(false);
                 break;
+            case Input.KEY_ESCAPE:
+                pause = !pause;
+                System.out.println(pause);
             default:
                 break;
         }

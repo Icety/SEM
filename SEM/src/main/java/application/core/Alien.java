@@ -4,6 +4,8 @@ import application.Main;
 import javafx.scene.image.Image;
 import org.w3c.dom.Element;
 
+import java.awt.*;
+
 /**
  * Created by Thomas on 01-09-15.
  */
@@ -27,18 +29,28 @@ public class Alien extends Sprite {
     }
 
     public void shoot() {
-        if ((Math.random() * 100 > 99.9 && isLowerLevel()) || (tShootChance > 1000 && isLowerLevel())) {
-            Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
-            tShootChance = 0;
+        if (isLowerLevel()) {
+            if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
+                Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
+                tShootChance = 0;
+            }
         }
     }
 
+
+    /**
+     * Checks whether the alien is the lowest alien of its column
+     * @return
+     */
     private boolean isLowerLevel() {
+        int bA = 5;
+        int hA = 10;
+        Rectangle myBox = new Rectangle(tX + bA,Main.sGame.getHeight(),(int)tWidth-(2*bA),(int)tHeight-(2*hA));
         for(Alien a: Main.sGame.getLevel().getAliens()) {
-            if(a.getX() > (tX - tWidth /2) || (tX + tWidth /2)  > a.getX()) {
-                if(a.getY() > tY) {
-                    return false;
-                }
+            Rectangle AlienBox = new Rectangle(a.getX()+bA,Main.sGame.getHeight(),(int)a.getWidth()-(2*bA),(int)a.getHeight()-(2*hA));
+            if(AlienBox.getBounds().intersects(myBox)) {
+                if (tY < a.getY())
+                return false;
             }
         }
         return true;

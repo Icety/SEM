@@ -30,7 +30,7 @@ public class Player extends Sprite {
         long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
-            Projectile projectile = new PlayerProjectile(tX , tY);
+            Projectile projectile = new PlayerProjectile(tX + tWidth/2 , tY );
             Main.sGame.addProjectile(projectile);
         }
         try {
@@ -70,12 +70,6 @@ public class Player extends Sprite {
 
     public void hit() {
         tHealth--;
-        if (tHealth <= 0) {
-            //delete the alien.
-            System.out.println("U DEAD");
-        } else {
-            System.out.println("U HIT BRUH");
-        }
     }
 
     public Player getPlayer() {
