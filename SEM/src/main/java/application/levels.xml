@@ -6,8 +6,8 @@
         <aliens>
             <!-- TOP ROW -->
             <alien>
-                <x>1</x>
-                <y>1</y>
+                <x>-1000</x>
+                <y>100</y>
                 <type>mother</type>
             </alien>
             <alien>

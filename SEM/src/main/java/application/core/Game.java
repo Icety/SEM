@@ -90,6 +90,8 @@ public class Game {
                         }
                     }
                 }
+            } else {
+                alien.switchDirection();
             }
         }
         for (Projectile projectile: tProjectiles  ) {
