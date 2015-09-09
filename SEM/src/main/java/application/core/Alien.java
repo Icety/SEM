@@ -42,7 +42,7 @@ public class Alien extends Sprite {
      * Checks whether the alien is the lowest alien of its column
      * @return
      */
-    private boolean isLowerLevel() {
+    protected boolean isLowerLevel() {
         int bA = 5;
         int hA = 10;
         Rectangle myBox = new Rectangle(tX + bA,Main.sGame.getHeight(),(int)tWidth-(2*bA),(int)tHeight-(2*hA));

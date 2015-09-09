@@ -16,8 +16,8 @@ public class Player extends Sprite {
     public Player() {
         tImageString = "Space_Invaders_cannon.png";
         tHealth = 3;
-        tHeight = 70;
-        tWidth = 112;
+        tHeight = 30;
+        tWidth = 80;
     }
 
     public void update() {

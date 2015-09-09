@@ -26,6 +26,7 @@ public class Game {
     protected boolean tWon = false;
     protected boolean tLost = false;
     protected boolean mothershipAlive;
+    protected boolean bossStage;
     protected ArrayList<Projectile> tProjectiles;
 
 
@@ -75,6 +76,10 @@ public class Game {
         tPlayer.update();
 
         for (Alien alien: tLevel.getAliens()) {
+            if (alien instanceof FinalBoss) {
+                bossStage = true;
+            }
+
             if (alien.isRemoved()) {
                 tLevel.removeAlien(alien);
 
@@ -90,9 +95,12 @@ public class Game {
             //Switch direction when the borders are reached
             if (!(alien instanceof MothershipAlien)) {
                 if (alien.endOfScreen()) {
+                    System.out.println("SWITCH");
                     for (Alien alien2: tLevel.getAliens()) {
+                        System.out.println("SWITCH");
                         if (!(alien2 instanceof MothershipAlien)) {
                             alien2.switchDirection();
+                            System.out.println("SWITCH");
                         }
                     }
                 }
@@ -107,8 +115,21 @@ public class Game {
             }
             projectile.move();
         }
+
+        if (bossStage) {
+            if (tLevel.getAliens().size() == 0) {
+                if (hasNextLevel()) {
+                    nextLevel();
+                }
+                else {
+                    System.out.println("NOPE");
+                    tWon = true;
+                    bossStage = false;
+                }
+            }
+        }
         //If all aliens are dead
-        if (tLevel.getAliens().size() == 0 || (tLevel.getAliens().size() == 1 && !mothershipAlive)) {
+         else if (tLevel.getAliens().size() == 0 || (tLevel.getAliens().size() == 1 && (!mothershipAlive))) {
             if (hasNextLevel()) {
                 nextLevel();
             }

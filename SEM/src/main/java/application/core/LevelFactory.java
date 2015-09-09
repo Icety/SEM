@@ -73,15 +73,17 @@ public class LevelFactory {
                 case "mini":
                     alien = new MiniAlien();
                     break;
+                case "boss":
+                    alien = new FinalBoss();
+                    break;
             }
             alien.readXml(eElement);
             aliens.add(alien);
         }
-
         return aliens;
     }
 
     public boolean levelExists(int levelNumber) {
-        return (levelNumber < (tLevels.getLength() - 1));
+        return (levelNumber < (tLevels.getLength()));
     }
 }

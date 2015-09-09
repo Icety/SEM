@@ -296,6 +296,18 @@
             <!-- END OF FIFTH ROW -->
         </aliens>
     </level>
+    <level>
+        <background>
+            background.jpg
+        </background>
+        <aliens>
+            <alien>
+                <x>400</x>
+                <y>150</y>
+                <type>boss</type>
+            </alien>
+        </aliens>
+    </level>
     <!--<level>-->
         <!--<background>-->
             <!--background.jpg-->

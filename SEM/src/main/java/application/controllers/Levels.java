@@ -54,7 +54,7 @@ public class Levels extends BasicGameState {
             //Display Lives in top right.
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
             for (int i = 1; i <= lives; i++) {
-                p.getImage().draw(container.getWidth() - 500 + i * 110, 10, p.getWidth(), p.getHeight());
+                p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
             }
 
             //Draw all aliens
