@@ -7,11 +7,11 @@ public class MothershipAlien extends Alien{
 
     public MothershipAlien() {
         tImageString = "mothership.png";
-        tHealth = 100;
+        tHealth = 1;
         tHitScore = 0;
         tKillScore = 500;
-        tWidth = 500;
-        tHeight= 300;
+        tWidth = 50;
+        tHeight= 30;
         tShootChance = 0;
     }
 }

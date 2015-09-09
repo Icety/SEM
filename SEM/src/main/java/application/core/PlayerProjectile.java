@@ -17,7 +17,7 @@ public class PlayerProjectile extends Projectile {
         tX = x - tWidth / 2;
         tY = y + tHeight /2;
 
-        tWidth = 10;
-        tHeight = 25;
+        tWidth = 7;
+        tHeight = 15;
     }
 }

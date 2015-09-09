@@ -13,6 +13,8 @@ public class Alien extends Sprite {
     protected int tKillScore;
     protected boolean tRemoved;
     protected int tShootChance;
+    protected int tDirection;
+    protected int tSpeed;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -20,11 +22,7 @@ public class Alien extends Sprite {
     }
 
     public void move() {
-        tX++;
-        if ((tX + 10) > Main.sGame.getWidth()) {
-            tY += 10;
-            tX = 10;
-        }
+        tX += tDirection *tSpeed;
         shoot();
     }
 
@@ -71,6 +69,15 @@ public class Alien extends Sprite {
     }
 
     public void addShootChance() {
-        tShootChance += Math.random() * 100;
+        tShootChance += Math.random() * 0;
+    }
+
+    public boolean endOfScreen() {
+        return tX == Main.sGame.getWidth() - tWidth + 10 || tX == 10;
+    }
+
+    public void switchDirection() {
+        tY += 30;
+        tDirection *= -1;
     }
 }

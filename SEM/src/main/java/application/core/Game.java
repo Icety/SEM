@@ -80,6 +80,17 @@ public class Game {
             }
             alien.move();
             alien.addShootChance();
+
+            //Switch direction when the borders are reached
+            if (!(alien instanceof MothershipAlien)) {
+                if (alien.endOfScreen()) {
+                    for (Alien alien2: tLevel.getAliens()) {
+                        if (!(alien2 instanceof MothershipAlien)) {
+                            alien2.switchDirection();
+                        }
+                    }
+                }
+            }
         }
         for (Projectile projectile: tProjectiles  ) {
             if (projectile.isRemoved()) {

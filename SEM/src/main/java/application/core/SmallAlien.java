@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import javafx.scene.image.Image;
 
 import java.io.File;
@@ -14,9 +15,11 @@ public class SmallAlien extends Alien {
         super.tHealth = 1;
         super.tHitScore = 10;
         super.tKillScore = 50;
-        tWidth = 50;
-        tHeight = 50;
+        tWidth = 70;
+        tHeight = 70;
         tShootChance = 0;
+        tDirection = 1;
+        tSpeed = 1;
     }
 
     @Override

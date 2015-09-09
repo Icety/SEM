@@ -75,7 +75,7 @@ public class Main extends StateBasedGame {
 
     // Application Properties
     public static final int WIDTH   = 1400;
-    public static final int HEIGHT  = 1050;
+    public static final int HEIGHT  = 1080;
     public static final int FPS     = 60;
     public static final double VERSION = 1.0;
 
@@ -107,6 +107,7 @@ public class Main extends StateBasedGame {
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(true);
+            app.isFullscreen();
             app.start();
         } catch(SlickException e) {
             e.printStackTrace();
