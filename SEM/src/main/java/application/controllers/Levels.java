@@ -20,6 +20,7 @@ public class Levels extends BasicGameState {
     protected Main tMain; // stored for later use
     protected int tId;
     protected ArrayList<Alien> tAliens;
+    protected Image tBackground;
 
     public Levels(int id) {
         tId = id;
@@ -31,13 +32,16 @@ public class Levels extends BasicGameState {
 
         Player p = Main.sGame.getPlayer();
         p.settX(Main.sGame.getWidth() / 2);
-        p.settY(Main.sGame.getHeight()  - (p.getHeight() + 50));
+        p.settY(Main.sGame.getHeight() - (p.getHeight() + 50));
+
+        tBackground = new Image("src/main/java/application/images/background.jpg");
 
     }
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
+        tBackground.draw(0, 0, container.getWidth(), container.getHeight());
 
         g.setColor(Color.white);
 
