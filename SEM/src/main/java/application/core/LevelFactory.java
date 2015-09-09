@@ -67,6 +67,12 @@ public class LevelFactory {
                 case "mother":
                     alien = new MothershipAlien();
                     break;
+                case "big":
+                    alien = new BigAlien();
+                    break;
+                case "mini":
+                    alien = new MiniAlien();
+                    break;
             }
             alien.readXml(eElement);
             aliens.add(alien);

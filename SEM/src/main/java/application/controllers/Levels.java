@@ -38,16 +38,28 @@ public class Levels extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
+
+        Player p = Main.sGame.getPlayer();
+        int lives = p.getHealth();
+
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
 
         g.setColor(Color.white);
 
-        g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), container.getWidth() - 140, 50);
+        //Display Score in top left.
+        g.drawString(("SCORE: " + Integer.toString(Main.sGame.getScore())), 140, 50);
+
+        //Display Lives in top right.
+        g.drawString("LIVES: ", container.getWidth() - 500, 50);
+        for (int i = 1; i <= lives; i++) {
+            p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
+        }
+
+
 
         for (Alien alien: Main.sGame.getLevel().getAliens()) {
             (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
         }
-        Player p = Main.sGame.getPlayer();
         p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
 
         for (Projectile projectile: Main.sGame.getProjectiles()) {

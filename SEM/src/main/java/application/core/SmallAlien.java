@@ -13,8 +13,8 @@ public class SmallAlien extends Alien {
     public SmallAlien() {
         tImageString = "smallAlien.png";
         super.tHealth = 1;
-        super.tHitScore = 10;
-        super.tKillScore = 50;
+        super.tHitScore = 0;
+        super.tKillScore = 20;
         tWidth = 70;
         tHeight = 70;
         tShootChance = 0;

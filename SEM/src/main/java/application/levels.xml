@@ -13,57 +13,57 @@
             <alien>
                 <x>10</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>90</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>170</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>250</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>330</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>410</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>490</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>570</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>650</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>730</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <alien>
                 <x>810</x>
                 <y>150</y>
-                <type>small</type>
+                <type>big</type>
             </alien>
             <!-- END OF  ROW -->
             <!-- SECOND ROW -->
@@ -122,6 +122,178 @@
                 <y>210</y>
                 <type>small</type>
             </alien>
+            <!-- END OF SECOND ROW -->
+            <!-- THIRD ROW -->
+            <alien>
+                <x>10</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>90</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>170</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>250</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>330</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>410</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>490</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>570</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>650</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>730</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+            <alien>
+                <x>810</x>
+                <y>270</y>
+                <type>small</type>
+            </alien>
+        <!--END OF THIRD ROW -->
+            <!-- START FOURTH ROW -->
+            <alien>
+                <x>10</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>90</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>170</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>250</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>330</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>410</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>490</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>570</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>650</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>730</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>810</x>
+                <y>330</y>
+                <type>mini</type>
+            </alien>
+            <!-- END OF FOURTH ROW -->
+            <!-- START FIFTH ROW -->
+            <alien>
+                <x>10</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>90</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>170</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>250</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>330</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>410</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>490</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>570</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>650</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>730</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <alien>
+                <x>810</x>
+                <y>390</y>
+                <type>mini</type>
+            </alien>
+            <!-- END OF FIFTH ROW -->
         </aliens>
     </level>
     <!--<level>-->

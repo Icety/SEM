@@ -17,8 +17,7 @@ public class smallProjectile extends Projectile {
         tX = x;
         tY = y;
         tSpeed = 5;
-
-        tWidth = 10;
-        tHeight = 25;
+        tWidth = 7;
+        tHeight = 15;
     }
 }

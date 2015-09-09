@@ -14,8 +14,8 @@ public class PlayerProjectile extends Projectile {
     public PlayerProjectile(int x, int y) {
         tDirection = -1;
         tImageString = "playerProjectile.png";
-        tX = x - tWidth / 2;
-        tY = y + tHeight /2;
+        tX = x;
+        tY = y;
 
         tWidth = 7;
         tHeight = 15;

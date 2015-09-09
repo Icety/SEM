@@ -8,7 +8,7 @@ import application.Main;
 public class Player extends Sprite {
     protected int tHealth;
     protected long tLastShot = 0;
-    protected int tReloadTime = 150;
+    protected int tReloadTime = 1000;
     protected int tSpeed = 5;
 
     protected boolean tShoot, tGoLeft, tGoRight;
@@ -30,11 +30,8 @@ public class Player extends Sprite {
         long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
-            Projectile projectile = new PlayerProjectile(tX + 10, tY - 10);
+            Projectile projectile = new PlayerProjectile(tX , tY);
             Main.sGame.addProjectile(projectile);
-            projectile = new PlayerProjectile(tX + tWidth - 10, tY - 10);
-            Main.sGame.addProjectile(projectile);
-            //projectile.addHit(getPlayer());
         }
         try {
             Thread.sleep(15);

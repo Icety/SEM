@@ -14,7 +14,7 @@ public class Alien extends Sprite {
     protected boolean tRemoved;
     protected int tShootChance;
     protected int tDirection;
-    protected int tSpeed;
+    protected double tSpeed;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -27,13 +27,10 @@ public class Alien extends Sprite {
     }
 
     public void shoot() {
-        if (Math.random() * 100 > 99.5 && isLowerLevel()) {
+        if ((Math.random() * 100 > 99.9 && isLowerLevel()) || (tShootChance > 1000 && isLowerLevel())) {
             Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
+            tShootChance = 0;
         }
-      //  if (tShootChance > 1000) {
-      //      Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
-       //     tShootChance = 0;
-       // }
     }
 
     private boolean isLowerLevel() {
@@ -73,11 +70,11 @@ public class Alien extends Sprite {
     }
 
     public boolean endOfScreen() {
-        return tX == Main.sGame.getWidth() - tWidth + 10 || tX == 10;
+        return tX == Main.sGame.getWidth() - tWidth - 10 || tX == 10;
     }
 
     public void switchDirection() {
-        tY += 30;
-        tDirection *= -1;
+            tY += 15;
+            tDirection *= -1;
     }
 }
