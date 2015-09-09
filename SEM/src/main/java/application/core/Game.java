@@ -70,6 +70,7 @@ public class Game {
                 return;
             }
             alien.move();
+            alien.addShootChance();
         }
         for (Projectile projectile: tProjectiles  ) {
             if (projectile.isRemoved()) {

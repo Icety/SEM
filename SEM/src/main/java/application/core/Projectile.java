@@ -68,8 +68,6 @@ public class Projectile extends Sprite {
                 this.hit(p);
             }
         }
-
-
     }
 
     public boolean isRemoved() {

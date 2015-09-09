@@ -12,5 +12,6 @@ public class MothershipAlien extends Alien{
         super.tKillScore = 500;
         tWidth = 50;
         tHeight= 30;
+        tShootChance = 0;
     }
 }

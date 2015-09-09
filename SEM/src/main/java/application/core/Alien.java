@@ -12,6 +12,7 @@ public class Alien extends Sprite {
     protected int tHitScore;
     protected int tKillScore;
     protected boolean tRemoved;
+    protected int tShootChance;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -31,6 +32,10 @@ public class Alien extends Sprite {
         if (Math.random() * 100 > 99.5 && isLowerLevel()) {
             Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
         }
+      //  if (tShootChance > 1000) {
+      //      Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
+       //     tShootChance = 0;
+       // }
     }
 
     private boolean isLowerLevel() {
@@ -63,5 +68,9 @@ public class Alien extends Sprite {
         } else {
             Main.sGame.setScore(tHitScore);
         }
+    }
+
+    public void addShootChance() {
+        tShootChance += Math.random() * 100;
     }
 }

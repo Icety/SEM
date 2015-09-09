@@ -16,5 +16,11 @@ public class SmallAlien extends Alien {
         super.tKillScore = 50;
         tWidth = 50;
         tHeight = 50;
+        tShootChance = 0;
+    }
+
+    @Override
+    public void addShootChance() {
+        tShootChance += Math.random() * 5;
     }
 }
