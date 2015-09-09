@@ -109,7 +109,8 @@ public class Main extends StateBasedGame {
         }
     }
 
-    public void loadScene(String scene) {
-
+    public static void newGame() {
+        sGame = new Game(WIDTH, HEIGHT);
+        sGame.nextLevel();
     }
 }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
+    protected String tBackground;
 
     public ArrayList<Alien> getAliens() {
         return tAliens;
@@ -27,6 +28,14 @@ public class Level {
             result += alien.toString() +"\n";
         }
         return result;
+    }
+
+    public void setBackground(String background) {
+        tBackground = background;
+    }
+
+    public String getBackground() {
+        return tBackground;
     }
 
 

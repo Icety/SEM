@@ -10,14 +10,12 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import java.io.File;
-
-public class Menu extends BasicGameState{
+public class Won extends BasicGameState{
     private StateBasedGame tGame; // stored for later use
     protected int tId;
     protected Image tBackground;
 
-    public Menu(int id) {
+    public Won(int id) {
         tId = id;
     }
 
@@ -32,13 +30,13 @@ public class Menu extends BasicGameState{
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-//
-//        g.setColor(Color.white);
-//        g.drawString("Higher or Lower", 50, 10);
-//
-//        g.drawString("1. Play Game", 50, 100);
-//        g.drawString("2. High Scores", 50, 120);
-//        g.drawString("3. Quit", 50, 140);
+
+        g.setColor(Color.white);
+        g.drawString("Je hebt gewonnen!", 50, 10);
+
+        g.drawString("1. Play Game", 50, 100);
+        g.drawString("2. High Scores", 50, 120);
+        g.drawString("3. Quit", 50, 140);
 
 
     }

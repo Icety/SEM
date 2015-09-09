@@ -21,6 +21,7 @@ public class Levels extends BasicGameState {
     protected int tId;
     protected ArrayList<Alien> tAliens;
     protected Image tBackground;
+    protected String tBackgroundString = "background.jpg";
 
     public Levels(int id) {
         tId = id;
@@ -34,7 +35,7 @@ public class Levels extends BasicGameState {
         p.settX(Main.sGame.getWidth() / 2);
         p.settY(Main.sGame.getHeight() - (p.getHeight() + 50));
 
-        tBackground = new Image("src/main/java/application/images/background.jpg");
+        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
 
     }
 
@@ -62,6 +63,13 @@ public class Levels extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
         Main.sGame.update();
+        if (Main.sGame.hasWon()) {
+            game.enterState(2, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        }
+        if (Main.sGame.getLevel().getBackground().equals(tBackgroundString)) {
+            tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+            tBackgroundString = Main.sGame.getLevel().getBackground();
+        }
     }
 
     @Override
@@ -101,60 +109,4 @@ public class Levels extends BasicGameState {
                 break;
         }
     }
-
-
-
-//    protected void drawPlayer(GraphicsContext gc) {
-//        Player player = OldMain.game.getPlayer();
-//        gc.drawImage(player.getImage(), player.getX(), player.getY());
-//    }
-//
-//    protected void drawProjectiles(GraphicsContext gc) {
-//        ArrayList<Projectile> projectiles = OldMain.game.getProjectiles();
-//        for (Projectile projectile: projectiles) {
-//            gc.drawImage( projectile.getImage(), projectile.getX(), projectile.getY() );
-//        }
-//    }
-
-//    OldMain.primaryStage.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-//        @Override
-//        public void handle(KeyEvent event) {
-//            KeyCode code = event.getCode();
-//            if (code == KeyCode.ESCAPE) {
-//                // show menu
-//            } else if (code == KeyCode.P) {
-//                if (!tPaused) {
-//                    tPaused = true;
-//                } else {
-//                    tPaused = false;
-//                }
-//            } else if (code == KeyCode.RIGHT) {
-//                tRightArrow = true;
-//                OldMain.game.getPlayer(). rightArrowPressed(tRightArrow);
-//            } else if (code == KeyCode.LEFT) {
-//                tLeftArrow = true;
-//                OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
-//            } else if (code == KeyCode.SPACE) {
-//                OldMain.game.getPlayer().fireButtonPressed(true);
-//            }
-//
-//        }
-//    });
-//
-//    OldMain.primaryStage.getScene().setOnKeyReleased(new EventHandler<KeyEvent>() {
-//        @Override
-//        public void handle(KeyEvent event) {
-//            KeyCode code = event.getCode();
-//            if (code == KeyCode.RIGHT) {
-//                tRightArrow = false;
-//                OldMain.game.getPlayer().rightArrowPressed(tRightArrow);
-//            } else if (code == KeyCode.LEFT) {
-//                tLeftArrow = false;
-//                OldMain.game.getPlayer().leftArrowPressed(tLeftArrow);
-//            } else if (code == KeyCode.SPACE) {
-//                OldMain.game.getPlayer().fireButtonPressed(false);
-//            }
-//        }
-//    });
-
 }
