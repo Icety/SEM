@@ -21,7 +21,7 @@ public class LevelFactory {
 
     public LevelFactory() {
         try {
-            File file = new File("src\\main\\java\\application\\levels.xml");
+            File file = new File("src/main/java/application/levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
