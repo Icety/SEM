@@ -1,7 +1,6 @@
 package application.core;
 
 import application.Main;
-import javafx.scene.image.Image;
 import org.w3c.dom.Element;
 
 import java.awt.*;
@@ -31,7 +30,7 @@ public class Alien extends Sprite {
     public void shoot() {
         if (isLowerLevel()) {
             if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
-                Main.sGame.addProjectile(new smallProjectile(tX+ tWidth/2, tY + tHeight));
+                Main.sGame.addProjectile(new SmallProjectile(tX+ tWidth/2, tY + tHeight));
                 tShootChance = 0;
             }
         }

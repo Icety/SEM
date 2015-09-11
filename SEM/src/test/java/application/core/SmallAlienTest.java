@@ -6,19 +6,19 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * Test class for BigAlien.java.
+ * Test class for SmallAlien.java.
  *
  * @author Arthur Breurkes
  */
-public class BigAlienTest {
-    private BigAlien testAlien;
+public class SmallAlienTest {
+    private SmallAlien testAlien;
 
     /**
      * Initialize variables for tests.
      */
     @Before
     public void setUp() {
-        testAlien = new BigAlien();
+        testAlien = new SmallAlien();
     }
 
     /**
