@@ -10,7 +10,7 @@ import org.newdawn.slick.Sound;
 public class Player extends Sprite {
     protected int tHealth;
     protected long tLastShot = 0;
-    protected int tReloadTime = 1000;
+    protected int tReloadTime = 50;
     protected int tSpeed = 5;
 
     protected boolean tShoot, tGoLeft, tGoRight;
