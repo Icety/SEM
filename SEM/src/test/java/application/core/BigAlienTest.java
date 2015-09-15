@@ -25,6 +25,6 @@ public class BigAlienTest {
     public void testAddShootChance() throws Exception {
         testAlien.addShootChance();
 
-        assertTrue(testAlien.tShootChance > 0);
+        assertTrue(testAlien.tShootChance >= 0);
     }
 }

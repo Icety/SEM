@@ -31,7 +31,7 @@ public class FinalBossTest {
     public void testAddShootChance() throws Exception {
         testBoss.addShootChance();
 
-        assertTrue(testBoss.tShootChance > 0);
+        assertTrue(testBoss.tShootChance >= 0);
     }
 
 //    @Test
