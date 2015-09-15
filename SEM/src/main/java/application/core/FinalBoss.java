@@ -11,8 +11,8 @@ public class FinalBoss extends Alien{
         super.tHealth = 50;
         super.tHitScore = 0;
         super.tKillScore = 10000;
-        tWidth = 250;
-        tHeight = 400;
+        tWidth = 320;
+        tHeight = 167;
         tShootChance = 0;
         tDirection = 1;
         tSpeed = 3;

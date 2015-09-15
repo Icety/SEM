@@ -10,7 +10,7 @@ public class BossProjectile extends Projectile{
         //tImage = new Image(new File("src/application/images/smallbullet.png").toURI().toString());
         tDirection = 1;
         //Should have a different image
-        tImageString = "spaghettiheart.jpg";
+        tImageString = "spaghettiheart.png";
         tX = x;
         tY = y;
         tSpeed = 5;
