@@ -28,6 +28,11 @@ public class BossProjectileTest {
         assertEquals(1, testProjectile.getY());
     }
 
+    /**
+     * Test whether getImage() returns the correct image.
+     *
+     * @throws Exception
+     */
     @Test
     public void testGetImage() throws Exception {
         assertNull(testProjectile.getImage());
