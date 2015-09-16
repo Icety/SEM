@@ -9,6 +9,7 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
     protected String tBackground;
+    protected ArrayList<Upgrade> tUpgradeList = new ArrayList();
 
     public ArrayList<Alien> getAliens() {
         return tAliens;
@@ -41,5 +42,9 @@ public class Level {
 
     public void removeAlien(Alien a) {
         tAliens.remove(a);
+    }
+
+    public void addUpgrade(Upgrade sprite) {
+        tUpgradeList.add(sprite);
     }
 }

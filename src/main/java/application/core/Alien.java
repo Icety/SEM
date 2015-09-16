@@ -70,11 +70,19 @@ public class Alien extends Sprite {
         tHealth--;
         if (tHealth <= 0) {
             //delete the alien.
+            drop();
             tRemoved = true;
 
             Main.sGame.setScore(tKillScore);
         } else {
             Main.sGame.setScore(tHitScore);
+        }
+    }
+
+    private void drop() {
+        if(Math.random()*100>90) {
+            Main.sGame.getLevel().addUpgrade(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
+            //Main.sGame.addProjectile(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
         }
     }
 
