@@ -95,12 +95,12 @@ public class Game {
             //Switch direction when the borders are reached
             if (!(alien instanceof MothershipAlien)) {
                 if (alien.endOfScreen()) {
-                    System.out.println("SWITCH");
+                    //System.out.println("SWITCH");
                     for (Alien alien2: tLevel.getAliens()) {
-                        System.out.println("SWITCH");
+                        //System.out.println("SWITCH");
                         if (!(alien2 instanceof MothershipAlien)) {
                             alien2.switchDirection();
-                            System.out.println("SWITCH");
+                            //System.out.println("SWITCH");
                         }
                     }
                 }
@@ -122,7 +122,7 @@ public class Game {
                     nextLevel();
                 }
                 else {
-                    System.out.println("NOPE");
+                    //System.out.println("NOPE");
                     tWon = true;
                     bossStage = false;
                 }

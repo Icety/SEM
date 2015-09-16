@@ -108,6 +108,7 @@ public class Main extends StateBasedGame {
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new Main("My Game v" + VERSION));
+            app.setIcon("src/main/java/application/images/icon.png");
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(true);

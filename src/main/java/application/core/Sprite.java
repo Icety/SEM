@@ -14,6 +14,9 @@ public class Sprite {
     Image tImage = null;
     String tImageString;
 
+    int tDifficulty = 1;
+    double tRandomChance;
+
     public int getX() {
         return tX;
     }
@@ -44,4 +47,6 @@ public class Sprite {
     public int getHeight() {
         return tHeight;
     }
+
+    public void setDifficulty(int difficulty) { tDifficulty = difficulty; }
 }

@@ -16,6 +16,7 @@ public class Alien extends Sprite {
     protected int tShootChance;
     protected int tDirection;
     protected double tSpeed;
+    protected double tRandomChance;
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -23,14 +24,15 @@ public class Alien extends Sprite {
     }
 
     public void move() {
-        tX += tDirection *tSpeed;
+        tX += tDirection * tSpeed;
         shoot();
+        applyDifficulty(); //This should only happen on init.
     }
 
     public void shoot() {
         if (isLowerLevel()) {
-            if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
-                Main.sGame.addProjectile(new SmallProjectile(tX+ tWidth/2, tY + tHeight));
+            if ((Math.random() * 100) > tRandomChance ) {
+                Main.sGame.addProjectile(new SmallProjectile(tX+ tWidth / 2, tY + tHeight));
                 tShootChance = 0;
             }
         }
@@ -81,11 +83,27 @@ public class Alien extends Sprite {
     }
 
     public boolean endOfScreen() {
-        return tX == Main.sGame.getWidth() - tWidth - 10 || tX == 10;
+        return tX >= Main.sGame.getWidth() - tWidth - 10 || tX <= 10;
     }
 
     public void switchDirection() {
             tY += 15;
             tDirection *= -1;
+    }
+
+    public void applyDifficulty() {
+        int d = tDifficulty;
+        if(d == 1) {
+            tSpeed = 1;
+            tRandomChance = 99.5;
+        }
+        else if(d == 2) {
+            tSpeed = 2;
+            tRandomChance = 99.0;
+        }
+        else {
+            tSpeed = 3;
+            tRandomChance = 98.6;
+        }
     }
 }

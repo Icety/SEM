@@ -16,8 +16,13 @@ public class SmallProjectile extends Projectile {
         tImageString = "playerProjectile.png";
         tX = x;
         tY = y;
-        tSpeed = 5;
         tWidth = 7;
         tHeight = 15;
+        if(tDifficulty == 1)
+            tSpeed = 2;
+        else if(tDifficulty == 2)
+            tSpeed = 3;
+        else
+            tSpeed = 5;
     }
 }
