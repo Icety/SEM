@@ -86,6 +86,7 @@ public class Main extends StateBasedGame {
     public static Image PLAYER_PROJECTILE;
     public static Image SMALL_PROJECTILE;
     public static Image BOSS_BACHELLI;
+    public static Image UPGRADE_0;
 
     protected Game tGame;
     public Music tBackgroundmusic;
@@ -117,6 +118,7 @@ public class Main extends StateBasedGame {
         PLAYER_PROJECTILE = new Image(root + "smallbullet.png");
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         BOSS_BACHELLI = new Image(root + "finalbossbachelli.png");
+        UPGRADE_0 = new Image(root + "upgrade_0.png");
     }
 
     // OldMain Method

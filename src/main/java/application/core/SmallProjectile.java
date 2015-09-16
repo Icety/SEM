@@ -11,13 +11,18 @@ import java.io.File;
 public class SmallProjectile extends Projectile {
 
     public SmallProjectile(int x, int y) {
-        //tImage = new Image(new File("src/application/images/smallbullet.png").toURI().toString());
         tDirection = 1;
         tX = x;
         tY = y;
-        tSpeed = 5;
         tWidth = 7;
         tHeight = 15;
+
+        if(tDifficulty == 1)
+            tSpeed = 2;
+        else if(tDifficulty == 2)
+            tSpeed = 3;
+        else
+            tSpeed = 5;
     }
 
     public org.newdawn.slick.Image getImage() {

@@ -98,6 +98,7 @@ public class Game {
 
         for (Alien alien : tLevel.getAliens()) {
             alien.update();
+            upgradeUpdate(alien.getUpgrades());
 
             //Switch direction when the borders are reached
             if (!directionSwitched && alien.endOfScreen()) {
@@ -108,6 +109,12 @@ public class Game {
             }
 
             alien.setLowerLevel(tLevel.getAliens());
+        }
+    }
+
+    private void upgradeUpdate(ArrayList<Upgrade> upgrades) {
+        for(Upgrade u: upgrades) {
+            u.update();
         }
     }
 
@@ -149,6 +156,17 @@ public class Game {
                     if (projectile.noLives()) {
                         it.remove();
                     }
+                }
+            }
+
+            //Check collision between player and alien projectile
+            Iterator<Upgrade> uit = alien.getUpgrades().iterator();
+            while (uit.hasNext()) {
+                Upgrade u = uit.next();
+                if (tPlayer.intersects(u)) {
+                    tPlayer.upgrade(u);
+                    u.hit();
+                    System.out.print("bruh");
                 }
             }
         }
