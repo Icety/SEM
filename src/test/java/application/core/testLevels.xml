@@ -1,0 +1,11 @@
+<levels>
+    <level>
+        <aliens>
+            <alien>
+                <x>1</x>
+                <y>1</y>
+                <type>small</type>
+            </alien>
+        </aliens>
+    </level>
+</levels>
