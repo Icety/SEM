@@ -1,7 +1,9 @@
 package application.core;
 
+import application.Main;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
@@ -9,8 +11,10 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 
 //ToDo: testMove(), testShoot(), testEndOfScreen() and testHit() must still be written (Dependencies unreachable)
 /**
@@ -21,6 +25,11 @@ import static org.junit.Assert.*;
 public class AlienTest {
     private Alien testAlien;
     private Element testElement;
+    private ArrayList<Alien> testAliens;
+    private LevelFactory testFactory;
+
+    @Mock
+    public final Main testMain = mock(Main.class);
 
     /**
      * Initialize variables for tests and read from a XML file written for these tests.
@@ -28,6 +37,8 @@ public class AlienTest {
     @Before
     public void setUp() {
         testAlien = new Alien();
+        testAliens = new ArrayList<>();
+        testFactory = new LevelFactory(1400, 1080);
         try {
             File file = new File("src/test/java/application/core/testLevels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -52,34 +63,65 @@ public class AlienTest {
     public void testReadXmlByUsingPreLoadedXmlFile() throws Exception {
         testAlien.readXml(testElement);
 
-        assertEquals(1, testAlien.tX);
-        assertEquals(1, testAlien.tY);
+        assertEquals(1000, testAlien.tX);
+        assertEquals(100, testAlien.tY);
     }
 
-//    /**
-//     * Tests whether move() moves the Alien correctly.
-//     * Done with a mocked image to prevent Exceptions.
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void testMove() throws Exception {
-//        testAlien.readXml(testElement);
-//        testAlien.move();
-//
-//        assertEquals(2, testAlien.getX());
-//    }
+    /**
+     * Test whether update() updates the location of the Alien correctly.
+     * Rest is tested individually.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdate() throws Exception {
+        testAlien.tX = 0;
+        testAlien.tSpeed = 1;
+        testAlien.tDirection = 1;
+        testAlien.update();
 
-//    @Test
+        assertEquals(1, testAlien.getX());
+    }
 
-//    @Test
+    /**
+     * Test whether isBonusAlien() returns the correct boolean value.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testIsBonusAlien() throws Exception {
+        assertFalse(testAlien.isBonusAlien());
+        testAlien.tBonusAlien = true;
 
-    //    public void testShoot() throws Exception {
-//
-//    }
-//    public void testIsLowerLevel() throws Exception {
-//
-//    }
+        assertTrue(testAlien.isBonusAlien());
+    }
+
+    /**
+     * Test whether shoot() works properly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testShoot() throws Exception {
+        testAlien.setCanShoot(true);
+        for(int i = 0; i < 10000; i++) {
+            testAlien.shoot();
+        }
+        assertTrue(testAlien.tProjectiles.size() > 0);
+    }
+
+    /**
+     * Test whether setCanShoot() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetCanShoot() throws Exception {
+        assertFalse(testAlien.tCanShoot);
+        testAlien.setCanShoot(true);
+
+        assertTrue(testAlien.tCanShoot);
+    }
 
     /**
      * Tests whether toString() returns the correct String with coordinates of the Alien.
@@ -90,7 +132,7 @@ public class AlienTest {
     public void testToStringBasedOnCoordinatesSpecifiedInTheXmlFile() throws Exception {
         testAlien.readXml(testElement);
 
-        assertEquals(testAlien.toString(), "Alien on coords: 1, 1");
+        assertEquals("Alien Alien on coords: 1000, 100", testAlien.toString());
     }
 
     /**
@@ -108,11 +150,6 @@ public class AlienTest {
         assertFalse(testAlien.isRemoved());
     }
 
-//    @Test
-//    public void testHit() throws Exception {
-//
-//    }
-
     /**
      * Test whether addShootChance() adds a correct value.
      * Zero for Alien.java.
@@ -127,10 +164,19 @@ public class AlienTest {
         assertEquals(1, testAlien.tShootChance);
     }
 
-//    @Test
-//    public void testEndOfScreen() throws Exception {
-//
-//    }
+    /**
+     * Test whether endOfScreen() returns the correct boolean value.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testEndOfScreen() throws Exception {
+        testAlien.tX = 10;
+        assertTrue(testAlien.endOfScreen());
+
+        testAlien.tX = 0;
+        assertFalse(testAlien.endOfScreen());
+    }
 
     /**
      * Test whether switchDirection() switches the Alien's direction correctly.
@@ -145,5 +191,18 @@ public class AlienTest {
 
         assertEquals(15, testAlien.getY());
         assertEquals(-1, testAlien.tDirection);
+    }
+
+    @Test
+    public void testSetLowerLevel() throws Exception {
+        ArrayList<Alien> testAliens = testFactory.loadAliens(testElement);
+        testAlien.tX = 100;
+        testAlien.tY = 105;
+        testAliens.add(testAlien);
+        testAlien.tX = 100;
+        testAlien.tY = 20;
+        testAlien.setLowerLevel(testAliens);
+
+        assertTrue(testAlien.tCanShoot);
     }
 }
