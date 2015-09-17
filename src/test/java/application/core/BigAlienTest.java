@@ -46,4 +46,17 @@ public class BigAlienTest {
 
         assertTrue(testAlien.tShootChance >= 0);
     }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testAlien.tX = 1;
+        testAlien.tY = 1;
+
+        assertEquals("BigAlien on coords: 1, 1", testAlien.toString());
+    }
 }

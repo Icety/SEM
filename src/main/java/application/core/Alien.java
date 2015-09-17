@@ -47,8 +47,7 @@ public class Alien extends Sprite {
     }
 
     public String toString() {
-        String result = "Alien " + this.getClass().getSimpleName() + " on coords: " + tX + ", " + tY;
-        return result;
+        return "Alien on coords: " + tX + ", " + tY;
     }
 
     public boolean isRemoved() {

@@ -132,7 +132,7 @@ public class AlienTest {
     public void testToStringBasedOnCoordinatesSpecifiedInTheXmlFile() throws Exception {
         testAlien.readXml(testElement);
 
-        assertEquals("Alien Alien on coords: 1000, 100", testAlien.toString());
+        assertEquals("Alien on coords: 1000, 100", testAlien.toString());
     }
 
     /**

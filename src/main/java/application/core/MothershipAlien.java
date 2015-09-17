@@ -34,4 +34,9 @@ public class MothershipAlien extends Alien{
     public boolean isAlive() {
         return tHealth > 0;
     }
+
+    @Override
+    public String toString() {
+        return "MotherShipAlien on coords: " + tX + ", " + tY;
+    }
 }

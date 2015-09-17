@@ -33,4 +33,17 @@ public class MiniAlienTest {
 
         assertTrue(testAlien.tShootChance >= oldChance);
     }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testAlien.tX = 1;
+        testAlien.tY = 1;
+
+        assertEquals("MiniAlien on coords: 1, 1", testAlien.toString());
+    }
 }

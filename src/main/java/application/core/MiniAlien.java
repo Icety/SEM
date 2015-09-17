@@ -27,4 +27,9 @@ public class MiniAlien extends Alien{
     public void addShootChance() {
         tShootChance += Math.random() * 10;
     }
+
+    @Override
+    public String toString() {
+        return "MiniAlien on coords: " + tX + ", " + tY;
+    }
 }

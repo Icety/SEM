@@ -72,4 +72,17 @@ public class FinalBossTest {
     public void testGetImage() throws Exception {
         assertNull(testBoss.getImage());
     }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testBoss.tX = 1;
+        testBoss.tY = 1;
+
+        assertEquals("FinalBoss on coords: 1, 1", testBoss.toString());
+    }
 }

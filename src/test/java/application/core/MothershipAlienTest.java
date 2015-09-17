@@ -39,4 +39,17 @@ public class MothershipAlienTest {
         testAlien.tHealth = 0;
         assertFalse(testAlien.isAlive());
     }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testAlien.tX = 1;
+        testAlien.tY = 1;
+
+        assertEquals("MotherShipAlien on coords: 1, 1", testAlien.toString());
+    }
 }
