@@ -11,6 +11,7 @@ import java.util.Iterator;
 public class Game {
     protected int tScore;
     protected LevelFactory levelFactory;
+    protected HighScoreManager highScoreManager;
     protected int levelNumber;
     protected Level tLevel;
     protected Player tPlayer;
@@ -21,13 +22,16 @@ public class Game {
     protected boolean tLost = false;
 
 
+
     public Game(int width, int height) {
         tScreenWidth = width;
         tScreenHeight = height;
         levelFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        highScoreManager = new HighScoreManager();
         levelNumber = 0;
         tPlayer = new Player();
         tPaused = false;
+
     }
 
     public void setScore(int value) {
@@ -69,6 +73,8 @@ public class Game {
             }
             else {
                 tWon = true;
+                highScoreManager.addScores(tScore);
+                System.out.println(highScoreManager.toString());
             }
         }
     }
@@ -145,6 +151,8 @@ public class Game {
                     tPlayer.hit();
                     if (tPlayer.noLives()) {
                         tLost = true;
+                        highScoreManager.addScores(tScore);
+                        System.out.println(highScoreManager.toString());
                     }
                     if (projectile.noLives()) {
                         it.remove();
