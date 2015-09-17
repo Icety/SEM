@@ -62,7 +62,15 @@ public class LevelBuilder extends BasicGameState {
 
         //Draw all text
         g.setColor(Color.white);
-        g.drawString("Selected Alien: ", Main.WIDTH / 4, menuHeight / 2);
+        g.drawString("Space:  add selected alien", Main.WIDTH / 8, menuHeight / 8);
+        g.drawString("R:     Delete alien in circle", Main.WIDTH / 8, 2*menuHeight / 8);
+        g.drawString("Arrows: move circle", Main.WIDTH / 8, 3*menuHeight / 8);
+        g.drawString("Selected Alien: ", Main.WIDTH / 3, menuHeight / 2);
+        g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH/4, menuHeight / 8);
+        g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH/4, 2*menuHeight / 8);
+        g.drawString("3: BigAlien      ", Main.WIDTH - Main.WIDTH/4, 3*menuHeight / 8);
+        g.drawString("4: MothershipAlien      ", Main.WIDTH - Main.WIDTH/4, 4*menuHeight / 8);
+        g.drawString("5: FinalBoss", Main.WIDTH - Main.WIDTH/4, 5*menuHeight / 8 );
 
         //Draw the circle
         g.setColor(Color.red);
@@ -117,10 +125,10 @@ public class LevelBuilder extends BasicGameState {
                 selected = new BigAlien();
                 break;
             case Input.KEY_4:
-               selected = new FinalBoss();
+                selected = new MothershipAlien();
                 break;
             case Input.KEY_5:
-                selected = new MothershipAlien();
+                selected = new FinalBoss();
                 break;
 
             //If we stop pressing an arrow, we make the circle stop moving aswell
