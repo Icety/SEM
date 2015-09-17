@@ -65,6 +65,10 @@ public class Menu extends BasicGameState{
             case Input.KEY_3:
                 // TODO: Implement later
                 break;
+            case Input.KEY_4:
+                tMain.newGame();
+                tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                break;
             default:
                 break;
         }
