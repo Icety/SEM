@@ -86,7 +86,7 @@ public class Main extends StateBasedGame {
     public static Image BOSS_BACHELLI;
 
     protected Game tGame;
-    public Music tBackgroundmusic;
+    public static Music tBackgroundmusic;
 
     // Class Constructor
     public Main(String appName) {
@@ -103,7 +103,7 @@ public class Main extends StateBasedGame {
         this.addState(new Won(WON));
         this.addState(new Lost(LOST));
         this.addState(new HighScoreBoard(HIGHSCORE));
-        tBackgroundmusic = new Music("src/main/java/application/sound/backgroundmusic.wav");
+        tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
         tBackgroundmusic.loop();
 
         String root = "src/main/java/application/images/";

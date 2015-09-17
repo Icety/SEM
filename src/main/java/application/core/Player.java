@@ -21,7 +21,7 @@ public class Player extends Sprite {
         tWidth = 80;
     }
 
-    public void update() {
+    public void update() throws SlickException {
         if(tGoLeft) {
             moveLeft();
         }
@@ -31,11 +31,7 @@ public class Player extends Sprite {
         long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
-            try {
-                laserSound();
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
+            laserSound();
 
             Projectile projectile = new PlayerProjectile(tX + tWidth/2 , tY );
             this.addProjectile(projectile);
@@ -69,7 +65,7 @@ public class Player extends Sprite {
     }
 
     public void laserSound() throws SlickException {
-        Sound laser = new Sound("src/main/java/application/sound/laser.wav");
+        Sound laser = new Sound("src/main/java/application/sound/shoot.wav");
         laser.play();
     }
 
