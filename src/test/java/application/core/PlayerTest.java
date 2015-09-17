@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-//ToDo: Write testMoveRight(), testLaserSound() (Dependency unreachable) and testUpdate (too long).
+//ToDo: testUpdateWithShoot() should work later on (UnsatisfiedLinkException)
 /**
  * Test class for Player.java.
  *
@@ -30,9 +30,43 @@ public class PlayerTest {
      * @throws Exception
      */
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdateWithGoLeft() throws Exception {
+        testPlayer.tX = 20;
+        testPlayer.tGoLeft = true;
+        testPlayer.update();
 
+        assertEquals(15, testPlayer.getX());
     }
+
+    /**
+     * Test whether update works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateWithGoRight() throws Exception {
+        testPlayer.tX = 20;
+        testPlayer.tGoRight = true;
+        testPlayer.update();
+
+        assertEquals(25, testPlayer.getX());
+    }
+
+//    /**
+//     * Test whether update works correctly.
+//     * Amount of Projectiles should be zero, because updateProjectiles() was called.
+//     *
+//     * @throws Exception
+//     */
+//    @Test
+//    public void testUpdateWithShoot() throws Exception {
+//        testPlayer.tLastShot = Integer.MIN_VALUE;
+//        testPlayer.tReloadTime = Integer.MIN_VALUE;
+//        testPlayer.tShoot = true;
+//        testPlayer.update();
+//
+//        assertEquals(0, testPlayer.getProjectiles().size());
+//    }
 
     /**
      * Test whether moveLeft() works correctly.
@@ -47,14 +81,6 @@ public class PlayerTest {
         assertEquals(15, testPlayer.getX());
     }
 
-//    @Test
-//    public void testMoveRight() throws Exception {
-//        testPlayer.tX = 20;
-//        testPlayer.moveRight();
-//
-//        assertEquals(25, testPlayer.getX());
-//    }
-
     /**
      * Test whether toString() returns the correct String.
      *
@@ -67,11 +93,6 @@ public class PlayerTest {
 
         assertEquals("Player on coords: 0, 0", testPlayer.toString());
     }
-
-//    @Test
-//    public void testLaserSound() throws Exception {
-//
-//    }
 
     /**
      * Test whether leftArrowPressed() returns the correct boolean value.
@@ -149,5 +170,28 @@ public class PlayerTest {
         testPlayer.tHealth = 1;
 
         assertEquals(1, testPlayer.getHealth());
+    }
+
+    /**
+     * Test whether moveRight() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testMoveRight() throws Exception {
+        testPlayer.tX = 20;
+        testPlayer.moveRight();
+
+        assertEquals(25, testPlayer.getX());
+    }
+
+    /**
+     * Test whether getImage() returns the correct Image.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImage() throws Exception {
+        assertNull(testPlayer.getImage());
     }
 }

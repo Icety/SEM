@@ -17,6 +17,11 @@ import static org.mockito.Mockito.mock;
  */
 public class GameTest {
     private Game testGame;
+    private Alien testAlien;
+    private Level nonMockedLevel;
+    private Player nonMockedPlayer;
+    private Projectile nonMockedProjectile;
+    private ArrayList<Alien> testAliens;
     @Mock
     public final Level testLevel = mock(Level.class);
     @Mock
@@ -29,7 +34,16 @@ public class GameTest {
      */
     @Before
     public void setUp() {
+        testAlien = new Alien();
+        testAliens = new ArrayList<>();
+        testAliens.add(testAlien);
         testGame = new Game(10, 10);
+        nonMockedLevel = new Level();
+        nonMockedPlayer = new Player();
+        nonMockedLevel.tPlayer = testPlayer;
+        nonMockedLevel.tAliens = testAliens;
+        nonMockedPlayer = new Player();
+        nonMockedProjectile = new SmallProjectile(10, 10);
     }
 
     /**
@@ -116,11 +130,6 @@ public class GameTest {
         assertEquals(testPlayer, testGame.getPlayer());
     }
 
-//    @Test
-//    public void testUpdate() throws Exception {
-//
-//    }
-
     /**
      * Test whether isPaused() returns the correct boolean value.
      *
@@ -178,5 +187,135 @@ public class GameTest {
         testGame.tLost = true;
 
         assertTrue(testGame.hasLost());
+    }
+
+    /**
+     * Test whether update() works correctly.
+     * Alien hasn' yet switched directions.
+     * Alien is at end of screen.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateAlienNoDirectionSwitchAndAtEndOfScreen() throws Exception {
+        testGame.tLevel = nonMockedLevel;
+        testAlien.tX = 10;
+        testAlien.tDirection = 1;
+        testGame.update();
+
+        assertEquals(-1, testAlien.tDirection);
+    }
+
+    /**
+     * Test whether update() works correctly.
+     * Level was won.
+     * Game Has a next level.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateWhileHasWonAndHasNextLevel() throws Exception {
+        testGame.tLevel = nonMockedLevel;
+        testGame.levelNumber = 0;
+        nonMockedLevel.removeAlien(testAlien);
+        testGame.update();
+
+        assertEquals(1, testGame.levelNumber);
+    }
+
+    /**
+     * Test whether update() works correctly.
+     * Level was won.
+     * Game has no next level.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateWhileHasWonAndHasNoNextLevel() throws Exception {
+        testGame.tLevel = nonMockedLevel;
+        testGame.levelNumber = 1000;
+        nonMockedLevel.removeAlien(testAlien);
+        testGame.update();
+
+        assertTrue(testGame.hasWon());
+    }
+
+    /**
+     * Test whether checkCollision() works correctly.
+     * Alien is hit.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCheckCollisionBetweenAlienAndProjectile() throws Exception {
+        testGame.tWon = false;
+        ArrayList<Alien> smallAliens = new ArrayList<>();
+        Alien smallAlien = new SmallAlien();
+        smallAlien.tX = 10;
+        smallAlien.tY = 10;
+        smallAliens.add(smallAlien);
+        nonMockedLevel = new Level();
+        nonMockedLevel.addAliens(smallAliens);
+        testGame.tLevel = nonMockedLevel;
+        testGame.tPlayer = nonMockedPlayer;
+        nonMockedPlayer.addProjectile(nonMockedProjectile);
+        testGame.checkCollision();
+
+        assertFalse(nonMockedPlayer.getProjectiles().contains(nonMockedProjectile));
+    }
+
+    /**
+     * Test whether checkCollision() works correctly.
+     * Player is hit.
+     * Does not die.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCheckCollisionBetweenPlayerAndProjectile() throws Exception {
+        testGame.tWon = false;
+        ArrayList<Alien> smallAliens = new ArrayList<>();
+        Alien smallAlien = new SmallAlien();
+        smallAlien.tX = 10;
+        smallAlien.tY = 10;
+        smallAliens.add(smallAlien);
+        nonMockedLevel = new Level();
+        nonMockedLevel.addAliens(smallAliens);
+        testGame.tLevel = nonMockedLevel;
+        nonMockedPlayer.tX = 10;
+        nonMockedPlayer.tY = 10;
+        testGame.tPlayer = nonMockedPlayer;
+        smallAlien.addProjectile(nonMockedProjectile);
+        testGame.checkCollision();
+
+        assertFalse(smallAlien.getProjectiles().contains(nonMockedProjectile));
+    }
+
+    /**
+     * Test whether checkCollision() works correctly.
+     * Player is hit.
+     * Dies.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCheckCollisionKillPlayer() throws Exception {
+        testGame.tWon = false;
+        ArrayList<Alien> smallAliens = new ArrayList<>();
+        Alien smallAlien = new SmallAlien();
+        smallAlien.tX = 10;
+        smallAlien.tY = 10;
+        smallAliens.add(smallAlien);
+        nonMockedLevel = new Level();
+        nonMockedLevel.addAliens(smallAliens);
+        testGame.tLevel = nonMockedLevel;
+        nonMockedPlayer.tX = 10;
+        nonMockedPlayer.tY = 10;
+        nonMockedPlayer.tHealth = 1;
+        testGame.tPlayer = nonMockedPlayer;
+        smallAlien.addProjectile(nonMockedProjectile);
+        testGame.checkCollision();
+
+        assertTrue(testGame.tLost);
     }
 }

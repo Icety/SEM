@@ -28,4 +28,9 @@ public class BigAlien extends Alien {
     public void addShootChance() {
         tShootChance += Math.random() * 3;
     }
+
+    @Override
+    public String toString() {
+        return "BigAlien on coords: " + tX + ", " + tY;
+    }
 }

@@ -1,9 +1,13 @@
 package application.core;
 
+import application.Main;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Test class for BigAlien.java.
@@ -21,10 +25,38 @@ public class BigAlienTest {
         testAlien = new BigAlien();
     }
 
+    /**
+     * Test whether getImage() returns the correct Image.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImage() throws Exception {
+        assertNull(testAlien.getImage());
+    }
+
+    /**
+     * Test whether addShootChance() updates the value correctly.
+     *
+     * @throws Exception
+     */
     @Test
     public void testAddShootChance() throws Exception {
         testAlien.addShootChance();
 
         assertTrue(testAlien.tShootChance >= 0);
+    }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testAlien.tX = 1;
+        testAlien.tY = 1;
+
+        assertEquals("BigAlien on coords: 1, 1", testAlien.toString());
     }
 }

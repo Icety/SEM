@@ -40,4 +40,9 @@ public class FinalBoss extends Alien {
     public boolean endOfScreen() {
         return tX > Main.WIDTH - tWidth - 10 || tX == 10;
     }
+
+    @Override
+    public String toString() {
+        return "FinalBoss on coords: " + tX + ", " + tY;
+    }
 }

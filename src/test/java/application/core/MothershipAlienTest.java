@@ -39,4 +39,41 @@ public class MothershipAlienTest {
         testAlien.tHealth = 0;
         assertFalse(testAlien.isAlive());
     }
+
+    /**
+     * Test whether toString() returns the correct string.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testToString() throws Exception {
+        testAlien.tX = 1;
+        testAlien.tY = 1;
+
+        assertEquals("MotherShipAlien on coords: 1, 1", testAlien.toString());
+    }
+
+    /**
+     * Test whether getImage() returns the correct image.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImage() throws Exception {
+        assertNull(testAlien.getImage());
+    }
+
+    /**
+     * Test whether switchDirection() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSwitchDirection() throws Exception {
+        testAlien.tDirection = 1;
+        testAlien.tX = -2001;
+        testAlien.switchDirection();
+
+        assertEquals(-1, testAlien.tDirection);
+    }
 }
