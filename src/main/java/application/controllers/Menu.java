@@ -16,6 +16,7 @@ public class Menu extends BasicGameState{
     private Main tMain;
     protected int tId;
     protected Image tBackground;
+    protected boolean tExit;
 
     public Menu(int id) {
         tId = id;
@@ -26,6 +27,7 @@ public class Menu extends BasicGameState{
             throws SlickException {
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/moving.jpg");
+        tExit = false;
     }
 
     @Override
@@ -46,7 +48,11 @@ public class Menu extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
+        if(tExit) {
+            container.exit();
+        }
     }
+
 
     @Override
     public int getID() {
@@ -60,10 +66,10 @@ public class Menu extends BasicGameState{
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
-                // TODO: Implement later
+                tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_3:
-                // TODO: Implement later
+                tExit = true;
                 break;
             default:
                 break;

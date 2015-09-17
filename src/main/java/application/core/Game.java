@@ -95,6 +95,10 @@ public class Game {
         return tWon;
     }
 
+    public HighScoreManager getHighScoreManager() {
+        return highScoreManager;
+    }
+
     public boolean hasLost() {
         return tLost;
     }

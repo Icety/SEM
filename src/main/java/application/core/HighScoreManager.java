@@ -103,7 +103,4 @@ public class HighScoreManager {
        return getScores().toString();
 
     }
-
-
-
 }
