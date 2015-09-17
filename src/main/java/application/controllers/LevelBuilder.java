@@ -2,21 +2,13 @@ package application.controllers;
 
 import application.Main;
 import application.core.*;
-import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.*;
-import org.newdawn.slick.geom.Point;
-import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
-
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -46,7 +38,7 @@ public class LevelBuilder extends BasicGameState {
 
         circlex = Main.WIDTH/2;
         circley =  Main.HEIGHT/3;
-        circle = new Circle(circlex,circley, 80);
+        circle = new Circle(circlex,circley, 70);
         menuHeight = 150;
         selected = null;
         tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
@@ -61,48 +53,60 @@ public class LevelBuilder extends BasicGameState {
             throws SlickException {
 
 
+        //Draw the background
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
 
+        //Draw the menu bar
         g.setColor(Color.blue);
         g.fillRect(0, 0, Main.WIDTH, menuHeight);
 
+        //Draw all text
         g.setColor(Color.white);
+        g.drawString("Selected Alien: ", Main.WIDTH / 4, menuHeight / 2);
 
-        g.drawString("Selected Alien: ", Main.WIDTH / 4, menuHeight/2);
+        //Draw the circle
+        g.setColor(Color.red);
+        g.draw(circle);
 
+        //Display the Alien we have currently selected
         if (selected != null) {
             selected.getImage().draw(Main.WIDTH / 2, menuHeight / 3, menuHeight / 2, menuHeight / 2);
         }
 
+        //Draw all aliens
         for (Alien alien : aliens) {
             alien.getImage().draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
         }
-
-        g.setColor(Color.red);
-        g.draw(circle);
     }
 
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
+        //Move circle up
         if (circleUp && circle.getMinY() > menuHeight) {
             circley -= 4;
         }
+        //Move circle down
         if (circleDown && circle.getMaxY() < Main.HEIGHT) {
             circley += 4;
         }
+        //Move circle right
         if (circleRight && circle.getMaxX() < Main.WIDTH) {
             circlex += 4;
         }
+        //Move circle left
         if (circleLeft && circle.getMinX() > 0){
             circlex -= 4;
         }
+        //Update circle coordinates
         circle.setCenterX(circlex);
         circle.setCenterY(circley);
     }
 
     public void keyReleased(int key, char c) {
         switch(key) {
+
+            //Update selected alien
             case Input.KEY_1:
                 selected = new MiniAlien();
                 break;
@@ -117,8 +121,9 @@ public class LevelBuilder extends BasicGameState {
                 break;
             case Input.KEY_5:
                 selected = new MothershipAlien();
-            default:
                 break;
+
+            //If we stop pressing an arrow, we make the circle stop moving aswell
             case Input.KEY_DOWN:
                     circleDown = false;
                 break;
@@ -131,17 +136,23 @@ public class LevelBuilder extends BasicGameState {
             case Input.KEY_RIGHT:
                     circleRight = false;
                 break;
+
+            //Place the selected alien in the middle of our circle
             case Input.KEY_SPACE:
                 if (selected != null) {
                     Alien newAlien = makeAlien();
                     placeAlien(newAlien, circlex - newAlien.getWidth()/2, circley - newAlien.getHeight()/2);
                 }
                 break;
+
+            //Remove the alien inside our circle
             case Input.KEY_R:
                 Alien toRemove = checkCollision();
                 if (checkCollision() != null) {
                     aliens.remove(toRemove);
                 }
+                break;
+            default:
                 break;
         }
     }
@@ -167,15 +178,10 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
-    public void chooseAlien(Alien a) {
-        if (a != null) {
-            selected = a;
-            System.out.println("New selected alien");
-        } else {
-            System.out.println("chosen is null");
-        }
-    }
-
+    /**
+     * Checks whether circle is above an alien in the game
+     * @return the alien which is under our circle, null if none
+     */
     public Alien checkCollision() {
         for(Alien a: aliens) {
             if(a.getBoundingBox().intersects(circle)) {
@@ -186,6 +192,12 @@ public class LevelBuilder extends BasicGameState {
         return null;
     }
 
+    /**
+     * Places an alien according to the parameters
+     * @param alien determines which type of alien is to be placed
+     * @param x determines the x coordinate
+     * @param y determines the y coordinate
+     */
     public void placeAlien(Alien alien, int x, int y) {
         if (alien != null) {
             alien.settX(x);
@@ -194,6 +206,10 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
+    /**
+     * Makes a new alien which is the same type as our selected alien (Alien selected)
+     * @return the new made alien
+     */
     public Alien makeAlien() {
         Alien alien;
 
