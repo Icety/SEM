@@ -46,4 +46,14 @@ public class SmallAlienTest {
 
         assertEquals("SmallAlien on coords: 1, 1", testAlien.toString());
     }
+
+    /**
+     * Test whether getImage() returns the correct image.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImage() throws Exception {
+        assertNull(testAlien.getImage());
+    }
 }
