@@ -78,7 +78,7 @@ public class LevelTest {
         alienList.add(new Alien());
         testLevel.addAliens(alienList);
 
-        assertEquals("Level with the following aliens: \nAlien Alien on coords: 0, 0\n", testLevel.toString());
+        assertEquals("Level with the following aliens: \nAlien on coords: 0, 0\n", testLevel.toString());
     }
 
     /**
