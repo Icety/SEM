@@ -90,7 +90,7 @@ public class AlienTest {
     public void testToStringBasedOnCoordinatesSpecifiedInTheXmlFile() throws Exception {
         testAlien.readXml(testElement);
 
-        assertEquals(testAlien.toString(), "Alien on coords: 1, 1");
+        assertEquals(testAlien.toString(), "Alien Alien on coords: 1, 1");
     }
 
     /**
