@@ -7,6 +7,8 @@ import static org.junit.Assert.*;
 
 /**
  * Test class for BossProjectile.java.
+ *
+ * @author Arthur
  */
 public class BossProjectileTest {
     private BossProjectile testProjectile;
