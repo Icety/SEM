@@ -70,7 +70,6 @@ public class Game {
         this.checkCollision();
 
         if (tLevel.hasWon()) {
-            Main.tBackgroundmusic.stop();
             if (hasNextLevel()) {
                 nextLevel();
             }
@@ -160,7 +159,6 @@ public class Game {
                     playerDeathSound();
                     if (tPlayer.noLives()) {
                         tLost = true;
-                        Main.tBackgroundmusic.stop();
                         highScoreManager.addScores(tScore);
                         System.out.println(highScoreManager.toString());
                     }
