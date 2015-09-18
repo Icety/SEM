@@ -318,4 +318,17 @@ public class GameTest {
 
         assertTrue(testGame.tLost);
     }
+
+    /**
+     * Test whether getHighScoreManager() returns the correct HighScoreManager.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetHighScoreManager() throws Exception {
+        HighScoreManager testHighScoreManager = new HighScoreManager();
+        testGame.highScoreManager = testHighScoreManager;
+
+        assertEquals(testHighScoreManager, testGame.getHighScoreManager());
+    }
 }
