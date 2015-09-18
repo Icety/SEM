@@ -11,14 +11,14 @@ import java.util.ArrayList;
  * Class that provides static methods to create a HTML LogFile
  */
 public class Logger {
-    protected static ArrayList<Log> tLogs = new ArrayList<Log>();
-    protected static HtmlFormatter tFormatter = new HtmlFormatter();
-    protected static PrintWriter tWriter;
+    protected ArrayList<Log> tLogs = new ArrayList<Log>();
+    protected HtmlFormatter tFormatter = new HtmlFormatter();
+    protected PrintWriter tWriter;
 
     /**
      * Starts the logging, opens the logging file and sets the header HTML.
      */
-    static public void startLogging() {
+    public void startLogging() {
         try {
             tWriter = new PrintWriter("log.html", "UTF-8");
             tWriter.println(tFormatter.getHeader());
@@ -30,7 +30,7 @@ public class Logger {
     /**
      * Stops the logging, adds the footer data and then closes the file
      */
-    public static void stopLogging() {
+    public void stopLogging() {
         tWriter.println(tFormatter.getFooter());
         tWriter.close();
     }
@@ -40,7 +40,7 @@ public class Logger {
      * @param log   The log file that is to be parsed and added to the logfile
      * @throws IOException
      */
-    protected static void writeLog(Log log) {
+    protected void writeLog(Log log) {
         tWriter.println(tFormatter.format(log));
     }
 
@@ -51,7 +51,7 @@ public class Logger {
      * @param important     The level of importancy, 0 = SEVERE, 1 = WARNING, 2 = INFO, 3 = CONFIG, 4 = FINE
      *                      5 = FINER, 6 = FINEST
      */
-    public static void setLog(String message, int important) {
+    public void setLog(String message, int important) {
         Log log = new Log(message, important);
         tLogs.add(log);
         writeLog(log);
