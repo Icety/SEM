@@ -1,6 +1,8 @@
 package application.core;
 
+import application.Main;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,6 +13,7 @@ import java.util.Iterator;
 public class Game {
     protected int tScore;
     protected LevelFactory levelFactory;
+    protected HighScoreManager highScoreManager;
     protected int levelNumber;
     protected Level tLevel;
     protected Player tPlayer;
@@ -21,13 +24,16 @@ public class Game {
     protected boolean tLost = false;
 
 
+
     public Game(int width, int height) {
         tScreenWidth = width;
         tScreenHeight = height;
         levelFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        highScoreManager = new HighScoreManager();
         levelNumber = 0;
         tPlayer = new Player();
         tPaused = false;
+
     }
 
     public void setScore(int value) {
@@ -64,11 +70,14 @@ public class Game {
         this.checkCollision();
 
         if (tLevel.hasWon()) {
+            Main.tBackgroundmusic.stop();
             if (hasNextLevel()) {
                 nextLevel();
             }
             else {
                 tWon = true;
+                highScoreManager.addScores(tScore);
+                System.out.println(highScoreManager.toString());
             }
         }
     }
@@ -87,6 +96,10 @@ public class Game {
 
     public boolean hasWon() {
         return tWon;
+    }
+
+    public HighScoreManager getHighScoreManager() {
+        return highScoreManager;
     }
 
     public boolean hasLost() {
@@ -111,7 +124,7 @@ public class Game {
         }
     }
 
-    protected void checkCollision() {
+    protected void checkCollision() throws SlickException {
         Iterator<Alien> i = tLevel.getAliens().iterator();
         boolean wasHit = false;
         while (i.hasNext()) {
@@ -132,6 +145,7 @@ public class Game {
                 }
             }
             if (wasHit && alien.noLives()) {
+                alienDeathSound();
                 i.remove();
                 continue;
             }
@@ -143,8 +157,12 @@ public class Game {
                 if (tPlayer.intersects(projectile)) {
                     projectile.hit();
                     tPlayer.hit();
+                    playerDeathSound();
                     if (tPlayer.noLives()) {
                         tLost = true;
+                        Main.tBackgroundmusic.stop();
+                        highScoreManager.addScores(tScore);
+                        System.out.println(highScoreManager.toString());
                     }
                     if (projectile.noLives()) {
                         it.remove();
@@ -152,5 +170,16 @@ public class Game {
                 }
             }
         }
+    }
+
+
+    public void playerDeathSound() throws SlickException {
+        Sound playerDeath = new Sound("src/main/java/application/sound/explosion.wav");
+        playerDeath.play();
+    }
+    public void alienDeathSound() throws SlickException {
+        Sound alienDeath = new Sound("src/main/java/application/sound/invaderkilled.wav");
+        alienDeath.play();
+
     }
 }

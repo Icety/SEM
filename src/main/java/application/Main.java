@@ -54,10 +54,7 @@
 //}
 package application;
 
-import application.controllers.Levels;
-import application.controllers.Lost;
-import application.controllers.Menu;
-import application.controllers.Won;
+import application.controllers.*;
 import application.core.Game;
 import application.core.Player;
 import org.newdawn.slick.*;
@@ -70,6 +67,7 @@ public class Main extends StateBasedGame {
     public static final int LEVELS = 1;
     public static final int WON = 2;
     public static final int LOST = 3;
+    public static final int HIGHSCORE = 4;
 
     // Application Properties
     public static final int WIDTH   = 1400;
@@ -90,7 +88,7 @@ public class Main extends StateBasedGame {
     public static Image BOSS_BACHELLI_CHARGE;
 
     protected Game tGame;
-    public Music tBackgroundmusic;
+    public static Music tBackgroundmusic;
 
     // Class Constructor
     public Main(String appName) {
@@ -106,7 +104,8 @@ public class Main extends StateBasedGame {
         this.addState(new Levels(LEVELS));
         this.addState(new Won(WON));
         this.addState(new Lost(LOST));
-        tBackgroundmusic = new Music("src/main/java/application/sound/backgroundmusic.wav");
+        this.addState(new HighScoreBoard(HIGHSCORE));
+        tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
         tBackgroundmusic.loop();
 
         String root = "src/main/java/application/images/";
