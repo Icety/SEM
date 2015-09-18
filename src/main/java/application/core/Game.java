@@ -113,7 +113,6 @@ public class Game {
         for (Alien alien : tLevel.getAliens()) {
             alien.update();
 
-            //Switch direction when the borders are reached
             if (!directionSwitched && alien.endOfScreen()) {
                 tLogger.setLog("The aliens reached the edge and turned around.", 2);
                 for (Alien alien2 : tLevel.getAliens()) {
@@ -131,7 +130,6 @@ public class Game {
         boolean wasHit = false;
         while (i.hasNext()) {
             Alien alien = i.next();
-            //Check collision between alien and player projectile
             Iterator<Projectile> it = tPlayer.getProjectiles().iterator();
             wasHit = false;
             while (it.hasNext()) {
@@ -143,7 +141,6 @@ public class Game {
                     tScore += alien.hit();
                     if (projectile.noLives()) {
                         it.remove();
-                        continue;
                     }
                 }
             }
@@ -153,7 +150,6 @@ public class Game {
                 continue;
             }
 
-            //Check collision between player and alien projectile
             it = alien.getProjectiles().iterator();
             while (it.hasNext()) {
                 Projectile projectile = it.next();
