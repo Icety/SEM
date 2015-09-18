@@ -100,5 +100,7 @@ public class Sprite {
         return this.getBoundingBox() != null && this.getBoundingBox().intersects(sprite.getBoundingBox());
     }
 
+    public void writeLog(String message) {
 
+    }
 }
