@@ -91,6 +91,7 @@ public class Main extends StateBasedGame {
     public static Image BOSS_BACHELLI_CHARGE;
 
     protected Game tGame;
+    protected Logger tLogger;
     public static Music tBackgroundmusic;
 
     // Class Constructor
@@ -98,17 +99,18 @@ public class Main extends StateBasedGame {
         super(appName);
 
         //Start the logger
-        Logger.startLogging();
+        tLogger = new Logger();
+        tLogger.startLogging();
 
         //Make sure that the logger is stopped when the game is exited.
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
-                Logger.stopLogging();
+                tLogger.stopLogging();
             }
         });
 
-        tGame = new Game(WIDTH, HEIGHT);
+        tGame = new Game(WIDTH, HEIGHT, tLogger);
     }
 
     // Initialize your game states (calls init method of each gamestate, and set's the state ID)
@@ -151,7 +153,7 @@ public class Main extends StateBasedGame {
     }
 
     public void newGame() {
-        tGame = new Game(WIDTH, HEIGHT);
+        tGame = new Game(WIDTH, HEIGHT, tLogger);
         tGame.nextLevel();
         Player p = tGame.getPlayer();
         p.settX(tGame.getWidth() / 2);
