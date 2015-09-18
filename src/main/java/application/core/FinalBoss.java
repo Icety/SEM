@@ -2,8 +2,6 @@ package application.core;
 
 import application.Main;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
 /**
  * Created by Niek on 9/9/2015.
@@ -73,10 +71,5 @@ public class FinalBoss extends Alien {
     @Override
     public String toString() {
         return "FinalBoss on coords: " + tX + ", " + tY;
-    }
-
-    public void laserSound() throws SlickException {
-        Sound sound = new Sound("src/main/java/application/sound/laser.wav");
-        sound.play();
     }
 }
