@@ -1,8 +1,6 @@
 package application.core;
 
-import application.Main;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -76,7 +74,6 @@ public class Game {
             else {
                 tWon = true;
                 highScoreManager.addScores(tScore);
-                System.out.println(highScoreManager.toString());
             }
         }
     }
@@ -144,7 +141,6 @@ public class Game {
                 }
             }
             if (wasHit && alien.noLives()) {
-                alienDeathSound();
                 i.remove();
                 continue;
             }
@@ -156,11 +152,9 @@ public class Game {
                 if (tPlayer.intersects(projectile)) {
                     projectile.hit();
                     tPlayer.hit();
-                    playerDeathSound();
                     if (tPlayer.noLives()) {
                         tLost = true;
                         highScoreManager.addScores(tScore);
-                        System.out.println(highScoreManager.toString());
                     }
                     if (projectile.noLives()) {
                         it.remove();
@@ -168,16 +162,5 @@ public class Game {
                 }
             }
         }
-    }
-
-
-    public void playerDeathSound() throws SlickException {
-        Sound playerDeath = new Sound("src/main/java/application/sound/explosion.wav");
-        playerDeath.play();
-    }
-    public void alienDeathSound() throws SlickException {
-        Sound alienDeath = new Sound("src/main/java/application/sound/invaderkilled.wav");
-        alienDeath.play();
-
     }
 }

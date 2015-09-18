@@ -25,9 +25,6 @@ public class HighScoreManager {
         list.add(1,4);
         list.add(2,39);
         list.add(3, 1);
-
-        System.out.println(list.toString());
-
     }
 
 
