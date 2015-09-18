@@ -79,7 +79,7 @@ public class Sprite {
     }
 
     public Rectangle getBoundingBox() {
-        return new Rectangle(this.getX(), this.getY(), tWidth, tHeight);
+        return new Rectangle(tX, tY, tWidth, tHeight);
     }
 
     public int hit() {

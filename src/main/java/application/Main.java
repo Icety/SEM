@@ -83,11 +83,9 @@ public class Main extends StateBasedGame {
     public static Image MOTHERSHIP_ALIEN;
     public static Image PLAYER;
     public static Image BOSS_PROJECTILE;
-    public static Image BACHELLI_PROJECTILE;
     public static Image PLAYER_PROJECTILE;
     public static Image SMALL_PROJECTILE;
     public static Image BOSS_BACHELLI;
-    public static Image BOSS_BACHELLI_CHARGE;
 
     protected Game tGame;
     public Music tBackgroundmusic;
@@ -116,11 +114,9 @@ public class Main extends StateBasedGame {
         MOTHERSHIP_ALIEN = new Image(root + "mothership.png");
         PLAYER = new Image(root + "player.png");
         BOSS_PROJECTILE = new Image(root + "spaghettiheart.png");
-        BACHELLI_PROJECTILE = new Image(root + "meatball.png");
         PLAYER_PROJECTILE = new Image(root + "smallbullet.png");
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         BOSS_BACHELLI = new Image(root + "finalbossbachelli.png");
-        BOSS_BACHELLI_CHARGE = new Image(root + "finalbossbachellicharge.png");
     }
 
     // OldMain Method
