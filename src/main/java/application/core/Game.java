@@ -1,5 +1,6 @@
 package application.core;
 
+import application.logger.Logger;
 import org.newdawn.slick.SlickException;
 
 import java.util.ArrayList;
@@ -42,6 +43,7 @@ public class Game {
 
     public void nextLevel() {
         tLevel = levelFactory.buildLevel(levelNumber);
+        Logger.setLog("The level with number: '"+ levelNumber +"' was build.", 2);
         levelNumber++;
     }
 
@@ -54,6 +56,7 @@ public class Game {
     }
 
     public void newGame() {
+        Logger.setLog("A new game was started..", 2);
         levelNumber = 0;
         nextLevel();
     }
@@ -69,9 +72,11 @@ public class Game {
 
         if (tLevel.hasWon()) {
             if (hasNextLevel()) {
+                Logger.setLog("The player has beaten the level and continues to the next level.", 2);
                 nextLevel();
             }
             else {
+                Logger.setLog("The player has beaten the last level and won the game.", 2);
                 tWon = true;
                 highScoreManager.addScores(tScore);
             }
@@ -110,6 +115,7 @@ public class Game {
 
             //Switch direction when the borders are reached
             if (!directionSwitched && alien.endOfScreen()) {
+                Logger.setLog("The aliens reached the edge and turned around.", 2);
                 for (Alien alien2 : tLevel.getAliens()) {
                     alien2.switchDirection();
                 }
@@ -131,6 +137,7 @@ public class Game {
             while (it.hasNext()) {
                 Projectile projectile = it.next();
                 if (alien.intersects(projectile)) {
+                    Logger.setLog("Alien was hit.", 2);
                     wasHit = true;
                     tScore += projectile.hit();
                     tScore += alien.hit();
@@ -141,6 +148,7 @@ public class Game {
                 }
             }
             if (wasHit && alien.noLives()) {
+                Logger.setLog("Alien has died.", 2);
                 i.remove();
                 continue;
             }
@@ -150,9 +158,11 @@ public class Game {
             while (it.hasNext()) {
                 Projectile projectile = it.next();
                 if (tPlayer.intersects(projectile)) {
+                    Logger.setLog("Player has been hit.", 2);
                     projectile.hit();
                     tPlayer.hit();
                     if (tPlayer.noLives()) {
+                        Logger.setLog("Player has lost.", 2);
                         tLost = true;
                         highScoreManager.addScores(tScore);
                     }

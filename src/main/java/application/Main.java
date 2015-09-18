@@ -57,8 +57,11 @@ package application;
 import application.controllers.*;
 import application.core.Game;
 import application.core.Player;
+import application.logger.Logger;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.io.IOException;
 
 public class Main extends StateBasedGame {
 
@@ -94,6 +97,17 @@ public class Main extends StateBasedGame {
     public Main(String appName) {
         super(appName);
 
+        //Start the logger
+        Logger.startLogging();
+
+        //Make sure that the logger is stopped when the game is exited.
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                Logger.stopLogging();
+            }
+        });
+
         tGame = new Game(WIDTH, HEIGHT);
     }
 
@@ -122,7 +136,7 @@ public class Main extends StateBasedGame {
         BOSS_BACHELLI_CHARGE = new Image(root + "finalbossbachellicharge.png");
     }
 
-    // OldMain Method
+    // Main Method
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new Main("My Game v" + VERSION));
