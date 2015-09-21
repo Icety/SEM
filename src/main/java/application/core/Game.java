@@ -159,14 +159,13 @@ public class Game {
                 }
             }
 
-            //Check collision between player and alien projectile
+            //Check collision between player and alien upgrade
             Iterator<Upgrade> uit = alien.getUpgrades().iterator();
             while (uit.hasNext()) {
                 Upgrade u = uit.next();
                 if (tPlayer.intersects(u)) {
                     tPlayer.upgrade(u);
                     u.hit();
-                    System.out.print("bruh");
                 }
             }
         }

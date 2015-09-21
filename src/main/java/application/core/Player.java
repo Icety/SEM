@@ -54,7 +54,6 @@ public class Player extends Sprite {
         for(Upgrade u: tActiveUpgrades) {
             if(u.isActive()) {
                 tReloadTime = 50;
-                System.out.print("50 hurtz");
             }
             else {
                tReloadTime = 250;

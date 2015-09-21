@@ -6,6 +6,7 @@ import org.w3c.dom.Element;
 import javax.xml.crypto.NodeSetData;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -27,10 +28,10 @@ public class Alien extends Sprite {
 
     public void update() {
         tX += tDirection * tSpeed;
-        //applyDifficulty(); //SHould be moved
         shoot();
         addShootChance();
         this.updateProjectiles();
+        this.updateUpgrades();
     }
 
     public boolean isBonusAlien() {
@@ -39,7 +40,7 @@ public class Alien extends Sprite {
 
     public void shoot() {
         if (tCanShoot) {
-            if ((Math.random() * 100) > tRandomChance && false ) {
+            if ((Math.random() * 100) > tRandomChance ) {
                 this.addProjectile(new SmallProjectile(tX+ tWidth/2, tY + tHeight));
                 tShootChance = 0;
             }
@@ -71,7 +72,7 @@ public class Alien extends Sprite {
     public void switchDirection() {
         tY += 15;
         tDirection *= -1;
-        drop();
+        drop();// Well, this shouldnt be here. But since every Sprite whitin Alien is deleted when an Alien is killed, this is for testing.
     }
 
     /**
@@ -115,11 +116,19 @@ public class Alien extends Sprite {
     protected void drop() {
         if(Math.random()*100>90) {
             tUpgrade.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
-            System.out.println("Upgrade earned");
         }
     }
 
     public ArrayList<Upgrade> getUpgrades() {
         return tUpgrade;
+    }
+
+    protected void updateUpgrades() {
+//        for(Upgrade u : tUpgrade) {
+//            if(!u.isActive()) {
+//                tUpgrade.remove(u);
+//                System.out.println("Upgrade deleted");
+//            }
+//        }
     }
 }

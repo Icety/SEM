@@ -141,6 +141,7 @@ public class Levels extends BasicGameState {
 
     private void drawUpgrades(ArrayList<Upgrade> upgrades) {
         for(Upgrade u: upgrades) {
+            if(u.toDraw())
             (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
         }
     }
