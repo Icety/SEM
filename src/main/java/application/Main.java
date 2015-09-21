@@ -89,6 +89,7 @@ public class Main extends StateBasedGame {
     public static Image SMALL_PROJECTILE;
     public static Image BOSS_BACHELLI;
     public static Image BOSS_BACHELLI_CHARGE;
+    public static Image UPGRADE_0;
 
     protected Game tGame;
     protected Logger tLogger;
@@ -136,6 +137,7 @@ public class Main extends StateBasedGame {
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         BOSS_BACHELLI = new Image(root + "finalbossbachelli.png");
         BOSS_BACHELLI_CHARGE = new Image(root + "finalbossbachellicharge.png");
+        UPGRADE_0 = new Image(root + "upgrade_0.png");
     }
 
     // Main Method

@@ -5,13 +5,16 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
+import java.util.ArrayList;
+
 /**
  * Created by Thomas on 01-09-15.
  */
 public class Player extends Sprite {
     protected long tLastShot = 0;
-    protected int tReloadTime = 50;
+    protected int tReloadTime = 250;
     protected int tSpeed = 5;
+    private ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
 
     protected boolean tShoot, tGoLeft, tGoRight;
 
@@ -42,6 +45,17 @@ public class Player extends Sprite {
             e.printStackTrace();
         }
         this.updateProjectiles();
+
+        //Update Upgrades
+        for(Upgrade u: tActiveUpgrades) {
+            if(u.isActive()) {
+                tReloadTime = 50;
+                System.out.print("50 hurtz");
+            }
+            else {
+               tReloadTime = 250;
+            }
+        }
     }
 
     protected void moveLeft() {
@@ -92,5 +106,9 @@ public class Player extends Sprite {
 
     public int getHealth() {
         return tHealth;
+    }
+
+    public void upgrade(Upgrade u) {
+        tActiveUpgrades.add(u);
     }
 }

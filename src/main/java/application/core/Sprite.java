@@ -23,6 +23,9 @@ public class Sprite {
     protected Rectangle tBoundingBox;
     protected int tHealth;
 
+    int tDifficulty = 1;
+    double tRandomChance;
+
     public int getX() {
         return tX;
     }
@@ -63,6 +66,10 @@ public class Sprite {
         tProjectiles.remove(projectile);
     }
 
+    public void setDifficulty(int difficulty) {
+        tDifficulty = difficulty;
+    }
+
     protected void updateProjectiles() {
         Iterator<Projectile> i = tProjectiles.iterator();
         while (i.hasNext()) {
@@ -85,6 +92,10 @@ public class Sprite {
     public int hit() {
         tHealth--;
         if (tHealth <= 0) {
+            if(this instanceof Alien) {
+                //Only and maybe drop if i'm an Alien
+                ((Alien)this).drop();
+            }
             return tKillScore;
         } else {
             return tHitScore;

@@ -1,10 +1,8 @@
 package application.controllers;
 
 import application.Main;
-import application.core.Alien;
+import application.core.*;
 import application.core.Game;
-import application.core.Player;
-import application.core.Projectile;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -58,10 +56,12 @@ public class Levels extends BasicGameState {
                 p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
             }
 
-            //Draw all aliens
+            //Draw all aliens and its upgrades
             for (Alien alien : tMain.getGame().getLevel().getAliens()) {
                 (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
                 drawProjectiles(alien.getProjectiles());
+                drawUpgrades(alien.getUpgrades());
+                alien.applyDifficulty(); //
             }
 
             //Draw the player
@@ -136,6 +136,12 @@ public class Levels extends BasicGameState {
     public void drawProjectiles(ArrayList<Projectile> projectiles) {
         for (Projectile projectile: projectiles) {
             projectile.getImage().draw(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight());
+        }
+    }
+
+    private void drawUpgrades(ArrayList<Upgrade> upgrades) {
+        for(Upgrade u: upgrades) {
+            (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
         }
     }
 }
