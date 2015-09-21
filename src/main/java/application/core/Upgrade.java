@@ -14,7 +14,7 @@ public abstract class Upgrade extends Sprite {
     protected boolean tRemoved = false;
     protected long tTime = System.currentTimeMillis();
     protected long tDuration = 15000; //15 sec
-
+    protected boolean tToDraw = true;
 
     public void setDirection(int direction) {
         tDirection = direction;
@@ -33,6 +33,12 @@ public abstract class Upgrade extends Sprite {
         return result;
     }
 
+    @Override
+    public int hit() {
+        tToDraw = false;
+        return 10;
+    }
+
     public boolean isRemoved() {
         return tRemoved;
     }
@@ -44,6 +50,10 @@ public abstract class Upgrade extends Sprite {
 
     public org.newdawn.slick.Image getImage() {
         return Main.UPGRADE_0;
+    }
+
+    public boolean toDraw() {
+        return tToDraw;
     }
 }
 

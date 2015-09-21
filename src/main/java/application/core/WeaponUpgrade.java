@@ -12,6 +12,7 @@ public final class WeaponUpgrade extends Upgrade {
         tY = y;
         tWidth = 35;
         tHeight = 50;
+        tHealth = 1;
         if (tDifficulty == 1)
             tSpeed = 2;
         else if (tDifficulty == 2)

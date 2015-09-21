@@ -23,7 +23,7 @@ public class Sprite {
     protected Rectangle tBoundingBox;
     protected int tHealth;
 
-    int tDifficulty = 1;
+    int tDifficulty = 3;
     double tRandomChance;
 
     public int getX() {

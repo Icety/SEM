@@ -183,7 +183,6 @@ public class Game {
                 if (tPlayer.intersects(u)) {
                     tPlayer.upgrade(u);
                     u.hit();
-                    System.out.print("bruh");
                 }
             }
         }

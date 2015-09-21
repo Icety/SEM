@@ -39,7 +39,7 @@ public class Alien extends Sprite {
 
     public void shoot() {
         if (tCanShoot) {
-            if ((Math.random() * 100) > tRandomChance && false ) {
+            if ((Math.random() * 100) > tRandomChance ) {
                 this.addProjectile(new SmallProjectile(tX+ tWidth/2, tY + tHeight));
                 tShootChance = 0;
             }
@@ -70,7 +70,7 @@ public class Alien extends Sprite {
     public void switchDirection() {
         tY += 15;
         tDirection *= -1;
-        drop();
+        drop(); //Should be on hit
     }
 
     /**
@@ -114,7 +114,6 @@ public class Alien extends Sprite {
     protected void drop() {
         if(Math.random()*100>90) {
             tUpgrade.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
-            System.out.println("Upgrade earned");
         }
     }
 
