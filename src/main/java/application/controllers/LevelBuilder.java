@@ -9,6 +9,19 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -26,7 +39,7 @@ public class LevelBuilder extends BasicGameState {
     protected int circley;
     protected boolean circleDown, circleUp, circleLeft, circleRight;
 
-    ArrayList<Alien> aliens = new ArrayList<Alien>();
+    protected ArrayList<Alien> aliens = new ArrayList<Alien>();
 
     public LevelBuilder(int id) {
         tId = id;
@@ -183,6 +196,8 @@ public class LevelBuilder extends BasicGameState {
                 if (circle.getX() < Main.WIDTH)
                 circleRight = true;
                 break;
+            case Input.KEY_S:
+                toXML("test");
         }
     }
 
@@ -236,6 +251,77 @@ public class LevelBuilder extends BasicGameState {
         } else if (selected instanceof MothershipAlien) {
             alien = new MothershipAlien();
             return alien;
+        } else {
+            return null;
+        }
+    }
+
+    public void toXML(String docname) {
+        try {
+
+            DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+
+            // root element
+            Document doc = docBuilder.newDocument();
+            Element rootElement = doc.createElement("level");
+            doc.appendChild(rootElement);
+
+            // background element
+            Element background = doc.createElement("background");
+            rootElement.appendChild(background);
+
+            // aliens elements
+            Element aliens = doc.createElement("aliens");
+            rootElement.appendChild(aliens);
+
+            // add every alien
+            for (Alien a : this.aliens) {
+                Element alien = doc.createElement("alien");
+                Element x = doc.createElement("x");
+                Element y = doc.createElement("y");
+                x.appendChild(doc.createTextNode(Integer.toString(a.getX())));
+                y.appendChild(doc.createTextNode(Integer.toString(a.getY())));
+                Element type = doc.createElement("type");
+                type.appendChild(doc.createTextNode(classToXML(a)));
+                alien.appendChild(x);
+                alien.appendChild(y);
+                alien.appendChild(type);
+                aliens.appendChild(alien);
+            }
+
+            // write the content into xml file
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            DOMSource source = new DOMSource(doc);
+            StreamResult result = new StreamResult(new File("src/main/java/application/" +  docname + ".xml"));
+
+            // Output to console for testing
+            // StreamResult result = new StreamResult(System.out);
+
+            transformer.transform(source, result);
+
+            System.out.println("File saved!");
+
+        } catch (ParserConfigurationException pce) {
+            pce.printStackTrace();
+        } catch (TransformerException tfe) {
+            tfe.printStackTrace();
+        }
+    }
+
+    private String classToXML(Alien selected) {
+        if (selected instanceof MiniAlien) {
+            return "mini";
+        } else if (selected instanceof SmallAlien) {
+            return "small";
+        } else if (selected instanceof BigAlien) {
+            return "big";
+        } else if (selected instanceof FinalBoss) {
+            return "boss";
+        } else if (selected instanceof MothershipAlien) {
+            return "mother";
         } else {
             return null;
         }
