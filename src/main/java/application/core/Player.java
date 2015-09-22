@@ -58,7 +58,7 @@ public class Player extends Sprite {
         int bestWeapon = 0;
         for(Upgrade u: tActiveUpgrades) {
             if(u instanceof WeaponUpgrade) {
-                bestWeapon = 1;
+                bestWeapon = 0;
             }
         }
 
