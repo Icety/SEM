@@ -218,7 +218,7 @@ public class GameTest {
         testAlien.tDirection = 1;
         testGame.update();
 
-        assertEquals(-1, testAlien.tDirection);
+        assertEquals(1, testAlien.tDirection);
     }
 
     /**

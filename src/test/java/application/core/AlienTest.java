@@ -172,9 +172,11 @@ public class AlienTest {
     @Test
     public void testEndOfScreen() throws Exception {
         testAlien.tX = 10;
+        testAlien.tDirection = -1;
         assertTrue(testAlien.endOfScreen());
 
         testAlien.tX = 0;
+        testAlien.tDirection = 1;
         assertFalse(testAlien.endOfScreen());
     }
 
