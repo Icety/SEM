@@ -91,6 +91,8 @@ public class Main extends StateBasedGame {
     public static Image BOSS_BACHELLI_CHARGE;
     public static Image UPGRADE_0;
 
+    public static int DIFFICULTY = 1;
+
     protected Game tGame;
     protected Logger tLogger;
     public static Music tBackgroundmusic;

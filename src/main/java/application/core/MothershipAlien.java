@@ -9,15 +9,15 @@ import org.newdawn.slick.Image;
 public class MothershipAlien extends Alien{
 
     public MothershipAlien() {
-        tImageString = "mothership.png";
         tHealth = 1;
         tHitScore = 0;
         tKillScore = 500;
         tWidth = 50;
-        tHeight= 30;
+        tHeight = 30;
         tShootChance = 0;
         tSpeed = 3;
         tDirection = 1;
+        tBonusAlien = true;
     }
 
     public Image getImage() {
