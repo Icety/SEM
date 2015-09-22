@@ -6,6 +6,7 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by Thomas on 01-09-15.
@@ -44,12 +45,23 @@ public class Player extends Sprite {
         this.updateProjectiles();
 
         //Update Upgrades
-        for(Upgrade u: tActiveUpgrades) {
-            if(u.isActive() && u instanceof SpeedUpgrade) {
+            //Reset everything
+        boolean hasWeaponUpgrade = false;
+        tReloadTime = 250;
+
+            //Apply new reload times and delete inactive Upgrades
+        Iterator<Upgrade> it = tActiveUpgrades.iterator();
+        while(it.hasNext()) {
+            Upgrade u = it.next();
+            if(u.isActive() && u instanceof SpeedUpgrade && !hasWeaponUpgrade) {
                 tReloadTime = 50;
             }
-            else {
-               tReloadTime = 250;
+            if(u.isActive() && u instanceof WeaponUpgrade) {
+                tReloadTime = 500;
+                hasWeaponUpgrade = true;
+            }
+            if(!u.isActive()) {
+                //tActiveUpgrades.remove(u);
             }
         }
     }
@@ -57,8 +69,8 @@ public class Player extends Sprite {
     private void shoot() throws SlickException {
         int bestWeapon = 0;
         for(Upgrade u: tActiveUpgrades) {
-            if(u instanceof WeaponUpgrade) {
-                bestWeapon = 0;
+            if(u instanceof WeaponUpgrade && u.isActive()) {
+                bestWeapon = 1          ;
             }
         }
 
@@ -67,15 +79,15 @@ public class Player extends Sprite {
             Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
             this.addProjectile(projectile);
         }
-//        else if(bestWeapon == 1) {
-//            for (int i=0; i<5; i++) {
-//                int x = tX + i * tWidth / 10;
-//                int y = tY + tHeight;
-//                int dirx = x - (tX + tWidth / 2);
-//                int diry = y;
-//                this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), -diry / Math.max(dirx, diry)));
-//            }
-//        }
+        else if(bestWeapon == 1) {
+            for (int i=0; i<5; i++) {
+                int x = tX + i * tWidth / 10;
+                int y = tY + tHeight;
+                int dirx = x - (tX + tWidth / 2);
+                int diry = y;
+                this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), -diry / Math.max(dirx, diry)));
+            }
+        }
     }
 
     protected void moveLeft() {

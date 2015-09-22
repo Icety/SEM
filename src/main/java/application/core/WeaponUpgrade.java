@@ -15,8 +15,8 @@ public class WeaponUpgrade extends Upgrade {
         if (tDifficulty == 1)
             tSpeed = 2;
         else if (tDifficulty == 2)
-            tSpeed = 3;
+            tSpeed = 2;
         else
-            tSpeed = 5;
+            tSpeed = 4;
     }
 }
