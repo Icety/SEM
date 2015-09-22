@@ -3,11 +3,11 @@ package application.core;
 import application.Main;
 
 /**
- * Created by Ties on 15-9-2015.
+ * Created by Ties on 22-9-2015.
  */
-public final class HealthUpgrade extends Upgrade {
+public class PlayerUpgrade extends Upgrade {
 
-    public HealthUpgrade(int x, int y) {
+    public PlayerUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
         tY = y;
@@ -17,11 +17,11 @@ public final class HealthUpgrade extends Upgrade {
         if (tDifficulty == 1)
             tSpeed = 2;
         else if (tDifficulty == 2)
-            tSpeed = 3;
+            tSpeed = 2;
         else
-            tSpeed = 5;
+            tSpeed = 4;
     }
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_2;
+        return Main.UPGRADE_3;
     }
 }

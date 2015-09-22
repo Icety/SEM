@@ -11,8 +11,8 @@ public class WeaponUpgrade extends Upgrade {
         tDirection = 1;
         tX = x;
         tY = y;
-        tWidth = 35;
-        tHeight = 35;
+        tWidth = 50;
+        tHeight = 50;
         tHealth = 1;
         if (tDifficulty == 1)
             tSpeed = 2;

@@ -135,11 +135,14 @@ public class Alien extends Sprite {
         if(Math.random() * 100 > 97) {
             tUpgrades.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
         }
-        else if(Math.random() * 100 > 96 ) {
+        else if(Math.random() * 100 > 97 ) {
             tUpgrades.add(new SpeedUpgrade(tX + tWidth / 2, tY + tHeight));
         }
         else if(Math.random() * 100 > 98 ) {
             tUpgrades.add(new HealthUpgrade(tX + tWidth / 2, tY + tHeight));
+        }
+        else if(Math.random() * 100 > 98 ) {
+            tUpgrades.add(new PlayerUpgrade(tX + tWidth / 2, tY + tHeight));
         }
     }
 

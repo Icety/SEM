@@ -93,6 +93,7 @@ public class Main extends StateBasedGame {
     public static Image UPGRADE_1;
     public static Image UPGRADE_2;
     public static Image UPGRADE_3;
+    public static Image UPGRADED_PLAYER;
 
 
     public static int DIFFICULTY = 1;
@@ -143,6 +144,7 @@ public class Main extends StateBasedGame {
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         BOSS_BACHELLI = new Image(root + "finalbossbachelli.png");
         BOSS_BACHELLI_CHARGE = new Image(root + "finalbossbachellicharge.png");
+        UPGRADED_PLAYER = new Image(root + "player_upgraded.png");
 
         UPGRADE_0 = new Image(root + "upgrade_speed.png");
         UPGRADE_1 = new Image(root + "upgrade_weapon.png");

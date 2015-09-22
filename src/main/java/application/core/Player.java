@@ -16,6 +16,8 @@ public class Player extends Sprite {
     protected int tReloadTime = 250;
     protected int tSpeed = 5;
     private ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
+    protected boolean tUpgraded = false;
+    protected int tLastSide = 0;
 
     protected boolean tShoot, tGoLeft, tGoRight;
 
@@ -75,16 +77,37 @@ public class Player extends Sprite {
         }
 
         if(bestWeapon == 0 ) {
-            laserSound();
-            Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
-            this.addProjectile(projectile);
+            if(tUpgraded) {
+                if(tLastSide == 0) {
+                    laserSound();
+                    Projectile projectile = new PlayerProjectile(tX + 5, tY);
+                    this.addProjectile(projectile);
+                    tLastSide = 1;
+                }
+                else {
+                    laserSound();
+                    Projectile projectile2 = new PlayerProjectile(tX + tWidth - 10, tY);
+                    this.addProjectile(projectile2);
+                    tLastSide = 0;
+                }
+            }
+            else {
+                laserSound();
+                Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
+                this.addProjectile(projectile);
+            }
+
         }
         else if(bestWeapon == 1) {
+            int amount = 3;
+            if(tUpgraded) {
+                amount = 6;
+            }
             int x, y;
             float dirx, diry;
-            for (int i=0; i<5; i++) {
+            for (int i=0; i<amount; i++) {
                 laserSound();
-                x = tX + i * tWidth / 5;
+                x = tX + i * tWidth / amount;
                 y = tY;
                 dirx = -(x - (tX + tWidth / 2)) * 4;
                 diry = y;
@@ -110,7 +133,9 @@ public class Player extends Sprite {
     }
 
     public Image getImage() {
+        if(!tUpgraded)
         return Main.PLAYER;
+        return Main.UPGRADED_PLAYER;
     }
 
     public void laserSound() throws SlickException {
@@ -146,6 +171,9 @@ public class Player extends Sprite {
     public void upgrade(Upgrade u) {
         if(u instanceof HealthUpgrade && tHealth < 3) {
             tHealth++;
+        }
+        if(u instanceof PlayerUpgrade) {
+            tUpgraded = true;
         }
         else {
             tActiveUpgrades.add(u);
