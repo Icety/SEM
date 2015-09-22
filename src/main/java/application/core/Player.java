@@ -70,7 +70,7 @@ public class Player extends Sprite {
         int bestWeapon = 0;
         for(Upgrade u: tActiveUpgrades) {
             if(u instanceof WeaponUpgrade && u.isActive()) {
-                bestWeapon = 1          ;
+                bestWeapon = 1;
             }
         }
 
@@ -80,12 +80,15 @@ public class Player extends Sprite {
             this.addProjectile(projectile);
         }
         else if(bestWeapon == 1) {
+            int x, y;
+            float dirx, diry;
             for (int i=0; i<5; i++) {
-                int x = tX + i * tWidth / 10;
-                int y = tY + tHeight;
-                int dirx = x - (tX + tWidth / 2);
-                int diry = y;
-                this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), -diry / Math.max(dirx, diry)));
+                laserSound();
+                x = tX + i * tWidth / 5;
+                y = tY;
+                dirx = -(x - (tX + tWidth / 2)) * 4;
+                diry = y;
+                this.addProjectile(new UpgradedProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
             }
         }
     }
@@ -141,6 +144,11 @@ public class Player extends Sprite {
     }
 
     public void upgrade(Upgrade u) {
-        tActiveUpgrades.add(u);
+        if(u instanceof HealthUpgrade && tHealth < 3) {
+            tHealth++;
+        }
+        else {
+            tActiveUpgrades.add(u);
+        }
     }
 }

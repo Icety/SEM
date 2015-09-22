@@ -5,11 +5,10 @@ import application.Main;
 /**
  * Created by Ties on 15-9-2015.
  */
-public final class SpeedUpgrade extends Upgrade {
+public final class HealthUpgrade extends Upgrade {
 
-    public SpeedUpgrade(int x, int y) {
+    public HealthUpgrade(int x, int y) {
         tDirection = 1;
-        //tImageString = "spaghettiheart.png";
         tX = x;
         tY = y;
         tWidth = 35;
@@ -23,6 +22,6 @@ public final class SpeedUpgrade extends Upgrade {
             tSpeed = 5;
     }
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_0;
+        return Main.UPGRADE_2;
     }
 }

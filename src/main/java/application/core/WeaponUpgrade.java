@@ -1,5 +1,7 @@
 package application.core;
 
+import application.Main;
+
 /**
  * Created by Ties on 22-9-2015.
  */
@@ -10,7 +12,7 @@ public class WeaponUpgrade extends Upgrade {
         tX = x;
         tY = y;
         tWidth = 35;
-        tHeight = 50;
+        tHeight = 35;
         tHealth = 1;
         if (tDifficulty == 1)
             tSpeed = 2;
@@ -18,5 +20,8 @@ public class WeaponUpgrade extends Upgrade {
             tSpeed = 2;
         else
             tSpeed = 4;
+    }
+    public org.newdawn.slick.Image getImage() {
+        return Main.UPGRADE_1;
     }
 }

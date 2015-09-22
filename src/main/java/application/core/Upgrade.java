@@ -47,10 +47,6 @@ public abstract class Upgrade extends Sprite {
         return tTime + tDuration > System.currentTimeMillis();
     }
 
-    public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_0;
-    }
-
     public boolean toDraw() {
         return tToDraw;
     }
