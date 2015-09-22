@@ -7,11 +7,11 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.*;
+import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -37,7 +37,10 @@ public class LevelBuilder extends BasicGameState {
     protected Circle circle;
     protected int circlex;
     protected int circley;
-    protected boolean circleDown, circleUp, circleLeft, circleRight;
+    protected boolean circleDown, circleUp, circleLeft, circleRight, saveGame;
+    protected TextField saveName;
+    protected boolean focus = false;
+
 
     protected ArrayList<Alien> aliens = new ArrayList<Alien>();
 
@@ -55,6 +58,10 @@ public class LevelBuilder extends BasicGameState {
         menuHeight = 150;
         selected = null;
         tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        saveGame = false;
+        Font font = container.getDefaultFont();
+        saveName = new TextField(container, font, Main.WIDTH/2 - Main.WIDTH/16, Main.HEIGHT/2, Main.WIDTH/8, 30);
+        saveName.setAcceptingInput(false);
     }
 
     public int getID() {
@@ -72,12 +79,17 @@ public class LevelBuilder extends BasicGameState {
         //Draw the menu bar
         g.setColor(Color.blue);
         g.fillRect(0, 0, Main.WIDTH, menuHeight);
-
         //Draw all text
         g.setColor(Color.white);
-        g.drawString("Space:  add selected alien", Main.WIDTH / 8, menuHeight / 8);
-        g.drawString("R:     Delete alien in circle", Main.WIDTH / 8, 2*menuHeight / 8);
-        g.drawString("Arrows: move circle", Main.WIDTH / 8, 3*menuHeight / 8);
+        g.drawString("Space:   add selected alien", Main.WIDTH / 8, menuHeight / 8);
+        g.drawString("R:       Delete alien in circle", Main.WIDTH / 8, 2*menuHeight / 8);
+        g.drawString("Arrows:  move circle", Main.WIDTH / 8, 3*menuHeight / 8);
+        g.drawString("Escape:  Save current level", Main.WIDTH / 8, 4 * menuHeight / 8);
+        if (saveGame) {
+            g.drawString("PLEASE ENTER A NAME FOR THE LEVEL FILE", Main.WIDTH / 2 - Main.WIDTH / 16, Main.HEIGHT / 2 - 50);
+            saveName.render(container, g);
+            saveName.setFocus(focus);
+        }
         g.drawString("Selected Alien: ", Main.WIDTH / 3, menuHeight / 2);
         g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH/4, menuHeight / 8);
         g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH/4, 2*menuHeight / 8);
@@ -173,6 +185,17 @@ public class LevelBuilder extends BasicGameState {
                     aliens.remove(toRemove);
                 }
                 break;
+            case Input.KEY_ESCAPE:
+                saveGame = !saveGame;
+                saveName.setAcceptingInput(!saveName.isAcceptingInput());
+                focus = !focus;
+                break;
+            case Input.KEY_ENTER:
+                if(saveGame) {
+                    toXML(saveName.getText());
+                    saveGame = !saveGame;
+                }
+                break;
             default:
                 break;
         }
@@ -196,8 +219,6 @@ public class LevelBuilder extends BasicGameState {
                 if (circle.getX() < Main.WIDTH)
                 circleRight = true;
                 break;
-            case Input.KEY_S:
-                toXML("test");
         }
     }
 
