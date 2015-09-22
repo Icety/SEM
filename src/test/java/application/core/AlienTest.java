@@ -136,18 +136,18 @@ public class AlienTest {
     }
 
     /**
-     * Tests whether isRemoved() returns the correct boolean value.
+     * Tests whether isDead() returns the correct boolean value.
      *
      * @throws Exception
      */
     @Test
-    public void testIsRemoved() throws Exception {
-        testAlien.tRemoved = true;
+    public void testIsDead() throws Exception {
+        testAlien.tDead = true;
 
-        assertTrue(testAlien.isRemoved());
-        testAlien.tRemoved = false;
+        assertTrue(testAlien.isDead());
+        testAlien.tDead = false;
 
-        assertFalse(testAlien.isRemoved());
+        assertFalse(testAlien.isDead());
     }
 
     /**
@@ -172,9 +172,11 @@ public class AlienTest {
     @Test
     public void testEndOfScreen() throws Exception {
         testAlien.tX = 10;
+        testAlien.tDirection = -1;
         assertTrue(testAlien.endOfScreen());
 
         testAlien.tX = 0;
+        testAlien.tDirection = 1;
         assertFalse(testAlien.endOfScreen());
     }
 

@@ -7,7 +7,6 @@ public class WeaponUpgrade extends Upgrade {
 
     public WeaponUpgrade(int x, int y) {
         tDirection = 1;
-        //tImageString = "spaghettiheart.png";
         tX = x;
         tY = y;
         tWidth = 35;
