@@ -18,12 +18,11 @@ public class Sprite {
     protected int tY;
     protected int tWidth, tHeight, tKillScore = 0, tHitScore = 0;
     protected Image tImage = null;
-    protected String tImageString;
     protected ArrayList<Projectile> tProjectiles = new ArrayList<Projectile>();
     protected Rectangle tBoundingBox;
     protected int tHealth;
 
-    int tDifficulty = 3;
+    int tDifficulty = 1;
     double tRandomChance;
 
     public int getX() {
@@ -92,10 +91,6 @@ public class Sprite {
     public int hit() {
         tHealth--;
         if (tHealth <= 0) {
-            if(this instanceof Alien) {
-                //Only and maybe drop if i'm an Alien
-                ((Alien)this).drop();
-            }
             return tKillScore;
         } else {
             return tHitScore;

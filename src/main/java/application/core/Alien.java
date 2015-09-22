@@ -11,14 +11,18 @@ import java.util.ArrayList;
  * Created by Thomas on 01-09-15.
  */
 public class Alien extends Sprite {
-    protected boolean tRemoved;
+    protected boolean tDead = false;
     protected int tShootChance;
     protected int tDirection;
     protected double tSpeed;
     protected boolean tCanShoot = false;
     protected boolean tBonusAlien = false;
 
-    protected ArrayList<Upgrade> tUpgrade = new ArrayList<>();
+    protected ArrayList<Upgrade> tUpgrades = new ArrayList<>();
+
+    public Alien() {
+        applyDifficulty();
+    }
 
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
@@ -26,11 +30,23 @@ public class Alien extends Sprite {
     }
 
     public void update() {
-        tX += tDirection * tSpeed;
-        //applyDifficulty(); //SHould be moved
-        shoot();
-        addShootChance();
+        //If dead, the alien can't move and shoot anymore, yet it's projectiles should keep moving
+        if (!tDead) {
+            tX += tDirection * tSpeed;
+            shoot();
+            addShootChance();
+        }
         this.updateProjectiles();
+        this.updateUpgrades();
+    }
+
+    /**
+     * Updates the position of all the upgrades that this alien dropped
+     */
+    protected void updateUpgrades() {
+        for(Upgrade u: tUpgrades) {
+            u.update();
+        }
     }
 
     public boolean isBonusAlien() {
@@ -54,8 +70,8 @@ public class Alien extends Sprite {
         return "Alien on coords: " + tX + ", " + tY;
     }
 
-    public boolean isRemoved() {
-        return tRemoved;
+    public boolean isDead() {
+        return tDead;
     }
 
     public void addShootChance() {
@@ -63,14 +79,12 @@ public class Alien extends Sprite {
     }
 
     public boolean endOfScreen() {
-        //return tX >= Main.WIDTH - tWidth - 10 || tX <= 10;
-        return tX == Main.WIDTH - tWidth - 10 || tX == 10;
+        return (tX >= (Main.WIDTH - tWidth - 10) && tDirection == 1) || (tX <= 10 && tDirection == -1);
     }
 
     public void switchDirection() {
         tY += 15;
         tDirection *= -1;
-        drop(); //Should be on hit
     }
 
     /**
@@ -81,43 +95,59 @@ public class Alien extends Sprite {
         int bA = 5;
         int hA = 10;
         Rectangle myBox = new Rectangle(tX + bA, Main.HEIGHT, (int) tWidth - (2 * bA), (int) tHeight - (2 * hA));
+        tCanShoot = true;
         for(Alien a: aliens) {
-            Rectangle AlienBox = new Rectangle(
-                    a.getX() + bA,
-                    Main.HEIGHT,
-                    (int) a.getWidth() - (2 * bA),
-                    (int) a.getHeight() - (2 * hA)
-            );
-            if(AlienBox.getBounds().intersects(myBox)) {
-                if (tY < a.getY())
-                    tCanShoot = false;
+            if (!a.isDead()) {
+                Rectangle AlienBox = new Rectangle(
+                        a.getX() + bA,
+                        Main.HEIGHT,
+                        (int) a.getWidth() - (2 * bA),
+                        (int) a.getHeight() - (2 * hA)
+                );
+                if (AlienBox.getBounds().intersects(myBox)) {
+                    if (tY < a.getY()) {
+                        tCanShoot = false;
+                        return;
+                    }
+                }
             }
         }
-        tCanShoot = true;
     }
+
     public void applyDifficulty() {
-        int d = tDifficulty;
-        if(d == 1) {
-            tSpeed = 1;
-            tRandomChance = 99.8;
-        }
-        else if(d == 2) {
-            tSpeed = 2;
-            tRandomChance = 99.9;
-        }
-        else {
-            tSpeed = 3;
-            tRandomChance = 99.5;
+        switch(Main.DIFFICULTY) {
+            case 1:
+                tSpeed = 1;
+                tRandomChance = 99.8;
+                break;
+            case 2:
+                tSpeed = 2;
+                tRandomChance = 99.9;
+                break;
+            case 3:
+                tSpeed = 3;
+                tRandomChance = 99.5;
+                break;
         }
     }
 
     protected void drop() {
         if(Math.random()*100>90) {
-            tUpgrade.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
+            tUpgrades.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
         }
     }
 
     public ArrayList<Upgrade> getUpgrades() {
-        return tUpgrade;
+        return tUpgrades;
+    }
+
+    @Override
+    public int hit() {
+        int result = super.hit();
+        if (tHealth <= 0) {
+            tDead = true;
+            this.drop();
+        }
+        return result;
     }
 }

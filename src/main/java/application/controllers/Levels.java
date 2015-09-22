@@ -58,10 +58,11 @@ public class Levels extends BasicGameState {
 
             //Draw all aliens and its upgrades
             for (Alien alien : tMain.getGame().getLevel().getAliens()) {
-                (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                if (!alien.isDead()) {
+                    (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                }
                 drawProjectiles(alien.getProjectiles());
                 drawUpgrades(alien.getUpgrades());
-                alien.applyDifficulty(); //
             }
 
             //Draw the player

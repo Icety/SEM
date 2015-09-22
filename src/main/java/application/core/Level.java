@@ -46,7 +46,7 @@ public class Level {
     public boolean hasWon() {
         boolean result = true;
         for (Alien alien: tAliens) {
-            if (!alien.isBonusAlien()) {
+            if (!alien.isDead() && !alien.isBonusAlien()) {
                 result = false;
             }
         }
