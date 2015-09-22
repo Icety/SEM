@@ -36,7 +36,7 @@ public abstract class Upgrade extends Sprite {
     @Override
     public int hit() {
         tToDraw = false;
-        return 10;
+        return 0;
     }
 
     public boolean isRemoved() {
@@ -44,7 +44,6 @@ public abstract class Upgrade extends Sprite {
     }
 
     public boolean isActive() {
-        //return true;
         return tTime + tDuration > System.currentTimeMillis();
     }
 

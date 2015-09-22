@@ -34,10 +34,7 @@ public class Player extends Sprite {
         long time = (System.nanoTime() - tLastShot) / 1000000;
         if(tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
-            laserSound();
-
-            Projectile projectile = new PlayerProjectile(tX + tWidth/2 , tY );
-            this.addProjectile(projectile);
+            shoot();
         }
         try {
             Thread.sleep(15);
@@ -48,13 +45,37 @@ public class Player extends Sprite {
 
         //Update Upgrades
         for(Upgrade u: tActiveUpgrades) {
-            if(u.isActive()) {
+            if(u.isActive() && u instanceof SpeedUpgrade) {
                 tReloadTime = 50;
             }
             else {
                tReloadTime = 250;
             }
         }
+    }
+
+    private void shoot() throws SlickException {
+        int bestWeapon = 0;
+        for(Upgrade u: tActiveUpgrades) {
+            if(u instanceof WeaponUpgrade) {
+                bestWeapon = 1;
+            }
+        }
+
+        if(bestWeapon == 0 ) {
+            laserSound();
+            Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
+            this.addProjectile(projectile);
+        }
+//        else if(bestWeapon == 1) {
+//            for (int i=0; i<5; i++) {
+//                int x = tX + i * tWidth / 10;
+//                int y = tY + tHeight;
+//                int dirx = x - (tX + tWidth / 2);
+//                int diry = y;
+//                this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), -diry / Math.max(dirx, diry)));
+//            }
+//        }
     }
 
     protected void moveLeft() {

@@ -18,6 +18,7 @@ public class MothershipAlien extends Alien{
         tShootChance = 0;
         tSpeed = 3;
         tDirection = 1;
+        tBonusAlien = true;
     }
 
     public Image getImage() {

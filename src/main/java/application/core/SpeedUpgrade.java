@@ -1,11 +1,11 @@
 package application.core;
 
 /**
- * Created by Ties on 22-9-2015.
+ * Created by Ties on 15-9-2015.
  */
-public class WeaponUpgrade extends Upgrade {
+public final class SpeedUpgrade extends Upgrade {
 
-    public WeaponUpgrade(int x, int y) {
+    public SpeedUpgrade(int x, int y) {
         tDirection = 1;
         //tImageString = "spaghettiheart.png";
         tX = x;

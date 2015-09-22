@@ -112,8 +112,11 @@ public class Alien extends Sprite {
     }
 
     protected void drop() {
-        if(Math.random()*100>90) {
+        if(Math.random()*100>95) {
             tUpgrade.add(new WeaponUpgrade(tX + tWidth / 2, tY + tHeight));
+        }
+        else if(Math.random()*100 > 95 ) {
+            tUpgrade.add(new SpeedUpgrade(tX + tWidth / 2, tY + tHeight));
         }
     }
 
