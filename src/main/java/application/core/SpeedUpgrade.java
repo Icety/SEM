@@ -3,12 +3,13 @@ package application.core;
 import application.Main;
 
 /**
- * Created by Ties on 22-9-2015.
+ * Created by Ties on 15-9-2015.
  */
-public class WeaponUpgrade extends Upgrade {
+public final class SpeedUpgrade extends Upgrade {
 
-    public WeaponUpgrade(int x, int y) {
+    public SpeedUpgrade(int x, int y) {
         tDirection = 1;
+        //tImageString = "spaghettiheart.png";
         tX = x;
         tY = y;
         tWidth = 50;
@@ -17,11 +18,11 @@ public class WeaponUpgrade extends Upgrade {
         if (tDifficulty == 1)
             tSpeed = 2;
         else if (tDifficulty == 2)
-            tSpeed = 2;
+            tSpeed = 3;
         else
-            tSpeed = 4;
+            tSpeed = 5;
     }
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_1;
+        return Main.UPGRADE_0;
     }
 }

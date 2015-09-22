@@ -113,7 +113,7 @@ public class Game {
 
         for (Alien alien : tLevel.getAliens()) {
             alien.update();
-            if (!alien.isDead()) {
+            if (!alien.isDead() && !alien.isBonusAlien()) {
                 if (!directionSwitched && alien.endOfScreen()) {
                     tLogger.setLog("The aliens reached the edge and turned around.", 2);
                     for (Alien alien2 : tLevel.getAliens()) {

@@ -5,9 +5,9 @@ import application.Main;
 /**
  * Created by Ties on 22-9-2015.
  */
-public class WeaponUpgrade extends Upgrade {
+public class PlayerUpgrade extends Upgrade {
 
-    public WeaponUpgrade(int x, int y) {
+    public PlayerUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
         tY = y;
@@ -22,6 +22,6 @@ public class WeaponUpgrade extends Upgrade {
             tSpeed = 4;
     }
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_1;
+        return Main.UPGRADE_3;
     }
 }
