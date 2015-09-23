@@ -71,6 +71,7 @@ public class Main extends StateBasedGame {
     public static final int WON = 2;
     public static final int LOST = 3;
     public static final int HIGHSCORE = 4;
+    public static final int STORYLINE = 5;
 
     // Application Properties
     public static final int WIDTH   = 1400;
@@ -101,6 +102,8 @@ public class Main extends StateBasedGame {
     protected Game tGame;
     protected Logger tLogger;
     public static Music tBackgroundmusic;
+    protected Image tBackground;
+    protected boolean tTransition;
 
     // Class Constructor
     public Main(String appName) {
@@ -129,6 +132,7 @@ public class Main extends StateBasedGame {
         this.addState(new Won(WON));
         this.addState(new Lost(LOST));
         this.addState(new HighScoreBoard(HIGHSCORE));
+        this.addState(new StoryLine(STORYLINE));
         tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
         tBackgroundmusic.loop();
 

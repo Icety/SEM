@@ -31,7 +31,7 @@ public class Level {
     }
 
     public void setBackground(String background) {
-        tBackground = background;
+        tBackground = background.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
 
     public String getBackground() {

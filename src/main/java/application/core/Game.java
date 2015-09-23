@@ -1,7 +1,10 @@
 package application.core;
 
 import application.logger.Logger;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -21,6 +24,8 @@ public class Game {
     protected boolean tPaused;
     protected boolean tWon = false;
     protected boolean tLost = false;
+    protected boolean tNextLevel = false;
+    protected boolean tNextLevelTransition = false;
     protected Logger tLogger;
 
 
@@ -43,6 +48,7 @@ public class Game {
     public int getScore() { return tScore; }
 
     public void nextLevel() {
+        tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber);
         tLogger.setLog("The level with number: '"+ levelNumber +"' was build.", 2);
         levelNumber++;
@@ -71,10 +77,10 @@ public class Game {
         this.alienUpdate();
         this.checkCollision();
 
-        if (tLevel.hasWon()) {
+        if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {
+                tNextLevel = true;
                 tLogger.setLog("The player has beaten the level and continues to the next level.", 2);
-                nextLevel();
             }
             else {
                 tLogger.setLog("The player has beaten the last level and won the game.", 2);
@@ -106,6 +112,10 @@ public class Game {
 
     public boolean hasLost() {
         return tLost;
+    }
+
+    public boolean isNextLevel() {
+        return tNextLevel;
     }
 
     protected void alienUpdate() {
