@@ -1,64 +1,70 @@
 package application.core;
 
+import application.Main;
+import application.controllers.HighScoreForm;
+import application.controllers.ScoreComparator;
+import org.newdawn.slick.state.StateBasedGame;
+
 import java.io.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
+ * HighScoreMangagerClass
  * Created by Daphne van Tetering on 17-9-2015.
  */
 public class HighScoreManager {
-
-    private ArrayList<Integer> scores;
-    private static final String highScoreFile = "scores.dat";
+    private ArrayList<Score> scores;
+    private static final String highScoreFile = "highScores.dat";
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
 
+    /**
+     * Constructor
+     */
     public HighScoreManager(){
-        scores = new ArrayList<Integer>();
+        scores = new ArrayList<Score>();
     }
 
-    public static void main(String[] args){
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(0,6);
-        list.add(1,4);
-        list.add(2,39);
-        list.add(3, 1);
-    }
-
-
-    public int compare (int x, int y) {
-        if (x > y) {
-            return -1;
-        } else if (x < y) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public ArrayList<Integer> getScores(){
+    /**
+     * Load scores from files, sort in descending order and return
+     * @return ArrayList of scores currently saved in file
+     */
+    public ArrayList<Score> getScores(){
         loadScoreFile();
         sort();
         return scores;
     }
 
+    /**
+     * Sort arrayList in descending order
+     */
     private void sort() {
-        Collections.sort(scores);
+        ScoreComparator comparator = new ScoreComparator();
+        Collections.sort(scores, comparator);
         Collections.reverse(scores);
     }
 
-    public void addScores(int newScore) {
+    /**
+     * Add new score to list
+     * @param newPlayer name of player the score belongs to
+     * @param newScore score
+     */
+    public void addScores(String newPlayer, int newScore) {
         loadScoreFile();
-        scores.add(newScore);
+        scores.add(new Score(newPlayer, newScore));
+        sort();
         updateScoreFile();
     }
 
+    /**
+     * Load scores from file
+     */
     public void loadScoreFile() {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(highScoreFile));
-            scores = (ArrayList<Integer>) inputStream.readObject();
+            scores = (ArrayList<Score>) inputStream.readObject();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -76,6 +82,9 @@ public class HighScoreManager {
         }
     }
 
+    /**
+     * Update scores and write to file
+     */
     public void updateScoreFile() {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(highScoreFile));
@@ -94,10 +103,5 @@ public class HighScoreManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String toString(){
-       return getScores().toString();
-
     }
 }

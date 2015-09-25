@@ -27,8 +27,7 @@ public class Game {
     protected boolean tNextLevel = false;
     protected boolean tNextLevelTransition = false;
     protected Logger tLogger;
-
-
+    protected String tPlayerName;
 
     public Game(int width, int height, Logger logger) {
         tScreenWidth = width;
@@ -85,7 +84,6 @@ public class Game {
             else {
                 tLogger.setLog("The player has beaten the last level and won the game.", 2);
                 tWon = true;
-                highScoreManager.addScores(tScore);
             }
         }
     }
@@ -153,7 +151,6 @@ public class Game {
                     if (tPlayer.noLives()) {
                         tLogger.setLog("Player has lost.", 2);
                         tLost = true;
-                        highScoreManager.addScores(tScore);
                     }
                     if (projectile.noLives()) {
                         it.remove();
@@ -193,4 +190,13 @@ public class Game {
             }
         }
     }
+
+    public String getPlayerName() {
+        return tPlayerName;
+    }
+
+    public void setPlayerName(String tPlayerName) {
+        this.tPlayerName = tPlayerName;
+    }
+
 }
