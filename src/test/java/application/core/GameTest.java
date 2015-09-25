@@ -1,5 +1,7 @@
 package application.core;
 
+import application.logger.Logger;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -8,6 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 //ToDo: write testUpdate() methods. Will do after all other short tests.
 /**
@@ -18,6 +21,7 @@ import static org.mockito.Mockito.mock;
 public class GameTest {
     private Game testGame;
     private Alien testAlien;
+    private Logger testLogger;
     private Level nonMockedLevel;
     private Player nonMockedPlayer;
     private Projectile nonMockedProjectile;
@@ -27,7 +31,7 @@ public class GameTest {
     @Mock
     public final Player testPlayer = mock(Player.class);
     @Mock
-    public final Projectile testProjectile= mock(Projectile.class);
+    public final Projectile testProjectile = mock(Projectile.class);
 
     /**
      * Set up variables for the test process.
@@ -36,14 +40,25 @@ public class GameTest {
     public void setUp() {
         testAlien = new Alien();
         testAliens = new ArrayList<>();
+        testLogger = new Logger();
         testAliens.add(testAlien);
-        testGame = new Game(10, 10);
+        testGame = new Game(10, 10, testLogger);
         nonMockedLevel = new Level();
         nonMockedPlayer = new Player();
+        testGame.tLogger = testLogger;
         nonMockedLevel.tPlayer = testPlayer;
         nonMockedLevel.tAliens = testAliens;
         nonMockedPlayer = new Player();
         nonMockedProjectile = new SmallProjectile(10, 10);
+        testLogger.startLogging();
+    }
+
+    /**
+     * Kill the Logger after use.
+     */
+    @After
+    public void tearDown() {
+        testLogger.stopLogging();
     }
 
     /**
@@ -203,7 +218,7 @@ public class GameTest {
         testAlien.tDirection = 1;
         testGame.update();
 
-        assertEquals(-1, testAlien.tDirection);
+        assertEquals(1, testAlien.tDirection);
     }
 
     /**
@@ -317,5 +332,18 @@ public class GameTest {
         testGame.checkCollision();
 
         assertTrue(testGame.tLost);
+    }
+
+    /**
+     * Test whether getHighScoreManager() returns the correct HighScoreManager.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetHighScoreManager() throws Exception {
+        HighScoreManager testHighScoreManager = new HighScoreManager();
+        testGame.highScoreManager = testHighScoreManager;
+
+        assertEquals(testHighScoreManager, testGame.getHighScoreManager());
     }
 }

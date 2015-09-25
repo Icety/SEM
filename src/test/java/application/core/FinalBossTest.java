@@ -69,8 +69,21 @@ public class FinalBossTest {
      * @throws Exception
      */
     @Test
-    public void testGetImage() throws Exception {
+    public void testGetImageNormal() throws Exception {
         assertNull(testBoss.getImage());
+    }
+
+    /**
+     * Test whether getImage() returns the correct image.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImageCharge() throws Exception {
+        testBoss.tSecondShot = 151;
+
+        assertNull(testBoss.getImage());
+        assertEquals(250, testBoss.tHeight);
     }
 
     /**

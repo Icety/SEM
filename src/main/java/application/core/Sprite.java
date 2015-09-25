@@ -18,10 +18,12 @@ public class Sprite {
     protected int tY;
     protected int tWidth, tHeight, tKillScore = 0, tHitScore = 0;
     protected Image tImage = null;
-    protected String tImageString;
     protected ArrayList<Projectile> tProjectiles = new ArrayList<Projectile>();
     protected Rectangle tBoundingBox;
     protected int tHealth;
+
+    int tDifficulty = 1;
+    double tRandomChance;
 
     public int getX() {
         return tX;
@@ -63,6 +65,10 @@ public class Sprite {
         tProjectiles.remove(projectile);
     }
 
+    public void setDifficulty(int difficulty) {
+        tDifficulty = difficulty;
+    }
+
     protected void updateProjectiles() {
         Iterator<Projectile> i = tProjectiles.iterator();
         while (i.hasNext()) {
@@ -79,7 +85,7 @@ public class Sprite {
     }
 
     public Rectangle getBoundingBox() {
-        return new Rectangle(tX, tY, tWidth, tHeight);
+        return new Rectangle(this.getX(), this.getY(), tWidth, tHeight);
     }
 
     public int hit() {
@@ -100,5 +106,7 @@ public class Sprite {
         return this.getBoundingBox() != null && this.getBoundingBox().intersects(sprite.getBoundingBox());
     }
 
+    public void writeLog(String message) {
 
+    }
 }
