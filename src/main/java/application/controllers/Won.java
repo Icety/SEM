@@ -39,6 +39,8 @@ public class Won extends BasicGameState{
         g.drawString("1. Play Game", 50, 100);
         g.drawString("2. High Scores", 50, 120);
         g.drawString("3. Quit", 50, 140);
+        g.drawString("Press Space to submit score", 50, 160);
+
 
 
     }
@@ -67,6 +69,9 @@ public class Won extends BasicGameState{
                 break;
             case Input.KEY_3:
                 // TODO: Implement later
+                break;
+            case Input.KEY_SPACE:
+                tMain.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             default:
                 break;
