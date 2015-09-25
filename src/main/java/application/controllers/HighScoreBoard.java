@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.Main;
+import application.core.Score;
 import org.newdawn.slick.*;
 
 import org.newdawn.slick.Color;
@@ -43,19 +44,19 @@ public class HighScoreBoard extends BasicGameState {
             graphics.setColor(Color.white);
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
 
-            ArrayList<Integer> list = tMain.getGame().getHighScoreManager().getScores();
+            ArrayList<Score> list = tMain.getGame().getHighScoreManager().getScores();
             int x = 400;
             int y = 300;
             int j = 1;
 
-            for (int i = 0; i < list.size() - 1; i++ ) {
-                    graphics.drawString(j+ ". " + list.get(i).toString() + "\n", x,y);
+            for (int i = 0; i < list.size(); i++ ) {
+                    graphics.drawString(j+ ". " + list.get(i).getPlayer().toString() + ": " + Integer.toString(list.get(i).getScore()) + "\n", x,y);
                     y = y + 25;
                     j = j + 1;
 
                 }
 
-            }
+           }
 
     }
 
