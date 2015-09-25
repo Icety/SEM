@@ -98,7 +98,7 @@ public class HighScoreForm extends BasicGameState {
         switch(key) {
             case Input.KEY_ENTER:
                 highScoreManager.addScores(tTextField.getText(),tMain.getGame().getScore());
-                tMain.enterState(4, new FadeInTransition(Color.black), new FadeOutTransition(Color.black));
+                tMain.enterState(6, new FadeInTransition(Color.black), new FadeOutTransition(Color.black));
         }
     }
 
