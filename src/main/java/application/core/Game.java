@@ -114,23 +114,17 @@ public class Game {
 
         for (Alien alien : tLevel.getAliens()) {
             alien.update();
-            upgradeUpdate(alien.getUpgrades());
-
-            if (!directionSwitched && alien.endOfScreen()) {
-                tLogger.setLog("The aliens reached the edge and turned around.", 2);
-                for (Alien alien2 : tLevel.getAliens()) {
-                    alien2.switchDirection();
+            if (!alien.isDead() && !alien.isBonusAlien()) {
+                if (!directionSwitched && alien.endOfScreen()) {
+                    tLogger.setLog("The aliens reached the edge and turned around.", 2);
+                    for (Alien alien2 : tLevel.getAliens()) {
+                        alien2.switchDirection();
+                    }
+                    directionSwitched = true;
                 }
-                directionSwitched = true;
+
+                alien.setLowerLevel(tLevel.getAliens());
             }
-
-            alien.setLowerLevel(tLevel.getAliens());
-        }
-    }
-
-    private void upgradeUpdate(ArrayList<Upgrade> upgrades) {
-        for(Upgrade u: upgrades) {
-            u.update();
         }
     }
 
@@ -139,27 +133,8 @@ public class Game {
         boolean wasHit = false;
         while (i.hasNext()) {
             Alien alien = i.next();
-            Iterator<Projectile> it = tPlayer.getProjectiles().iterator();
-            wasHit = false;
-            while (it.hasNext()) {
-                Projectile projectile = it.next();
-                if (alien.intersects(projectile)) {
-                    tLogger.setLog("Alien was hit.", 2);
-                    wasHit = true;
-                    tScore += projectile.hit();
-                    tScore += alien.hit();
-                    if (projectile.noLives()) {
-                        it.remove();
-                    }
-                }
-            }
-            if (wasHit && alien.noLives()) {
-                tLogger.setLog("Alien has died.", 2);
-                i.remove();
-                continue;
-            }
 
-            it = alien.getProjectiles().iterator();
+            Iterator<Projectile> it = alien.getProjectiles().iterator();
             while (it.hasNext()) {
                 Projectile projectile = it.next();
                 if (tPlayer.intersects(projectile)) {
@@ -183,6 +158,27 @@ public class Game {
                 if (tPlayer.intersects(u)) {
                     tPlayer.upgrade(u);
                     u.hit();
+                }
+            }
+
+            //If the alien is dead, it can't collide with player projectiles, so it should be skipped
+            if (!alien.isDead()) {
+                it = tPlayer.getProjectiles().iterator();
+                wasHit = false;
+                while (it.hasNext()) {
+                    Projectile projectile = it.next();
+                    if (alien.intersects(projectile)) {
+                        tLogger.setLog("Alien was hit.", 2);
+                        wasHit = true;
+                        tScore += projectile.hit();
+                        tScore += alien.hit();
+                        if (projectile.noLives()) {
+                            it.remove();
+                        }
+                    }
+                }
+                if (wasHit && alien.isDead()) {
+                    tLogger.setLog("Alien has died.", 2);
                 }
             }
         }

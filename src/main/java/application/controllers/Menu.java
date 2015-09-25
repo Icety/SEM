@@ -41,6 +41,7 @@ public class Menu extends BasicGameState{
         g.drawString("1. Play Game", 50, 100);
         g.drawString("2. High Scores", 50, 120);
         g.drawString("3. Quit", 50, 140);
+        g.drawString("4: Levelbuilder", 50, 160);
 
 
     }
@@ -66,13 +67,15 @@ public class Menu extends BasicGameState{
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
-                tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                tMain.enterState(6, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_3:
                 tExit = true;
                 break;
-            case Input.KEY_5:
-                tMain.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            case Input.KEY_4:
+                tMain.newGame();
+                tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                break;
             default:
                 break;
         }
