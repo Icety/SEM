@@ -86,7 +86,7 @@ public class Levels extends BasicGameState {
                 game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
             if (tMain.getGame().isNextLevel()) {
-                game.enterState(5);
+                game.enterState(7);
             }
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
