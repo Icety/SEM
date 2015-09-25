@@ -4,23 +4,25 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by Thomas on 01-09-15.
+ * Class for LevelFactory.
+ * @author Thomas Oomens
  */
 public class LevelFactory {
-    NodeList tLevels;
+    protected NodeList tLevels;
     protected int tScreenWidth;
     protected int tScreenHeight;
 
+    /**
+     * Constructor for the LevelFactory.
+     * @param width width of the game.
+     * @param height height of the game.
+     */
     public LevelFactory(int width, int height) {
         try {
             tScreenWidth = width;
@@ -38,10 +40,13 @@ public class LevelFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
     }
 
+    /**
+     * Build the parsed Level.
+     * @param levelNumber the number belonging to the Level.
+     * @return the built Level.
+     */
     public Level buildLevel(int levelNumber) {
         Level level = new Level();
 
@@ -55,6 +60,11 @@ public class LevelFactory {
         return level;
     }
 
+    /**
+     * Load all Aliens beloning to a Level.
+     * @param level the read XMl for the Aliens in the Level.
+     * @return an ArrayList of Aliens.
+     */
     public ArrayList<Alien> loadAliens(Element level) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
 
@@ -87,6 +97,11 @@ public class LevelFactory {
         return aliens;
     }
 
+    /**
+     * Check whether a Level exists.
+     * @param levelNumber the number belonging to the Level.
+     * @return the boolean value.
+     */
     public boolean levelExists(int levelNumber) {
         return (levelNumber < (tLevels.getLength()));
     }

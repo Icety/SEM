@@ -3,10 +3,16 @@ package application.core;
 import application.Main;
 
 /**
- * Created by Ties on 15-9-2015.
+ * Class for HealthUpgrade.
+ * @author Ties Westerborg
  */
 public final class HealthUpgrade extends Upgrade {
 
+    /**
+     * Constructor for HealthUpgrade.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     */
     public HealthUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
@@ -21,6 +27,11 @@ public final class HealthUpgrade extends Upgrade {
         else
             tSpeed = 5;
     }
+
+    /**
+     * Getter method for the Image.
+     * @return the belonging Image.
+     */
     public org.newdawn.slick.Image getImage() {
         return Main.UPGRADE_2;
     }

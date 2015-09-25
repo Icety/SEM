@@ -4,11 +4,15 @@ import application.Main;
 import org.newdawn.slick.Image;
 
 /**
- * Created by Niek on 9/9/2015.
+ * Class for FinalBoss.
+ * @author Niek van der Laan
  */
 public class FinalBoss extends Alien {
     protected int tSecondShot = 0;
 
+    /**
+     * Constructor method for FinalBoss.
+     */
     public FinalBoss() {
         tHealth = 50;
         tHitScore = 0;
@@ -20,11 +24,17 @@ public class FinalBoss extends Alien {
         tSpeed = 3;
     }
 
+    /**
+     * Method to add shoot chance to the FinalBoss.
+     */
     @Override
     public void addShootChance() {
         tShootChance += Math.random() * 40;
     }
 
+    /**
+     * Method to make the FinalBoss shoot.
+     */
     @Override
     public void shoot() {
         tSecondShot++;
@@ -55,6 +65,10 @@ public class FinalBoss extends Alien {
         }
     }
 
+    /**
+     * Getter method for the Image.
+     * @return Image belonging to the FinalBoss.
+     */
     public Image getImage() {
         if (tSecondShot > 150) {
             tHeight = 250;
@@ -64,10 +78,18 @@ public class FinalBoss extends Alien {
         }
     }
 
+    /**
+     * Method to check whether FinalBoss is at the end of the screen.
+     * @return the boolean value.
+     */
     public boolean endOfScreen() {
         return tX > Main.WIDTH - tWidth - 10 || tX == 10;
     }
 
+    /**
+     * Method to return a readable representation for the FinalBoss.
+     * @return the String value.
+     */
     @Override
     public String toString() {
         return "FinalBoss on coords: " + tX + ", " + tY;

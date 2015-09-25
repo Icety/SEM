@@ -2,12 +2,10 @@ package application.core;
 
 import application.Main;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
-
-import java.io.File;
 
 /**
- * Created by Thomas on 01-09-15.
+ * Class for SmallAlien.
+ * @author Thomas Oomens
  */
 public class SmallAlien extends Alien {
     public SmallAlien() {
@@ -21,15 +19,26 @@ public class SmallAlien extends Alien {
         tSpeed = 1;
     }
 
+    /**
+     * Getter method for the beloging Image.
+     * @return the belonging Image.
+     */
     public Image getImage() {
         return Main.SMALL_ALIEN;
     }
 
+    /**
+     * Method to add shoot chance to the SmallAlien.
+     */
     @Override
     public void addShootChance() {
         tShootChance += Math.random() * 5;
     }
 
+    /**
+     * Create a String representing the SmallAlien.
+     * @return the belonging String.
+     */
     @Override
     public String toString() {
         return "SmallAlien on coords: " + tX + ", " + tY;

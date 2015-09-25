@@ -4,10 +4,14 @@ import application.Main;
 import org.newdawn.slick.Image;
 
 /**
- * Created by Niek on 9/8/2015.
+ * Class for MotherShipAlien.
+ * @author Niek van der Laan
  */
 public class MothershipAlien extends Alien{
 
+    /**
+     * Constructor for MotherShipAlien.
+     */
     public MothershipAlien() {
         tHealth = 1;
         tHitScore = 0;
@@ -20,10 +24,17 @@ public class MothershipAlien extends Alien{
         tBonusAlien = true;
     }
 
+    /**
+     * Getter method for the belonging Image.
+     * @return the belonging Image.
+     */
     public Image getImage() {
         return Main.MOTHERSHIP_ALIEN;
     }
 
+    /**
+     * Method to make MotherShipAlien change direction.
+     */
     @Override
     public void switchDirection() {
         if (tX > Main.WIDTH + 2000 || tX < -2000) {
@@ -31,10 +42,18 @@ public class MothershipAlien extends Alien{
         }
     }
 
+    /**
+     * Check whether MotherShipAlien is alive.
+     * @return the boolean value.
+     */
     public boolean isAlive() {
         return tHealth > 0;
     }
 
+    /**
+     * Create a String representing the MotherShipAlien.
+     * @return the belonging String value.
+     */
     @Override
     public String toString() {
         return "MotherShipAlien on coords: " + tX + ", " + tY;
