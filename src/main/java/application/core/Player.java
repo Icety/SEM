@@ -51,13 +51,16 @@ public class Player extends Sprite {
             e.printStackTrace();
         }
         this.updateProjectiles();
+        updateUpgrade();
+    }
 
-        //Update Upgrades
-        //Reset everything
+    /**
+     * Updater for the upgrades of the Player.
+     */
+    public void updateUpgrade() {
         boolean hasWeaponUpgrade = false;
         tReloadTime = 250;
 
-            //Apply new reload times and delete inactive Upgrades
         for (Upgrade u : tActiveUpgrades) {
             if (u.isActive() && u instanceof SpeedUpgrade && !hasWeaponUpgrade) {
                 tReloadTime = 50;
@@ -82,42 +85,57 @@ public class Player extends Sprite {
         }
 
         if(bestWeapon == 0 ) {
-            if(tUpgraded) {
-                if(tLastSide == 0) {
-                    laserSound();
-                    Projectile projectile = new PlayerProjectile(tX + 5, tY);
-                    this.addProjectile(projectile);
-                    tLastSide = 1;
-                }
-                else {
-                    laserSound();
-                    Projectile projectile2 = new PlayerProjectile(tX + tWidth - 10, tY);
-                    this.addProjectile(projectile2);
-                    tLastSide = 0;
-                }
+            shootWeaponZero();
+        }
+        else if(bestWeapon == 1) {
+            shootWeaponOne();
+        }
+    }
+
+    /**
+     * Shoot method for when best weapon is zero.
+     * @throws SlickException
+     */
+    public void shootWeaponZero() throws SlickException {
+        if(tUpgraded) {
+            if(tLastSide == 0) {
+                laserSound();
+                Projectile projectile = new PlayerProjectile(tX + 5, tY);
+                this.addProjectile(projectile);
+                tLastSide = 1;
             }
             else {
                 laserSound();
-                Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
-                this.addProjectile(projectile);
+                Projectile projectile2 = new PlayerProjectile(tX + tWidth - 10, tY);
+                this.addProjectile(projectile2);
+                tLastSide = 0;
             }
-
         }
-        else if(bestWeapon == 1) {
-            int amount = 3;
-            if(tUpgraded) {
-                amount = 6;
-            }
-            int x, y;
-            float dirx, diry;
-            for (int i=0; i<amount; i++) {
-                laserSound();
-                x = tX + i * tWidth / amount;
-                y = tY;
-                dirx = -(x - (tX + tWidth / 2)) * 4;
-                diry = y;
-                this.addProjectile(new UpgradedProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
-            }
+        else {
+            laserSound();
+            Projectile projectile = new PlayerProjectile(tX + tWidth / 2, tY);
+            this.addProjectile(projectile);
+        }
+    }
+
+    /**
+     * Shoot method for when best weapon is one.
+     * @throws SlickException
+     */
+    public void shootWeaponOne() throws SlickException {
+        int amount = 3;
+        if(tUpgraded) {
+            amount = 6;
+        }
+        int x, y;
+        float dirx, diry;
+        for (int i=0; i<amount; i++) {
+            laserSound();
+            x = tX + i * tWidth / amount;
+            y = tY;
+            dirx = -(x - (tX + tWidth / 2)) * 4;
+            diry = y;
+            this.addProjectile(new UpgradedProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
         }
     }
 
