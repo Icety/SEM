@@ -13,6 +13,7 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.ArrayList;
 
 /**
+ * Class HighScoreBoard
  * Created by Daphne van Tetering on 17-9-2015.
  */
 public class HighScoreBoard extends BasicGameState {
@@ -28,13 +29,25 @@ public class HighScoreBoard extends BasicGameState {
     }
 
 
-
+    /**
+     * init-method
+     * @param gameContainer
+     * @param stateBasedGame
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
         tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
     }
 
+    /**
+     * render method
+     * @param gameContainer
+     * @param stateBasedGame
+     * @param graphics
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         gameContainer.setPaused(tPause);
@@ -60,11 +73,22 @@ public class HighScoreBoard extends BasicGameState {
 
     }
 
+    /**
+     * update-method
+     * @param gameContainer
+     * @param stateBasedGame
+     * @param i
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
 
     }
 
+    /**
+     * method which returns ID of the HighScoreBoard
+     * @return ID
+     */
     @Override
     public int getID() {
         return tId;

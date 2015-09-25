@@ -19,6 +19,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
+ * Class HighScoreForm
  * Created by Daphne van Tetering on 22-9-2015.
  */
 public class HighScoreForm extends BasicGameState {
@@ -33,13 +34,18 @@ public class HighScoreForm extends BasicGameState {
     public String tName;
 
 
-
+    /**
+     * Constructor
+     * @param id ID of the HighScoreForm
+     */
     public HighScoreForm (int id) {
         tId = id;
         highScoreManager = new HighScoreManager();
     }
 
-    @Override
+    /**
+     * init-method
+     */
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
         tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
@@ -51,6 +57,9 @@ public class HighScoreForm extends BasicGameState {
     }
 
 
+    /**
+     * render-method
+     */
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         gameContainer.setPaused(tPause);
@@ -68,11 +77,23 @@ public class HighScoreForm extends BasicGameState {
         }
     }
 
+    /**
+     * update-method
+     * @param gameContainer
+     * @param stateBasedGame
+     * @param i
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
 
     }
 
+    /**
+     * method to execute action when Enter is pressed
+     * @param key inputKey
+     * @param c inputCharacter
+     */
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_ENTER:
@@ -81,11 +102,19 @@ public class HighScoreForm extends BasicGameState {
         }
     }
 
+    /**
+     * method to get ID of the HighScoreForm
+     * @return
+     */
     @Override
     public int getID() {
         return 5;
     }
 
+    /**
+     * method to get name of the player
+     * @return name of player
+     */
     public String getName() {
         return tName;
     }
