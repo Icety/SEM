@@ -39,6 +39,7 @@ public class Menu extends BasicGameState{
         g.drawString("1. Play Game", 50, 100);
         g.drawString("2. High Scores", 50, 120);
         g.drawString("3. Quit", 50, 140);
+        g.drawString("4: Levelbuilder", 50, 160);
 
 
     }
