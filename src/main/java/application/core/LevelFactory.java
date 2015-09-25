@@ -10,7 +10,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,7 +25,7 @@ public class LevelFactory {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
-            File file = new File("src/main/java/application/levels/levels.xml");
+            File file = new File("src/main/java/application/levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
@@ -45,33 +44,22 @@ public class LevelFactory {
 
     public Level buildLevel(int levelNumber) {
         Level level = new Level();
-        NodeList alienList;
+
         Element levelXml = (Element) tLevels.item(levelNumber);
-        String levelname = levelXml.getFirstChild().getNodeValue();
-        try {
-            File file = new File("src/main/java/application/levels/" + levelname +".xml");
-            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = null;
-            dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(file);
-            doc.getDocumentElement().normalize();
 
-            //start xml parsing
-            alienList = doc.getElementsByTagName("alien");
-
-            ArrayList<Alien> aliens = loadAliens(alienList);
-            level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
-            level.addAliens(aliens);
-            level.setStartPlayer();
-        } catch (Exception e) {
-
-        }
+        ArrayList<Alien> aliens = loadAliens(levelXml);
+        level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
+        level.addAliens(aliens);
+        level.setStartPlayer();
 
         return level;
     }
 
-    public ArrayList<Alien> loadAliens(NodeList alienList) {
+    public ArrayList<Alien> loadAliens(Element level) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
+
+        NodeList alienList = level.getElementsByTagName("alien");
+
         Alien alien = new Alien();
         for (int temp = 0; temp < alienList.getLength(); temp++) {
             Node node = alienList.item(temp);
