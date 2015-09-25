@@ -1,8 +1,5 @@
 package application.controllers;
 
-/**
- * Created by Thomas on 08-09-15.
- */
 import application.Main;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -10,16 +7,30 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
+/**
+ * Controller class for Lost.
+ * @author Thomas Oomens
+ */
 public class Lost extends BasicGameState{
     private Main tMain; // stored for later use
     protected int tId;
     protected Image tBackground;
     protected Image tWon;
 
+    /**
+     * Constructor method for Lost.
+     * @param id ID for the Lost controller.
+     */
     public Lost(int id) {
         tId = id;
     }
 
+    /**
+     * Init method for Lost.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
@@ -28,6 +39,13 @@ public class Lost extends BasicGameState{
         tWon = new Image("src/main/java/application/images/gameover.png");
     }
 
+    /**
+     * Render method for Lost.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @param g Graphics used by the program.
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -42,19 +60,32 @@ public class Lost extends BasicGameState{
         g.drawString("Press Space to submit score", 50, 160);
     }
 
+    /**
+     * Update method for Lost.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @param delta an integer value.
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        // TODO Auto-generated method stub
-
     }
 
+    /**
+     * Getter method for the ID of the controller.
+     * @return the controller ID.
+     */
     @Override
     public int getID() {
-        // TODO Auto-generated method stub
         return tId;
     }
 
+    /**
+     * Method to check whether a key is being released.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_1:
@@ -74,5 +105,4 @@ public class Lost extends BasicGameState{
                 break;
         }
     }
-
 }

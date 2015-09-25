@@ -1,12 +1,8 @@
 package application.core;
 
-import application.Main;
-import application.controllers.HighScoreForm;
 import application.controllers.ScoreComparator;
-import org.newdawn.slick.state.StateBasedGame;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 

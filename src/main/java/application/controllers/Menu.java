@@ -1,8 +1,5 @@
 package application.controllers;
 
-/**
- * Created by Thomas on 08-09-15.
- */
 import application.Main;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -10,18 +7,30 @@ import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import java.io.File;
-
+/**
+ * Controller class for Menu.
+ * @author Thomas Oomens.
+ */
 public class Menu extends BasicGameState{
     private Main tMain;
     protected int tId;
     protected Image tBackground;
     protected boolean tExit;
 
+    /**
+     * Constructor method for the Menu.
+     * @param id given ID belonging to the controller.
+     */
     public Menu(int id) {
         tId = id;
     }
 
+    /**
+     * Init method for the Menu.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
@@ -30,6 +39,13 @@ public class Menu extends BasicGameState{
         tExit = false;
     }
 
+    /**
+     * Render method for the Menu.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @param g Graphics used by the program.
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -46,6 +62,13 @@ public class Menu extends BasicGameState{
 
     }
 
+    /**
+     * Update method for the Menu.
+     * @param container GameController used by the program.
+     * @param game being played at the moment.
+     * @param delta an integer value.
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
@@ -54,12 +77,20 @@ public class Menu extends BasicGameState{
         }
     }
 
-
+    /**
+     * Getter method for the Menu.
+     * @return the ID of the controller.
+     */
     @Override
     public int getID() {
         return tId;
     }
 
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for a key.
+     * @param c character value for a key.
+     */
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_1:
@@ -80,5 +111,4 @@ public class Menu extends BasicGameState{
                 break;
         }
     }
-
 }
