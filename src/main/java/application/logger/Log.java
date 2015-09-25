@@ -1,12 +1,9 @@
 package application.logger;
 
 /**
- * Created by Thomas on 18-09-15.
- */
-
-/**
  * The Log Class that stores data from one logrule, contains the message,
- * the time of writing and the level of importancy
+ * the time of writing and the level of importance.
+ * @author Thomas Oomens.
  */
 public class Log {
     protected String tType;
@@ -16,10 +13,10 @@ public class Log {
     protected long tTime;
 
     /**
-     * The constructor method that stores the given message and importancy and saves the current time in milliseconds
-     * @param message       The message that is to be saved/logged
-     * @param important     The level of importancy, 0 = SEVERE, 1 = WARNING, 2 = INFO, 3 = CONFIG, 4 = FINE
-     *                      5 = FINER, 6 = FINEST
+     * The constructor method that stores the given message and importancy and saves the current time in milliseconds.
+     * @param message The message that is to be saved/logged.
+     * @param important The level of importancy, 0 = SEVERE, 1 = WARNING, 2 = INFO, 3 = CONFIG, 4 = FINE
+     * 5 = FINER, 6 = FINEST.
      */
     public Log(String message, int important) {
         tMessage = message;
@@ -28,8 +25,8 @@ public class Log {
     }
 
     /**
-     * Returns a textual version of the level of importancy
-     * @return  The level of importancy, expressed by one word
+     * Returns a textual version of the level of importance.
+     * @return  The level of importancy, expressed by one word.
      */
     public String getType() {
         switch(tImportant) {
@@ -52,16 +49,16 @@ public class Log {
     }
 
     /**
-     * A getter for the message
-     * @return  Return tMessage
+     * A getter for the message.
+     * @return  Return tMessage.
      */
     public String getMessage() {
         return tMessage;
     }
 
     /**
-     * A getter for the color, will return a string containing the color that belongs to the level of importancy
-     * @return  A textual color representation of the level of importancy
+     * A getter for the color, will return a string containing the color that belongs to the level of importance.
+     * @return  A textual color representation of the level of importance.
      */
     public String getColor() {
         switch(tImportant) {
@@ -84,8 +81,8 @@ public class Log {
     }
 
     /**
-     * A getter for the time that the log was created
-     * @return  The time in milliseconds of the time of creation of this log
+     * A getter for the time that the log was created.
+     * @return  The time in milliseconds of the time of creation of this log.
      */
     public long getTime() {
         return tTime;
