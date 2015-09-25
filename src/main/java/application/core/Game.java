@@ -194,57 +194,75 @@ public class Game {
      * @throws SlickException
      */
     protected void checkCollision() throws SlickException {
-        Iterator<Alien> i = tLevel.getAliens().iterator();
-        boolean wasHit = false;
-        while (i.hasNext()) {
-            Alien alien = i.next();
-
+        for (Alien alien : tLevel.getAliens()) {
             Iterator<Projectile> it = alien.getProjectiles().iterator();
+            checkAlienCollisions(it);
+            checkPlayerUpgradeCollisions(alien.getUpgrades().iterator());
+            checkDeadAlien(alien, it);
+        }
+    }
+
+    /**
+     * Checker method for collisions of Aliens with projectiles.
+     * @param it the Iterator over Projectiles.
+     */
+    public void checkAlienCollisions(Iterator<Projectile> it) {
+        while (it.hasNext()) {
+            Projectile projectile = it.next();
+            if (tPlayer.intersects(projectile)) {
+                tLogger.setLog("Player has been hit.", 2);
+                projectile.hit();
+                tPlayer.hit();
+                if (tPlayer.noLives()) {
+                    tLogger.setLog("Player has lost.", 2);
+                    tLost = true;
+                }
+                if (projectile.noLives()) {
+                    it.remove();
+                }
+            }
+        }
+    }
+
+    /**
+     * Checker method for collisions of players with upgrades.
+     * @param uit Iterator over upgrades.
+     */
+    public void checkPlayerUpgradeCollisions(Iterator<Upgrade> uit) {
+        while (uit.hasNext()) {
+            Upgrade u = uit.next();
+            if (tPlayer.intersects(u)) {
+                tPlayer.upgrade(u);
+                u.hit();
+            }
+        }
+    }
+
+    /**
+     * Checker method for dead Aliens.
+     * @param alien a given Alien.
+     * @param it the Iterator over Aliens.
+     */
+    public void checkDeadAlien(Alien alien, Iterator<Projectile> it) {
+        boolean wasHit = false;
+        //If the alien is dead, it can't collide with player projectiles, so it should be skipped
+        if (!alien.isDead()) {
+            it = tPlayer.getProjectiles().iterator();
+            wasHit = false;
             while (it.hasNext()) {
                 Projectile projectile = it.next();
-                if (tPlayer.intersects(projectile)) {
-                    tLogger.setLog("Player has been hit.", 2);
-                    projectile.hit();
-                    tPlayer.hit();
-                    if (tPlayer.noLives()) {
-                        tLogger.setLog("Player has lost.", 2);
-                        tLost = true;
-                    }
+                if (alien.intersects(projectile)) {
+                    tLogger.setLog("Alien was hit.", 2);
+                    wasHit = true;
+                    tScore += projectile.hit();
+                    tScore += alien.hit();
                     if (projectile.noLives()) {
                         it.remove();
                     }
                 }
             }
-
-            //Check collision between player and alien projectile
-            Iterator<Upgrade> uit = alien.getUpgrades().iterator();
-            while (uit.hasNext()) {
-                Upgrade u = uit.next();
-                if (tPlayer.intersects(u)) {
-                    tPlayer.upgrade(u);
-                    u.hit();
-                }
-            }
-
-            //If the alien is dead, it can't collide with player projectiles, so it should be skipped
-            if (!alien.isDead()) {
-                it = tPlayer.getProjectiles().iterator();
-                wasHit = false;
-                while (it.hasNext()) {
-                    Projectile projectile = it.next();
-                    if (alien.intersects(projectile)) {
-                        tLogger.setLog("Alien was hit.", 2);
-                        wasHit = true;
-                        tScore += projectile.hit();
-                        tScore += alien.hit();
-                        if (projectile.noLives()) {
-                            it.remove();
-                        }
-                    }
-                }
-                if (wasHit && alien.isDead()) {
-                    tLogger.setLog("Alien has died.", 2);
-                }
+            if (wasHit && alien.isDead()) {
+                tLogger.setLog("Alien has died.", 2);
             }
         }
     }
