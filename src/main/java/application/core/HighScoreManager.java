@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * HighScoreMangagerClass
- * Created by Daphne van Tetering on 17-9-2015.
+ * Class for HighScoreMangager.
+ * @author Daphne van Tetering.
  */
 public class HighScoreManager {
     private ArrayList<Score> scores;
@@ -17,15 +17,15 @@ public class HighScoreManager {
     ObjectInputStream inputStream = null;
 
     /**
-     * Constructor
+     * Constructor for HighScoreManager.
      */
     public HighScoreManager(){
         scores = new ArrayList<Score>();
     }
 
     /**
-     * Load scores from files, sort in descending order and return
-     * @return ArrayList of scores currently saved in file
+     * Load scores from files, sort in descending order and return.
+     * @return ArrayList of scores currently saved in file.
      */
     public ArrayList<Score> getScores(){
         loadScoreFile();
@@ -34,7 +34,7 @@ public class HighScoreManager {
     }
 
     /**
-     * Sort arrayList in descending order
+     * Sort arrayList in descending order.
      */
     private void sort() {
         ScoreComparator comparator = new ScoreComparator();
@@ -43,9 +43,9 @@ public class HighScoreManager {
     }
 
     /**
-     * Add new score to list
-     * @param newPlayer name of player the score belongs to
-     * @param newScore score
+     * Add new score to list.
+     * @param newPlayer name of player the score belongs to.
+     * @param newScore score.
      */
     public void addScores(String newPlayer, int newScore) {
         loadScoreFile();
@@ -55,7 +55,7 @@ public class HighScoreManager {
     }
 
     /**
-     * Load scores from file
+     * Load scores from file.
      */
     public void loadScoreFile() {
         try {
@@ -79,7 +79,7 @@ public class HighScoreManager {
     }
 
     /**
-     * Update scores and write to file
+     * Update scores and write to file.
      */
     public void updateScoreFile() {
         try {

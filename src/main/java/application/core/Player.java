@@ -4,12 +4,12 @@ import application.Main;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Created by Thomas on 01-09-15.
+ * Class for Player.
+ * @author Thomas Oomens
  */
 public class Player extends Sprite {
     protected long tLastShot = 0;
@@ -18,15 +18,21 @@ public class Player extends Sprite {
     private ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
     protected boolean tUpgraded = false;
     protected int tLastSide = 0;
-
     protected boolean tShoot, tGoLeft, tGoRight;
 
+    /**
+     * Constructor for Player.
+     */
     public Player() {
         tHealth = 3;
         tHeight = 30;
         tWidth = 80;
     }
 
+    /**
+     * Update method for the Player.
+     * @throws SlickException
+     */
     public void update() throws SlickException {
         if(tGoLeft) {
             moveLeft();
@@ -47,27 +53,26 @@ public class Player extends Sprite {
         this.updateProjectiles();
 
         //Update Upgrades
-            //Reset everything
+        //Reset everything
         boolean hasWeaponUpgrade = false;
         tReloadTime = 250;
 
             //Apply new reload times and delete inactive Upgrades
-        Iterator<Upgrade> it = tActiveUpgrades.iterator();
-        while(it.hasNext()) {
-            Upgrade u = it.next();
-            if(u.isActive() && u instanceof SpeedUpgrade && !hasWeaponUpgrade) {
+        for (Upgrade u : tActiveUpgrades) {
+            if (u.isActive() && u instanceof SpeedUpgrade && !hasWeaponUpgrade) {
                 tReloadTime = 50;
             }
-            if(u.isActive() && u instanceof WeaponUpgrade) {
+            if (u.isActive() && u instanceof WeaponUpgrade) {
                 tReloadTime = 500;
                 hasWeaponUpgrade = true;
-            }
-            if(!u.isActive()) {
-                //tActiveUpgrades.remove(u);
             }
         }
     }
 
+    /**
+     * Shoot method for the Player.
+     * @throws SlickException
+     */
     private void shoot() throws SlickException {
         int bestWeapon = 0;
         for(Upgrade u: tActiveUpgrades) {
@@ -116,58 +121,104 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Make the Player move Left.
+     */
     protected void moveLeft() {
         if ( (tX ) > 10 ) {
             tX -= tSpeed;
         }
     }
+
+    /**
+     * Make the Player more right.
+     */
     protected void moveRight() {
         if ( !((tX + tWidth + 10) > Main.WIDTH )) {
             tX += tSpeed;
         }
     }
 
+    /**
+     * Create a String which represents the Player.
+     * @return the belonging String value.
+     */
     public String toString() {
-        String result = "Player on coords: " + tX + ", " + tY;
-        return result;
+        return "Player on coords: " + tX + ", " + tY;
     }
 
+    /**
+     * Getter method for the Image belonging to the Player.
+     * @return the Image belonging to the Player.
+     */
     public Image getImage() {
         if(!tUpgraded)
         return Main.PLAYER;
         return Main.UPGRADED_PLAYER;
     }
 
+    /**
+     * The sound belonging to the shots fired.
+     * @throws SlickException
+     */
     public void laserSound() throws SlickException {
         Sound laser = new Sound("src/main/java/application/sound/shoot.wav");
         laser.play();
     }
 
+    /**
+     * Handle the left arrow pressed event.
+     * @param pressed the boolean value.
+     */
     public void leftArrowPressed(boolean pressed) {
         tGoLeft = pressed;
     }
 
+    /**
+     * Handle the right arrow pressed event.
+     * @param pressed the boolean value.
+     */
     public void rightArrowPressed(boolean pressed) {
         tGoRight = pressed;
     }
 
+    /**
+     * Handle the spacebar pressed event.
+     * @param pressed the boolean value.
+     */
     public void fireButtonPressed(boolean pressed) {
         tShoot = pressed;
     }
 
+    /**
+     * Handle a hit on the Player.
+     * @return the Integer killScore.
+     */
     public int hit() {
         tHealth--;
         return tKillScore;
     }
 
+    /**
+     * Getter method for the Player.
+     * @return this.
+     */
     public Player getPlayer() {
         return this;
     }
 
+    /**
+     * Getter method for the Player' health.
+     * @return the health Integer value.
+     */
     public int getHealth() {
         return tHealth;
     }
 
+    /**
+     * Upgrade the player with a given upgrade.
+     * @param u the given upgrade.
+     */
     public void upgrade(Upgrade u) {
         if(u instanceof HealthUpgrade && tHealth < 3) {
             tHealth++;

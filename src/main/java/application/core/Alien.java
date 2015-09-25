@@ -2,13 +2,12 @@ package application.core;
 
 import application.Main;
 import org.w3c.dom.Element;
-
-import javax.xml.crypto.NodeSetData;
 import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * Created by Thomas on 01-09-15.
+ * Class for Alien.
+ * @author Thomas Oomens
  */
 public class Alien extends Sprite {
     protected boolean tDead = false;
@@ -17,20 +16,29 @@ public class Alien extends Sprite {
     protected double tSpeed;
     protected boolean tCanShoot = false;
     protected boolean tBonusAlien = false;
-
     protected ArrayList<Upgrade> tUpgrades = new ArrayList<>();
 
+    /**
+     * Constructor for Alien.
+     */
     public Alien() {
         applyDifficulty();
     }
 
+    /**
+     * Read XML to create Aliens.
+     * @param eElement read XML.
+     */
     public void readXml(Element eElement) {
         tX = Integer.parseInt(eElement.getElementsByTagName("x").item(0).getTextContent());
         tY = Integer.parseInt(eElement.getElementsByTagName("y").item(0).getTextContent());
     }
 
+    /**
+     * Update method for the Alien.
+     */
     public void update() {
-        //If dead, the alien can't move and shoot anymore, yet it's projectiles should keep moving
+        //ToDo: If dead, the alien can't move and shoot anymore, yet it's projectiles should keep moving
         if (!tDead) {
             tX += tDirection * tSpeed;
             shoot();
@@ -41,7 +49,7 @@ public class Alien extends Sprite {
     }
 
     /**
-     * Updates the position of all the upgrades that this alien dropped
+     * Updates the position of all the upgrades that this alien has dropped.
      */
     protected void updateUpgrades() {
         for(Upgrade u: tUpgrades) {
@@ -49,10 +57,17 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Checks whether an Alien is a bonus Alien.
+     * @return a boolean value.
+     */
     public boolean isBonusAlien() {
         return tBonusAlien;
     }
 
+    /**
+     * Shoot method for the Alien.
+     */
     public void shoot() {
         if (tCanShoot) {
             if ((Math.random() * 100) > tRandomChance ) {
@@ -62,34 +77,55 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Setter method to determine whether an Alien can shoot or not.
+     * @param canShoot boolean value.
+     */
     public void setCanShoot(boolean canShoot) {
         tCanShoot = canShoot;
     }
 
+    /**
+     * Method to return a String value describing the Alien.
+     * @return a String value.
+     */
     public String toString() {
         return "Alien on coords: " + tX + ", " + tY;
     }
 
+    /**
+     * Check whether the Alien is dead.
+     * @return a boolean value.
+     */
     public boolean isDead() {
         return tDead;
     }
 
+    /**
+     * Method to add shoot chance to the Alien.
+     */
     public void addShootChance() {
         tShootChance += Math.random() * 0;
     }
 
+    /**
+     * Check whether the Alien is at the end of the screen.
+     * @return a boolean value.
+     */
     public boolean endOfScreen() {
         return (tX >= (Main.WIDTH - tWidth - 10) && tDirection == 1) || (tX <= 10 && tDirection == -1);
     }
 
+    /**
+     * Method to make the Alien switch direction.
+     */
     public void switchDirection() {
         tY += 15;
         tDirection *= -1;
     }
 
     /**
-     * Checks whether the alien is the lowest alien of its column
-     * @return
+     * Determines whether the alien is the lowest alien of its column.
      */
     protected void setLowerLevel(ArrayList<Alien> aliens) {
         int bA = 5;
@@ -114,6 +150,9 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Apply difficulty to Aliens.
+     */
     public void applyDifficulty() {
         switch(Main.DIFFICULTY) {
             case 1:
@@ -131,6 +170,9 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Method to make Alien drop an upgrade.
+     */
     protected void drop() {
         int c = (int)(Math.random() * 100);
         if(c > 96) {
@@ -147,10 +189,18 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Getter method for the upgrades the Alien holds.
+     * @return an ArrayList of upgrades.
+     */
     public ArrayList<Upgrade> getUpgrades() {
         return tUpgrades;
     }
 
+    /**
+     * Method to apply impact of a projectily on the Alien.
+     * @return the Score to be added to the total Score.
+     */
     @Override
     public int hit() {
         int result = super.hit();
