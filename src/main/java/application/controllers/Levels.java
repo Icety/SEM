@@ -98,7 +98,7 @@ public class Levels extends BasicGameState {
         return tId;
     }
 
-    public void keyPressed(int key, char c) {
+    public void keyPressed(int key) {
         switch(key) {
             case Input.KEY_LEFT:
                 tMain.getGame().getPlayer().leftArrowPressed(true);
