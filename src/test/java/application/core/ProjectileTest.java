@@ -2,12 +2,9 @@ package application.core;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
-//ToDo: Write testMove(), testCheckCollision() (dependencies unreachable)
 /**
  * Test class for Projectile.java.
  *
@@ -38,11 +35,6 @@ public class ProjectileTest {
         assertEquals(2, testProjectile.tDirection);
     }
 
-//    @Test
-//    public void testMove() throws Exception {
-//
-//    }
-
     /**
      * Test whether toString() returns the correct String;
      *
@@ -55,11 +47,6 @@ public class ProjectileTest {
 
         assertEquals("Projectile on coords: 0, 0", testProjectile.toString());
     }
-
-//    @Test
-//    public void testCheckCollision() throws Exception {
-//
-//    }
 
     /**
      * Test whether isRemoved() returns the correct boolean value.

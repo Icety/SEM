@@ -20,9 +20,9 @@ public class SmallProjectile extends Projectile {
         tWidth = 7;
         tHeight = 15;
 
-        if(tDifficulty == 1)
+        if(Main.DIFFICULTY == 1)
             tSpeed = 2;
-        else if(tDifficulty == 2)
+        else if(Main.DIFFICULTY == 2)
             tSpeed = 3;
         else
             tSpeed = 5;

@@ -11,8 +11,8 @@ import java.util.Collections;
  * @author Daphne van Tetering.
  */
 public class HighScoreManager {
-    private ArrayList<Score> scores;
-    private static final String highScoreFile = "highScores.dat";
+    protected ArrayList<Score> scores;
+    protected static String highScoreFile = "highScores.dat";
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
 
