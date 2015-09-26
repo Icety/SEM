@@ -1,57 +1,3 @@
-//package application;
-//
-///**
-// * Created by Thomas on 08-09-15.
-// */
-///*
-//* To change this template, choose Tools | Templates
-//* and open the template in the editor.
-//*/
-//
-//        import org.newdawn.slick.AppGameContainer;
-//        import org.newdawn.slick.BasicGame;
-//        import org.newdawn.slick.GameContainer;
-//        import org.newdawn.slick.Graphics;
-//        import org.newdawn.slick.SlickException;
-//
-///**
-// * @author panos
-// */
-//public class NewMain extends BasicGame
-//{
-//    public NewMain()
-//    {
-//        super("Super Awesome Cool Fun Explosive Space Invaders");
-//    }
-//
-//    public static void main(String[] arguments)
-//    {
-//        try
-//        {
-//            AppGameContainer app = new AppGameContainer(new NewMain());
-//            app.setDisplayMode(1024, 1024, false);
-//            app.start();
-//        }
-//        catch (SlickException e)
-//        {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void init(GameContainer container) throws SlickException
-//    {
-//    }
-//
-//    @Override
-//    public void update(GameContainer container, int delta) throws SlickException
-//    {
-//    }
-//
-//    public void render(GameContainer container, Graphics g) throws SlickException
-//    {
-//    }
-//}
 package application;
 
 import application.controllers.*;
@@ -60,8 +6,6 @@ import application.core.Player;
 import application.logger.Logger;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
-
-import java.io.IOException;
 
 public class Main extends StateBasedGame {
 
