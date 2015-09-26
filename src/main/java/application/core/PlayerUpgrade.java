@@ -20,9 +20,9 @@ public class PlayerUpgrade extends Upgrade {
         tWidth = 50;
         tHeight = 50;
         tHealth = 1;
-        if (tDifficulty == 1)
+        if (Main.DIFFICULTY == 1)
             tSpeed = 2;
-        else if (tDifficulty == 2)
+        else if (Main.DIFFICULTY == 2)
             tSpeed = 2;
         else
             tSpeed = 4;

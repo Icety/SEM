@@ -15,7 +15,7 @@ public class Player extends Sprite {
     protected long tLastShot = 0;
     protected int tReloadTime = 250;
     protected int tSpeed = 5;
-    private ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
+    protected ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
     protected boolean tUpgraded = false;
     protected int tLastSide = 0;
     protected boolean tShoot, tGoLeft, tGoRight;
@@ -76,7 +76,7 @@ public class Player extends Sprite {
      * Shoot method for the Player.
      * @throws SlickException
      */
-    private void shoot() throws SlickException {
+    protected void shoot() throws SlickException {
         int bestWeapon = 0;
         for(Upgrade u: tActiveUpgrades) {
             if(u instanceof WeaponUpgrade && u.isActive()) {

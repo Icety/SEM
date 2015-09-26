@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import java.util.ArrayList;
@@ -7,16 +8,16 @@ import java.util.Iterator;
 
 /**
  * Class for Sprite.
- * @author Thomas Oomens.
+ * @author Thomas Oomens
  */
 public class Sprite {
     protected int tX;
     protected int tY;
+    protected int tHealth;
+    protected double tRandomChance;
+    protected int tDifficulty = Main.DIFFICULTY;
     protected int tWidth, tHeight, tKillScore = 0, tHitScore = 0;
     protected ArrayList<Projectile> tProjectiles = new ArrayList<>();
-    protected int tHealth;
-    int tDifficulty = 1;
-    double tRandomChance;
 
     /**
      * Getter method for the x-coordinate.
@@ -51,7 +52,7 @@ public class Sprite {
     }
 
     /**
-     * Getter method for the belonging Image.
+     * Getter method for the Image.
      * @return the belonging Image.
      */
     public Image getImage() {
@@ -75,24 +76,32 @@ public class Sprite {
     }
 
     /**
-     * Adder method for a projectile.
-     * @param projectile a projectile.
+     * Check whether the Sprite is alive.
+     * @return the boolean value.
+     */
+    public boolean noLives() {
+        return tHealth < 1;
+    }
+
+    /**
+     * Adder method for Projectiles.
+     * @param projectile an ArrayList containing the projectiles to be added.
      */
     public void addProjectile(Projectile projectile) {
         tProjectiles.add(projectile);
     }
 
     /**
-     * Getter method for all projectiles.
-     * @return an ArrayList of projectiles.
+     * Getter method for the belonging Projectiles.
+     * @return an ArrayList containing the belonging Projectiles.
      */
     public ArrayList<Projectile> getProjectiles() {
         return tProjectiles;
     }
 
     /**
-     * Remover method for a projectile.
-     * @param projectile a projectile.
+     * Remover method for a specific Projectile.
+     * @param projectile the projectile to be removed.
      */
     public void removeProjectile(Projectile projectile) {
         tProjectiles.remove(projectile);
@@ -100,61 +109,50 @@ public class Sprite {
 
     /**
      * Setter method for the difficulty.
-     * @param difficulty the value of difficulty.
+     * @param difficulty the integer value of the difficulty.
      */
     public void setDifficulty(int difficulty) {
         tDifficulty = difficulty;
     }
 
     /**
-     * Update method for the Projectiles.
+     * Update method for the projectiles belonging to the Sprite.
      */
     protected void updateProjectiles() {
         Iterator<Projectile> i = tProjectiles.iterator();
-        while (i.hasNext()) {
+        while(i.hasNext()) {
             Projectile projectile = i.next();
             projectile.update();
-            if (projectile.isOutOfBounds()) {
+            if(projectile.isOutOfBounds()) {
                 i.remove();
             }
         }
     }
 
     /**
-     * Check whether a sprite has no lives.
-     * @return the boolean value.
-     */
-    public boolean noLives() {
-        return (tHealth < 1);
-    }
-
-    /**
-     * Getter method for the hitBox of the Sprite.
-     * @return the boundingBox.
+     * Get the hitBox for the Sprite.
+     * @return the belonging boundingBox.
      */
     public Rectangle getBoundingBox() {
-        return new Rectangle(this.getX(), this.getY(), tWidth, tHeight);
+        return new Rectangle(tX, tY, tWidth, tHeight);
     }
 
     /**
-     * Method to handle hits.
-     * @return the Score.
+     * Hit handling method for the Sprite.
+     * @return a specific score belonging to the hit.
      */
     public int hit() {
         tHealth--;
-        if (tHealth <= 0) {
-            return tKillScore;
-        } else {
-            return tHitScore;
-        }
+        if(tHealth <= 0) return tKillScore;
+        return tHitScore;
     }
 
     /**
-     * Method to check whether two sprites intersect.
-     * @param sprite Another Sprite object, with which you want to check collision
-     * @return whether the given object collides with this object
+     * Check whether two Sprites intersect.
+     * @param sprite the Sprite to compare to.
+     * @return the boolean value.
      */
     public boolean intersects(Sprite sprite) {
-        return this.getBoundingBox() != null && this.getBoundingBox().intersects(sprite.getBoundingBox());
+        return getBoundingBox() != null && getBoundingBox().intersects(sprite.getBoundingBox());
     }
 }
