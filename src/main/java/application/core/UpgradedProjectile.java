@@ -8,10 +8,9 @@ import org.newdawn.slick.Image;
  * @author Niek van der Laan.
  */
 public class UpgradedProjectile extends Projectile {
-    protected float tX;
-    protected float tY;
     protected float tDirectionX;
     protected float tDirectionY;
+
 
     /**
      * Constructor method for UpgradedProjectile.
