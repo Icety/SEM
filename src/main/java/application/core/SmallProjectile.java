@@ -1,15 +1,18 @@
 package application.core;
 
 import application.Main;
-import javafx.scene.image.Image;
-
-import java.io.File;
 
 /**
- * Created by Niek on 9/2/2015.
+ * Class for SmallProjectile.
+ * @author Niek van der Laan.
  */
 public class SmallProjectile extends Projectile {
 
+    /**
+     * Constructor for SmallProjectile.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     */
     public SmallProjectile(int x, int y) {
         tDirection = 1;
         tX = x;
@@ -17,14 +20,18 @@ public class SmallProjectile extends Projectile {
         tWidth = 7;
         tHeight = 15;
 
-        if(tDifficulty == 1)
+        if(Main.DIFFICULTY == 1)
             tSpeed = 2;
-        else if(tDifficulty == 2)
+        else if(Main.DIFFICULTY == 2)
             tSpeed = 3;
         else
             tSpeed = 5;
     }
 
+    /**
+     * Getter method for the belonging Image.
+     * @return the belonging Image.
+     */
     public org.newdawn.slick.Image getImage() {
         return Main.SMALL_PROJECTILE;
     }

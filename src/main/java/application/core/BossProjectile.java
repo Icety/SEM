@@ -1,18 +1,21 @@
 package application.core;
 
-
 import application.Main;
 import org.newdawn.slick.Image;
 
 /**
- * Created by Niek on 9/9/2015.
+ * Class for BossProjectile.
+ * @author Thomas Oomens
  */
 public class BossProjectile extends Projectile{
 
+    /**
+     * Constructor method for the BossProjectile.
+     * @param x x-coordinate of the projectile.
+     * @param y y-coordinate of the projectile.
+     */
     public BossProjectile(int x, int y) {
-        //tImage = new Image(new File("src/application/images/smallbullet.png").toURI().toString());
         tDirection = 1;
-        //Should have a different image
         tX = x;
         tY = y;
         tSpeed = 5;
@@ -20,6 +23,10 @@ public class BossProjectile extends Projectile{
         tHeight = 70;
     }
 
+    /**
+     * Getter method for the belonging Image.
+     * @return the Image belonging to BossProjectile.
+     */
     public Image getImage() {
         return Main.BOSS_PROJECTILE;
     }

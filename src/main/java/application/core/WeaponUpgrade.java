@@ -3,10 +3,16 @@ package application.core;
 import application.Main;
 
 /**
- * Created by Ties on 22-9-2015.
+ * Class for WeaponUpgrade.
+ * @author Ties WesterBorg.
  */
 public class WeaponUpgrade extends Upgrade {
 
+    /**
+     * Constructor for WeaponUpgrade.
+     * @param x x-coordinate.
+     * @param y y-coordinate.
+     */
     public WeaponUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
@@ -21,6 +27,11 @@ public class WeaponUpgrade extends Upgrade {
         else
             tSpeed = 4;
     }
+
+    /**
+     * Getter method for the belonging Image.
+     * @return the belonging Image.
+     */
     public org.newdawn.slick.Image getImage() {
         return Main.UPGRADE_1;
     }

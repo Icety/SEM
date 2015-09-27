@@ -25,7 +25,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * Created by Niek on 9/15/2015.
+ * Controller method for LevelBuilder.
+ * @author Niek van der Laan.
  */
 public class LevelBuilder extends BasicGameState {
 
@@ -40,14 +41,22 @@ public class LevelBuilder extends BasicGameState {
     protected boolean circleDown, circleUp, circleLeft, circleRight, saveGame;
     protected TextField saveName;
     protected boolean focus = false;
-
-
     protected ArrayList<Alien> aliens = new ArrayList<Alien>();
 
+    /**
+     * Constructor method for the LevelBuilder.
+     * @param id used by the controller.
+     */
     public LevelBuilder(int id) {
         tId = id;
     }
 
+    /**
+     * Init method for the LevelBuilder.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
@@ -64,10 +73,21 @@ public class LevelBuilder extends BasicGameState {
         saveName.setAcceptingInput(false);
     }
 
+    /**
+     * Getter method for the ID of the controller.
+     * @return ID of the controller.
+     */
     public int getID() {
         return tId;
     }
 
+    /**
+     * Render method for the LevelBuilder.
+     * @param container GameContainer being used by the program.
+     * @param game being played at the moment.
+     * @param g Graphics used by the program.
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -112,6 +132,13 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
+    /**
+     * Update method for LevelBuilder.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @param delta an integer value.
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
@@ -136,6 +163,11 @@ public class LevelBuilder extends BasicGameState {
         circle.setCenterY(circley);
     }
 
+    /**
+     * Method which checks whether a key is released.
+     * @param key integer value for a specific key.
+     * @param c character value of the key.
+     */
     public void keyReleased(int key, char c) {
         switch(key) {
 
@@ -201,6 +233,11 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
+    /**
+     * Method which checks whether a key is pressed.
+     * @param key integer value of the key.
+     * @param c character value of the key.
+     */
     public void keyPressed(int key, char c) {
         switch(key) {
             case Input.KEY_DOWN:
@@ -223,8 +260,8 @@ public class LevelBuilder extends BasicGameState {
     }
 
     /**
-     * Checks whether circle is above an alien in the game
-     * @return the alien which is under our circle, null if none
+     * Checks whether circle is above an alien in the game.
+     * @return the alien which is under our circle, null if none.
      */
     public Alien checkCollision() {
         for(Alien a: aliens) {
@@ -237,10 +274,10 @@ public class LevelBuilder extends BasicGameState {
     }
 
     /**
-     * Places an alien according to the parameters
-     * @param alien determines which type of alien is to be placed
-     * @param x determines the x coordinate
-     * @param y determines the y coordinate
+     * Places an alien according to the parameters.
+     * @param alien determines which type of alien is to be placed.
+     * @param x determines the x coordinate.
+     * @param y determines the y coordinate.
      */
     public void placeAlien(Alien alien, int x, int y) {
         if (alien != null) {
@@ -251,8 +288,8 @@ public class LevelBuilder extends BasicGameState {
     }
 
     /**
-     * Makes a new alien which is the same type as our selected alien (Alien selected)
-     * @return the new made alien
+     * Makes a new alien which is the same type as our selected alien (Alien selected).
+     * @return the new made alien.
      */
     public Alien makeAlien() {
         Alien alien;
@@ -277,6 +314,10 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
+    /**
+     * Write XML corresponding to the created Level.
+     * @param docname a String value to represent the Level.
+     */
     public void toXML(String docname) {
         try {
 
@@ -318,9 +359,6 @@ public class LevelBuilder extends BasicGameState {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File("src/main/java/application/" +  docname + ".xml"));
 
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
-
             transformer.transform(source, result);
 
             System.out.println("File saved!");
@@ -332,6 +370,11 @@ public class LevelBuilder extends BasicGameState {
         }
     }
 
+    /**
+     * Parse the type of Alien into XML.
+     * @param selected the selected Alien.
+     * @return the String name value for the Alien.
+     */
     private String classToXML(Alien selected) {
         if (selected instanceof MiniAlien) {
             return "mini";

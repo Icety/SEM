@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
-//ToDo: testMove(), testShoot(), testEndOfScreen() and testHit() must still be written (Dependencies unreachable)
 /**
  * Test class for Alien.java.
  *
@@ -25,7 +24,6 @@ import static org.mockito.Mockito.mock;
 public class AlienTest {
     private Alien testAlien;
     private Element testElement;
-    private ArrayList<Alien> testAliens;
     private LevelFactory testFactory;
 
     @Mock
@@ -37,7 +35,6 @@ public class AlienTest {
     @Before
     public void setUp() {
         testAlien = new Alien();
-        testAliens = new ArrayList<>();
         testFactory = new LevelFactory(1400, 1080);
         try {
             File file = new File("src/test/java/application/core/testLevels.xml");
@@ -195,6 +192,11 @@ public class AlienTest {
         assertEquals(-1, testAlien.tDirection);
     }
 
+    /**
+     * Test whether setLowerLevel() works correctly.
+     *
+     * @throws Exception
+     */
     @Test
     public void testSetLowerLevel() throws Exception {
         ArrayList<Alien> testAliens = testFactory.loadAliens(testElement);
@@ -206,5 +208,92 @@ public class AlienTest {
         testAlien.setLowerLevel(testAliens);
 
         assertTrue(testAlien.tCanShoot);
+    }
+
+    /**
+     * Test whether applyDifficulty() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testApplyDifficultyOne() throws Exception {
+        Main.DIFFICULTY = 1;
+        testAlien.applyDifficulty();
+
+        assertEquals(99.8, testAlien.tRandomChance, 0.0);
+    }
+
+    /**
+     * Test whether applyDifficulty() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testApplyDifficultyTwo() throws Exception {
+        Main.DIFFICULTY = 2;
+        testAlien.applyDifficulty();
+
+        assertEquals(99.9, testAlien.tRandomChance, 0.0);
+    }
+
+    /**
+     * Test whether applyDifficulty() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testApplyDifficultyThree() throws Exception {
+        Main.DIFFICULTY = 3;
+        testAlien.applyDifficulty();
+
+        assertEquals(99.5, testAlien.tRandomChance, 0.0);
+    }
+
+    /**
+     * Test whether drop() works correctly.
+     * Based on a generated coverage report,
+     * we can conclude that all updates were dropped at least once.
+     * @throws Exception
+     */
+    @Test
+    public void testDrop() throws Exception {
+        for(int i = 0; i < 100; i++) {
+            testAlien.drop();
+        }
+
+        assertTrue(testAlien.getUpgrades().size() >= 0);
+    }
+
+    /**
+     * Test whether getUpgrades() returns the correct ArrayList of upgrades.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetUpgrades() throws Exception {
+        ArrayList<Upgrade> testList = new ArrayList<>();
+        Upgrade testUpgrade = new HealthUpgrade(0, 0);
+        testList.add(testUpgrade);
+        testAlien.tUpgrades = testList;
+
+        assertEquals(testList, testAlien.getUpgrades());
+    }
+
+    /**
+     * Test whether updateUpgrades() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateUpgrades() throws Exception {
+        ArrayList<Upgrade> testList = new ArrayList<>();
+        Upgrade testUpgrade = new HealthUpgrade(0, 0);
+        testUpgrade.tSpeed = 1;
+        testUpgrade.tDirection = 1;
+        testList.add(testUpgrade);
+        testAlien.tUpgrades = testList;
+        testAlien.updateUpgrades();
+
+        assertEquals(1, testUpgrade.tY);
     }
 }

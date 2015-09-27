@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-//ToDo: testUpdateWithShoot() should work later on (UnsatisfiedLinkException)
 /**
  * Test class for Player.java.
  *
@@ -55,6 +54,8 @@ public class PlayerTest {
 //    /**
 //     * Test whether update works correctly.
 //     * Amount of Projectiles should be zero, because updateProjectiles() was called.
+//     *
+//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
 //     *
 //     * @throws Exception
 //     */
@@ -193,5 +194,111 @@ public class PlayerTest {
     @Test
     public void testGetImage() throws Exception {
         assertNull(testPlayer.getImage());
+    }
+
+    /**
+     * Test whether getImage() returns the correct Image while the Player is upgraded.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetImageWhileUpgraded() throws Exception {
+        testPlayer.tUpgraded = true;
+        assertNull(testPlayer.getImage());
+    }
+
+    /**
+     * Test updateUpgrade() with a speed upgrade.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateUpgradeLittleReloadTime() throws Exception {
+        Upgrade testUpgrade = new SpeedUpgrade(0, 0);
+        testPlayer.tActiveUpgrades.add(testUpgrade);
+        testPlayer.updateUpgrade();
+
+        assertEquals(50, testPlayer.tReloadTime);
+    }
+
+    /**
+     * Test updateUpgrade() with a weapon upgrade.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testUpdateUpgradeMuchReloadTime() throws Exception {
+        Upgrade testUpgrade = new WeaponUpgrade(0, 0);
+        testPlayer.tActiveUpgrades.add(testUpgrade);
+        testPlayer.updateUpgrade();
+
+        assertEquals(500, testPlayer.tReloadTime);
+    }
+
+//    /**
+//     * Test shoot() with an upgraded weapon 0.
+//     *
+//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
+//     *
+//     * @throws Exception
+//     */
+//    @Test
+//    public void testShootWeaponZeroLastSideZero() throws Exception {
+//        testPlayer.tUpgraded = true;
+//        testPlayer.tLastSide = 0;
+//        testPlayer.shoot();
+//
+//        assertTrue(testPlayer.getProjectiles().size() >= 1);
+//    }
+//
+//    /**
+//     * Test shoot() with an upgraded weapon 0 with lastSide non 0.
+//     *
+//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
+//     *
+//     * @throws Exception
+//     */
+//    @Test
+//    public void testShootWeaponZeroLastSideNotZero() throws Exception {
+//        testPlayer.tUpgraded = true;
+//        testPlayer.tLastSide = 1;
+//        testPlayer.shoot();
+//
+//        assertTrue(testPlayer.getProjectiles().size() >= 1);
+//    }
+
+//    /**
+//     * Test shoot() with an upgraded weapon 1.
+//     *
+//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
+//     *
+//     * @throws Exception
+//     */
+//    @Test
+//    public void testShootWeaponOne() throws Exception {
+//        testPlayer.tUpgraded = true;
+//        Upgrade testUpgrade = new WeaponUpgrade(0, 0);
+//        testPlayer.tActiveUpgrades.add(testUpgrade);
+//        testPlayer.shoot();
+//
+//        assertTrue(testPlayer.getProjectiles().size() >= 1);
+//    }
+
+    @Test
+    public void testUpgradeHealth() throws Exception {
+        Upgrade testUpgrade = new HealthUpgrade(0, 0);
+        testPlayer.tHealth = 2;
+        testPlayer.upgrade(testUpgrade);
+
+        assertEquals(3, testPlayer.tHealth);
+    }
+
+    @Test
+    public void testUpgradePlayer() throws Exception {
+        Upgrade testUpgrade = new PlayerUpgrade(0, 0);
+        testPlayer.tUpgraded = false;
+        testPlayer.upgrade(testUpgrade);
+
+        assertTrue(testPlayer.tUpgraded);
     }
 }

@@ -4,23 +4,18 @@ import application.Main;
 import application.core.HighScoreManager;
 import org.newdawn.slick.*;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Font;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.gui.AbstractComponent;
-import org.newdawn.slick.gui.ComponentListener;
 import org.newdawn.slick.gui.TextField;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
 
-import java.awt.*;
-import java.util.ArrayList;
 
 /**
- * Class HighScoreForm
- * Created by Daphne van Tetering on 22-9-2015.
+ * Controller class for HighScoreForm.
+ * @author Daphne van Tetering.
  */
 public class HighScoreForm extends BasicGameState {
 
@@ -35,8 +30,8 @@ public class HighScoreForm extends BasicGameState {
 
 
     /**
-     * Constructor
-     * @param id ID of the HighScoreForm
+     * Constructor method for HighScoreForm.
+     * @param id ID of the HighScoreForm.
      */
     public HighScoreForm (int id) {
         tId = id;
@@ -44,7 +39,7 @@ public class HighScoreForm extends BasicGameState {
     }
 
     /**
-     * init-method
+     * Init method for the HighScoreForm.
      */
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
@@ -58,7 +53,7 @@ public class HighScoreForm extends BasicGameState {
 
 
     /**
-     * render-method
+     * Render method for the HighScoreForm.
      */
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -78,10 +73,10 @@ public class HighScoreForm extends BasicGameState {
     }
 
     /**
-     * update-method
-     * @param gameContainer
-     * @param stateBasedGame
-     * @param i
+     * Update method for the HighScoreForm.
+     * @param gameContainer used by the program.
+     * @param stateBasedGame being played at the moment.
+     * @param i an integer value.
      * @throws SlickException
      */
     @Override
@@ -90,9 +85,9 @@ public class HighScoreForm extends BasicGameState {
     }
 
     /**
-     * method to execute action when Enter is pressed
-     * @param key inputKey
-     * @param c inputCharacter
+     * Method to execute action when Enter is pressed.
+     * @param key inputKey value.
+     * @param c inputCharacter value.
      */
     public void keyReleased(int key, char c) {
         switch(key) {
@@ -103,8 +98,8 @@ public class HighScoreForm extends BasicGameState {
     }
 
     /**
-     * method to get ID of the HighScoreForm
-     * @return
+     * Method to get ID of the HighScoreForm.
+     * @return the ID of the HighScoreForm.
      */
     @Override
     public int getID() {
@@ -112,8 +107,8 @@ public class HighScoreForm extends BasicGameState {
     }
 
     /**
-     * method to get name of the player
-     * @return name of player
+     * Method to get name of the player.
+     * @return name of player.
      */
     public String getName() {
         return tName;

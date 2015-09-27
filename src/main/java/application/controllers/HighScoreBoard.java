@@ -13,8 +13,8 @@ import org.newdawn.slick.state.StateBasedGame;
 import java.util.ArrayList;
 
 /**
- * Class HighScoreBoard
- * Created by Daphne van Tetering on 17-9-2015.
+ * Controller class for HighScoreBoard.
+ * @author Daphne van Tetering.
  */
 public class HighScoreBoard extends BasicGameState {
     protected Main tMain;
@@ -30,9 +30,9 @@ public class HighScoreBoard extends BasicGameState {
 
 
     /**
-     * init-method
-     * @param gameContainer
-     * @param stateBasedGame
+     * Init method for the HighScoreBoard.
+     * @param gameContainer used by the program.
+     * @param stateBasedGame being played at the moment.
      * @throws SlickException
      */
     @Override
@@ -42,10 +42,10 @@ public class HighScoreBoard extends BasicGameState {
     }
 
     /**
-     * render method
-     * @param gameContainer
-     * @param stateBasedGame
-     * @param graphics
+     * Rendering method for the HighScoreBoard.
+     * @param gameContainer used by the program.
+     * @param stateBasedGame being played at the moment.
+     * @param graphics used by the game.
      * @throws SlickException
      */
     @Override
@@ -74,10 +74,10 @@ public class HighScoreBoard extends BasicGameState {
     }
 
     /**
-     * update-method
-     * @param gameContainer
-     * @param stateBasedGame
-     * @param i
+     * Update method for the HighScoreBoard.
+     * @param gameContainer used by the program.
+     * @param stateBasedGame being played at the moment.
+     * @param i an integer value.
      * @throws SlickException
      */
     @Override
@@ -86,8 +86,8 @@ public class HighScoreBoard extends BasicGameState {
     }
 
     /**
-     * method which returns ID of the HighScoreBoard
-     * @return ID
+     * Method which returns ID of the HighScoreBoard.
+     * @return ID of the HighScoreBoard.
      */
     @Override
     public int getID() {

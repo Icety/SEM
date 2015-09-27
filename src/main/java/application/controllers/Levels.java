@@ -2,7 +2,6 @@ package application.controllers;
 
 import application.Main;
 import application.core.*;
-import application.core.Game;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -12,12 +11,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import java.util.ArrayList;
 
 /**
- * Created by Thomas on 08-09-15.
+ * Controller class for Levels.
+ * @author Thomas Oomens
  */
 public class Levels extends BasicGameState {
     protected Main tMain;
     protected int tId;
-    protected ArrayList<Alien> tAliens;
     protected Image tBackground;
     protected String tBackgroundString = "background.jpg";
     protected boolean pause = false;
@@ -26,6 +25,12 @@ public class Levels extends BasicGameState {
         tId = id;
     }
 
+    /**
+     * Init method for Levels.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @throws SlickException
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
@@ -35,6 +40,13 @@ public class Levels extends BasicGameState {
 
     }
 
+    /**
+     * Render method for Levels.
+     * @param container GameContainer being used at the moment.
+     * @param game being played at the moment.
+     * @param g Graphics used by the program.
+     * @throws SlickException
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -74,6 +86,13 @@ public class Levels extends BasicGameState {
         }
     }
 
+    /**
+     * Update method for Levels.
+     * @param container GameContainer used by the program.
+     * @param game being played at the moment.
+     * @param delta an integer value.
+     * @throws SlickException
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
@@ -96,11 +115,20 @@ public class Levels extends BasicGameState {
 
     }
 
+    /**
+     * Getter method for the ID of the Controller.
+     * @return the ID of the Controller.
+     */
     @Override
     public int getID() {
         return tId;
     }
 
+    /**
+     * Method to check whether a key is pressed.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
     public void keyPressed(int key, char c) {
         switch(key) {
             case Input.KEY_LEFT:
@@ -111,13 +139,17 @@ public class Levels extends BasicGameState {
                 break;
             case Input.KEY_SPACE:
                 tMain.getGame().getPlayer().fireButtonPressed(true);
-                //TODO
                 break;
             default:
                 break;
         }
     }
 
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
     public void keyReleased(int key, char c) {
         switch(key) {
             case Input.KEY_LEFT:
@@ -137,12 +169,20 @@ public class Levels extends BasicGameState {
         }
     }
 
+    /**
+     * Method to spawn in-game projectiles.
+     * @param projectiles to draw in the game.
+     */
     public void drawProjectiles(ArrayList<Projectile> projectiles) {
         for (Projectile projectile: projectiles) {
             projectile.getImage().draw(projectile.getX(), projectile.getY(), projectile.getWidth(), projectile.getHeight());
         }
     }
 
+    /**
+     * Method to spawn in-game upgrades.
+     * @param upgrades to draw in the game.
+     */
     private void drawUpgrades(ArrayList<Upgrade> upgrades) {
         for(Upgrade u: upgrades) {
             if(u.toDraw())

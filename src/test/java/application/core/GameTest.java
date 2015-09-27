@@ -7,12 +7,11 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
-//ToDo: write testUpdate() methods. Will do after all other short tests.
 /**
  * Test class for Game.java.
  *
@@ -345,5 +344,48 @@ public class GameTest {
         testGame.highScoreManager = testHighScoreManager;
 
         assertEquals(testHighScoreManager, testGame.getHighScoreManager());
+    }
+
+    /**
+     * Test whether upgrade hits are handled correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testCheckPlayerUpgradeCollisions() throws Exception {
+        ArrayList<Upgrade> testUpgrades = new ArrayList<>();
+        Upgrade testUpgrade = new HealthUpgrade(0, 0);
+        testUpgrades.add(testUpgrade);
+        Iterator<Upgrade> testIterator = testUpgrades.iterator();
+        nonMockedPlayer.tX = 0;
+        nonMockedPlayer.tY = 0;
+        testGame.tPlayer = nonMockedPlayer;
+        testGame.checkPlayerUpgradeCollisions(testIterator);
+
+        assertFalse(testUpgrade.tToDraw);
+    }
+
+    /**
+     * Test whether getPlayerName() returns the correct String value.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testGetPlayerName() throws Exception {
+        testGame.tPlayerName = "Mark";
+
+        assertEquals("Mark", testGame.getPlayerName());
+    }
+
+    /**
+     * Test whether setPlayerName() works correctly.
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSetPlayerName() throws Exception {
+        testGame.setPlayerName("John");
+
+        assertEquals("John", testGame.tPlayerName);
     }
 }
