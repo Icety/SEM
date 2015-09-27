@@ -51,7 +51,7 @@ public class Level {
      * @param background String containing name of the background Image.
      */
     public void setBackground(String background) {
-        tBackground = background;
+        tBackground = background.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
 
     /**

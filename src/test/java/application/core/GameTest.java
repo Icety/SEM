@@ -234,7 +234,7 @@ public class GameTest {
         nonMockedLevel.removeAlien(testAlien);
         testGame.update();
 
-        assertEquals(1, testGame.levelNumber);
+        assertEquals(0, testGame.levelNumber);
     }
 
     /**

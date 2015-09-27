@@ -13,7 +13,7 @@ import java.util.Iterator;
  */
 public class Player extends Sprite {
     protected long tLastShot = 0;
-    protected int tReloadTime = 250;
+    protected int tReloadTime = 10;
     protected int tSpeed = 5;
     protected ArrayList<Upgrade> tActiveUpgrades = new ArrayList<>();
     protected boolean tUpgraded = false;
@@ -142,7 +142,7 @@ public class Player extends Sprite {
     /**
      * Make the Player move Left.
      */
-    protected void moveLeft() {
+    public void moveLeft() {
         if ( (tX ) > 10 ) {
             tX -= tSpeed;
         }
@@ -151,7 +151,7 @@ public class Player extends Sprite {
     /**
      * Make the Player more right.
      */
-    protected void moveRight() {
+    public void moveRight() {
         if ( !((tX + tWidth + 10) > Main.WIDTH )) {
             tX += tSpeed;
         }
@@ -247,5 +247,9 @@ public class Player extends Sprite {
         else {
             tActiveUpgrades.add(u);
         }
+    }
+
+    public void moveUp(int y) {
+        tY -= y;
     }
 }

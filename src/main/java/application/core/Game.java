@@ -20,6 +20,8 @@ public class Game {
     protected boolean tPaused;
     protected boolean tWon = false;
     protected boolean tLost = false;
+    protected boolean tNextLevel = false;
+    protected boolean tNextLevelTransition = false;
     protected Logger tLogger;
     protected String tPlayerName;
 
@@ -60,6 +62,7 @@ public class Game {
      * Method to make the Game proceed to the next level.
      */
     public void nextLevel() {
+        tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber);
         tLogger.setLog("The level with number: '"+ levelNumber +"' was build.", 2);
         levelNumber++;
@@ -107,10 +110,10 @@ public class Game {
         this.alienUpdate();
         this.checkCollision();
 
-        if (tLevel.hasWon()) {
+        if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {
+                tNextLevel = true;
                 tLogger.setLog("The player has beaten the level and continues to the next level.", 2);
-                nextLevel();
             }
             else {
                 tLogger.setLog("The player has beaten the last level and won the game.", 2);
@@ -165,6 +168,10 @@ public class Game {
      */
     public boolean hasLost() {
         return tLost;
+    }
+
+    public boolean isNextLevel() {
+        return tNextLevel;
     }
 
     /**

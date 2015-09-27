@@ -18,7 +18,7 @@ public class Levels extends BasicGameState {
     protected Main tMain;
     protected int tId;
     protected Image tBackground;
-    protected String tBackgroundString = "moving.jpg";
+    protected String tBackgroundString = "background.jpg";
     protected boolean pause = false;
 
     public Levels(int id) {
@@ -104,9 +104,12 @@ public class Levels extends BasicGameState {
             if (tMain.getGame().hasLost()) {
                 game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
-            if (tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
-                tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+            if (tMain.getGame().isNextLevel()) {
+                game.enterState(7);
+            }
+            if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
+                tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
             }
         }
 
