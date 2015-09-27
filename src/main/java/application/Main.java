@@ -1,12 +1,31 @@
 package application;
 
-import application.controllers.*;
+import application.controllers.Levels;
+import application.controllers.Lost;
+import application.controllers.Menu;
+import application.controllers.Won;
+import application.controllers.LevelBuilder;
+import application.controllers.HighScoreBoard;
+import application.controllers.StoryLine;
+import application.controllers.HighScoreForm;
 import application.core.Game;
 import application.core.Player;
 import application.logger.Logger;
-import org.newdawn.slick.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * Main class for the game.
+ */
+@SuppressWarnings({
+        "checkstyle:staticvariablename",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber"
+})
 public class Main extends StateBasedGame {
 
     // Game state identifiers
@@ -52,7 +71,10 @@ public class Main extends StateBasedGame {
     protected Image tBackground;
     protected boolean tTransition;
 
-    // Class Constructor
+    /**
+     * Constructor for Main.
+     * @param appName name of the application.
+     */
     public Main(String appName) {
         super(appName);
 
@@ -71,9 +93,12 @@ public class Main extends StateBasedGame {
         tGame = new Game(WIDTH, HEIGHT, tLogger);
     }
 
-    // Initialize your game states (calls init method of each gamestate, and set's the state ID)
+    /**
+     * Initial variable setter.
+     * @param gc the required GameContainer.
+     * @throws SlickException possible Exception.
+     */
     public void initStatesList(GameContainer gc) throws SlickException {
-        // The first state added will be the one that is loaded first, when the application is launched
         this.addState(new Menu(MENU));
         this.addState(new Levels(LEVELS));
         this.addState(new Won(WON));
@@ -98,14 +123,16 @@ public class Main extends StateBasedGame {
         BOSS_BACHELLI = new Image(root + "finalbossbachelli.png");
         BOSS_BACHELLI_CHARGE = new Image(root + "finalbossbachellicharge.png");
         UPGRADED_PLAYER = new Image(root + "player_upgraded.png");
-
         UPGRADE_0 = new Image(root + "upgrade_speed.png");
         UPGRADE_1 = new Image(root + "upgrade_weapon.png");
         UPGRADE_2 = new Image(root + "upgrade_health.png");
         UPGRADE_3 = new Image(root + "upgrade.png");
     }
 
-    // Main Method
+    /**
+     * Main method for running the game.
+     * @param args default parameter.
+     */
     public static void main(String[] args) {
         try {
             AppGameContainer app = new AppGameContainer(new Main("My Game v" + VERSION));
@@ -114,11 +141,14 @@ public class Main extends StateBasedGame {
             app.setShowFPS(true);
             app.isFullscreen();
             app.start();
-        } catch(SlickException e) {
+        } catch (SlickException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Let Main start a new game.
+     */
     public void newGame() {
         tGame = new Game(WIDTH, HEIGHT, tLogger);
         tGame.nextLevel();
@@ -127,6 +157,10 @@ public class Main extends StateBasedGame {
         p.settY(tGame.getHeight() - (p.getHeight() + 50));
     }
 
+    /**
+     * Get the current game.
+     * @return the current game.
+     */
     public Game getGame() {
         return tGame;
     }
