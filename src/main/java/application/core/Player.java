@@ -142,15 +142,16 @@ public class Player extends Sprite {
     /**
      * Make the Player move Left.
      */
-    protected void moveLeft() {
+    public void moveLeft() {
         if ( (tX ) > 10 ) {
             tX -= tSpeed;
         }
     }
+
     /**
      * Make the Player more right.
      */
-    protected void moveRight() {
+    public void moveRight() {
         if ( !((tX + tWidth + 10) > Main.WIDTH )) {
             tX += tSpeed;
         }
