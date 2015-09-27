@@ -93,7 +93,7 @@ public class StoryLine extends BasicGameState {
                 p.settY(Main.HEIGHT + 120);
                 tStart = false;
                 tCount = 0;
-                game.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                game.enterState(7, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
             if (!tDone) {
