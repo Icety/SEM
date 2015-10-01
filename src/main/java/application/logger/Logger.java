@@ -1,12 +1,18 @@
 package application.logger;
 
-import java.io.*;
+import java.io.PrintWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Class that provides static methods to create a HTML LogFile.
  * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Logger {
     protected ArrayList<Log> tLogs = new ArrayList<Log>();
     protected HtmlFormatter tFormatter = new HtmlFormatter();
@@ -41,10 +47,11 @@ public class Logger {
     }
 
     /**
-     * Create a new log based on the message and importancy and store it in the arraylist.
+     * Create a new log based on the message and importance and store it in the arraylist.
      * After that try to write the log to the logfile.
      * @param message The message that is to be logged to the logfile.
-     * @param important The level of importancy, 0 = SEVERE, 1 = WARNING, 2 = INFO, 3 = CONFIG, 4 = FINE
+     * @param important The level of importance,
+     * 0 = SEVERE, 1 = WARNING, 2 = INFO, 3 = CONFIG, 4 = FINE
      * 5 = FINER, 6 = FINEST.
      */
     public void setLog(String message, int important) {

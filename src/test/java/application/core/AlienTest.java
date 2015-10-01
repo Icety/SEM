@@ -13,14 +13,19 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
  * Test class for Alien.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class AlienTest {
     private Alien testAlien;
     private Element testElement;
@@ -53,8 +58,7 @@ public class AlienTest {
 
     /**
      * Tests whether readXml() loads the correct data from the pre-loaded XML file.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testReadXmlByUsingPreLoadedXmlFile() throws Exception {
@@ -67,8 +71,7 @@ public class AlienTest {
     /**
      * Test whether update() updates the location of the Alien correctly.
      * Rest is tested individually.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdate() throws Exception {
@@ -82,8 +85,7 @@ public class AlienTest {
 
     /**
      * Test whether isBonusAlien() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testIsBonusAlien() throws Exception {
@@ -95,13 +97,12 @@ public class AlienTest {
 
     /**
      * Test whether shoot() works properly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testShoot() throws Exception {
         testAlien.setCanShoot(true);
-        for(int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10000; i++) {
             testAlien.shoot();
         }
         assertTrue(testAlien.tProjectiles.size() > 0);
@@ -109,8 +110,7 @@ public class AlienTest {
 
     /**
      * Test whether setCanShoot() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSetCanShoot() throws Exception {
@@ -122,8 +122,7 @@ public class AlienTest {
 
     /**
      * Tests whether toString() returns the correct String with coordinates of the Alien.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToStringBasedOnCoordinatesSpecifiedInTheXmlFile() throws Exception {
@@ -134,8 +133,7 @@ public class AlienTest {
 
     /**
      * Tests whether isDead() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testIsDead() throws Exception {
@@ -150,8 +148,7 @@ public class AlienTest {
     /**
      * Test whether addShootChance() adds a correct value.
      * Zero for Alien.java.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddShootChance() throws Exception {
@@ -163,8 +160,7 @@ public class AlienTest {
 
     /**
      * Test whether endOfScreen() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testEndOfScreen() throws Exception {
@@ -179,8 +175,7 @@ public class AlienTest {
 
     /**
      * Test whether switchDirection() switches the Alien's direction correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSwitchDirection() throws Exception {
@@ -194,8 +189,7 @@ public class AlienTest {
 
     /**
      * Test whether setLowerLevel() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSetLowerLevel() throws Exception {
@@ -212,8 +206,7 @@ public class AlienTest {
 
     /**
      * Test whether applyDifficulty() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testApplyDifficultyOne() throws Exception {
@@ -225,8 +218,7 @@ public class AlienTest {
 
     /**
      * Test whether applyDifficulty() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testApplyDifficultyTwo() throws Exception {
@@ -238,8 +230,7 @@ public class AlienTest {
 
     /**
      * Test whether applyDifficulty() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testApplyDifficultyThree() throws Exception {
@@ -253,11 +244,11 @@ public class AlienTest {
      * Test whether drop() works correctly.
      * Based on a generated coverage report,
      * we can conclude that all updates were dropped at least once.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testDrop() throws Exception {
-        for(int i = 0; i < 100; i++) {
+        for (int i = 0; i < 100; i++) {
             testAlien.drop();
         }
 
@@ -266,8 +257,7 @@ public class AlienTest {
 
     /**
      * Test whether getUpgrades() returns the correct ArrayList of upgrades.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetUpgrades() throws Exception {
@@ -281,8 +271,7 @@ public class AlienTest {
 
     /**
      * Test whether updateUpgrades() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateUpgrades() throws Exception {

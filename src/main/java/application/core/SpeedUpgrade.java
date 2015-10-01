@@ -6,6 +6,9 @@ import application.Main;
  * Class for SpeedUpgrade.
  * @author Ties WesterBorg.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public final class SpeedUpgrade extends Upgrade {
 
     /**
@@ -20,12 +23,15 @@ public final class SpeedUpgrade extends Upgrade {
         tWidth = 50;
         tHeight = 50;
         tHealth = 1;
-        if (Main.DIFFICULTY == 1)
+        if (Main.DIFFICULTY == 1) {
             tSpeed = 2;
-        else if (Main.DIFFICULTY == 2)
+        }
+        else if (Main.DIFFICULTY == 2) {
             tSpeed = 3;
-        else
+        }
+        else {
             tSpeed = 5;
+        }
     }
 
     /**

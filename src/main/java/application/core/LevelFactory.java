@@ -13,6 +13,9 @@ import java.util.ArrayList;
  * Class for LevelFactory.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class LevelFactory {
     protected NodeList tLevels;
     protected int tScreenWidth;
@@ -67,9 +70,7 @@ public class LevelFactory {
      */
     public ArrayList<Alien> loadAliens(Element level) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
-
         NodeList alienList = level.getElementsByTagName("alien");
-
         Alien alien = new Alien();
         for (int temp = 0; temp < alienList.getLength(); temp++) {
             Node node = alienList.item(temp);
@@ -90,6 +91,7 @@ public class LevelFactory {
                 case "boss":
                     alien = new FinalBoss();
                     break;
+                default: break;
             }
             alien.readXml(eElement);
             aliens.add(alien);

@@ -7,7 +7,14 @@ import org.newdawn.slick.Image;
  * Class for SmallAlien.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class SmallAlien extends Alien {
+
+    /**
+     * Constructor method for SmallAlien.
+     */
     public SmallAlien() {
         tHealth = 1;
         tHitScore = 0;

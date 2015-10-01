@@ -7,6 +7,10 @@ import org.newdawn.slick.Image;
  * Class for FinalBoss.
  * @author Niek van der Laan
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class FinalBoss extends Alien {
     protected int tSecondShot = 0;
 
@@ -48,18 +52,20 @@ public class FinalBoss extends Alien {
                 tSecondShot = 0;
                 int x, y;
                 float dirx, diry;
-                for (int i=0; i<10; i++) {
+                for (int i = 0; i < 10; i++) {
                     x = tX + i * tWidth / 10;
                     y = tY + tHeight;
                     dirx = x - (tX + tWidth / 2);
                     diry = y;
-                    this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
+                    this.addProjectile(new BachelliProjectile(
+                            x, y,
+                            dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
                 }
             }
         }
         if (tCanShoot) {
-            if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
-                this.addProjectile(new BossProjectile(tX + tWidth/2, tY + tHeight));
+            if ((Math.random() * 100 > 99.9) || tShootChance > 1000) {
+                this.addProjectile(new BossProjectile(tX + tWidth / 2, tY + tHeight));
                 tShootChance = 0;
             }
         }

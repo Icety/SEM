@@ -15,7 +15,7 @@ public class ScoreComparator implements Comparator<Score> {
      * @param y integer to be compared.
      * @return value to indicate which integer is bigger.
      */
-    public int compare (Score x, Score y) {
+    public int compare(Score x, Score y) {
         int sc1 = x.getScore();
         int sc2 = y.getScore();
 

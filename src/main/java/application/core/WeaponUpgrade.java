@@ -6,6 +6,9 @@ import application.Main;
  * Class for WeaponUpgrade.
  * @author Ties WesterBorg.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class WeaponUpgrade extends Upgrade {
 
     /**
@@ -20,12 +23,15 @@ public class WeaponUpgrade extends Upgrade {
         tWidth = 50;
         tHeight = 50;
         tHealth = 1;
-        if (tDifficulty == 1)
+        if (tDifficulty == 1) {
             tSpeed = 2;
-        else if (tDifficulty == 2)
+        }
+        else if (tDifficulty == 2) {
             tSpeed = 2;
-        else
+        }
+        else {
             tSpeed = 4;
+        }
     }
 
     /**

@@ -7,7 +7,10 @@ import org.newdawn.slick.Image;
  * Class for BossProjectile.
  * @author Thomas Oomens
  */
-public class BossProjectile extends Projectile{
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
+public class BossProjectile extends Projectile {
 
     /**
      * Constructor method for the BossProjectile.

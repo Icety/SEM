@@ -6,6 +6,10 @@ import application.Main;
  * Class for Upgrade.
  * @author Ties Westerborg.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber"
+})
 public abstract class Upgrade extends Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 8;
@@ -27,7 +31,7 @@ public abstract class Upgrade extends Sprite {
      * @return the boolean value.
      */
     public boolean isOutOfBounds() {
-        return ( (tY < 0) || (tY > Main.HEIGHT) );
+        return ((tY < 0) || (tY > Main.HEIGHT));
     }
 
     /**

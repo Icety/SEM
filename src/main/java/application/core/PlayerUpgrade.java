@@ -6,6 +6,9 @@ import application.Main;
  * Class for PlayerUpgrade.
  * @author Ties WesterBorg
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class PlayerUpgrade extends Upgrade {
 
     /**
@@ -20,12 +23,15 @@ public class PlayerUpgrade extends Upgrade {
         tWidth = 50;
         tHeight = 50;
         tHealth = 1;
-        if (Main.DIFFICULTY == 1)
+        if (Main.DIFFICULTY == 1) {
             tSpeed = 2;
-        else if (Main.DIFFICULTY == 2)
+        }
+        else if (Main.DIFFICULTY == 2) {
             tSpeed = 2;
-        else
+        }
+        else {
             tSpeed = 4;
+        }
     }
 
     /**

@@ -7,6 +7,9 @@ import org.newdawn.slick.Image;
  * Class for BigAlien.
  * @author Niek van der Laan
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class BigAlien extends Alien {
 
     /**

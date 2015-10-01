@@ -10,6 +10,9 @@ import java.util.Iterator;
  * Class for Sprite.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class Sprite {
     protected int tX;
     protected int tY;
@@ -120,10 +123,10 @@ public class Sprite {
      */
     protected void updateProjectiles() {
         Iterator<Projectile> i = tProjectiles.iterator();
-        while(i.hasNext()) {
+        while (i.hasNext()) {
             Projectile projectile = i.next();
             projectile.update();
-            if(projectile.isOutOfBounds()) {
+            if (projectile.isOutOfBounds()) {
                 i.remove();
             }
         }
@@ -143,7 +146,9 @@ public class Sprite {
      */
     public int hit() {
         tHealth--;
-        if(tHealth <= 0) return tKillScore;
+        if (tHealth <= 0) {
+            return tKillScore;
+        }
         return tHitScore;
     }
 

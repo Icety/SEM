@@ -3,15 +3,12 @@ package application.core;
 import application.Main;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for BigAlien.java.
- *
  * @author Arthur Breurkes
  */
 public class BigAlienTest {
@@ -27,18 +24,16 @@ public class BigAlienTest {
 
     /**
      * Test whether getImage() returns the correct Image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
-        assertNull(testAlien.getImage());
+        assertEquals(Main.BIG_ALIEN, testAlien.getImage());
     }
 
     /**
      * Test whether addShootChance() updates the value correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddShootChance() throws Exception {
@@ -49,8 +44,7 @@ public class BigAlienTest {
 
     /**
      * Test whether toString() returns the correct string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {

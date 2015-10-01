@@ -1,8 +1,16 @@
 package application.controllers;
 
 import application.Main;
-import application.core.*;
-import org.newdawn.slick.*;
+import application.core.Alien;
+import application.core.Player;
+import application.core.Projectile;
+import application.core.Upgrade;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -14,6 +22,11 @@ import java.util.ArrayList;
  * Controller class for Levels.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Levels extends BasicGameState {
     protected Main tMain;
     protected int tId;
@@ -21,6 +34,10 @@ public class Levels extends BasicGameState {
     protected String tBackgroundString = "background.jpg";
     protected boolean pause = false;
 
+    /**
+     * Constructor method for this controller.
+     * @param id given ID for the controller.
+     */
     public Levels(int id) {
         tId = id;
     }
@@ -36,7 +53,7 @@ public class Levels extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
 
     }
 
@@ -54,20 +71,15 @@ public class Levels extends BasicGameState {
         if (!pause) {
             Player p = tMain.getGame().getPlayer();
             int lives = p.getHealth();
-
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-
             g.setColor(Color.white);
-
             //Display Score in top left.
             g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
-
             //Display Lives in top right.
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
             for (int i = 1; i <= lives; i++) {
                 p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
             }
-
             //Draw all aliens and its upgrades
             for (Alien alien : tMain.getGame().getLevel().getAliens()) {
                 if (!alien.isDead()) {
@@ -76,13 +88,11 @@ public class Levels extends BasicGameState {
                 drawProjectiles(alien.getProjectiles());
                 drawUpgrades(alien.getUpgrades());
             }
-
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
             drawProjectiles(p.getProjectiles());
-
         } else {
-            g.drawString("PAUSED", container.getWidth() /2, container.getHeight() /2);
+            g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
         }
     }
 
@@ -109,7 +119,7 @@ public class Levels extends BasicGameState {
             }
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
-                tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+                tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
             }
         }
 
@@ -130,7 +140,7 @@ public class Levels extends BasicGameState {
      * @param c character value for the key.
      */
     public void keyPressed(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_LEFT:
                 tMain.getGame().getPlayer().leftArrowPressed(true);
                 break;
@@ -151,7 +161,7 @@ public class Levels extends BasicGameState {
      * @param c character value for the key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_LEFT:
                 tMain.getGame().getPlayer().leftArrowPressed(false);
                 break;
@@ -164,6 +174,7 @@ public class Levels extends BasicGameState {
             case Input.KEY_ESCAPE:
                 pause = !pause;
                 System.out.println(pause);
+                break;
             default:
                 break;
         }
@@ -184,9 +195,10 @@ public class Levels extends BasicGameState {
      * @param upgrades to draw in the game.
      */
     private void drawUpgrades(ArrayList<Upgrade> upgrades) {
-        for(Upgrade u: upgrades) {
-            if(u.toDraw())
-            (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
+        for (Upgrade u: upgrades) {
+            if (u.toDraw()) {
+                (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }
         }
     }
 }
