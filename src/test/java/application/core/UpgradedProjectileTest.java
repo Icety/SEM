@@ -1,9 +1,10 @@
 package application.core;
 
+import application.Main;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test for UpgradedProjectile.java.
@@ -14,7 +15,7 @@ public class UpgradedProjectileTest {
 
     /**
      * Initialize variable for the test process.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -23,7 +24,7 @@ public class UpgradedProjectileTest {
 
     /**
      * Test whether update() works correctly.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdate() throws Exception {
@@ -38,7 +39,7 @@ public class UpgradedProjectileTest {
 
     /**
      * Test whether getX() returns the correct value.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetX() throws Exception {
@@ -49,7 +50,7 @@ public class UpgradedProjectileTest {
 
     /**
      * Test whether getY() returns the correct value.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetY() throws Exception {
@@ -60,10 +61,10 @@ public class UpgradedProjectileTest {
 
     /**
      * Test whether getImage() returns the correct Image.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
-        assertNull(testProjectile.getImage());
+        assertEquals(Main.PLAYER_PROJECTILE, testProjectile.getImage());
     }
 }

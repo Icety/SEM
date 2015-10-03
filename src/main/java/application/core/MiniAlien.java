@@ -7,7 +7,10 @@ import org.newdawn.slick.Image;
  * Class for MiniAlien.
  * @author Niek vand der Laan.
  */
-public class MiniAlien extends Alien{
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
+public class MiniAlien extends Alien {
 
     /**
      * Constructor for MiniAlien.

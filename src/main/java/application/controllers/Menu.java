@@ -1,7 +1,12 @@
 package application.controllers;
 
 import application.Main;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -11,7 +16,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * Controller class for Menu.
  * @author Thomas Oomens.
  */
-public class Menu extends BasicGameState{
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
+public class Menu extends BasicGameState {
     private Main tMain;
     protected int tId;
     protected Image tBackground;
@@ -72,7 +82,7 @@ public class Menu extends BasicGameState{
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        if(tExit) {
+        if (tExit) {
             container.exit();
         }
     }
@@ -92,7 +102,7 @@ public class Menu extends BasicGameState{
      * @param c character value for a key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_1:
                 tMain.newGame();
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

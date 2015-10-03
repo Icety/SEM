@@ -3,19 +3,20 @@ package application.core;
 import application.Main;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for SmallProjectile.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class SmallProjectileTest {
 
     /**
      * Test whether SmallProjectiles are initialized correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSmallProjectileDifficultyOne() throws Exception {
@@ -27,8 +28,7 @@ public class SmallProjectileTest {
 
     /**
      * Test whether SmallProjectiles are initialized correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSmallProjectileDifficultyTwo() throws Exception {
@@ -40,8 +40,7 @@ public class SmallProjectileTest {
 
     /**
      * Test whether SmallProjectiles are initialized correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSmallProjectileDifficultyThree() throws Exception {
@@ -53,13 +52,12 @@ public class SmallProjectileTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
         SmallProjectile testProjectile = new SmallProjectile(0, 0);
 
-        assertNull(testProjectile.getImage());
+        assertEquals(Main.SMALL_PROJECTILE, testProjectile.getImage());
     }
 }

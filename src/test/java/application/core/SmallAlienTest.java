@@ -1,13 +1,14 @@
 package application.core;
 
+import application.Main;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for SmallAlien.java.
- *
  * @author Arthur Breurkes
  */
 public class SmallAlienTest {
@@ -23,8 +24,7 @@ public class SmallAlienTest {
 
     /**
      * Test whether addShootChance() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddShootChance() throws Exception {
@@ -36,8 +36,7 @@ public class SmallAlienTest {
 
     /**
      * Test whether toString() returns the correct string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {
@@ -49,11 +48,10 @@ public class SmallAlienTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
-        assertNull(testAlien.getImage());
+        assertEquals(Main.SMALL_ALIEN, testAlien.getImage());
     }
 }

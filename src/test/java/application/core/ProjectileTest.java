@@ -3,11 +3,12 @@ package application.core;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for Projectile.java.
- *
  * @author Arthur Breurkes
  */
 public class ProjectileTest {
@@ -15,8 +16,7 @@ public class ProjectileTest {
 
     /**
      * Initialize variables for testing process.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -25,8 +25,7 @@ public class ProjectileTest {
 
     /**
      * Test whether setDirection() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSetDirection() throws Exception {
@@ -36,9 +35,8 @@ public class ProjectileTest {
     }
 
     /**
-     * Test whether toString() returns the correct String;
-     *
-     * @throws Exception
+     * Test whether toString() returns the correct String.
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {
@@ -50,8 +48,7 @@ public class ProjectileTest {
 
     /**
      * Test whether isRemoved() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testIsRemoved() throws Exception {

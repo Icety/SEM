@@ -6,6 +6,9 @@ import application.Main;
  * Class for PlayerProjectile.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class PlayerProjectile extends Projectile {
 
     /**

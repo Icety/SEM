@@ -7,6 +7,9 @@ import java.util.Date;
  * A class that generates html header and footer data for the logfile and parses logs to html.
  * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class HtmlFormatter {
 
     /**
@@ -18,13 +21,13 @@ public class HtmlFormatter {
         StringBuffer buf = new StringBuffer(1000);
         buf.append("<tr>\n");
         //The color + log type
-        buf.append("\t<th style=\"color: "+ log.getColor() +"\">");
+        buf.append("\t<th style=\"color: " + log.getColor() + "\">");
         buf.append(log.getType());
         buf.append("<th>\n");
         //The message
-        buf.append("<td>"+ log.getMessage() +"</td>\n");
+        buf.append("<td>" + log.getMessage() + "</td>\n");
         //The time
-        buf.append("<td>"+ this.parseTime(log.getTime()) +"</td>");
+        buf.append("<td>" + this.parseTime(log.getTime()) + "</td>");
         buf.append("</tr>\n");
 
         return buf.toString();
@@ -36,9 +39,9 @@ public class HtmlFormatter {
      * @return      The time given in dd-MMM-yyyy HH:mm format.
      */
     protected String parseTime(long time) {
-        SimpleDateFormat date_format = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
         Date resultdate = new Date(time);
-        return date_format.format(resultdate);
+        return dateFormat.format(resultdate);
     }
 
     /**

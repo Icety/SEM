@@ -2,10 +2,10 @@ package application.core;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for HighScoreManager.java.
@@ -14,6 +14,10 @@ import static org.junit.Assert.*;
 public class HighScoreManagerTest {
     private HighScoreManager testScoreManager;
 
+    /**
+     * Initialize variables for the test process.
+     * @throws Exception possible Exception.
+     */
     @Before
     public void setUp() throws Exception {
         testScoreManager = new HighScoreManager();
@@ -22,8 +26,7 @@ public class HighScoreManagerTest {
 
     /**
      * Test whether getScores() returns the correct list of Scores.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetScores() throws Exception {
@@ -32,8 +35,7 @@ public class HighScoreManagerTest {
 
     /**
      * Test whether addScores() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddScores() throws Exception {
@@ -45,8 +47,7 @@ public class HighScoreManagerTest {
 
     /**
      * Test whether loadScoreFile() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testLoadScoreFile() throws Exception {
@@ -58,7 +59,7 @@ public class HighScoreManagerTest {
 
     /**
      * Test whether updateScoreFile() works correctly.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateScoreFile() throws Exception {

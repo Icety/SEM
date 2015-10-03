@@ -8,6 +8,10 @@ import org.newdawn.slick.SlickException;
  * Class for Game.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Game {
     protected int tScore;
     protected LevelFactory levelFactory;
@@ -64,7 +68,7 @@ public class Game {
     public void nextLevel() {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber);
-        tLogger.setLog("The level with number: '"+ levelNumber +"' was build.", 2);
+        tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         levelNumber++;
     }
 
@@ -103,7 +107,7 @@ public class Game {
 
     /**
      * The update method for the Game.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
         tPlayer.update();
@@ -126,7 +130,7 @@ public class Game {
      * Check whether the game is paused.
      * @return the boolean value.
      */
-    public boolean isPaused(){
+    public boolean isPaused() {
         return tPaused;
     }
 
@@ -170,6 +174,10 @@ public class Game {
         return tLost;
     }
 
+    /**
+     * Check whether next level is up.
+     * @return the boolean value.
+     */
     public boolean isNextLevel() {
         return tNextLevel;
     }
@@ -198,7 +206,7 @@ public class Game {
 
     /**
      * Check whether there was a collision in the Game.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     protected void checkCollision() throws SlickException {
         for (Alien alien : tLevel.getAliens()) {

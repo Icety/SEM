@@ -7,7 +7,10 @@ import org.newdawn.slick.Image;
  * Class for MotherShipAlien.
  * @author Niek van der Laan
  */
-public class MothershipAlien extends Alien{
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
+public class MothershipAlien extends Alien {
 
     /**
      * Constructor for MotherShipAlien.

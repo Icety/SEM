@@ -6,6 +6,10 @@ import application.Main;
  * Class for projectile.
  * @author Niek van der Laan
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class Projectile extends Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 15;
@@ -32,7 +36,7 @@ public class Projectile extends Sprite {
      * @return the boolean value.
      */
     public boolean isOutOfBounds() {
-        return ( (tY < 0) || (tY > Main.HEIGHT) );
+        return ((tY < 0) || (tY > Main.HEIGHT));
     }
 
     /**
@@ -40,7 +44,7 @@ public class Projectile extends Sprite {
      * @return the belonging String.
      */
     public String toString() {
-        return "Projectile on coords: "+ tX +", "+ tY;
+        return "Projectile on coords: " + tX + ", " + tY;
     }
 
     /**

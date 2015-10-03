@@ -7,6 +7,10 @@ import org.newdawn.slick.Image;
  * Class for BachelliProjectile.
  * @author Niek van der Laan.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class BachelliProjectile extends Projectile {
     protected float tX;
     protected float tY;

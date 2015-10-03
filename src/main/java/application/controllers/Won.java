@@ -1,7 +1,12 @@
 package application.controllers;
 
 import application.Main;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -11,7 +16,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * Controller class for Won.
  * @author Thomas Oomens.
  */
-public class Won extends BasicGameState{
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
+public class Won extends BasicGameState {
     private Main tMain; // stored for later use
     protected int tId;
     protected Image tBackground;
@@ -87,7 +97,7 @@ public class Won extends BasicGameState{
      * @param c character value for the key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_1:
                 tMain.newGame();
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

@@ -1,17 +1,27 @@
 package application.controllers;
 
+import java.io.File;
 import application.Main;
-import application.core.*;
-import org.newdawn.slick.*;
+import org.w3c.dom.Element;
+import java.util.ArrayList;
+import org.w3c.dom.Document;
+import application.core.Alien;
+import application.core.BigAlien;
+import application.core.MiniAlien;
+import application.core.FinalBoss;
+import application.core.SmallAlien;
+import application.core.MothershipAlien;
+import org.newdawn.slick.Font;
 import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.geom.*;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Circle;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.gui.TextField;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,13 +31,17 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Controller method for LevelBuilder.
  * @author Niek van der Laan.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber",
+        "checkstyle:linelength",
+        "checkstyle:methodlength"
+})
 public class LevelBuilder extends BasicGameState {
 
     protected int tId;
@@ -61,15 +75,19 @@ public class LevelBuilder extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
-        circlex = Main.WIDTH/2;
-        circley =  Main.HEIGHT/3;
-        circle = new Circle(circlex,circley, 70);
+        circlex = Main.WIDTH / 2;
+        circley =  Main.HEIGHT / 3;
+        circle = new Circle(circlex, circley, 70);
         menuHeight = 150;
         selected = null;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
         saveGame = false;
         Font font = container.getDefaultFont();
-        saveName = new TextField(container, font, Main.WIDTH/2 - Main.WIDTH/16, Main.HEIGHT/2, Main.WIDTH/8, 30);
+        saveName = new TextField(container,
+                font,
+                Main.WIDTH / 2 - Main.WIDTH / 16,
+                Main.HEIGHT / 2, Main.WIDTH / 8,
+                30);
         saveName.setAcceptingInput(false);
     }
 
@@ -91,45 +109,47 @@ public class LevelBuilder extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
-
-
         //Draw the background
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-
         //Draw the menu bar
         g.setColor(Color.blue);
         g.fillRect(0, 0, Main.WIDTH, menuHeight);
         //Draw all text
         g.setColor(Color.white);
         g.drawString("Space:   add selected alien", Main.WIDTH / 8, menuHeight / 8);
-        g.drawString("R:       Delete alien in circle", Main.WIDTH / 8, 2*menuHeight / 8);
-        g.drawString("Arrows:  move circle", Main.WIDTH / 8, 3*menuHeight / 8);
+        g.drawString("R:       Delete alien in circle", Main.WIDTH / 8, 2 * menuHeight / 8);
+        g.drawString("Arrows:  move circle", Main.WIDTH / 8, 3 * menuHeight / 8);
         g.drawString("Escape:  Save current level", Main.WIDTH / 8, 4 * menuHeight / 8);
         if (saveGame) {
             g.drawString("PLEASE ENTER A NAME FOR THE LEVEL FILE", Main.WIDTH / 2 - Main.WIDTH / 16, Main.HEIGHT / 2 - 50);
             saveName.render(container, g);
             saveName.setFocus(focus);
         }
-        g.drawString("Selected Alien: ", Main.WIDTH / 3, menuHeight / 2);
-        g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH/4, menuHeight / 8);
-        g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH/4, 2*menuHeight / 8);
-        g.drawString("3: BigAlien      ", Main.WIDTH - Main.WIDTH/4, 3*menuHeight / 8);
-        g.drawString("4: MothershipAlien      ", Main.WIDTH - Main.WIDTH/4, 4*menuHeight / 8);
-        g.drawString("5: FinalBoss", Main.WIDTH - Main.WIDTH/4, 5*menuHeight / 8 );
-
+        renderDrawAliens(g);
         //Draw the circle
         g.setColor(Color.red);
         g.draw(circle);
-
         //Display the Alien we have currently selected
         if (selected != null) {
             selected.getImage().draw(Main.WIDTH / 2, menuHeight / 3, menuHeight / 2, menuHeight / 2);
         }
-
         //Draw all aliens
         for (Alien alien : aliens) {
             alien.getImage().draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
         }
+    }
+
+    /**
+     * Render method to draw Aliens in the LevelBuilder.
+     * @param g required graphics for placing Aliens.
+     */
+    public void renderDrawAliens(Graphics g) {
+        g.drawString("Selected Alien: ", Main.WIDTH / 3, menuHeight / 2);
+        g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH / 4, menuHeight / 8);
+        g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH / 4, 2 * menuHeight / 8);
+        g.drawString("3: BigAlien      ", Main.WIDTH - Main.WIDTH / 4, 3 * menuHeight / 8);
+        g.drawString("4: MothershipAlien      ", Main.WIDTH - Main.WIDTH / 4, 4 * menuHeight / 8);
+        g.drawString("5: FinalBoss", Main.WIDTH - Main.WIDTH / 4, 5 * menuHeight / 8);
     }
 
     /**
@@ -155,7 +175,7 @@ public class LevelBuilder extends BasicGameState {
             circlex += 4;
         }
         //Move circle left
-        if (circleLeft && circle.getMinX() > 0){
+        if (circleLeft && circle.getMinX() > 0) {
             circlex -= 4;
         }
         //Update circle coordinates
@@ -169,8 +189,7 @@ public class LevelBuilder extends BasicGameState {
      * @param c character value of the key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
-
+        switch (key) {
             //Update selected alien
             case Input.KEY_1:
                 selected = new MiniAlien();
@@ -187,7 +206,6 @@ public class LevelBuilder extends BasicGameState {
             case Input.KEY_5:
                 selected = new FinalBoss();
                 break;
-
             //If we stop pressing an arrow, we make the circle stop moving aswell
             case Input.KEY_DOWN:
                     circleDown = false;
@@ -201,15 +219,13 @@ public class LevelBuilder extends BasicGameState {
             case Input.KEY_RIGHT:
                     circleRight = false;
                 break;
-
             //Place the selected alien in the middle of our circle
             case Input.KEY_SPACE:
                 if (selected != null) {
                     Alien newAlien = makeAlien();
-                    placeAlien(newAlien, circlex - newAlien.getWidth()/2, circley - newAlien.getHeight()/2);
+                    placeAlien(newAlien, circlex - newAlien.getWidth() / 2, circley - newAlien.getHeight() / 2);
                 }
                 break;
-
             //Remove the alien inside our circle
             case Input.KEY_R:
                 Alien toRemove = checkCollision();
@@ -223,7 +239,7 @@ public class LevelBuilder extends BasicGameState {
                 focus = !focus;
                 break;
             case Input.KEY_ENTER:
-                if(saveGame) {
+                if (saveGame) {
                     toXML(saveName.getText());
                     saveGame = !saveGame;
                 }
@@ -239,23 +255,28 @@ public class LevelBuilder extends BasicGameState {
      * @param c character value of the key.
      */
     public void keyPressed(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_DOWN:
-                if (circle.getY() < Main.HEIGHT)
-                circleDown = true;
-                break;
+                if (circle.getY() < Main.HEIGHT) {
+                    circleDown = true;
+                    break;
+                }
             case Input.KEY_UP:
-                if (circle.getY() > 0)
-                circleUp = true;
-                break;
+                if (circle.getY() > 0) {
+                    circleUp = true;
+                    break;
+                }
             case Input.KEY_LEFT:
-                if (circle.getX() > 0)
-                circleLeft = true;
-                break;
+                if (circle.getX() > 0) {
+                    circleLeft = true;
+                    break;
+                }
             case Input.KEY_RIGHT:
-                if (circle.getX() < Main.WIDTH)
-                circleRight = true;
-                break;
+                if (circle.getX() < Main.WIDTH) {
+                    circleRight = true;
+                    break;
+                }
+            default: break;
         }
     }
 
@@ -264,8 +285,8 @@ public class LevelBuilder extends BasicGameState {
      * @return the alien which is under our circle, null if none.
      */
     public Alien checkCollision() {
-        for(Alien a: aliens) {
-            if(a.getBoundingBox().intersects(circle)) {
+        for (Alien a: aliens) {
+            if (a.getBoundingBox().intersects(circle)) {
                 return a;
             }
         }

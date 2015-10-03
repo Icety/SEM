@@ -6,6 +6,9 @@ import application.Main;
  * Class for SmallProjectile.
  * @author Niek van der Laan.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class SmallProjectile extends Projectile {
 
     /**
@@ -20,12 +23,15 @@ public class SmallProjectile extends Projectile {
         tWidth = 7;
         tHeight = 15;
 
-        if(Main.DIFFICULTY == 1)
+        if (Main.DIFFICULTY == 1) {
             tSpeed = 2;
-        else if(Main.DIFFICULTY == 2)
+        }
+        else if (Main.DIFFICULTY == 2) {
             tSpeed = 3;
-        else
+        }
+        else {
             tSpeed = 5;
+        }
     }
 
     /**

@@ -3,9 +3,12 @@ package application.controllers;
 import application.Main;
 import application.core.Alien;
 import application.core.Player;
-import application.core.Projectile;
-import application.core.Upgrade;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -14,8 +17,15 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import java.util.ArrayList;
 
 /**
- * Created by Thomas on 08-09-15.
+ * Controller class for StoryLine.
+ * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength",
+        "checkstyle:methodlength"
+})
 public class StoryLine extends BasicGameState {
     protected Main tMain;
     protected int tId;
@@ -28,19 +38,36 @@ public class StoryLine extends BasicGameState {
     protected int tCount = 0;
     protected int tTextHeight = -300;
 
+    /**
+     * Constructor method for the controller.
+     * @param id the given ID for the controller.
+     */
     public StoryLine(int id) {
         tId = id;
     }
 
+    /**
+     * Initialization method for the controller.
+     * @param container required GameController.
+     * @param game the current game.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
 
     }
 
+    /**
+     * Render method for the controller.
+     * @param container required GameController.
+     * @param game the current game.
+     * @param g required Graphics.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -74,6 +101,13 @@ public class StoryLine extends BasicGameState {
 
     }
 
+    /**
+     * Update method for the controller.
+     * @param container required GameContainer.
+     * @param game the current game.
+     * @param delta a given integer.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
@@ -82,7 +116,7 @@ public class StoryLine extends BasicGameState {
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/"+ tMain.getGame().getLevel().getBackground());
+                tBackground2 = new Image("src/main/java/application/images/" + tMain.getGame().getLevel().getBackground());
             }
             if (tCount % 2 == 0) {
                 p.moveUp((int) (tCount / 50) * 2);
@@ -137,31 +171,47 @@ public class StoryLine extends BasicGameState {
         }
     }
 
+    /**
+     * Getter method for the ID of the controller.
+     * @return the controller ID.
+     */
     @Override
     public int getID() {
         return tId;
     }
 
+    /**
+     * Method to reset the values of the StoryLine.
+     */
     protected void resetValues() {
         tCount = 0;
         tDone = false;
         tTextHeight = -300;
     }
 
+    /**
+     * Method to give the made up Story.
+     * @return The made up story in a String.
+     */
     protected String getStory() {
         //Todo: Get this from XML
-        return "those aliens, are they?? Pandaliens??\n\n" +
-                "Now the ship is on it's way. But wait! What are\n\n" +
-                "the aliens, so it could be destroyed.\n\n" +
-                "left it's safe home, in search for the planet of \n\n" +
-                "retaliate! Their most powerful ship: The Thomas \n\n" +
-                "planet was under attack, they would have to \n\n" +
-                "it became clear to the SEMmians that their \n\n" +
-                "After destroying the first layer of aliens";
+        return "those aliens, are they?? Pandaliens??\n\n"
+                + "Now the ship is on it's way. But wait! What are\n\n"
+                + "the aliens, so it could be destroyed.\n\n"
+                + "left it's safe home, in search for the planet of \n\n"
+                + "retaliate! Their most powerful ship: The Thomas \n\n"
+                + "planet was under attack, they would have to \n\n"
+                + "it became clear to the SEMmians that their \n\n"
+                + "After destroying the first layer of aliens";
     }
 
+    /**
+     * Method to check whether a key is pressed.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
     public void keyPressed(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_SPACE:
                 tMain.getGame().getPlayer().fireButtonPressed(true);
                 //TODO
@@ -171,8 +221,13 @@ public class StoryLine extends BasicGameState {
         }
     }
 
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_LEFT:
                 tMain.getGame().getPlayer().leftArrowPressed(false);
                 break;

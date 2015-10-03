@@ -6,21 +6,25 @@ import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * Test class for Sprite.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class SpriteTest {
     private Sprite testSprite;
     private Projectile testProjectile;
 
     /**
      * Initialize variables for test process.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -30,8 +34,7 @@ public class SpriteTest {
 
     /**
      * Test whether getX() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetX() throws Exception {
@@ -42,8 +45,7 @@ public class SpriteTest {
 
     /**
      * Test whether getY() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetY() throws Exception {
@@ -54,8 +56,7 @@ public class SpriteTest {
 
     /**
      * Test whether setX() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSettX() throws Exception {
@@ -66,8 +67,7 @@ public class SpriteTest {
 
     /**
      * Test whether setY() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSettY() throws Exception {
@@ -78,8 +78,7 @@ public class SpriteTest {
 
     /**
      * Test whether getWidth() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetWidth() throws Exception {
@@ -90,8 +89,7 @@ public class SpriteTest {
 
     /**
      * Test whether getHeight() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetHeight() throws Exception {
@@ -102,8 +100,7 @@ public class SpriteTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
@@ -112,8 +109,7 @@ public class SpriteTest {
 
     /**
      * Test whether addProjectile() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddProjectile() throws Exception {
@@ -125,8 +121,7 @@ public class SpriteTest {
 
     /**
      * Test whether getProjectiles returns the correct list of projectiles.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetProjectiles() throws Exception {
@@ -139,8 +134,7 @@ public class SpriteTest {
 
     /**
      * Test whether removeProjectile() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testRemoveProjectile() throws Exception {
@@ -153,8 +147,7 @@ public class SpriteTest {
 
     /**
      * Test whether updateProjectiles() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateProjectiles() throws Exception {
@@ -169,8 +162,7 @@ public class SpriteTest {
 
     /**
      * Test whether noLives() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testNoLives() throws Exception {
@@ -183,10 +175,8 @@ public class SpriteTest {
 
     /**
      * Test whether getBoundingBox() returns the correct rectangle.
-     *
      * WARNING: Totally illegally tested with toString() because parent library misses equals()!
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetBoundingBox() throws Exception {
@@ -201,8 +191,7 @@ public class SpriteTest {
 
     /**
      * Test whether hit() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testHit() throws Exception {
@@ -215,8 +204,7 @@ public class SpriteTest {
 
     /**
      * Test whether intersect() returns the correct boolean value..
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testIntersects() throws Exception {

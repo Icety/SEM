@@ -7,6 +7,10 @@ import org.newdawn.slick.Image;
  * Class for UpgradedProjectile.
  * @author Niek van der Laan.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber"
+})
 public class UpgradedProjectile extends Projectile {
     protected float tDirectionX;
     protected float tDirectionY;

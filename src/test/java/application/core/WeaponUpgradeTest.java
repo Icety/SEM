@@ -10,13 +10,15 @@ import static org.junit.Assert.assertNull;
  * Test class for HealthUpgrade.java.
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class WeaponUpgradeTest {
     private WeaponUpgrade testUpgrade;
 
     /**
      * Test whether the constructor works with difficulty 1.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testConstructorWithDifficultyOne() throws Exception {
@@ -29,8 +31,7 @@ public class WeaponUpgradeTest {
 
     /**
      * Test whether the constructor works with difficulty 2.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testConstructorWithDifficultyTwo() throws Exception {
@@ -43,8 +44,7 @@ public class WeaponUpgradeTest {
 
     /**
      * Test whether the constructor works with difficulty 3.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testConstructorWithDifficultyThree() throws Exception {
@@ -57,8 +57,7 @@ public class WeaponUpgradeTest {
 
     /**
      * Test whether getImage() returns the correct Image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
