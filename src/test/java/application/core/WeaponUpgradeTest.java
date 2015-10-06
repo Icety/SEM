@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.WeaponUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

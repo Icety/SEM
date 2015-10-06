@@ -1,5 +1,6 @@
 package application.core;
 
+import application.core.projectiles.Projectile;
 import org.junit.Before;
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;

@@ -1,5 +1,6 @@
 package application.core;
 
+import application.core.aliens.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

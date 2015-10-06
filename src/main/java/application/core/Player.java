@@ -1,6 +1,10 @@
 package application.core;
 
 import application.Main;
+import application.core.projectiles.PlayerProjectile;
+import application.core.projectiles.Projectile;
+import application.core.projectiles.UpgradedProjectile;
+import application.core.upgrades.*;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;

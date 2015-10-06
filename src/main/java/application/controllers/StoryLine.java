@@ -1,7 +1,7 @@
 package application.controllers;
 
 import application.Main;
-import application.core.Alien;
+import application.core.aliens.Alien;
 import application.core.Player;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;

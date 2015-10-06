@@ -1,4 +1,4 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
 import org.newdawn.slick.Image;

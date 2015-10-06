@@ -1,6 +1,7 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
+import application.core.Sprite;
 
 /**
  * Class for Upgrade.

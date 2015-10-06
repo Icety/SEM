@@ -1,4 +1,4 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
 

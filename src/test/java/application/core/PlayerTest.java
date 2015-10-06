@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.*;
 import org.junit.Before;
 import org.junit.Test;
 

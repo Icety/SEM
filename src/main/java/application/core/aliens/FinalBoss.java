@@ -1,6 +1,9 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
+import application.core.aliens.Alien;
+import application.core.projectiles.BachelliProjectile;
+import application.core.projectiles.BossProjectile;
 import org.newdawn.slick.Image;
 
 /**

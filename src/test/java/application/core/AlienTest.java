@@ -1,6 +1,9 @@
 package application.core;
 
 import application.Main;
+import application.core.aliens.Alien;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.Upgrade;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

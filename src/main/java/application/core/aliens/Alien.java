@@ -1,6 +1,9 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
+import application.core.*;
+import application.core.projectiles.SmallProjectile;
+import application.core.upgrades.*;
 import org.w3c.dom.Element;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -134,7 +137,7 @@ public class Alien extends Sprite {
      * Determines whether the alien is the lowest alien of its column.
      * @param aliens the Aliens to set for the lower Level.
      */
-    protected void setLowerLevel(ArrayList<Alien> aliens) {
+    public void setLowerLevel(ArrayList<Alien> aliens) {
         int bA = 5;
         int hA = 10;
         Rectangle myBox = new Rectangle(tX + bA,

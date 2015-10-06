@@ -1,5 +1,6 @@
 package application.core;
 
+import application.core.aliens.Alien;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;

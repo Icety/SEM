@@ -1,22 +1,22 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
 
 /**
- * Class for PlayerUpgrade.
- * @author Ties WesterBorg
+ * Class for HealthUpgrade.
+ * @author Ties Westerborg
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
 })
-public class PlayerUpgrade extends Upgrade {
+public final class HealthUpgrade extends Upgrade {
 
     /**
-     * Constructor for PlayerUpgrade.
+     * Constructor for HealthUpgrade.
      * @param x x-coordinate.
      * @param y y-coordinate.
      */
-    public PlayerUpgrade(int x, int y) {
+    public HealthUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
         tY = y;
@@ -27,18 +27,18 @@ public class PlayerUpgrade extends Upgrade {
             tSpeed = 2;
         }
         else if (Main.DIFFICULTY == 2) {
-            tSpeed = 2;
+            tSpeed = 3;
         }
         else {
-            tSpeed = 4;
+            tSpeed = 5;
         }
     }
 
     /**
-     * Getter method for the belonging Image.
+     * Getter method for the Image.
      * @return the belonging Image.
      */
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_3;
+        return Main.UPGRADE_2;
     }
 }

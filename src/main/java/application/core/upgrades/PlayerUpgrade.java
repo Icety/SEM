@@ -1,32 +1,32 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
 
 /**
- * Class for WeaponUpgrade.
- * @author Ties WesterBorg.
+ * Class for PlayerUpgrade.
+ * @author Ties WesterBorg
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
 })
-public class WeaponUpgrade extends Upgrade {
+public class PlayerUpgrade extends Upgrade {
 
     /**
-     * Constructor for WeaponUpgrade.
+     * Constructor for PlayerUpgrade.
      * @param x x-coordinate.
      * @param y y-coordinate.
      */
-    public WeaponUpgrade(int x, int y) {
+    public PlayerUpgrade(int x, int y) {
         tDirection = 1;
         tX = x;
         tY = y;
         tWidth = 50;
         tHeight = 50;
         tHealth = 1;
-        if (tDifficulty == 1) {
+        if (Main.DIFFICULTY == 1) {
             tSpeed = 2;
         }
-        else if (tDifficulty == 2) {
+        else if (Main.DIFFICULTY == 2) {
             tSpeed = 2;
         }
         else {
@@ -39,6 +39,6 @@ public class WeaponUpgrade extends Upgrade {
      * @return the belonging Image.
      */
     public org.newdawn.slick.Image getImage() {
-        return Main.UPGRADE_1;
+        return Main.UPGRADE_3;
     }
 }

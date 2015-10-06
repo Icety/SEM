@@ -1,5 +1,11 @@
 package application.core;
 
+import application.core.aliens.Alien;
+import application.core.aliens.SmallAlien;
+import application.core.projectiles.Projectile;
+import application.core.projectiles.SmallProjectile;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.junit.After;
 import org.junit.Before;

@@ -1,6 +1,10 @@
 package application.core;
 
 import java.util.Iterator;
+
+import application.core.aliens.Alien;
+import application.core.projectiles.Projectile;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
 

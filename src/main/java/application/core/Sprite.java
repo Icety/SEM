@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.projectiles.Projectile;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Rectangle;
 import java.util.ArrayList;
