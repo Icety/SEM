@@ -298,4 +298,16 @@ public class PlayerTest {
 
         assertTrue(testPlayer.tUpgraded);
     }
+
+    /**
+     * Test whether moveUp() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testMoveUp() throws Exception {
+        testPlayer.tY = 10;
+        testPlayer.moveUp(10);
+
+        assertEquals(0, testPlayer.tY);
+    }
 }
