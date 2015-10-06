@@ -25,6 +25,7 @@ public class StoryLine extends BasicGameState {
     protected String tBackgroundString = "moving.jpg";
     protected boolean tDone = false;
     protected boolean tStart = true;
+    protected boolean tSkip = false;
     protected int tCount = 0;
     protected int tTextHeight = -300;
 
@@ -96,7 +97,7 @@ public class StoryLine extends BasicGameState {
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
-            if (!tDone) {
+            if (!tDone && !tSkip) {
                 if (tCount % 2 == 0) {
                     p.moveUp(Math.max(2, 10 - (int) (tCount / 25)));
                 }
@@ -109,7 +110,7 @@ public class StoryLine extends BasicGameState {
                 if (tCount % 2 == 0) {
                     tTextHeight++;
                 }
-                if (tTextHeight > Main.HEIGHT / 2) {
+                if (tTextHeight > Main.HEIGHT / 2 || tSkip) {
                     if (tCount > 500) {
                         tCount = 0;
                     }
@@ -145,30 +146,15 @@ public class StoryLine extends BasicGameState {
     protected void resetValues() {
         tCount = 0;
         tDone = false;
+        tSkip = false;
         tTextHeight = -300;
     }
 
     public void keyPressed(int key, char c) {
         switch(key) {
             case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(true);
-                //TODO
-                break;
-            default:
-                break;
-        }
-    }
-
-    public void keyReleased(int key, char c) {
-        switch(key) {
-            case Input.KEY_LEFT:
-                tMain.getGame().getPlayer().leftArrowPressed(false);
-                break;
-            case Input.KEY_RIGHT:
-                tMain.getGame().getPlayer().rightArrowPressed(false);
-                break;
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(false);
+                tSkip = true;
+                tCount = 0;
                 break;
             default:
                 break;
