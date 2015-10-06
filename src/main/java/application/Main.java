@@ -14,7 +14,7 @@ public class Main extends StateBasedGame {
     public static final int LEVELS = 1;
     public static final int WON = 2;
     public static final int LOST = 3;
-    public static final int STORYLINE = 7;
+    public static final int STORYLINE = 20;
     public static final int LEVELBUILDER = 4;
     public static final int ENTERNAME = 5;
     public static final int HIGHSCORE = 6;

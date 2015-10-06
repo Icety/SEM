@@ -11,6 +11,16 @@ public class Level {
     protected Player tPlayer;
     protected String tBackground;
 
+    public String getStoryLine() {
+        return tStoryLine;
+    }
+
+    public void setStoryLine(String tStoryLine) {
+        this.tStoryLine = tStoryLine;
+    }
+
+    protected String tStoryLine;
+
     /**
      * Getter method for the Aliens in the Level.
      * @return an ArrayList of Aliens.

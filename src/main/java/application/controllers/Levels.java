@@ -36,7 +36,7 @@ public class Levels extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
 
     }
 
@@ -105,11 +105,11 @@ public class Levels extends BasicGameState {
                 game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
             if (tMain.getGame().isNextLevel()) {
-                game.enterState(7);
+                game.enterState(20);
             }
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
-                tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+                tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
             }
         }
 
@@ -139,6 +139,9 @@ public class Levels extends BasicGameState {
                 break;
             case Input.KEY_SPACE:
                 tMain.getGame().getPlayer().fireButtonPressed(true);
+                break;
+            case Input.KEY_S:
+                tMain.enterState(20);
                 break;
             default:
                 break;

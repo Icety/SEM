@@ -37,7 +37,7 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
 
     }
 
@@ -54,7 +54,7 @@ public class StoryLine extends BasicGameState {
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
             if (tDone) {
-                g.drawString(this.getStory(), Main.WIDTH - 600, tTextHeight);
+                g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 600, tTextHeight);
             }
         }
 
@@ -82,7 +82,7 @@ public class StoryLine extends BasicGameState {
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/"+ tMain.getGame().getLevel().getBackground());
+                tBackground2 = new Image("src/main/java/application/images/backgrounds/"+ tMain.getGame().getLevel().getBackground());
             }
             if (tCount % 2 == 0) {
                 p.moveUp((int) (tCount / 50) * 2);
@@ -93,7 +93,7 @@ public class StoryLine extends BasicGameState {
                 p.settY(Main.HEIGHT + 120);
                 tStart = false;
                 tCount = 0;
-                game.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
             if (!tDone) {
@@ -146,18 +146,6 @@ public class StoryLine extends BasicGameState {
         tCount = 0;
         tDone = false;
         tTextHeight = -300;
-    }
-
-    protected String getStory() {
-        //Todo: Get this from XML
-        return "those aliens, are they?? Pandaliens??\n\n" +
-                "Now the ship is on it's way. But wait! What are\n\n" +
-                "the aliens, so it could be destroyed.\n\n" +
-                "left it's safe home, in search for the planet of \n\n" +
-                "retaliate! Their most powerful ship: The Thomas \n\n" +
-                "planet was under attack, they would have to \n\n" +
-                "it became clear to the SEMmians that their \n\n" +
-                "After destroying the first layer of aliens";
     }
 
     public void keyPressed(int key, char c) {

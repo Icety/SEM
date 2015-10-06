@@ -66,7 +66,7 @@ public class LevelBuilder extends BasicGameState {
         circle = new Circle(circlex,circley, 70);
         menuHeight = 150;
         selected = null;
-        tBackground = new Image("src/main/java/application/images/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
         saveGame = false;
         Font font = container.getDefaultFont();
         saveName = new TextField(container, font, Main.WIDTH/2 - Main.WIDTH/16, Main.HEIGHT/2, Main.WIDTH/8, 30);
@@ -331,6 +331,7 @@ public class LevelBuilder extends BasicGameState {
 
             // background element
             Element background = doc.createElement("background");
+            background.appendChild(doc.createTextNode(tBackgroundString));
             rootElement.appendChild(background);
 
             // aliens elements
