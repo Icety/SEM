@@ -153,8 +153,8 @@ public class Main extends StateBasedGame {
         tGame = new Game(WIDTH, HEIGHT, tLogger);
         tGame.nextLevel();
         Player p = tGame.getPlayer();
-        p.settX(tGame.getWidth() / 2);
-        p.settY(tGame.getHeight() - (p.getHeight() + 50));
+        p.setX(tGame.getWidth() / 2);
+        p.setY(tGame.getHeight() - (p.getHeight() + 50));
     }
 
     /**

@@ -26,8 +26,8 @@ public class UpgradedProjectile extends ExtendedProjectile {
     public UpgradedProjectile(int x, int y, float directionX, float directionY) {
         super(x, y, directionX, directionY);
         this.tSpeed = 5;
-        this.tWidth = 7;
-        this.tHeight = 15;
+        this.setWidth(7);
+        this.setHeight(15);
     }
 
     /**

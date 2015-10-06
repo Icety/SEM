@@ -29,10 +29,10 @@ public class SmallAlienTest {
      */
     @Test
     public void testAddShootChance() throws Exception {
-        int oldChance = testAlien.tShootChance;
+        int oldChance = testAlien.getShootChance();
         testAlien.addShootChance();
 
-        assertTrue(testAlien.tShootChance >= oldChance);
+        assertTrue(testAlien.getShootChance() >= oldChance);
     }
 
     /**

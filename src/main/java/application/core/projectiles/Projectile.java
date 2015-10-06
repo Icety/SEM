@@ -11,6 +11,7 @@ import application.core.Sprite;
         "checkstyle:magicnumber",
         "checkstyle:visibilitymodifier"
 })
+
 public class Projectile extends Sprite {
     protected int tSpeed = 15;
     protected int tHealth = 1;
@@ -83,5 +84,42 @@ public class Projectile extends Sprite {
      */
     public boolean isRemoved() {
         return tRemoved;
+    }
+
+    public int getSpeed() {
+        return tSpeed;
+    }
+
+    public void setSpeed(int tSpeed) {
+        this.tSpeed = tSpeed;
+    }
+
+    public int getHealth() {
+        return tHealth;
+    }
+
+    public void setHealth(int tHealth) {
+        this.tHealth = tHealth;
+    }
+
+    public void setX(float tX) {
+        this.tX = tX;
+    }
+
+    public void setY(float tY) {
+        this.tY = tY;
+    }
+
+    public float getDirectionY() {
+        return tDirectionY;
+    }
+
+    public void setDirectionY(float tDirectionY) {
+        this.tDirectionY = tDirectionY;
+    }
+
+
+    public void setRemoved(boolean tRemoved) {
+        this.tRemoved = tRemoved;
     }
 }

@@ -65,7 +65,7 @@ public class BachelliProjectileTest {
      */
     @Test
     public void testGetX() throws Exception {
-        testProjectile.tX = 1;
+        testProjectile.setX(1);
 
         assertEquals(1, testProjectile.getX());
     }
@@ -76,7 +76,7 @@ public class BachelliProjectileTest {
      */
     @Test
     public void testGetY() throws Exception {
-        testProjectile.tY = 1;
+        testProjectile.setY(1);
 
         assertEquals(1, testProjectile.getY());
     }

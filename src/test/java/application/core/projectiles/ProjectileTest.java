@@ -1,4 +1,4 @@
-package application.core;
+package application.core.projectiles;
 
 import application.core.projectiles.Projectile;
 import org.junit.Before;
@@ -21,7 +21,7 @@ public class ProjectileTest {
      */
     @Before
     public void setUp() throws Exception {
-        testProjectile = new Projectile();
+        testProjectile = new Projectile(0, 0);
     }
 
     /**
@@ -30,9 +30,9 @@ public class ProjectileTest {
      */
     @Test
     public void testSetDirection() throws Exception {
-        testProjectile.setDirection(2);
+        testProjectile.setDirectionY(2);
 
-        assertEquals(2, testProjectile.tDirection);
+        assertEquals(2, testProjectile.tDirectionY, 0.0);
     }
 
     /**
@@ -41,8 +41,8 @@ public class ProjectileTest {
      */
     @Test
     public void testToString() throws Exception {
-        testProjectile.settX(0);
-        testProjectile.settY(0);
+        testProjectile.setX(0);
+        testProjectile.setY(0);
 
         assertEquals("Projectile on coords: 0, 0", testProjectile.toString());
     }

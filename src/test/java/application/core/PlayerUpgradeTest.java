@@ -26,7 +26,7 @@ public class PlayerUpgradeTest {
         Main.DIFFICULTY = 1;
         testUpgrade = new PlayerUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -38,7 +38,7 @@ public class PlayerUpgradeTest {
         Main.DIFFICULTY = 2;
         testUpgrade = new PlayerUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -50,7 +50,7 @@ public class PlayerUpgradeTest {
         Main.DIFFICULTY = 3;
         testUpgrade = new PlayerUpgrade(0, 0);
 
-        assertEquals(4, testUpgrade.tSpeed);
+        assertEquals(4, testUpgrade.getSpeed());
     }
 
     /**

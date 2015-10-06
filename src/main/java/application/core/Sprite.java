@@ -43,7 +43,7 @@ public class Sprite {
      * Setter method for the x-coordinate.
      * @param x x-coordinate.
      */
-    public void settX(int x) {
+    public void setX(int x) {
         tX = x;
     }
 
@@ -51,7 +51,7 @@ public class Sprite {
      * Setter method for the y-coordinate.
      * @param y y-coordinate.
      */
-    public void settY(int y) {
+    public void setY(int y) {
         tY = y;
     }
 
@@ -122,7 +122,7 @@ public class Sprite {
     /**
      * Update method for the projectiles belonging to the Sprite.
      */
-    protected void updateProjectiles() {
+    public void updateProjectiles() {
         Iterator<Projectile> i = tProjectiles.iterator();
         while (i.hasNext()) {
             Projectile projectile = i.next();
@@ -160,5 +160,61 @@ public class Sprite {
      */
     public boolean intersects(Sprite sprite) {
         return getBoundingBox() != null && getBoundingBox().intersects(sprite.getBoundingBox());
+    }
+
+    public int getHealth() {
+        return tHealth;
+    }
+
+    public double getRandomChance() {
+        return tRandomChance;
+    }
+
+    public int getDifficulty() {
+        return tDifficulty;
+    }
+
+    public int getKillScore() {
+        return tKillScore;
+    }
+
+    public int getHitScore() {
+        return tHitScore;
+    }
+
+    public void setHealth(int tHealth) {
+        this.tHealth = tHealth;
+    }
+
+    public void setRandomChance(double tRandomChance) {
+        this.tRandomChance = tRandomChance;
+    }
+
+    public void setWidth(int tWidth) {
+        this.tWidth = tWidth;
+    }
+
+    public void setHeight(int tHeight) {
+        this.tHeight = tHeight;
+    }
+
+    public void setKillScore(int tKillScore) {
+        this.tKillScore = tKillScore;
+    }
+
+    public void setHitScore(int tHitScore) {
+        this.tHitScore = tHitScore;
+    }
+
+    public void setProjectiles(ArrayList<Projectile> tProjectiles) {
+        this.tProjectiles = tProjectiles;
+    }
+
+    public void decrementHealth() {
+        this.tHealth--;
+    }
+
+    public void incrementHealth() {
+        this.tHealth++;
     }
 }

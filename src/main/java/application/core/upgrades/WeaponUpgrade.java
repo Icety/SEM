@@ -1,6 +1,7 @@
 package application.core.upgrades;
 
 import application.Main;
+import org.newdawn.slick.Image;
 
 /**
  * Class for WeaponUpgrade.
@@ -17,20 +18,20 @@ public class WeaponUpgrade extends Upgrade {
      * @param y y-coordinate.
      */
     public WeaponUpgrade(int x, int y) {
-        tDirection = 1;
-        tX = x;
-        tY = y;
-        tWidth = 50;
-        tHeight = 50;
-        tHealth = 1;
-        if (tDifficulty == 1) {
-            tSpeed = 2;
+        setDirection(1);
+        setX(x);
+        setY(y);
+        setWidth(50);
+        setHeight(50);
+        setHealth(1);
+        if (getDifficulty() == 1) {
+            setSpeed(2);
         }
-        else if (tDifficulty == 2) {
-            tSpeed = 2;
+        else if (getDifficulty() == 2) {
+            setSpeed(2);
         }
         else {
-            tSpeed = 4;
+            setSpeed(4);
         }
     }
 
@@ -38,7 +39,7 @@ public class WeaponUpgrade extends Upgrade {
      * Getter method for the belonging Image.
      * @return the belonging Image.
      */
-    public org.newdawn.slick.Image getImage() {
+    public Image getImage() {
         return Main.UPGRADE_1;
     }
 }

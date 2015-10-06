@@ -1,6 +1,7 @@
 package application.core.upgrades;
 
 import application.Main;
+import org.newdawn.slick.Image;
 
 /**
  * Class for PlayerUpgrade.
@@ -38,7 +39,7 @@ public class PlayerUpgrade extends Upgrade {
      * Getter method for the belonging Image.
      * @return the belonging Image.
      */
-    public org.newdawn.slick.Image getImage() {
+    public Image getImage() {
         return Main.UPGRADE_3;
     }
 }

@@ -24,7 +24,7 @@ public class SmallProjectileTest {
         Main.DIFFICULTY = 1;
         SmallProjectile testProjectile = new SmallProjectile(0, 0);
 
-        assertEquals(2, testProjectile.tSpeed);
+        assertEquals(2, testProjectile.getSpeed());
     }
 
     /**
@@ -36,7 +36,7 @@ public class SmallProjectileTest {
         Main.DIFFICULTY = 2;
         SmallProjectile testProjectile = new SmallProjectile(0, 0);
 
-        assertEquals(3, testProjectile.tSpeed);
+        assertEquals(3, testProjectile.getSpeed());
     }
 
     /**
@@ -48,7 +48,7 @@ public class SmallProjectileTest {
         Main.DIFFICULTY = 3;
         SmallProjectile testProjectile = new SmallProjectile(0, 0);
 
-        assertEquals(5, testProjectile.tSpeed);
+        assertEquals(5, testProjectile.getSpeed());
     }
 
     /**

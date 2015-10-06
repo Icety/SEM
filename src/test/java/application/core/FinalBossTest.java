@@ -25,7 +25,7 @@ public class FinalBossTest {
     @Before
     public void setUp() {
         testBoss = new FinalBoss();
-        testBoss.tCanShoot = true;
+        testBoss.setCanShoot(true);
     }
 
     /**
@@ -36,7 +36,7 @@ public class FinalBossTest {
     public void testAddShootChance() throws Exception {
         testBoss.addShootChance();
 
-        assertTrue(testBoss.tShootChance >= 0);
+        assertTrue(testBoss.getShootChance() >= 0);
     }
 
     /**
@@ -80,7 +80,7 @@ public class FinalBossTest {
      */
     @Test
     public void testGetImageCharge() throws Exception {
-        testBoss.tSecondShot = 151;
+        testBoss.setSecondShot(151);
 
         assertEquals(Main.BOSS_BACHELLI_CHARGE, testBoss.getImage());
         assertEquals(250, testBoss.tHeight);

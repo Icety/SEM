@@ -302,8 +302,8 @@ public class LevelBuilder extends BasicGameState {
      */
     public void placeAlien(Alien alien, int x, int y) {
         if (alien != null) {
-            alien.settX(x);
-            alien.settY(y);
+            alien.setX(x);
+            alien.setY(y);
             aliens.add(alien);
         }
     }

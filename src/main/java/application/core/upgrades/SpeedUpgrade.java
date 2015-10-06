@@ -1,6 +1,7 @@
 package application.core.upgrades;
 
 import application.Main;
+import org.newdawn.slick.Image;
 
 /**
  * Class for SpeedUpgrade.
@@ -17,20 +18,20 @@ public final class SpeedUpgrade extends Upgrade {
      * @param y y-coordinate.
      */
     public SpeedUpgrade(int x, int y) {
-        tDirection = 1;
-        tX = x;
-        tY = y;
-        tWidth = 50;
-        tHeight = 50;
-        tHealth = 1;
+        setDirection(1);
+        setX(x);
+        setY(y);
+        setWidth(50);
+        setHeight(50);
+        setHealth(1);
         if (Main.DIFFICULTY == 1) {
-            tSpeed = 2;
+            setSpeed(2);
         }
         else if (Main.DIFFICULTY == 2) {
-            tSpeed = 3;
+            setSpeed(3);
         }
         else {
-            tSpeed = 5;
+            setSpeed(5);
         }
     }
 
@@ -38,7 +39,7 @@ public final class SpeedUpgrade extends Upgrade {
      * Getter method for the belonging Image.
      * @return the belonging Image.
      */
-    public org.newdawn.slick.Image getImage() {
+    public Image getImage() {
         return Main.UPGRADE_0;
     }
 }

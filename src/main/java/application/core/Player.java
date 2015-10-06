@@ -225,8 +225,8 @@ public class Player extends Sprite {
      * @return the Integer killScore.
      */
     public int hit() {
-        tHealth--;
-        return tKillScore;
+        decrementHealth();
+        return getKillScore();
     }
 
     /**
@@ -250,8 +250,8 @@ public class Player extends Sprite {
      * @param u the given upgrade.
      */
     public void upgrade(Upgrade u) {
-        if (u instanceof HealthUpgrade && tHealth < 3) {
-            tHealth++;
+        if (u instanceof HealthUpgrade && getHealth() < 3) {
+            incrementHealth();
         }
         if (u instanceof PlayerUpgrade) {
             tUpgraded = true;

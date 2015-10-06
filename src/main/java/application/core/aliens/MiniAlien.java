@@ -16,9 +16,9 @@ public class MiniAlien extends Alien {
      * Constructor for MiniAlien.
      */
     public MiniAlien() {
-        super.tHealth = 1;
-        super.tHitScore = 0;
-        super.tKillScore = 40;
+        tHealth = 1;
+        tHitScore = 0;
+        tKillScore = 40;
         tWidth = 70;
         tHeight = 70;
         tShootChance = 0;
