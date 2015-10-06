@@ -50,12 +50,22 @@ public class LevelFactory {
     public Level buildLevel(int levelNumber) {
         Level level = new Level();
 
-        Element levelXml = (Element) tLevels.item(levelNumber);
-
-        ArrayList<Alien> aliens = loadAliens(levelXml);
-        level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
-        level.addAliens(aliens);
-        level.setStartPlayer();
+        Element levelName = (Element) tLevels.item(levelNumber);
+        try {
+            File file = new File("src/main/java/application/" + levelName.getTextContent() + ".xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = null;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            Element levelXml = doc.getDocumentElement();
+            ArrayList<Alien> aliens = loadAliens(levelXml);
+            level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
+            level.addAliens(aliens);
+            level.setStartPlayer();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return level;
     }
