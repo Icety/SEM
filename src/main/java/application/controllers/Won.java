@@ -109,7 +109,7 @@ public class Won extends BasicGameState {
                 // TODO: Implement later
                 break;
             case Input.KEY_SPACE:
-                tMain.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                tMain.enterState(5);
                 break;
             default:
                 break;
