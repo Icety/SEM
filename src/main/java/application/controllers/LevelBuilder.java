@@ -2,6 +2,8 @@ package application.controllers;
 
 import java.io.File;
 import application.Main;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.w3c.dom.Element;
 import java.util.ArrayList;
 import org.w3c.dom.Document;
@@ -44,6 +46,7 @@ import javax.xml.transform.stream.StreamResult;
 })
 public class LevelBuilder extends BasicGameState {
 
+    protected Main tMain;
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "moving.jpg";
@@ -74,7 +77,7 @@ public class LevelBuilder extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
-
+        tMain = (Main) game;
         circlex = Main.WIDTH / 2;
         circley =  Main.HEIGHT / 3;
         circle = new Circle(circlex, circley, 70);
@@ -111,15 +114,14 @@ public class LevelBuilder extends BasicGameState {
             throws SlickException {
         //Draw the background
         tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-        //Draw the menu bar
-        g.setColor(Color.blue);
-        g.fillRect(0, 0, Main.WIDTH, menuHeight);
+
         //Draw all text
         g.setColor(Color.white);
-        g.drawString("Space:   add selected alien", Main.WIDTH / 8, menuHeight / 8);
-        g.drawString("R:       Delete alien in circle", Main.WIDTH / 8, 2 * menuHeight / 8);
-        g.drawString("Arrows:  move circle", Main.WIDTH / 8, 3 * menuHeight / 8);
-        g.drawString("Escape:  Save current level", Main.WIDTH / 8, 4 * menuHeight / 8);
+        g.drawString("Space:   Add selected alien", Main.WIDTH / 8, menuHeight / 6);
+        g.drawString("R:       Delete alien in circle", Main.WIDTH / 8, 2 * menuHeight / 6);
+        g.drawString("Arrows:  Move circle", Main.WIDTH / 8, 3 * menuHeight / 6);
+        g.drawString("Escape:  Save current level", Main.WIDTH / 8, 4 * menuHeight / 6);
+        g.drawString("Tab:     Leave without saving", Main.WIDTH / 8, 5 * menuHeight / 6);
         if (saveGame) {
             g.drawString("PLEASE ENTER A NAME FOR THE LEVEL FILE", Main.WIDTH / 2 - Main.WIDTH / 16, Main.HEIGHT / 2 - 50);
             saveName.render(container, g);
@@ -145,11 +147,11 @@ public class LevelBuilder extends BasicGameState {
      */
     public void renderDrawAliens(Graphics g) {
         g.drawString("Selected Alien: ", Main.WIDTH / 3, menuHeight / 2);
-        g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH / 4, menuHeight / 8);
-        g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH / 4, 2 * menuHeight / 8);
-        g.drawString("3: BigAlien      ", Main.WIDTH - Main.WIDTH / 4, 3 * menuHeight / 8);
-        g.drawString("4: MothershipAlien      ", Main.WIDTH - Main.WIDTH / 4, 4 * menuHeight / 8);
-        g.drawString("5: FinalBoss", Main.WIDTH - Main.WIDTH / 4, 5 * menuHeight / 8);
+        g.drawString("1: MiniAlien       ", Main.WIDTH - Main.WIDTH / 4, menuHeight / 6);
+        g.drawString("2: SmallAlien      ", Main.WIDTH - Main.WIDTH / 4, 2 * menuHeight / 6);
+        g.drawString("3: BigAlien      ", Main.WIDTH - Main.WIDTH / 4, 3 * menuHeight / 6);
+        g.drawString("4: MothershipAlien      ", Main.WIDTH - Main.WIDTH / 4, 4 * menuHeight / 6);
+        g.drawString("5: FinalBoss", Main.WIDTH - Main.WIDTH / 4, 5 * menuHeight / 6);
     }
 
     /**
@@ -243,7 +245,10 @@ public class LevelBuilder extends BasicGameState {
                     toXML(saveName.getText());
                     saveGame = !saveGame;
                 }
+                tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
+            case Input.KEY_TAB:
+                tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             default:
                 break;
         }
