@@ -1,6 +1,8 @@
 package application.core;
 
 import application.Main;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.w3c.dom.Element;
 import java.awt.Rectangle;
 import java.util.ArrayList;

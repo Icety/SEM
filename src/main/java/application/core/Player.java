@@ -220,7 +220,7 @@ public class Player extends Sprite {
      * Handle a hit on the Player.
      * @return the Integer killScore.
      */
-    public int hit() {
+    public int hit(){
         tHealth--;
         return tKillScore;
     }
