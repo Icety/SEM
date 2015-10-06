@@ -11,7 +11,7 @@ import org.newdawn.slick.Image;
         "checkstyle:visibilitymodifier",
         "checkstyle:magicnumber"
 })
-public class UpgradedProjectile extends Projectile {
+public class UpgradedProjectile extends ExtendedProjectile {
     protected float tDirectionX;
     protected float tDirectionY;
 
@@ -24,40 +24,10 @@ public class UpgradedProjectile extends Projectile {
      * @param directionY y-direction.
      */
     public UpgradedProjectile(int x, int y, float directionX, float directionY) {
-        this.tDirection = 1;
-        this.tX = x;
-        this.tY = y;
+        super(x, y, directionX, directionY);
         this.tSpeed = 5;
-        this.tWidth = 50;
-        this.tHeight = 70;
-        this.tDirectionX = -directionX;
-        this.tDirectionY = -directionY;
         this.tWidth = 7;
         this.tHeight = 15;
-    }
-
-    /**
-     * Update method for the UpgradedProjectile.
-     */
-    public void update() {
-        this.tX += tDirectionX * tSpeed;
-        this.tY += tDirectionY * tSpeed;
-    }
-
-    /**
-     * Getter method for the x-coordinate of the UpgradedProjectile.
-     * @return x-coordinate.
-     */
-    public int getX() {
-        return (int) tX;
-    }
-
-    /**
-     * Getter method for the y-coordinate of the UpgradedProjectile.
-     * @return y-coordinate.
-     */
-    public int getY() {
-        return (int) tY;
     }
 
     /**

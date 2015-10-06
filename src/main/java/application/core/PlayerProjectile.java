@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import org.newdawn.slick.Image;
 
 /**
  * Class for PlayerProjectile.
@@ -17,9 +18,8 @@ public class PlayerProjectile extends Projectile {
      * @param y y-coordinate.
      */
     public PlayerProjectile(int x, int y) {
-        tDirection = -1;
-        tX = x;
-        tY = y;
+        super(x, y);
+        tDirectionY = -1;
         tWidth = 7;
         tHeight = 15;
     }
@@ -28,7 +28,7 @@ public class PlayerProjectile extends Projectile {
      * Getter method for the belonging Image.
      * @return the belonging Image.
      */
-    public org.newdawn.slick.Image getImage() {
+    public Image getImage() {
         return Main.PLAYER_PROJECTILE;
     }
 }
