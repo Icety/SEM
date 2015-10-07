@@ -2,6 +2,9 @@
     <background>
         background.jpg
     </background>
+    <music>
+        normalmusic.wav
+    </music>
     <aliens>
         <!-- TOP ROW -->
         <alien>

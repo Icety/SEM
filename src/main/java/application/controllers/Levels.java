@@ -19,6 +19,7 @@ public class Levels extends BasicGameState {
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "background.jpg";
+    protected String tMusicString = "normalmusic.wav";
     protected boolean pause = false;
 
     public Levels(int id) {
@@ -37,7 +38,6 @@ public class Levels extends BasicGameState {
 
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
-
     }
 
     /**
@@ -110,6 +110,11 @@ public class Levels extends BasicGameState {
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
                 tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+            }
+            if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
+                tMusicString = tMain.getGame().getLevel().getMusic();
+                Main.tBackgroundmusic.stop();
+                Main.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMain.getGame().getLevel().getMusic());
             }
         }
 

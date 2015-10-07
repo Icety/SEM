@@ -59,14 +59,24 @@ public class LevelFactory {
             Document doc = dBuilder.parse(file);
             doc.getDocumentElement().normalize();
             Element levelXml = doc.getDocumentElement();
+
+            //Set aliens
             ArrayList<Alien> aliens = loadAliens(levelXml);
+            level.addAliens(aliens);
+            level.setStartPlayer();
+            //Set background music
             if (levelXml.getElementsByTagName("background").getLength() != 0) {
                 level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
             }
-            level.addAliens(aliens);
-            level.setStartPlayer();
+
+            //Set Story
             if (levelXml.getElementsByTagName("story").getLength() != 0) {
                 level.setStoryLine(levelXml.getElementsByTagName("story").item(0).getTextContent());
+            }
+
+            //Set Music
+            if (levelXml.getElementsByTagName("music").getLength() != 0) {
+                level.setMusic(levelXml.getElementsByTagName("music").item(0).getTextContent());
             }
         } catch (Exception e) {
             e.printStackTrace();

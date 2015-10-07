@@ -1,5 +1,7 @@
 package application.core;
 
+import org.newdawn.slick.Music;
+
 import java.util.ArrayList;
 
 /**
@@ -10,6 +12,7 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
     protected String tBackground;
+    protected String tMusic;
 
     public String getStoryLine() {
         return tStoryLine;
@@ -86,11 +89,20 @@ public class Level {
      */
     public boolean hasWon() {
         boolean result = true;
-        for (Alien alien: tAliens) {
+        for (Alien alien : tAliens) {
             if (!alien.isDead() && !alien.isBonusAlien()) {
                 result = false;
             }
         }
         return result;
+    }
+
+
+    public String getMusic() {
+        return tMusic;
+    }
+
+    public void setMusic(String music) {
+        this.tMusic = music.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
 }
