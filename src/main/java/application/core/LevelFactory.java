@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -78,6 +79,12 @@ public class LevelFactory {
             if (levelXml.getElementsByTagName("music").getLength() != 0) {
                 level.setMusic(levelXml.getElementsByTagName("music").item(0).getTextContent());
             }
+
+            //Set Theme
+            if (levelXml.getElementsByTagName("theme").getLength() != 0) {
+                level.setTheme(levelXml.getElementsByTagName("theme").item(0).getTextContent());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

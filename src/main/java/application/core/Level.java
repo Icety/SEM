@@ -14,6 +14,16 @@ public class Level {
     protected String tBackground;
     protected String tMusic;
 
+    public String getTheme() {
+        return tTheme;
+    }
+
+    public void setTheme(String tTheme) {
+        this.tTheme = tTheme;
+    }
+
+    protected String tTheme;
+
     public String getStoryLine() {
         return tStoryLine;
     }

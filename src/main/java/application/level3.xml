@@ -2,6 +2,7 @@
 <level>
 <background>moving.jpg</background>
     <music>normalmusic.wav</music>
+    <theme>classic</theme>
 <aliens>
 <alien>
 <x>540</x>

@@ -33,6 +33,8 @@ public class LevelBuilder extends BasicGameState {
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "moving.jpg";
+    protected String tMusic = "normalmusic.wav";
+    protected String tTheme = "classic";
     protected Alien selected = new Alien();
     protected int menuHeight;
     protected Circle circle;
@@ -333,6 +335,16 @@ public class LevelBuilder extends BasicGameState {
             Element background = doc.createElement("background");
             background.appendChild(doc.createTextNode(tBackgroundString));
             rootElement.appendChild(background);
+
+            // music element
+            Element music = doc.createElement("music");
+            music.appendChild(doc.createTextNode(tMusic));
+            rootElement.appendChild(music);
+
+            // theme element
+            Element theme = doc.createElement("theme");
+            theme.appendChild(doc.createTextNode(tTheme));
+            rootElement.appendChild(theme);
 
             // aliens elements
             Element aliens = doc.createElement("aliens");

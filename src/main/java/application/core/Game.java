@@ -1,6 +1,8 @@
 package application.core;
 
 import java.util.Iterator;
+
+import application.Main;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
 
@@ -109,6 +111,10 @@ public class Game {
         tPlayer.update();
         this.alienUpdate();
         this.checkCollision();
+
+        if (tLevel.getTheme() != Main.imageTheme) {
+            Main.imageTheme = tLevel.getTheme();
+        }
 
         if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {

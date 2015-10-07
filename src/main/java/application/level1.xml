@@ -5,6 +5,7 @@
     <music>
         backgroundmusic.wav
     </music>
+    <theme>classic</theme>
     <aliens>
         <!-- TOP ROW -->
         <alien>

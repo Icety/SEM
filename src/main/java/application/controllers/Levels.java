@@ -21,6 +21,7 @@ public class Levels extends BasicGameState {
     protected String tBackgroundString = "background.jpg";
     protected String tMusicString = "normalmusic.wav";
     protected boolean pause = false;
+    protected String tTheme;
 
     public Levels(int id) {
         tId = id;
@@ -114,9 +115,19 @@ public class Levels extends BasicGameState {
             if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
                 tMusicString = tMain.getGame().getLevel().getMusic();
                 tMain.tBackgroundmusic.stop();
-                tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMain.getGame().getLevel().getMusic());
+                tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMusicString);
                 tMain.tBackgroundmusic.loop();
             }
+
+            //Change the theme if the new theme does not match the current theme.
+            if (!tMain.getGame().getLevel().getTheme().equals(tTheme)) {
+                tTheme = tMain.getGame().getLevel().getTheme();
+
+                //Method in main to change the images according to the theme
+                tMain.setAlienImages(tTheme);
+            }
+
+
         }
 
     }
