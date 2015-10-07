@@ -113,8 +113,9 @@ public class Levels extends BasicGameState {
             }
             if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
                 tMusicString = tMain.getGame().getLevel().getMusic();
-                Main.tBackgroundmusic.stop();
-                Main.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMain.getGame().getLevel().getMusic());
+                tMain.tBackgroundmusic.stop();
+                tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMain.getGame().getLevel().getMusic());
+                tMain.tBackgroundmusic.loop();
             }
         }
 
