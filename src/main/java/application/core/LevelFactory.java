@@ -18,15 +18,16 @@ import java.util.ArrayList;
 })
 public class LevelFactory {
     protected NodeList tLevels;
-    protected int tScreenWidth;
-    protected int tScreenHeight;
+    private static LevelFactory tUniqueFactory;
+    protected static int tScreenWidth;
+    protected static int tScreenHeight;
 
     /**
      * Constructor for the LevelFactory.
      * @param width width of the game.
      * @param height height of the game.
      */
-    public LevelFactory(int width, int height) {
+    private  LevelFactory(int width, int height) {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
@@ -44,6 +45,14 @@ public class LevelFactory {
             e.printStackTrace();
         }
     }
+
+    public static synchronized LevelFactory getFactory() {
+        if (tUniqueFactory == null) {
+            tUniqueFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        }
+        return tUniqueFactory;
+    }
+
 
     /**
      * Build the parsed Level.

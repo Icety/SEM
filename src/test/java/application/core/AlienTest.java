@@ -40,7 +40,8 @@ public class AlienTest {
     @Before
     public void setUp() {
         testAlien = new Alien();
-        testFactory = new LevelFactory(1400, 1080);
+        testFactory = LevelFactory.getFactory();
+        //testFactory = new LevelFactory(1400, 1080);
         try {
             File file = new File("src/test/java/application/core/testLevels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
