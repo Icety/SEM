@@ -13,6 +13,7 @@ public class Level {
     protected Player tPlayer;
     protected String tBackground;
     protected String tMusic;
+    protected String tTheme;
 
     public String getTheme() {
         return tTheme;
@@ -21,8 +22,6 @@ public class Level {
     public void setTheme(String tTheme) {
         this.tTheme = tTheme;
     }
-
-    protected String tTheme;
 
     public String getStoryLine() {
         return tStoryLine;
