@@ -46,7 +46,7 @@ public class GameTest {
         ArrayList<Alien> testAliens = new ArrayList<>();
         testLogger = new Logger();
         testAliens.add(testAlien);
-        testGame = new Game(10, 10, testLogger);
+        testGame = new Game(10, 10, testLogger, false);
         nonMockedLevel = new Level();
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
