@@ -6,7 +6,10 @@ import java.io.Serializable;
  * Class for Score.
  * @author Daphne van Tetering.
  */
-public class Score implements Serializable{
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
+public class Score implements Serializable {
     protected int tScore;
     protected String tPlayer;
 
@@ -15,7 +18,7 @@ public class Score implements Serializable{
      * @param player name of player the score belongs to.
      * @param score score.
      */
-    public Score(String player, int score){
+    public Score(String player, int score) {
         tPlayer = player;
         tScore = score;
     }

@@ -1,12 +1,14 @@
 package application.controllers;
 
 import application.Main;
-import application.core.HighScoreManager;
-import org.newdawn.slick.*;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.gui.TextField;
+import org.newdawn.slick.SlickException;
+import application.core.HighScoreManager;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -17,43 +19,55 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * Controller class for HighScoreForm.
  * @author Daphne van Tetering.
  */
+@SuppressWarnings({
+        "checkstyle:linelength",
+        "checkstyle:magicnumber"
+})
 public class HighScoreForm extends BasicGameState {
 
-    protected HighScoreManager highScoreManager;
-    protected Main tMain;
-    protected int tId;
-    protected Image tBackground;
-    protected String tBackgroundString = "moving.jpg";
-    protected boolean tPause = false;
-    protected TextField tTextField;
-    public String tName;
+    private HighScoreManager highScoreManager;
+    private Main tMain;
+    private int tId;
+    private Image tBackground;
+    private String tBackgroundString = "moving.jpg";
+    private boolean tPause = false;
+    private TextField tTextField;
+    private String tName;
 
 
     /**
      * Constructor method for HighScoreForm.
      * @param id ID of the HighScoreForm.
      */
-    public HighScoreForm (int id) {
+    public HighScoreForm(int id) {
         tId = id;
         highScoreManager = new HighScoreManager();
     }
 
     /**
      * Init method for the HighScoreForm.
+     * @param gameContainer current GameContainer.
+     * @param stateBasedGame current Game.
+     * @throws SlickException possible Exception.
      */
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
+
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
 
-        tTextField = new TextField(gameContainer,gameContainer.getDefaultFont(),420,400,500,80);
+
+        tTextField = new TextField(gameContainer, gameContainer.getDefaultFont(), 420, 400, 500, 80);
         tTextField.setBorderColor(Color.transparent);
         tTextField.setAcceptingInput(true);
-
     }
 
 
     /**
      * Render method for the HighScoreForm.
+     * @param gameContainer current GameContainer.
+     * @param stateBasedGame current Game.
+     * @param graphics required Graphics.
+     * @throws SlickException possible Exception.
      */
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
@@ -90,10 +104,11 @@ public class HighScoreForm extends BasicGameState {
      * @param c inputCharacter value.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
+            default: break;
             case Input.KEY_ENTER:
-                highScoreManager.addScores(tTextField.getText(),tMain.getGame().getScore());
-                tMain.enterState(6, new FadeInTransition(Color.black), new FadeOutTransition(Color.black));
+                highScoreManager.addScores(tTextField.getText(), tMain.getGame().getScore());
+                tMain.enterState(6);
         }
     }
 
@@ -112,5 +127,13 @@ public class HighScoreForm extends BasicGameState {
      */
     public String getName() {
         return tName;
+    }
+
+    /**
+     * Method to set name of the player.
+     * @param name the desired name.
+     */
+    public void setName(String name) {
+        tName = name;
     }
 }

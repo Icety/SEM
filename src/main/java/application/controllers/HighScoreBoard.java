@@ -3,12 +3,10 @@ package application.controllers;
 import application.Main;
 import application.core.Score;
 import org.newdawn.slick.*;
-
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import java.util.ArrayList;
 
@@ -16,6 +14,11 @@ import java.util.ArrayList;
  * Controller class for HighScoreBoard.
  * @author Daphne van Tetering.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber",
+        "checkstyle:linelength"
+})
 public class HighScoreBoard extends BasicGameState {
     protected Main tMain;
     protected int tId;
@@ -23,7 +26,10 @@ public class HighScoreBoard extends BasicGameState {
     protected String tBackgroundString = "moving.jpg";
     protected boolean tPause = false;
 
-
+    /**
+     * Constructor method for HighScoreBoard.
+     * @param id controller ID.
+     */
     public HighScoreBoard(int id) {
         tId = id;
     }
@@ -38,6 +44,7 @@ public class HighScoreBoard extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
+
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
@@ -51,26 +58,35 @@ public class HighScoreBoard extends BasicGameState {
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         gameContainer.setPaused(tPause);
-        if(!tPause) {
+        if (!tPause) {
             tBackground.draw(0, 0, gameContainer.getWidth(), gameContainer.getHeight());
 
             graphics.setColor(Color.white);
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
+            graphics.drawString("Press Enter to return to menu", 550, 150);
 
             ArrayList<Score> list = tMain.getGame().getHighScoreManager().getScores();
             int x = 400;
             int y = 300;
             int j = 1;
 
-            for (int i = 0; i < list.size(); i++ ) {
-                    graphics.drawString(j+ ". " + list.get(i).getPlayer().toString() + ": " + Integer.toString(list.get(i).getScore()) + "\n", x,y);
-                    y = y + 25;
-                    j = j + 1;
+            for (Score aList : list) {
+                graphics.drawString(j + ". " + aList.getPlayer() + ": " + Integer.toString(aList.getScore()) + "\n", x, y);
+                y = y + 25;
+                j = j + 1;
 
-                }
+            }
 
            }
 
+    }
+
+    public void keyReleased(int key, char c) {
+        switch (key) {
+            default: break;
+            case Input.KEY_ENTER:
+                tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        }
     }
 
     /**

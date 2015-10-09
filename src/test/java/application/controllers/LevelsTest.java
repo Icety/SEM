@@ -3,10 +3,12 @@ package application.controllers;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -14,6 +16,9 @@ import static org.mockito.Mockito.mock;
  *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class LevelsTest {
     private Levels testLevels;
 
@@ -22,16 +27,26 @@ public class LevelsTest {
     @Mock
     public final GameContainer mockedContainer = mock(GameContainer.class);
 
+    /**
+     * Initialize variables for the testing process.
+     */
     @Before
     public void setUp() {
         testLevels = new Levels(1);
     }
 
+    /**
+     * Test whether the created controller is initialized correctly.
+     */
     @Test
     public void testLevelsNotNull() {
         assertNotNull(testLevels);
     }
 
+    /**
+     * Test whether init() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testInit() throws Exception {
         try {
@@ -45,6 +60,9 @@ public class LevelsTest {
         }
     }
 
+    /**
+     * Test whether getID() returns the correct ID.
+     */
     @Test
     public void testGetID() {
         assertEquals(1, testLevels.getID());

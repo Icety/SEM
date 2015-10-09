@@ -1,7 +1,12 @@
 package application.controllers;
 
 import application.Main;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -11,7 +16,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
  * Controller class for Lost.
  * @author Thomas Oomens
  */
-public class Lost extends BasicGameState{
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
+public class Lost extends BasicGameState {
     private Main tMain; // stored for later use
     protected int tId;
     protected Image tBackground;
@@ -87,9 +97,9 @@ public class Lost extends BasicGameState{
      * @param c character value for the key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_1:
-                tMain.newGame();
+                tMain.newGame(tMain.getGame().isMultiplayerGame());
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
@@ -99,7 +109,7 @@ public class Lost extends BasicGameState{
                 // TODO: Implement later
                 break;
             case Input.KEY_SPACE:
-                tMain.enterState(5, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                tMain.enterState(5);
                 break;
             default:
                 break;

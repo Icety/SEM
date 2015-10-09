@@ -5,6 +5,11 @@ package application.logger;
  * the time of writing and the level of importance.
  * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Log {
     protected String tType;
     protected String tMessage;
@@ -29,7 +34,7 @@ public class Log {
      * @return  The level of importancy, expressed by one word.
      */
     public String getType() {
-        switch(tImportant) {
+        switch (tImportant) {
             case 0:
                 return "SEVERE";
             case 1:
@@ -44,6 +49,7 @@ public class Log {
                 return "FINER";
             case 6:
                 return "FINEST";
+            default: break;
         }
         return "INFO";
     }
@@ -57,11 +63,12 @@ public class Log {
     }
 
     /**
-     * A getter for the color, will return a string containing the color that belongs to the level of importance.
+     * A getter for the color,
+     * will return a string containing the color that belongs to the level of importance.
      * @return  A textual color representation of the level of importance.
      */
     public String getColor() {
-        switch(tImportant) {
+        switch (tImportant) {
             case 0:
                 return "red";
             case 1:
@@ -76,6 +83,7 @@ public class Log {
                 return "light-green";
             case 6:
                 return "green";
+            default: break;
         }
         return "blue";
     }

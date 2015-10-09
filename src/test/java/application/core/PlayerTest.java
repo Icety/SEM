@@ -1,22 +1,27 @@
 package application.core;
 
+import application.Main;
+import application.core.upgrades.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for Player.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class PlayerTest {
     private Player testPlayer;
 
     /**
      * Initialize variables for the test process.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -25,8 +30,7 @@ public class PlayerTest {
 
     /**
      * Test whether update works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateWithGoLeft() throws Exception {
@@ -39,8 +43,7 @@ public class PlayerTest {
 
     /**
      * Test whether update works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateWithGoRight() throws Exception {
@@ -71,8 +74,7 @@ public class PlayerTest {
 
     /**
      * Test whether moveLeft() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testMoveLeft() throws Exception {
@@ -84,21 +86,19 @@ public class PlayerTest {
 
     /**
      * Test whether toString() returns the correct String.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {
-        testPlayer.settX(0);
-        testPlayer.settY(0);
+        testPlayer.setX(0);
+        testPlayer.setY(0);
 
         assertEquals("Player on coords: 0, 0", testPlayer.toString());
     }
 
     /**
      * Test whether leftArrowPressed() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testLeftArrowPressed() throws Exception {
@@ -112,8 +112,7 @@ public class PlayerTest {
 
     /**
      * Test whether rightArrowPressed() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testRightArrowPressed() throws Exception {
@@ -126,8 +125,7 @@ public class PlayerTest {
 
     /**
      * Test whether fireButtonPressed() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testFireButtonPressed() throws Exception {
@@ -140,8 +138,7 @@ public class PlayerTest {
 
     /**
      * Test whether hit() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testHit() throws Exception {
@@ -153,8 +150,7 @@ public class PlayerTest {
 
     /**
      * Test whether getPlayer() returns the correct player.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetPlayer() throws Exception {
@@ -163,8 +159,7 @@ public class PlayerTest {
 
     /**
      * Test whether getHealth() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetHealth() throws Exception {
@@ -175,8 +170,7 @@ public class PlayerTest {
 
     /**
      * Test whether moveRight() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testMoveRight() throws Exception {
@@ -188,29 +182,26 @@ public class PlayerTest {
 
     /**
      * Test whether getImage() returns the correct Image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
-        assertNull(testPlayer.getImage());
+        assertEquals(Main.PLAYER, testPlayer.getImage());
     }
 
     /**
      * Test whether getImage() returns the correct Image while the Player is upgraded.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImageWhileUpgraded() throws Exception {
         testPlayer.tUpgraded = true;
-        assertNull(testPlayer.getImage());
+        assertEquals(Main.UPGRADED_PLAYER, testPlayer.getImage());
     }
 
     /**
      * Test updateUpgrade() with a speed upgrade.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateUpgradeLittleReloadTime() throws Exception {
@@ -223,8 +214,7 @@ public class PlayerTest {
 
     /**
      * Test updateUpgrade() with a weapon upgrade.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateUpgradeMuchReloadTime() throws Exception {
@@ -284,6 +274,10 @@ public class PlayerTest {
 //        assertTrue(testPlayer.getProjectiles().size() >= 1);
 //    }
 
+    /**
+     * Test whether HealthUpgrade is correctly applied to Player.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testUpgradeHealth() throws Exception {
         Upgrade testUpgrade = new HealthUpgrade(0, 0);
@@ -293,6 +287,10 @@ public class PlayerTest {
         assertEquals(3, testPlayer.tHealth);
     }
 
+    /**
+     * Test whether Upgrade is correctly applied to Player.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testUpgradePlayer() throws Exception {
         Upgrade testUpgrade = new PlayerUpgrade(0, 0);
@@ -300,5 +298,17 @@ public class PlayerTest {
         testPlayer.upgrade(testUpgrade);
 
         assertTrue(testPlayer.tUpgraded);
+    }
+
+    /**
+     * Test whether moveUp() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testMoveUp() throws Exception {
+        testPlayer.tY = 10;
+        testPlayer.moveUp(10);
+
+        assertEquals(0, testPlayer.tY);
     }
 }

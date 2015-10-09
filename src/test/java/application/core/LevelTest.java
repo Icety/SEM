@@ -1,19 +1,22 @@
 package application.core;
 
+import application.core.aliens.Alien;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 /**
  * Test class for Level.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class LevelTest {
     private Level testLevel;
     @Mock
@@ -21,8 +24,7 @@ public class LevelTest {
 
     /**
      * Initialize variables for testing purposes.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -31,8 +33,7 @@ public class LevelTest {
 
     /**
      * Test whether getAliens() returns the correct Arraylist of Aliens.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetAliens() throws Exception {
@@ -44,8 +45,7 @@ public class LevelTest {
 
     /**
      * Test whether addAliens() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddAliens() throws Exception {
@@ -57,8 +57,7 @@ public class LevelTest {
 
     /**
      * Test whether setStartPlayer() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSetStartPlayer() throws Exception {
@@ -69,8 +68,7 @@ public class LevelTest {
 
     /**
      * Test whether toString() returns the correct string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {
@@ -78,13 +76,13 @@ public class LevelTest {
         alienList.add(new Alien());
         testLevel.addAliens(alienList);
 
-        assertEquals("Level with the following aliens: \nAlien on coords: 0, 0\n", testLevel.toString());
+        assertEquals("Level with the following aliens: \nAlien on coords: 0, 0\n",
+                testLevel.toString());
     }
 
     /**
      * Test whether setBackground() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSetBackground() throws Exception {
@@ -95,8 +93,7 @@ public class LevelTest {
 
     /**
      * Test whether getBackground() returns the correct Background string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetBackground() throws Exception {
@@ -107,8 +104,7 @@ public class LevelTest {
 
     /**
      * Test whether removeAlien() correctly removes an Alien from a level.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testRemoveAlien() throws Exception {

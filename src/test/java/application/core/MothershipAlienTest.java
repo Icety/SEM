@@ -1,16 +1,22 @@
 package application.core;
 
+import application.Main;
+import application.core.aliens.MothershipAlien;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 //ToDo: Write testSwitchDirection() (Dependency unreachable)
 /**
  * Test class for MothershipAlien.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class MothershipAlienTest {
     private MothershipAlien testAlien;
 
@@ -22,15 +28,9 @@ public class MothershipAlienTest {
         testAlien = new MothershipAlien();
     }
 
-//    @Test
-//    public void testSwitchDirection() throws Exception {
-//
-//    }
-
     /**
      * Test whether isAlive() returns the correct boolean value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testIsAlive() throws Exception {
@@ -42,8 +42,7 @@ public class MothershipAlienTest {
 
     /**
      * Test whether toString() returns the correct string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {
@@ -55,25 +54,23 @@ public class MothershipAlienTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
-        assertNull(testAlien.getImage());
+        assertEquals(Main.MOTHERSHIP_ALIEN, testAlien.getImage());
     }
 
     /**
      * Test whether switchDirection() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testSwitchDirection() throws Exception {
-        testAlien.tDirection = 1;
+        testAlien.setDirection(1);
         testAlien.tX = -2001;
         testAlien.switchDirection();
 
-        assertEquals(-1, testAlien.tDirection);
+        assertEquals(-1, testAlien.getDirection());
     }
 }

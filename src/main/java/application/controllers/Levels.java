@@ -1,7 +1,10 @@
 package application.controllers;
 
 import application.Main;
-import application.core.*;
+import application.core.aliens.Alien;
+import application.core.Player;
+import application.core.projectiles.Projectile;
+import application.core.upgrades.Upgrade;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -14,6 +17,11 @@ import java.util.ArrayList;
  * Controller class for Levels.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Levels extends BasicGameState {
     protected Main tMain;
     protected int tId;
@@ -23,6 +31,10 @@ public class Levels extends BasicGameState {
     protected boolean pause = false;
     protected String tTheme;
 
+    /**
+     * Constructor method for this controller.
+     * @param id given ID for the controller.
+     */
     public Levels(int id) {
         tId = id;
     }
@@ -55,14 +67,10 @@ public class Levels extends BasicGameState {
         if (!pause) {
             Player p = tMain.getGame().getPlayer();
             int lives = p.getHealth();
-
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-
             g.setColor(Color.white);
-
             //Display Score in top left.
             g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
-
             //Display Lives in top right.
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
             for (int i = 1; i <= lives; i++) {
@@ -77,13 +85,26 @@ public class Levels extends BasicGameState {
                 drawProjectiles(alien.getProjectiles());
                 drawUpgrades(alien.getUpgrades());
             }
-
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
             drawProjectiles(p.getProjectiles());
 
+            if(tMain.getGame().isMultiplayerGame()) {
+                Player p2 = tMain.getGame().getPlayer2();
+                int lives2 = p2.getHealth();
+
+                // Draw lives of Player 2
+                g.drawString("LIVES player 2: ", container.getWidth() - 1050, 50);
+                for (int i = 1; i <= lives2; i++) {
+                    p2.getImage().draw(container.getWidth()- 1000 + i*110, 50, p.getWidth(), p.getHeight());
+                }
+
+                // Draw Player 2
+                p2.getImage().draw(p2.getX(),p2.getY(), p2.getWidth(), p2.getHeight());
+                drawProjectiles(p2.getProjectiles());
+            }
         } else {
-            g.drawString("PAUSED", container.getWidth() /2, container.getHeight() /2);
+            g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
         }
     }
 
@@ -113,7 +134,7 @@ public class Levels extends BasicGameState {
                 tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
             }
             if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
-                tMusicString = tMain.getGame().getLevel().getMusic();
+                //tMusicString = tMain.getGame().getLevel().getMusic();
                 tMain.tBackgroundmusic.stop();
                 tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMusicString);
                 tMain.tBackgroundmusic.loop();
@@ -147,23 +168,38 @@ public class Levels extends BasicGameState {
      * @param c character value for the key.
      */
     public void keyPressed(int key, char c) {
-        switch(key) {
-            case Input.KEY_LEFT:
-                tMain.getGame().getPlayer().leftArrowPressed(true);
-                break;
-            case Input.KEY_RIGHT:
-                tMain.getGame().getPlayer().rightArrowPressed(true);
-                break;
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(true);
-                break;
-            case Input.KEY_S:
-                tMain.enterState(20);
-                break;
-            default:
-                break;
+            switch (key) {
+                case Input.KEY_LEFT:
+                    tMain.getGame().getPlayer().leftArrowPressed(true);
+                    break;
+                case Input.KEY_RIGHT:
+                    tMain.getGame().getPlayer().rightArrowPressed(true);
+                    break;
+                case Input.KEY_SPACE:
+                    tMain.getGame().getPlayer().fireButtonPressed(true);
+                    break;
+                case Input.KEY_ESCAPE:
+                    pause = !pause;
+                    break;
+                default:
+                    break;
+            }
+        if (tMain.getGame().isMultiplayerGame()) {
+            switch (key) {
+                case Input.KEY_A:
+                    tMain.getGame().getPlayer2().leftArrowPressed(true);
+                    break;
+                case Input.KEY_D:
+                    tMain.getGame().getPlayer2().rightArrowPressed(true);
+                    break;
+                case Input.KEY_Q:
+                    tMain.getGame().getPlayer2().fireButtonPressed(true);
+                    break;
+            }
         }
     }
+
+
 
     /**
      * Method to check whether a key is released.
@@ -171,22 +207,36 @@ public class Levels extends BasicGameState {
      * @param c character value for the key.
      */
     public void keyReleased(int key, char c) {
-        switch(key) {
-            case Input.KEY_LEFT:
-                tMain.getGame().getPlayer().leftArrowPressed(false);
-                break;
-            case Input.KEY_RIGHT:
-                tMain.getGame().getPlayer().rightArrowPressed(false);
-                break;
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(false);
-                break;
-            case Input.KEY_ESCAPE:
-                pause = !pause;
-                System.out.println(pause);
-            default:
-                break;
+            switch (key) {
+                case Input.KEY_LEFT:
+                    tMain.getGame().getPlayer().leftArrowPressed(false);
+                    break;
+                case Input.KEY_RIGHT:
+                    tMain.getGame().getPlayer().rightArrowPressed(false);
+                    break;
+                case Input.KEY_SPACE:
+                    tMain.getGame().getPlayer().fireButtonPressed(false);
+                    break;
+                default:
+                    break;
+            }
+        if(tMain.getGame().isMultiplayerGame()) {
+            switch (key) {
+                case Input.KEY_A:
+                    tMain.getGame().getPlayer2().leftArrowPressed(false);
+                    break;
+                case Input.KEY_D:
+                    tMain.getGame().getPlayer2().rightArrowPressed(false);
+                    break;
+                case Input.KEY_Q:
+                    tMain.getGame().getPlayer2().fireButtonPressed(false);
+                    break;
+                default:
+                    break;
+            }
         }
+
+
     }
 
     /**
@@ -204,9 +254,10 @@ public class Levels extends BasicGameState {
      * @param upgrades to draw in the game.
      */
     private void drawUpgrades(ArrayList<Upgrade> upgrades) {
-        for(Upgrade u: upgrades) {
-            if(u.toDraw())
-            (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
+        for (Upgrade u: upgrades) {
+            if (u.toDraw()) {
+                (u.getImage()).draw(u.getX(), u.getY(), u.getWidth(), u.getHeight());
+            }
         }
     }
 }

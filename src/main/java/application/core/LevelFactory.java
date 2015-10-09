@@ -1,6 +1,8 @@
 package application.core;
 
+import org.w3c.dom.NodeList;
 import application.Main;
+import application.core.aliens.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -14,17 +16,21 @@ import java.util.ArrayList;
  * Class for LevelFactory.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class LevelFactory {
     protected NodeList tLevels;
-    protected int tScreenWidth;
-    protected int tScreenHeight;
+    private static LevelFactory tUniqueFactory;
+    protected static int tScreenWidth;
+    protected static int tScreenHeight;
 
     /**
      * Constructor for the LevelFactory.
      * @param width width of the game.
      * @param height height of the game.
      */
-    public LevelFactory(int width, int height) {
+    private  LevelFactory(int width, int height) {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
@@ -42,6 +48,14 @@ public class LevelFactory {
             e.printStackTrace();
         }
     }
+
+    public static synchronized LevelFactory getFactory() {
+        if (tUniqueFactory == null) {
+            tUniqueFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        }
+        return tUniqueFactory;
+    }
+
 
     /**
      * Build the parsed Level.
@@ -99,9 +113,7 @@ public class LevelFactory {
      */
     public ArrayList<Alien> loadAliens(Element level) {
         ArrayList<Alien> aliens = new ArrayList<Alien>();
-
         NodeList alienList = level.getElementsByTagName("alien");
-
         Alien alien = new Alien();
         for (int temp = 0; temp < alienList.getLength(); temp++) {
             Node node = alienList.item(temp);
@@ -122,6 +134,7 @@ public class LevelFactory {
                 case "boss":
                     alien = new FinalBoss();
                     break;
+                default: break;
             }
             alien.readXml(eElement);
             aliens.add(alien);

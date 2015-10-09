@@ -1,16 +1,21 @@
 package application.core;
 
+import application.Main;
+import application.core.aliens.FinalBoss;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
-//ToDo: Write testShoot() and testEndOfScreen() (Dependency unreachable)
 /**
  * Test class for FinalBoss.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class FinalBossTest {
     private FinalBoss testBoss;
 
@@ -20,30 +25,28 @@ public class FinalBossTest {
     @Before
     public void setUp() {
         testBoss = new FinalBoss();
-        testBoss.tCanShoot = true;
+        testBoss.setCanShoot(true);
     }
 
     /**
      * Test whether addShootChance() adds a correct shoot chance.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testAddShootChance() throws Exception {
         testBoss.addShootChance();
 
-        assertTrue(testBoss.tShootChance >= 0);
+        assertTrue(testBoss.getShootChance() >= 0);
     }
 
     /**
      * Test whether shoot() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testShoot() throws Exception {
         testBoss.setCanShoot(true);
-        for(int i = 0; i < 10000; i++) {
+        for (int i = 0; i < 10000; i++) {
             testBoss.shoot();
         }
         assertTrue(testBoss.tProjectiles.size() > 0);
@@ -51,8 +54,7 @@ public class FinalBossTest {
 
     /**
      * Test whether endOfScreen() works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testEndOfScreen() throws Exception {
@@ -65,31 +67,28 @@ public class FinalBossTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImageNormal() throws Exception {
-        assertNull(testBoss.getImage());
+        assertEquals(Main.BOSS_BACHELLI, testBoss.getImage());
     }
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImageCharge() throws Exception {
-        testBoss.tSecondShot = 151;
+        testBoss.setSecondShot(151);
 
-        assertNull(testBoss.getImage());
+        assertEquals(Main.BOSS_BACHELLI_CHARGE, testBoss.getImage());
         assertEquals(250, testBoss.tHeight);
     }
 
     /**
      * Test whether toString() returns the correct string.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testToString() throws Exception {

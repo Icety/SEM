@@ -1,11 +1,14 @@
 package application.controllers;
 
 import application.Main;
-import application.core.Alien;
+import application.core.aliens.Alien;
 import application.core.Player;
-import application.core.Projectile;
-import application.core.Upgrade;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -14,8 +17,15 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import java.util.ArrayList;
 
 /**
- * Created by Thomas on 08-09-15.
+ * Controller class for StoryLine.
+ * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength",
+        "checkstyle:methodlength"
+})
 public class StoryLine extends BasicGameState {
     protected Main tMain;
     protected int tId;
@@ -29,19 +39,36 @@ public class StoryLine extends BasicGameState {
     protected int tCount = 0;
     protected int tTextHeight = -300;
 
+    /**
+     * Constructor method for the controller.
+     * @param id the given ID for the controller.
+     */
     public StoryLine(int id) {
         tId = id;
     }
 
+    /**
+     * Initialization method for the controller.
+     * @param container required GameController.
+     * @param game the current game.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
 
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
+    /**
+     * Render method for the controller.
+     * @param container required GameController.
+     * @param game the current game.
+     * @param g required Graphics.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
@@ -75,6 +102,13 @@ public class StoryLine extends BasicGameState {
 
     }
 
+    /**
+     * Update method for the controller.
+     * @param container required GameContainer.
+     * @param game the current game.
+     * @param delta a given integer.
+     * @throws SlickException possible Exception.
+     */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
@@ -90,10 +124,11 @@ public class StoryLine extends BasicGameState {
             }
             if (p.getY() < -150) {
                 System.out.println(p.getY());
-                p.settX(250);
-                p.settY(Main.HEIGHT + 120);
+                p.setX(250);
+                p.setY(Main.HEIGHT + 120);
                 tStart = false;
                 tCount = 0;
+
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
@@ -118,8 +153,8 @@ public class StoryLine extends BasicGameState {
                         p.moveUp((int) (tCount / 50) * 2);
                     }
                     if (p.getY() < -150) {
-                        p.settX(Main.WIDTH - p.getWidth());
-                        p.settY(Main.HEIGHT - p.getHeight() - 50);
+                        p.setX(Main.WIDTH - p.getWidth());
+                        p.setY(Main.HEIGHT - p.getHeight() - 50);
                         this.resetValues();
                         tMain.getGame().nextLevel();
                         game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
@@ -138,11 +173,18 @@ public class StoryLine extends BasicGameState {
         }
     }
 
+    /**
+     * Getter method for the ID of the controller.
+     * @return the controller ID.
+     */
     @Override
     public int getID() {
         return tId;
     }
 
+    /**
+     * Method to reset the values of the StoryLine.
+     */
     protected void resetValues() {
         tCount = 0;
         tDone = false;
@@ -150,11 +192,57 @@ public class StoryLine extends BasicGameState {
         tTextHeight = -300;
     }
 
+    /**
+     * Method to give the made up Story.
+     * @return The made up story in a String.
+     */
+    protected String getStory() {
+        //Todo: Get this from XML
+        return "those aliens, are they?? Pandaliens??\n\n"
+                + "Now the ship is on it's way. But wait! What are\n\n"
+                + "the aliens, so it could be destroyed.\n\n"
+                + "left it's safe home, in search for the planet of \n\n"
+                + "retaliate! Their most powerful ship: The Thomas \n\n"
+                + "planet was under attack, they would have to \n\n"
+                + "it became clear to the SEMmians that their \n\n"
+                + "After destroying the first layer of aliens";
+    }
+
+    /**
+     * Method to check whether a key is pressed.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
+
     public void keyPressed(int key, char c) {
-        switch(key) {
+        switch (key) {
             case Input.KEY_SPACE:
+
                 tSkip = true;
                 tCount = 0;
+                tMain.getGame().getPlayer().fireButtonPressed(true);
+                //TODO
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for the key.
+     * @param c character value for the key.
+     */
+    public void keyReleased(int key, char c) {
+        switch (key) {
+            case Input.KEY_LEFT:
+                tMain.getGame().getPlayer().leftArrowPressed(false);
+                break;
+            case Input.KEY_RIGHT:
+                tMain.getGame().getPlayer().rightArrowPressed(false);
+                break;
+            case Input.KEY_SPACE:
+                tMain.getGame().getPlayer().fireButtonPressed(false);
                 break;
             default:
                 break;

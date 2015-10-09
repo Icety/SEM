@@ -1,15 +1,22 @@
 package application.core;
 
 import application.controllers.ScoreComparator;
-
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Class for HighScoreMangager.
  * @author Daphne van Tetering.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class HighScoreManager {
     protected ArrayList<Score> scores;
     protected static String highScoreFile = "highScores.dat";
@@ -19,7 +26,7 @@ public class HighScoreManager {
     /**
      * Constructor for HighScoreManager.
      */
-    public HighScoreManager(){
+    public HighScoreManager() {
         scores = new ArrayList<Score>();
     }
 
@@ -27,7 +34,7 @@ public class HighScoreManager {
      * Load scores from files, sort in descending order and return.
      * @return ArrayList of scores currently saved in file.
      */
-    public ArrayList<Score> getScores(){
+    public ArrayList<Score> getScores() {
         loadScoreFile();
         sort();
         return scores;
@@ -61,9 +68,7 @@ public class HighScoreManager {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(highScoreFile));
             scores = (ArrayList<Score>) inputStream.readObject();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -85,9 +90,7 @@ public class HighScoreManager {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(highScoreFile));
             outputStream.writeObject(scores);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e ) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {

@@ -1,15 +1,26 @@
 package application.core;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
+
 import application.Main;
+import application.core.aliens.Alien;
+import application.core.aliens.MothershipAlien;
+import application.core.projectiles.Projectile;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 /**
  * Class for Game.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
+})
 public class Game {
     protected int tScore;
     protected LevelFactory levelFactory;
@@ -17,13 +28,16 @@ public class Game {
     protected int levelNumber;
     protected Level tLevel;
     protected Player tPlayer;
+    protected Player tPlayer2;
+    protected ArrayList<Player> tPlayers;
     protected int tScreenWidth;
     protected int tScreenHeight;
     protected boolean tPaused;
     protected boolean tWon = false;
     protected boolean tLost = false;
     protected boolean tNextLevel = false;
-    protected boolean tNextLevelTransition = false;
+    //protected boolean tNextLevelTransition = false;
+    protected boolean tMultiplayerGame;
     protected Logger tLogger;
     protected String tPlayerName;
 
@@ -33,15 +47,26 @@ public class Game {
      * @param height the height of the game.
      * @param logger the Logger to be bound to the game.
      */
-    public Game(int width, int height, Logger logger) {
+    public Game(int width, int height, Logger logger, boolean multiplayerGame) {
         tScreenWidth = width;
         tScreenHeight = height;
-        levelFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        levelFactory = LevelFactory.getFactory();
+        //levelFactory = new LevelFactory(tScreenWidth, tScreenHeight);
         highScoreManager = new HighScoreManager();
         levelNumber = 0;
-        tPlayer = new Player();
         tPaused = false;
         tLogger = logger;
+        tMultiplayerGame = multiplayerGame;
+
+        tPlayer = new Player();
+        tPlayers = new ArrayList<>();
+        tPlayers.add(tPlayer);
+
+        if(tMultiplayerGame) {
+            tPlayer2 = new Player();
+            tPlayers.add(tPlayer2);
+
+        }
     }
 
     /**
@@ -66,7 +91,7 @@ public class Game {
     public void nextLevel() {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber);
-        tLogger.setLog("The level with number: '"+ levelNumber +"' was build.", 2);
+        tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         levelNumber++;
     }
 
@@ -105,9 +130,12 @@ public class Game {
 
     /**
      * The update method for the Game.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
+        if(tMultiplayerGame) {
+            tPlayer2.update();
+        }
         tPlayer.update();
         this.alienUpdate();
         this.checkCollision();
@@ -132,7 +160,7 @@ public class Game {
      * Check whether the game is paused.
      * @return the boolean value.
      */
-    public boolean isPaused(){
+    public boolean isPaused() {
         return tPaused;
     }
 
@@ -150,6 +178,18 @@ public class Game {
      */
     public int getWidth() {
         return tScreenWidth;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return tPlayers;
+    }
+
+    public boolean isMultiplayerGame() {
+        return tMultiplayerGame;
+    }
+
+    public Player getPlayer2() {
+        return tPlayer2;
     }
 
     /**
@@ -176,6 +216,10 @@ public class Game {
         return tLost;
     }
 
+    /**
+     * Check whether next level is up.
+     * @return the boolean value.
+     */
     public boolean isNextLevel() {
         return tNextLevel;
     }
@@ -204,7 +248,7 @@ public class Game {
 
     /**
      * Check whether there was a collision in the Game.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     protected void checkCollision() throws SlickException {
         for (Alien alien : tLevel.getAliens()) {
@@ -219,19 +263,23 @@ public class Game {
      * Checker method for collisions of Aliens with projectiles.
      * @param it the Iterator over Projectiles.
      */
-    public void checkAlienCollisions(Iterator<Projectile> it) {
+    public void checkAlienCollisions(Iterator<Projectile> it) throws SlickException {
         while (it.hasNext()) {
             Projectile projectile = it.next();
-            if (tPlayer.intersects(projectile)) {
-                tLogger.setLog("Player has been hit.", 2);
-                projectile.hit();
-                tPlayer.hit();
-                if (tPlayer.noLives()) {
-                    tLogger.setLog("Player has lost.", 2);
-                    tLost = true;
-                }
-                if (projectile.noLives()) {
-                    it.remove();
+
+            for(Player p : tPlayers) {
+                if (p.intersects(projectile)) {
+                    tLogger.setLog("Player has been hit.", 2);
+                    projectile.hit();
+                    p.hit();
+                    playerDeathSound();
+                    if (p.noLives()) {
+                        tLogger.setLog("Player has lost.", 2);
+                        tLost = true;
+                    }
+                    if (projectile.noLives()) {
+                        it.remove();
+                    }
                 }
             }
         }
@@ -244,9 +292,11 @@ public class Game {
     public void checkPlayerUpgradeCollisions(Iterator<Upgrade> uit) {
         while (uit.hasNext()) {
             Upgrade u = uit.next();
-            if (tPlayer.intersects(u)) {
-                tPlayer.upgrade(u);
-                u.hit();
+            for(Player p : tPlayers){
+                if (p.intersects(u)) {
+                    p.upgrade(u);
+                    u.hit();
+                }
             }
         }
     }
@@ -256,29 +306,65 @@ public class Game {
      * @param alien a given Alien.
      * @param it the Iterator over Aliens.
      */
-    public void checkDeadAlien(Alien alien, Iterator<Projectile> it) {
+    public void checkDeadAlien(Alien alien, Iterator<Projectile> it) throws SlickException {
         boolean wasHit = false;
         //If the alien is dead, it can't collide with player projectiles, so it should be skipped
         if (!alien.isDead()) {
-            it = tPlayer.getProjectiles().iterator();
-            wasHit = false;
-            while (it.hasNext()) {
-                Projectile projectile = it.next();
-                if (alien.intersects(projectile)) {
-                    tLogger.setLog("Alien was hit.", 2);
-                    wasHit = true;
-                    tScore += projectile.hit();
-                    tScore += alien.hit();
-                    if (projectile.noLives()) {
-                        it.remove();
+            for (Player p : tPlayers) {
+                it = p.getProjectiles().iterator();
+                wasHit = false;
+                while (it.hasNext()) {
+                    Projectile projectile = it.next();
+                    if (alien.intersects(projectile)) {
+                        tLogger.setLog("Alien was hit.", 2);
+                        wasHit = true;
+                        tScore += projectile.hit();
+                        tScore += alien.hit();
+                        if (projectile.noLives()) {
+                            it.remove();
+                        }
                     }
                 }
-            }
-            if (wasHit && alien.isDead()) {
-                tLogger.setLog("Alien has died.", 2);
+                if (wasHit && alien.isDead()) {
+                    tLogger.setLog("Alien has died.", 2);
+                    if (alien instanceof MothershipAlien) {
+                        motherShipKilled();
+                    } else {
+                        invaderKilledSound();
+                    }
+
+                }
             }
         }
     }
+
+    /**
+     * The sound belonging to the shots fired.
+     * @throws SlickException possible Exception.
+     */
+    public void playerDeathSound() throws SlickException {
+        Sound death = new Sound("src/main/java/application/sound/explosion.wav");
+        death.play();
+    }
+
+    /**
+     * The sound belonging to the death of an alien
+     * @throws SlickException
+     */
+    public void invaderKilledSound() throws SlickException {
+        Sound invaderKilled = new Sound("src/main/java/application/sound/invaderkilled.wav");
+        invaderKilled.play();
+    }
+
+    /**
+     * The sound belonging to the death of an alien
+     * @throws SlickException
+     */
+    public void motherShipKilled() throws SlickException {
+        Sound motherShip = new Sound("src/main/java/application/sound/mothership.wav");
+        motherShip.play(1.0f,2.0f);
+    }
+
 
     /**
      * Getter method for the name of the Player.
@@ -295,4 +381,5 @@ public class Game {
     public void setPlayerName(String tPlayerName) {
         this.tPlayerName = tPlayerName;
     }
+
 }

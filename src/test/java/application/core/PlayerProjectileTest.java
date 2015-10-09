@@ -1,21 +1,26 @@
 package application.core;
 
+import application.Main;
+import application.core.projectiles.PlayerProjectile;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 
 /**
  * Test class for PlayerProjectile.java.
- *
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class PlayerProjectileTest {
     PlayerProjectile testProjectile;
 
     /**
      * Test whether the constructor method works correctly.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void setUp() throws Exception {
@@ -26,13 +31,12 @@ public class PlayerProjectileTest {
 
     /**
      * Test whether getImage() returns the correct image.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetImage() throws Exception {
         testProjectile = new PlayerProjectile(0, 0);
 
-        assertNull(testProjectile.getImage());
+        assertEquals(Main.PLAYER_PROJECTILE, testProjectile.getImage());
     }
 }

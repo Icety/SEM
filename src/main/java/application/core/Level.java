@@ -1,13 +1,16 @@
 package application.core;
 
 import org.newdawn.slick.Music;
-
+import application.core.aliens.Alien;
 import java.util.ArrayList;
 
 /**
  * Class for Level.
  * @author Thomas Oomens.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
@@ -63,7 +66,7 @@ public class Level {
     public String toString() {
         String result = "Level with the following aliens: \n";
         for (Alien alien: tAliens) {
-            result += alien.toString() +"\n";
+            result += alien.toString() + "\n";
         }
         return result;
     }
@@ -78,7 +81,7 @@ public class Level {
 
     /**
      * Getter method for the background of the level.
-     * @return
+     * @return the corresponding background.
      */
     public String getBackground() {
         return tBackground;
@@ -86,7 +89,7 @@ public class Level {
 
     /**
      * Remove an Alien from the Level.
-     * @param a
+     * @param a the Alien to remove from the level.
      */
     public void removeAlien(Sprite a) {
         tAliens.remove(a);

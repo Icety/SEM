@@ -2,6 +2,7 @@ package application.core;
 
 import application.Main;
 import org.newdawn.slick.Image;
+import application.core.aliens.FinalBoss;
 
 /**
  * Class for DaphnalienBoss.

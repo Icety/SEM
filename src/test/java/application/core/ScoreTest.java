@@ -14,8 +14,7 @@ public class ScoreTest {
 
     /**
      * Initialize variable for the test process.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Before
     public void setUp() throws Exception {
@@ -24,8 +23,7 @@ public class ScoreTest {
 
     /**
      * Test whether getScore() returns the correct value.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetScore() throws Exception {
@@ -34,8 +32,7 @@ public class ScoreTest {
 
     /**
      * Test whether getPlayer() returns the correct Player name.
-     *
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testGetPlayer() throws Exception {

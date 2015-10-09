@@ -1,16 +1,23 @@
 package application.core;
 
 import application.Main;
+import application.core.projectiles.PlayerProjectile;
+import application.core.projectiles.Projectile;
+import application.core.projectiles.UpgradedProjectile;
+import application.core.upgrades.*;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Class for Player.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class Player extends Sprite {
     protected long tLastShot = 0;
     protected int tReloadTime = 10;
@@ -31,17 +38,17 @@ public class Player extends Sprite {
 
     /**
      * Update method for the Player.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
-        if(tGoLeft) {
+        if (tGoLeft) {
             moveLeft();
         }
-        else if(tGoRight) {
+        else if (tGoRight) {
             moveRight();
         }
         long time = (System.nanoTime() - tLastShot) / 1000000;
-        if(tShoot && time > tReloadTime) {
+        if (tShoot && time > tReloadTime) {
             tLastShot = System.nanoTime();
             shoot();
         }
@@ -74,31 +81,31 @@ public class Player extends Sprite {
 
     /**
      * Shoot method for the Player.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     protected void shoot() throws SlickException {
         int bestWeapon = 0;
-        for(Upgrade u: tActiveUpgrades) {
-            if(u instanceof WeaponUpgrade && u.isActive()) {
+        for (Upgrade u: tActiveUpgrades) {
+            if (u instanceof WeaponUpgrade && u.isActive()) {
                 bestWeapon = 1;
             }
         }
 
-        if(bestWeapon == 0 ) {
+        if (bestWeapon == 0) {
             shootWeaponZero();
         }
-        else if(bestWeapon == 1) {
+        else if (bestWeapon == 1) {
             shootWeaponOne();
         }
     }
 
     /**
      * Shoot method for when best weapon is zero.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void shootWeaponZero() throws SlickException {
-        if(tUpgraded) {
-            if(tLastSide == 0) {
+        if (tUpgraded) {
+            if (tLastSide == 0) {
                 laserSound();
                 Projectile projectile = new PlayerProjectile(tX + 5, tY);
                 this.addProjectile(projectile);
@@ -120,22 +127,27 @@ public class Player extends Sprite {
 
     /**
      * Shoot method for when best weapon is one.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void shootWeaponOne() throws SlickException {
         int amount = 3;
-        if(tUpgraded) {
+        if (tUpgraded) {
             amount = 6;
         }
         int x, y;
         float dirx, diry;
-        for (int i=0; i<amount; i++) {
+        for (int i = 0; i < amount; i++) {
             laserSound();
             x = tX + i * tWidth / amount;
             y = tY;
-            dirx = -(x - (tX + tWidth / 2)) * 4;
-            diry = y;
-            this.addProjectile(new UpgradedProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
+            dirx = x - (tX + tWidth / 3);
+            diry = tHeight / 2;
+            System.out.println(x +", "+ y +", "+ dirx / diry +", "+ -1);
+            this.addProjectile(
+                    new UpgradedProjectile(
+                            x, y,
+                            dirx / diry / 4, -1
+                    ));
         }
     }
 
@@ -143,7 +155,7 @@ public class Player extends Sprite {
      * Make the Player move Left.
      */
     public void moveLeft() {
-        if ( (tX ) > 10 ) {
+        if ((tX) > 10) {
             tX -= tSpeed;
         }
     }
@@ -152,7 +164,7 @@ public class Player extends Sprite {
      * Make the Player more right.
      */
     public void moveRight() {
-        if ( !((tX + tWidth + 10) > Main.WIDTH )) {
+        if (!((tX + tWidth + 10) > Main.WIDTH)) {
             tX += tSpeed;
         }
     }
@@ -170,14 +182,15 @@ public class Player extends Sprite {
      * @return the Image belonging to the Player.
      */
     public Image getImage() {
-        if(!tUpgraded)
-        return Main.PLAYER;
+        if (!tUpgraded) {
+            return Main.PLAYER;
+        }
         return Main.UPGRADED_PLAYER;
     }
 
     /**
      * The sound belonging to the shots fired.
-     * @throws SlickException
+     * @throws SlickException possible Exception.
      */
     public void laserSound() throws SlickException {
         Sound laser = new Sound("src/main/java/application/sound/shoot.wav");
@@ -213,8 +226,8 @@ public class Player extends Sprite {
      * @return the Integer killScore.
      */
     public int hit() {
-        tHealth--;
-        return tKillScore;
+        decrementHealth();
+        return getKillScore();
     }
 
     /**
@@ -238,10 +251,10 @@ public class Player extends Sprite {
      * @param u the given upgrade.
      */
     public void upgrade(Upgrade u) {
-        if(u instanceof HealthUpgrade && tHealth < 3) {
-            tHealth++;
+        if (u instanceof HealthUpgrade && getHealth() < 3) {
+            incrementHealth();
         }
-        if(u instanceof PlayerUpgrade) {
+        if (u instanceof PlayerUpgrade) {
             tUpgraded = true;
         }
         else {
@@ -249,6 +262,10 @@ public class Player extends Sprite {
         }
     }
 
+    /**
+     * Method to make the play move up.
+     * @param y the integer amount to move up.
+     */
     public void moveUp(int y) {
         tY -= y;
     }
