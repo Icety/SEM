@@ -1,6 +1,10 @@
 package application.core;
 
 import application.Main;
+import application.core.projectiles.PlayerProjectile;
+import application.core.projectiles.Projectile;
+import application.core.projectiles.UpgradedProjectile;
+import application.core.upgrades.*;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -136,12 +140,13 @@ public class Player extends Sprite {
             laserSound();
             x = tX + i * tWidth / amount;
             y = tY;
-            dirx = -(x - (tX + tWidth / 2)) * 4;
-            diry = y;
+            dirx = x - (tX + tWidth / 3);
+            diry = tHeight / 2;
+            System.out.println(x +", "+ y +", "+ dirx / diry +", "+ -1);
             this.addProjectile(
                     new UpgradedProjectile(
                             x, y,
-                            dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)
+                            dirx / diry / 4, -1
                     ));
         }
     }
@@ -220,9 +225,9 @@ public class Player extends Sprite {
      * Handle a hit on the Player.
      * @return the Integer killScore.
      */
-    public int hit(){
-        tHealth--;
-        return tKillScore;
+    public int hit() {
+        decrementHealth();
+        return getKillScore();
     }
 
     /**
@@ -246,8 +251,8 @@ public class Player extends Sprite {
      * @param u the given upgrade.
      */
     public void upgrade(Upgrade u) {
-        if (u instanceof HealthUpgrade && tHealth < 3) {
-            tHealth++;
+        if (u instanceof HealthUpgrade && getHealth() < 3) {
+            incrementHealth();
         }
         if (u instanceof PlayerUpgrade) {
             tUpgraded = true;

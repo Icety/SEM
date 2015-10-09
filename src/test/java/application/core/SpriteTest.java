@@ -1,5 +1,6 @@
 package application.core;
 
+import application.core.projectiles.Projectile;
 import org.junit.Before;
 import org.junit.Test;
 import org.newdawn.slick.geom.Rectangle;
@@ -29,7 +30,7 @@ public class SpriteTest {
     @Before
     public void setUp() throws Exception {
         testSprite = new Sprite();
-        testProjectile = new Projectile();
+        testProjectile = new Projectile(0, 0);
     }
 
     /**
@@ -60,7 +61,7 @@ public class SpriteTest {
      */
     @Test
     public void testSettX() throws Exception {
-        testSprite.settX(1);
+        testSprite.setX(1);
 
         assertEquals(1, testSprite.tX);
     }
@@ -71,7 +72,7 @@ public class SpriteTest {
      */
     @Test
     public void testSettY() throws Exception {
-        testSprite.settY(1);
+        testSprite.setY(1);
 
         assertEquals(1, testSprite.tY);
     }
@@ -152,8 +153,9 @@ public class SpriteTest {
     @Test
     public void testUpdateProjectiles() throws Exception {
         ArrayList<Projectile> testProjectiles = new ArrayList<>();
-        testProjectile.tX = 100000;
-        testProjectile.tY = 100000;
+        testProjectile.setX(100000);
+        testProjectile.setY(100000);
+        testProjectiles.add(testProjectile);
         testSprite.addProjectile(testProjectile);
         testSprite.updateProjectiles();
 

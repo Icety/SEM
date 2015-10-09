@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.aliens.BigAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -39,7 +40,7 @@ public class BigAlienTest {
     public void testAddShootChance() throws Exception {
         testAlien.addShootChance();
 
-        assertTrue(testAlien.tShootChance >= 0);
+        assertTrue(testAlien.getShootChance() >= 0);
     }
 
     /**

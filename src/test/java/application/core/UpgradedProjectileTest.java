@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.projectiles.UpgradedProjectile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,13 +29,13 @@ public class UpgradedProjectileTest {
      */
     @Test
     public void testUpdate() throws Exception {
-        testProjectile.tDirectionX = 1;
-        testProjectile.tDirectionY = 1;
-        testProjectile.tSpeed = 1;
+        testProjectile.setDirectionX(1);
+        testProjectile.setDirectionY(1);
+        testProjectile.setSpeed(1);
         testProjectile.update();
 
-        assertEquals(1.0, testProjectile.tX, 0.0);
-        assertEquals(1.0, testProjectile.tX, 0.0);
+        assertEquals(1.0, testProjectile.getX(), 0.0);
+        assertEquals(1.0, testProjectile.getY(), 0.0);
     }
 
     /**
@@ -43,9 +44,9 @@ public class UpgradedProjectileTest {
      */
     @Test
     public void testGetX() throws Exception {
-        testProjectile.tX = 1;
+        testProjectile.setX(1.0f);
 
-        assertEquals(1, testProjectile.getX());
+        assertEquals(1.0f, testProjectile.getX(), 0.0);
     }
 
     /**
@@ -54,9 +55,9 @@ public class UpgradedProjectileTest {
      */
     @Test
     public void testGetY() throws Exception {
-        testProjectile.tY = 1;
+        testProjectile.setY(1.0f);
 
-        assertEquals(1, testProjectile.getY());
+        assertEquals(1.0f, testProjectile.getY(), 0.0);
     }
 
     /**

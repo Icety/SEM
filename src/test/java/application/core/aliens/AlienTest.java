@@ -1,6 +1,9 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
+import application.core.LevelFactory;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.Upgrade;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -65,8 +68,8 @@ public class AlienTest {
     public void testReadXmlByUsingPreLoadedXmlFile() throws Exception {
         testAlien.readXml(testElement);
 
-        assertEquals(1000, testAlien.tX);
-        assertEquals(100, testAlien.tY);
+        assertEquals(1000, testAlien.getX());
+        assertEquals(100, testAlien.getY());
     }
 
     /**
@@ -76,9 +79,9 @@ public class AlienTest {
      */
     @Test
     public void testUpdate() throws Exception {
-        testAlien.tX = 0;
-        testAlien.tSpeed = 1;
-        testAlien.tDirection = 1;
+        testAlien.setX(0);
+        testAlien.setSpeed(1.0);
+        testAlien.setDirection(1);
         testAlien.update();
 
         assertEquals(1, testAlien.getX());
@@ -91,7 +94,7 @@ public class AlienTest {
     @Test
     public void testIsBonusAlien() throws Exception {
         assertFalse(testAlien.isBonusAlien());
-        testAlien.tBonusAlien = true;
+        testAlien.setBonusAlien(true);
 
         assertTrue(testAlien.isBonusAlien());
     }
@@ -106,7 +109,7 @@ public class AlienTest {
         for (int i = 0; i < 10000; i++) {
             testAlien.shoot();
         }
-        assertTrue(testAlien.tProjectiles.size() > 0);
+        assertTrue(testAlien.getProjectiles().size() > 0);
     }
 
     /**
@@ -115,10 +118,10 @@ public class AlienTest {
      */
     @Test
     public void testSetCanShoot() throws Exception {
-        assertFalse(testAlien.tCanShoot);
+        assertFalse(testAlien.canShoot());
         testAlien.setCanShoot(true);
 
-        assertTrue(testAlien.tCanShoot);
+        assertTrue(testAlien.canShoot());
     }
 
     /**
@@ -138,10 +141,10 @@ public class AlienTest {
      */
     @Test
     public void testIsDead() throws Exception {
-        testAlien.tDead = true;
+        testAlien.setDead(true);
 
         assertTrue(testAlien.isDead());
-        testAlien.tDead = false;
+        testAlien.setDead(false);
 
         assertFalse(testAlien.isDead());
     }
@@ -153,10 +156,10 @@ public class AlienTest {
      */
     @Test
     public void testAddShootChance() throws Exception {
-        testAlien.tShootChance = 1;
+        testAlien.setShootChance(1);
 
         testAlien.addShootChance();
-        assertEquals(1, testAlien.tShootChance);
+        assertEquals(1, testAlien.getShootChance());
     }
 
     /**
@@ -165,12 +168,12 @@ public class AlienTest {
      */
     @Test
     public void testEndOfScreen() throws Exception {
-        testAlien.tX = 10;
-        testAlien.tDirection = -1;
+        testAlien.setX(10);
+        testAlien.setDirection(-1);
         assertTrue(testAlien.endOfScreen());
 
-        testAlien.tX = 0;
-        testAlien.tDirection = 1;
+        testAlien.setX(0);
+        testAlien.setDirection(1);
         assertFalse(testAlien.endOfScreen());
     }
 
@@ -180,12 +183,12 @@ public class AlienTest {
      */
     @Test
     public void testSwitchDirection() throws Exception {
-        testAlien.tDirection = 1;
+        testAlien.setDirection(1);
 
         testAlien.switchDirection();
 
         assertEquals(15, testAlien.getY());
-        assertEquals(-1, testAlien.tDirection);
+        assertEquals(-1, testAlien.getDirection());
     }
 
     /**
@@ -195,14 +198,14 @@ public class AlienTest {
     @Test
     public void testSetLowerLevel() throws Exception {
         ArrayList<Alien> testAliens = testFactory.loadAliens(testElement);
-        testAlien.tX = 100;
-        testAlien.tY = 105;
+//        testAlien.tX = 100;
+//        testAlien.tY = 105;
         testAliens.add(testAlien);
-        testAlien.tX = 100;
-        testAlien.tY = 20;
+        testAlien.setX(100);
+        testAlien.setY(20);
         testAlien.setLowerLevel(testAliens);
 
-        assertTrue(testAlien.tCanShoot);
+        assertTrue(testAlien.canShoot());
     }
 
     /**
@@ -214,7 +217,7 @@ public class AlienTest {
         Main.DIFFICULTY = 1;
         testAlien.applyDifficulty();
 
-        assertEquals(99.8, testAlien.tRandomChance, 0.0);
+        assertEquals(99.8, testAlien.getRandomChance(), 0.0);
     }
 
     /**
@@ -226,7 +229,7 @@ public class AlienTest {
         Main.DIFFICULTY = 2;
         testAlien.applyDifficulty();
 
-        assertEquals(99.9, testAlien.tRandomChance, 0.0);
+        assertEquals(99.9, testAlien.getRandomChance(), 0.0);
     }
 
     /**
@@ -238,7 +241,7 @@ public class AlienTest {
         Main.DIFFICULTY = 3;
         testAlien.applyDifficulty();
 
-        assertEquals(99.5, testAlien.tRandomChance, 0.0);
+        assertEquals(99.5, testAlien.getRandomChance(), 0.0);
     }
 
     /**
@@ -265,7 +268,7 @@ public class AlienTest {
         ArrayList<Upgrade> testList = new ArrayList<>();
         Upgrade testUpgrade = new HealthUpgrade(0, 0);
         testList.add(testUpgrade);
-        testAlien.tUpgrades = testList;
+        testAlien.setUpgrades(testList);
 
         assertEquals(testList, testAlien.getUpgrades());
     }
@@ -278,12 +281,12 @@ public class AlienTest {
     public void testUpdateUpgrades() throws Exception {
         ArrayList<Upgrade> testList = new ArrayList<>();
         Upgrade testUpgrade = new HealthUpgrade(0, 0);
-        testUpgrade.tSpeed = 1;
-        testUpgrade.tDirection = 1;
+        testUpgrade.setSpeed(1);
+        testUpgrade.setDirection(1);
         testList.add(testUpgrade);
-        testAlien.tUpgrades = testList;
+        testAlien.setUpgrades(testList);
         testAlien.updateUpgrades();
 
-        assertEquals(1, testUpgrade.tY);
+        assertEquals(1, testUpgrade.getY());
     }
 }

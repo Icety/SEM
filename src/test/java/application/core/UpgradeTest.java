@@ -1,5 +1,7 @@
 package application.core;
 
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.Upgrade;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,7 +32,7 @@ public class UpgradeTest {
     public void testSetDirection() throws Exception {
         testUpgrade.setDirection(2);
 
-        assertEquals(2, testUpgrade.tDirection);
+        assertEquals(2, testUpgrade.getDirection());
     }
 
     /**
@@ -52,8 +54,8 @@ public class UpgradeTest {
     @Test
     public void testUpdate() throws Exception {
         testUpgrade.tY = 0;
-        testUpgrade.tSpeed = 1;
-        testUpgrade.tDirection = 1;
+        testUpgrade.setSpeed(1);
+        testUpgrade.setDirection(1);
         testUpgrade.update();
 
         assertEquals(1, testUpgrade.tY);
@@ -77,10 +79,10 @@ public class UpgradeTest {
      */
     @Test
     public void testHit() throws Exception {
-        testUpgrade.tToDraw = true;
+        testUpgrade.setToDraw(true);
         testUpgrade.hit();
 
-        assertFalse(testUpgrade.tToDraw);
+        assertFalse(testUpgrade.toDraw());
     }
 
     /**
@@ -89,7 +91,7 @@ public class UpgradeTest {
      */
     @Test
     public void testIsRemovedTrue() throws Exception {
-        testUpgrade.tRemoved = true;
+        testUpgrade.setRemoved(true);
         assertTrue(testUpgrade.isRemoved());
     }
 
@@ -99,7 +101,7 @@ public class UpgradeTest {
      */
     @Test
     public void testIsRemovedFalse() throws Exception {
-        testUpgrade.tRemoved = false;
+        testUpgrade.setRemoved(false);
         assertFalse(testUpgrade.isRemoved());
     }
 
@@ -109,7 +111,7 @@ public class UpgradeTest {
      */
     @Test
     public void testIsActiveTrue() throws Exception {
-        testUpgrade.tDuration = Integer.MAX_VALUE;
+        testUpgrade.setDuration(Integer.MAX_VALUE);
 
         assertTrue(testUpgrade.isActive());
     }
@@ -120,7 +122,7 @@ public class UpgradeTest {
      */
     @Test
     public void testIsActiveFalse() throws Exception {
-        testUpgrade.tDuration = Integer.MIN_VALUE;
+        testUpgrade.setDuration(Integer.MIN_VALUE);
 
         assertFalse(testUpgrade.isActive());
     }
@@ -131,7 +133,7 @@ public class UpgradeTest {
      */
     @Test
     public void testToDrawTrue() throws Exception {
-        testUpgrade.tToDraw = true;
+        testUpgrade.setToDraw(true);
 
         assertTrue(testUpgrade.toDraw());
     }
@@ -142,7 +144,7 @@ public class UpgradeTest {
      */
     @Test
     public void testToDrawFalse() throws Exception {
-        testUpgrade.tToDraw = false;
+        testUpgrade.setToDraw(false);
 
         assertFalse(testUpgrade.toDraw());
     }

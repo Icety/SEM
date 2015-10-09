@@ -2,6 +2,11 @@ package application.core;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import application.core.aliens.Alien;
+import application.core.aliens.MothershipAlien;
+import application.core.projectiles.Projectile;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;

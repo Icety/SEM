@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.SpeedUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,7 +25,7 @@ public class SpeedUpgradeTest {
         Main.DIFFICULTY = 1;
         testUpgrade = new SpeedUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -36,7 +37,7 @@ public class SpeedUpgradeTest {
         Main.DIFFICULTY = 2;
         testUpgrade = new SpeedUpgrade(0, 0);
 
-        assertEquals(3, testUpgrade.tSpeed);
+        assertEquals(3, testUpgrade.getSpeed());
     }
 
     /**
@@ -48,7 +49,7 @@ public class SpeedUpgradeTest {
         Main.DIFFICULTY = 3;
         testUpgrade = new SpeedUpgrade(0, 0);
 
-        assertEquals(5, testUpgrade.tSpeed);
+        assertEquals(5, testUpgrade.getSpeed());
     }
 
     /**

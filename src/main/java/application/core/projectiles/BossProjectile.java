@@ -1,4 +1,4 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
 import org.newdawn.slick.Image;
@@ -18,9 +18,7 @@ public class BossProjectile extends Projectile {
      * @param y y-coordinate of the projectile.
      */
     public BossProjectile(int x, int y) {
-        tDirection = 1;
-        tX = x;
-        tY = y;
+        super(x, y);
         tSpeed = 5;
         tWidth = 50;
         tHeight = 70;

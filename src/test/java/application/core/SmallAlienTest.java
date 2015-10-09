@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.aliens.SmallAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,10 +29,10 @@ public class SmallAlienTest {
      */
     @Test
     public void testAddShootChance() throws Exception {
-        int oldChance = testAlien.tShootChance;
+        int oldChance = testAlien.getShootChance();
         testAlien.addShootChance();
 
-        assertTrue(testAlien.tShootChance >= oldChance);
+        assertTrue(testAlien.getShootChance() >= oldChance);
     }
 
     /**

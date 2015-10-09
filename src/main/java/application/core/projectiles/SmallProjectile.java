@@ -1,6 +1,7 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
+import org.newdawn.slick.Image;
 
 /**
  * Class for SmallProjectile.
@@ -17,9 +18,7 @@ public class SmallProjectile extends Projectile {
      * @param y y-coordinate.
      */
     public SmallProjectile(int x, int y) {
-        tDirection = 1;
-        tX = x;
-        tY = y;
+        super(x, y);
         tWidth = 7;
         tHeight = 15;
 
@@ -38,7 +37,7 @@ public class SmallProjectile extends Projectile {
      * Getter method for the belonging Image.
      * @return the belonging Image.
      */
-    public org.newdawn.slick.Image getImage() {
+    public Image getImage() {
         return Main.SMALL_PROJECTILE;
     }
 }

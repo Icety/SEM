@@ -1,10 +1,10 @@
 package application.controllers;
 
 import application.Main;
-import application.core.Alien;
+import application.core.aliens.Alien;
 import application.core.Player;
-import application.core.Projectile;
-import application.core.Upgrade;
+import application.core.projectiles.Projectile;
+import application.core.upgrades.Upgrade;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.Image;
