@@ -7,6 +7,7 @@ import application.core.projectiles.Projectile;
 import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 /**
  * Class for Game.
@@ -225,13 +226,14 @@ public class Game {
      * Checker method for collisions of Aliens with projectiles.
      * @param it the Iterator over Projectiles.
      */
-    public void checkAlienCollisions(Iterator<Projectile> it) {
+    public void checkAlienCollisions(Iterator<Projectile> it) throws SlickException {
         while (it.hasNext()) {
             Projectile projectile = it.next();
             if (tPlayer.intersects(projectile)) {
                 tLogger.setLog("Player has been hit.", 2);
                 projectile.hit();
                 tPlayer.hit();
+                playerDeathSound();
                 if (tPlayer.noLives()) {
                     tLogger.setLog("Player has lost.", 2);
                     tLost = true;
@@ -262,7 +264,7 @@ public class Game {
      * @param alien a given Alien.
      * @param it the Iterator over Aliens.
      */
-    public void checkDeadAlien(Alien alien, Iterator<Projectile> it) {
+    public void checkDeadAlien(Alien alien, Iterator<Projectile> it) throws SlickException {
         boolean wasHit = false;
         //If the alien is dead, it can't collide with player projectiles, so it should be skipped
         if (!alien.isDead()) {
@@ -282,9 +284,43 @@ public class Game {
             }
             if (wasHit && alien.isDead()) {
                 tLogger.setLog("Alien has died.", 2);
+                if (alien instanceof MothershipAlien) {
+                    motherShipKilled();
+                } else {
+                    invaderKilledSound();
+                }
+
             }
-        }
+            }
     }
+
+    /**
+     * The sound belonging to the shots fired.
+     * @throws SlickException possible Exception.
+     */
+    public void playerDeathSound() throws SlickException {
+        Sound death = new Sound("src/main/java/application/sound/explosion.wav");
+        death.play();
+    }
+
+    /**
+     * The sound belonging to the death of an alien
+     * @throws SlickException
+     */
+    public void invaderKilledSound() throws SlickException {
+        Sound invaderKilled = new Sound("src/main/java/application/sound/invaderkilled.wav");
+        invaderKilled.play();
+    }
+
+    /**
+     * The sound belonging to the death of an alien
+     * @throws SlickException
+     */
+    public void motherShipKilled() throws SlickException {
+        Sound motherShip = new Sound("src/main/java/application/sound/mothership.wav");
+        motherShip.play(1.0f,2.0f);
+    }
+
 
     /**
      * Getter method for the name of the Player.

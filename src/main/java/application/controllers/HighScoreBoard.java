@@ -2,13 +2,11 @@ package application.controllers;
 
 import application.Main;
 import application.core.Score;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
 
 import java.util.ArrayList;
 
@@ -64,6 +62,7 @@ public class HighScoreBoard extends BasicGameState {
 
             graphics.setColor(Color.white);
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
+            graphics.drawString("Press Enter to return to menu", 550, 150);
 
             ArrayList<Score> list = tMain.getGame().getHighScoreManager().getScores();
             int x = 400;
@@ -79,6 +78,14 @@ public class HighScoreBoard extends BasicGameState {
 
            }
 
+    }
+
+    public void keyReleased(int key, char c) {
+        switch (key) {
+            default: break;
+            case Input.KEY_ENTER:
+                tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+        }
     }
 
     /**
