@@ -40,7 +40,7 @@ public abstract class Upgrade extends Sprite {
      * Update method for the upgrade.
      */
     public void update() {
-        setY(tDirection * tSpeed);
+        tY += tDirection * tSpeed;
     }
 
     /**

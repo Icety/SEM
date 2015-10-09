@@ -138,7 +138,7 @@ public class Sprite {
      * @return the belonging boundingBox.
      */
     public Rectangle getBoundingBox() {
-        return new Rectangle(tX, tY, tWidth, tHeight);
+        return new Rectangle(this.getX(), this.getY(), tWidth, tHeight);
     }
 
     /**

@@ -140,12 +140,13 @@ public class Player extends Sprite {
             laserSound();
             x = tX + i * tWidth / amount;
             y = tY;
-            dirx = -(x - (tX + tWidth / 2)) * 4;
-            diry = y;
+            dirx = x - (tX + tWidth / 2);
+            diry = tHeight / 2;
+            System.out.println(x +", "+ y +", "+ dirx / diry +", "+ -1);
             this.addProjectile(
                     new UpgradedProjectile(
                             x, y,
-                            dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)
+                            dirx / diry / 4, -1
                     ));
         }
     }
