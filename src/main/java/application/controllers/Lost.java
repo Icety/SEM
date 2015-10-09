@@ -99,7 +99,7 @@ public class Lost extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_1:
-                tMain.newGame();
+                tMain.newGame(tMain.getGame().isMultiplayerGame());
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:

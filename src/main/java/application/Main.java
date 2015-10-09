@@ -89,8 +89,6 @@ public class Main extends StateBasedGame {
                 tLogger.stopLogging();
             }
         });
-
-        tGame = new Game(WIDTH, HEIGHT, tLogger);
     }
 
     /**
@@ -149,12 +147,18 @@ public class Main extends StateBasedGame {
     /**
      * Let Main start a new game.
      */
-    public void newGame() {
-        tGame = new Game(WIDTH, HEIGHT, tLogger);
+    public void newGame(boolean multiplayer){
+        tGame = new Game(WIDTH, HEIGHT, tLogger, multiplayer);
         tGame.nextLevel();
-        Player p = tGame.getPlayer();
-        p.setX(tGame.getWidth() / 2);
-        p.setY(tGame.getHeight() - (p.getHeight() + 50));
+
+        int j = 0;
+
+        for (int i = 0; i < tGame.getPlayers().size(); i++) {
+            Player p = tGame.getPlayers().get(i);
+            p.setX(tGame.getWidth() / 4 + j);
+            p.setY(tGame.getHeight() - (p.getHeight() + 50));
+            j = j + 100;
+        }
     }
 
     /**
@@ -164,4 +168,5 @@ public class Main extends StateBasedGame {
     public Game getGame() {
         return tGame;
     }
+
 }

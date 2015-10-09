@@ -52,7 +52,7 @@ public class GameTest {
         ArrayList<Alien> testAliens = new ArrayList<>();
         testLogger = new Logger();
         testAliens.add(testAlien);
-        testGame = new Game(10, 10, testLogger);
+        testGame = new Game(10, 10, testLogger, false);
         nonMockedLevel = new Level();
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
@@ -257,7 +257,7 @@ public class GameTest {
 //     */
 //    @Test
 //    public void testCheckCollisionBetweenAlienAndProjectile() throws Exception {
-//        testGame.tWon = false;
+//    testGame.tWon = false;
 //        ArrayList<Alien> smallAliens = new ArrayList<>();
 //        Alien smallAlien = new SmallAlien();
 //        smallAlien.tX = 10;
@@ -266,8 +266,10 @@ public class GameTest {
 //        nonMockedLevel = new Level();
 //        nonMockedLevel.addAliens(smallAliens);
 //        testGame.tLevel = nonMockedLevel;
-//        testGame.tPlayer = nonMockedPlayer;
+//        ArrayList<Player> testPlayers = new ArrayList<>();
 //        nonMockedPlayer.addProjectile(nonMockedProjectile);
+//        testPlayers.add(nonMockedPlayer);
+//        testGame.tPlayers = testPlayers;
 //        testGame.checkCollision();
 //
 //        assertFalse(nonMockedPlayer.getProjectiles().contains(nonMockedProjectile));
@@ -307,6 +309,7 @@ public class GameTest {
 //     */
 //    @Test
 //    public void testCheckCollisionKillPlayer() throws Exception {
+//        ArrayList<Player> testPlayers = new ArrayList<>();
 //        testGame.tWon = false;
 //        ArrayList<Alien> smallAliens = new ArrayList<>();
 //        Alien smallAlien = new SmallAlien();
@@ -319,8 +322,10 @@ public class GameTest {
 //        nonMockedPlayer.tX = 10;
 //        nonMockedPlayer.tY = 10;
 //        nonMockedPlayer.tHealth = 1;
-//        testGame.tPlayer = nonMockedPlayer;
+//        nonMockedPlayer.addProjectile(nonMockedProjectile);
+//        testPlayers.add(nonMockedPlayer);
 //        smallAlien.addProjectile(nonMockedProjectile);
+//        testGame.tPlayers = testPlayers;
 //        testGame.checkCollision();
 //
 //        assertTrue(testGame.tLost);
