@@ -120,7 +120,6 @@ public class Alien extends Sprite {
      * Method to make the Alien switch direction.
      */
     public void switchDirection() {
-        tY += 15;
         tDirection *= -1;
     }
 
