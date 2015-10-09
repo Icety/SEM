@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+<background>moving.jpg</background>
+<music>normalmusic.wav</music>
+<theme>classic</theme>
+<aliens>
+<alien>
+<x>77</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>181</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>285</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>389</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>493</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>597</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>701</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>805</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1013</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1117</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1221</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>913</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>181</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>285</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>393</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>497</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>601</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>705</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>809</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>913</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>1017</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>1121</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>43</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+<alien>
+<x>631</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+<alien>
+<x>1307</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+    <alien>
+        <x>77</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>181</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>285</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>389</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>493</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>597</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>701</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>805</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1013</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1117</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1560</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>913</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+</aliens>
+</level>

@@ -138,5 +138,12 @@ public class Main extends StateBasedGame {
         UPGRADE_2 = new Image(imageRoot + "upgrade_health.png");
         UPGRADE_3 = new Image(imageRoot + "upgrade.png");
     }
+
+    public void changeDifficulty() {
+        DIFFICULTY++;
+        if(DIFFICULTY>3) {
+            DIFFICULTY = 1;
+        }
+    }
 }
 

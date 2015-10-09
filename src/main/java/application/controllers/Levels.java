@@ -38,7 +38,7 @@ public class Levels extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/"+ Main.imageTheme + "/"+ tBackgroundString);
     }
 
     /**

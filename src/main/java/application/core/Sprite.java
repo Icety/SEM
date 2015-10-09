@@ -108,14 +108,6 @@ public class Sprite {
     }
 
     /**
-     * Setter method for the difficulty.
-     * @param difficulty the integer value of the difficulty.
-     */
-    public void setDifficulty(int difficulty) {
-        tDifficulty = difficulty;
-    }
-
-    /**
      * Update method for the projectiles belonging to the Sprite.
      */
     protected void updateProjectiles() {

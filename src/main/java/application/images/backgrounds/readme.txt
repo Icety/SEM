@@ -1,0 +1,1 @@
+background.png should be placed in theme map	
