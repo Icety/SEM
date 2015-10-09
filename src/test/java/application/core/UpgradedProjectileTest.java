@@ -44,9 +44,9 @@ public class UpgradedProjectileTest {
      */
     @Test
     public void testGetX() throws Exception {
-        testProjectile.setX(1);
+        testProjectile.setX(1.0f);
 
-        assertEquals(1, testProjectile.getX());
+        assertEquals(1.0f, testProjectile.getX(), 0.0);
     }
 
     /**
@@ -55,9 +55,9 @@ public class UpgradedProjectileTest {
      */
     @Test
     public void testGetY() throws Exception {
-        testProjectile.setY(1);
+        testProjectile.setY(1.0f);
 
-        assertEquals(1, testProjectile.getY());
+        assertEquals(1.0f, testProjectile.getY(), 0.0);
     }
 
     /**
