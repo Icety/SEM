@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.WeaponUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,7 @@ public class WeaponUpgradeTest {
 
         testUpgrade = new WeaponUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -39,7 +40,7 @@ public class WeaponUpgradeTest {
 
         testUpgrade = new WeaponUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -52,7 +53,7 @@ public class WeaponUpgradeTest {
 
         testUpgrade = new WeaponUpgrade(0, 0);
 
-        assertEquals(4, testUpgrade.tSpeed);
+        assertEquals(4, testUpgrade.getSpeed());
     }
 
     /**

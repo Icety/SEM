@@ -1,7 +1,7 @@
 package application.controllers;
 
 import application.Main;
-import application.core.Alien;
+import application.core.aliens.Alien;
 import application.core.Player;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
@@ -123,8 +123,8 @@ public class StoryLine extends BasicGameState {
             }
             if (p.getY() < -150) {
                 System.out.println(p.getY());
-                p.settX(250);
-                p.settY(Main.HEIGHT + 120);
+                p.setX(250);
+                p.setY(Main.HEIGHT + 120);
                 tStart = false;
                 tCount = 0;
                 game.enterState(7, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
@@ -151,8 +151,8 @@ public class StoryLine extends BasicGameState {
                         p.moveUp((int) (tCount / 50) * 2);
                     }
                     if (p.getY() < -150) {
-                        p.settX(Main.WIDTH - p.getWidth());
-                        p.settY(Main.HEIGHT - p.getHeight() - 50);
+                        p.setX(Main.WIDTH - p.getWidth());
+                        p.setY(Main.HEIGHT - p.getHeight() - 50);
                         this.resetValues();
                         tMain.getGame().nextLevel();
                         game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

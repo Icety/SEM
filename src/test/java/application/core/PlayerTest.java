@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -89,8 +90,8 @@ public class PlayerTest {
      */
     @Test
     public void testToString() throws Exception {
-        testPlayer.settX(0);
-        testPlayer.settY(0);
+        testPlayer.setX(0);
+        testPlayer.setY(0);
 
         assertEquals("Player on coords: 0, 0", testPlayer.toString());
     }

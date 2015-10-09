@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.aliens.MothershipAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -66,10 +67,10 @@ public class MothershipAlienTest {
      */
     @Test
     public void testSwitchDirection() throws Exception {
-        testAlien.tDirection = 1;
+        testAlien.setDirection(1);
         testAlien.tX = -2001;
         testAlien.switchDirection();
 
-        assertEquals(-1, testAlien.tDirection);
+        assertEquals(-1, testAlien.getDirection());
     }
 }

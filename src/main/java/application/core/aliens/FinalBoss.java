@@ -1,6 +1,8 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
+import application.core.projectiles.BachelliProjectile;
+import application.core.projectiles.BossProjectile;
 import org.newdawn.slick.Image;
 
 /**
@@ -11,6 +13,7 @@ import org.newdawn.slick.Image;
         "checkstyle:magicnumber",
         "checkstyle:visibilitymodifier"
 })
+
 public class FinalBoss extends Alien {
     protected int tSecondShot = 0;
 
@@ -63,7 +66,7 @@ public class FinalBoss extends Alien {
                 }
             }
         }
-        if (tCanShoot) {
+        if (canShoot()) {
             if ((Math.random() * 100 > 99.9) || tShootChance > 1000) {
                 this.addProjectile(new BossProjectile(tX + tWidth / 2, tY + tHeight));
                 tShootChance = 0;
@@ -99,5 +102,13 @@ public class FinalBoss extends Alien {
     @Override
     public String toString() {
         return "FinalBoss on coords: " + tX + ", " + tY;
+    }
+
+    public int getSecondShot() {
+        return tSecondShot;
+    }
+
+    public void setSecondShot(int tSecondShot) {
+        this.tSecondShot = tSecondShot;
     }
 }

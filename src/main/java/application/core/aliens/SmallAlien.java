@@ -1,4 +1,4 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
 import org.newdawn.slick.Image;

@@ -1,5 +1,11 @@
 package application.core;
 
+import application.core.aliens.Alien;
+import application.core.aliens.SmallAlien;
+import application.core.projectiles.Projectile;
+import application.core.projectiles.SmallProjectile;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -206,10 +212,10 @@ public class GameTest {
     public void testUpdateAlienNoDirectionSwitchAndAtEndOfScreen() throws Exception {
         testGame.tLevel = nonMockedLevel;
         testAlien.tX = 10;
-        testAlien.tDirection = 1;
+        testAlien.setDirection(1);
         testGame.update();
 
-        assertEquals(1, testAlien.tDirection);
+        assertEquals(1, testAlien.getDirection());
     }
 
     /**
@@ -347,7 +353,7 @@ public class GameTest {
         testGame.tPlayer = nonMockedPlayer;
         testGame.checkPlayerUpgradeCollisions(testIterator);
 
-        assertFalse(testUpgrade.tToDraw);
+        assertFalse(testUpgrade.toDraw());
     }
 
     /**

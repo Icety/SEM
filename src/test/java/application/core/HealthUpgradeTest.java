@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Main;
+import application.core.upgrades.HealthUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -26,7 +27,7 @@ public class HealthUpgradeTest {
 
         testUpgrade = new HealthUpgrade(0, 0);
 
-        assertEquals(2, testUpgrade.tSpeed);
+        assertEquals(2, testUpgrade.getSpeed());
     }
 
     /**
@@ -39,7 +40,7 @@ public class HealthUpgradeTest {
 
         testUpgrade = new HealthUpgrade(0, 0);
 
-        assertEquals(3, testUpgrade.tSpeed);
+        assertEquals(3, testUpgrade.getSpeed());
     }
 
     /**
@@ -52,7 +53,7 @@ public class HealthUpgradeTest {
 
         testUpgrade = new HealthUpgrade(0, 0);
 
-        assertEquals(5, testUpgrade.tSpeed);
+        assertEquals(5, testUpgrade.getSpeed());
     }
 
     /**

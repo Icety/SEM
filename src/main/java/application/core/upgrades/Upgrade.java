@@ -1,6 +1,7 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
+import application.core.Sprite;
 
 /**
  * Class for Upgrade.
@@ -10,6 +11,7 @@ import application.Main;
         "checkstyle:visibilitymodifier",
         "checkstyle:magicnumber"
 })
+
 public abstract class Upgrade extends Sprite {
     protected int tDirection = 1;
     protected int tSpeed = 8;
@@ -31,7 +33,7 @@ public abstract class Upgrade extends Sprite {
      * @return the boolean value.
      */
     public boolean isOutOfBounds() {
-        return ((tY < 0) || (tY > Main.HEIGHT));
+        return ((getY() < 0) || (getY()> Main.HEIGHT));
     }
 
     /**
@@ -46,7 +48,7 @@ public abstract class Upgrade extends Sprite {
      * @return the belonging String.
      */
     public String toString() {
-        return "Upgrade on coords: " + tX + ", " + tY;
+        return "Upgrade on coords: " + getX() + ", " + getY();
     }
 
     /**
@@ -81,6 +83,46 @@ public abstract class Upgrade extends Sprite {
      */
     public boolean toDraw() {
         return tToDraw;
+    }
+
+    public int getDirection() {
+        return tDirection;
+    }
+
+    public int getSpeed() {
+        return tSpeed;
+    }
+
+    public void setSpeed(int tSpeed) {
+        this.tSpeed = tSpeed;
+    }
+
+    public void setRemoved(boolean tRemoved) {
+        this.tRemoved = tRemoved;
+    }
+
+    public long getTime() {
+        return tTime;
+    }
+
+    public void setTime(long tTime) {
+        this.tTime = tTime;
+    }
+
+    public long getDuration() {
+        return tDuration;
+    }
+
+    public void setDuration(long tDuration) {
+        this.tDuration = tDuration;
+    }
+
+    public boolean isToDraw() {
+        return tToDraw;
+    }
+
+    public void setToDraw(boolean tToDraw) {
+        this.tToDraw = tToDraw;
     }
 }
 

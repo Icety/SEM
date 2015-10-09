@@ -7,12 +7,12 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 import org.w3c.dom.Element;
 import java.util.ArrayList;
 import org.w3c.dom.Document;
-import application.core.Alien;
-import application.core.BigAlien;
-import application.core.MiniAlien;
-import application.core.FinalBoss;
-import application.core.SmallAlien;
-import application.core.MothershipAlien;
+import application.core.aliens.Alien;
+import application.core.aliens.BigAlien;
+import application.core.aliens.MiniAlien;
+import application.core.aliens.FinalBoss;
+import application.core.aliens.SmallAlien;
+import application.core.aliens.MothershipAlien;
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Input;
@@ -307,8 +307,8 @@ public class LevelBuilder extends BasicGameState {
      */
     public void placeAlien(Alien alien, int x, int y) {
         if (alien != null) {
-            alien.settX(x);
-            alien.settY(y);
+            alien.setX(x);
+            alien.setY(y);
             aliens.add(alien);
         }
     }

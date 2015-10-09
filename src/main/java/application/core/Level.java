@@ -1,5 +1,7 @@
 package application.core;
 
+import application.core.aliens.Alien;
+
 import java.util.ArrayList;
 
 /**
