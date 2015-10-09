@@ -184,6 +184,7 @@ public class AlienTest {
      */
     @Test
     public void testSwitchDirection() throws Exception {
+        testAlien.tY = 15;
         testAlien.tDirection = 1;
 
         testAlien.switchDirection();
