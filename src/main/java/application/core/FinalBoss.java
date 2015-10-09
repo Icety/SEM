@@ -39,29 +39,10 @@ public class FinalBoss extends Alien {
     public void shoot() {
         tSecondShot++;
         if (tSecondShot > 150) {
-            if (tSecondShot == 151) {
-                tY -= 83;
-            }
-            if (tSecondShot > 250) {
-                tHeight = 167;
-                tY += 83;
-                tSecondShot = 0;
-                int x, y;
-                float dirx, diry;
-                for (int i=0; i<10; i++) {
-                    x = tX + i * tWidth / 10;
-                    y = tY + tHeight;
-                    dirx = x - (tX + tWidth / 2);
-                    diry = y;
-                    this.addProjectile(new BachelliProjectile(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry)));
-                }
-            }
+            this.handleSpecial();
         }
         if (tCanShoot) {
-            if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
-                this.addProjectile(new BossProjectile(tX + tWidth/2, tY + tHeight));
-                tShootChance = 0;
-            }
+            this.handleShot();
         }
     }
 
@@ -72,10 +53,63 @@ public class FinalBoss extends Alien {
     public Image getImage() {
         if (tSecondShot > 150) {
             tHeight = 250;
-            return Main.BOSS_BACHELLI_CHARGE;
+            return Main.BOSS_CHARGE;
         } else {
-            return Main.BOSS_BACHELLI;
+            return Main.BOSS;
         }
+    }
+
+    /**
+     * Handle the shooting of the special weapon
+     */
+    protected void handleSpecial() {
+        if (tSecondShot == 151) {
+            tY -= 83;
+        }
+        if (tSecondShot > 250) {
+            tHeight = 167;
+            tY += 83;
+            tSecondShot = 0;
+            int x, y;
+            float dirx, diry;
+            for (int i=0; i<10; i++) {
+                x = tX + i * tWidth / 10;
+                y = tY + tHeight;
+                dirx = x - (tX + tWidth / 2);
+                diry = y;
+                this.shootSpecial(x, y, dirx / Math.max(dirx, diry), diry / Math.max(dirx, diry));
+            }
+        }
+    }
+
+    /**
+     * Handle the shooting of the normal weapon
+     */
+    protected void handleShot() {
+        if ((Math.random() * 100 > 99.9 ) || tShootChance > 1000) {
+            shootMain(tX + tWidth/2, tY + tHeight);
+            tShootChance = 0;
+        }
+    }
+
+    /**
+     * Add the projectile
+     * @param x The x position on which the projectile should start
+     * @param y The y position on which the projectile should start
+     */
+    protected void shootMain(int x, int y) {
+        this.addProjectile(new BossProjectile(x, y));
+    }
+
+    /**
+     * Add the special projectile
+     * @param x The x position on which the projectile should start
+     * @param y The y position on which the projectile should start
+     * @param dirx The normalized x direction in which the projectile should move
+     * @param diry The normalized y direction in which the projectile should move
+     */
+    protected void shootSpecial(int x, int y, float dirx, float diry) {
+        this.addProjectile(new BachelliProjectile(x, y, dirx, diry));
     }
 
     /**

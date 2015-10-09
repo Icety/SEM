@@ -32,11 +32,11 @@ public class Main extends StateBasedGame {
     public static Image MOTHERSHIP_ALIEN;
     public static Image PLAYER;
     public static Image BOSS_PROJECTILE;
-    public static Image BACHELLI_PROJECTILE;
+    public static Image BOSS_PROJECTILE_SPECIAL;
     public static Image PLAYER_PROJECTILE;
     public static Image SMALL_PROJECTILE;
-    public static Image BOSS_BACHELLI;
-    public static Image BOSS_BACHELLI_CHARGE;
+    public static Image BOSS;
+    public static Image BOSS_CHARGE;
     public static Image UPGRADE_0;
     public static Image UPGRADE_1;
     public static Image UPGRADE_2;
@@ -120,17 +120,17 @@ public class Main extends StateBasedGame {
     }
 
     public void setAlienImages (String theme) throws SlickException {
-        MINI_ALIEN = new Image(imageRoot + imageTheme + "/miniAlien_" + imageTheme + ".png");
-        SMALL_ALIEN = new Image(imageRoot + imageTheme + "/smallAlien_" + imageTheme + ".png");
-        BIG_ALIEN = new Image(imageRoot + imageTheme + "/bigAlien_" + imageTheme + ".png");
-        MOTHERSHIP_ALIEN = new Image(imageRoot + imageTheme + "/mothership_" + imageTheme + ".png");
+        MINI_ALIEN = new Image(imageRoot + imageTheme + "/miniAlien.png");
+        SMALL_ALIEN = new Image(imageRoot + imageTheme + "/smallAlien.png");
+        BIG_ALIEN = new Image(imageRoot + imageTheme + "/bigAlien.png");
+        MOTHERSHIP_ALIEN = new Image(imageRoot + imageTheme + "/mothership.png");
+        BOSS = new Image(imageRoot + imageTheme + "/boss.png");
+        BOSS_CHARGE = new Image(imageRoot + imageTheme + "/boss_charge.png");
+        BOSS_PROJECTILE_SPECIAL = new Image(imageRoot + imageTheme + "/boss_weapon_special.png");
         PLAYER = new Image(imageRoot + "player.png");
         BOSS_PROJECTILE = new Image(imageRoot + "spaghettiheart.png");
-        BACHELLI_PROJECTILE = new Image(imageRoot + "meatball.png");
         PLAYER_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         SMALL_PROJECTILE = new Image(imageRoot + "smallbullet.png");
-        BOSS_BACHELLI = new Image(imageRoot + "finalbossbachelli.png");
-        BOSS_BACHELLI_CHARGE = new Image(imageRoot + "finalbossbachellicharge.png");
         UPGRADED_PLAYER = new Image(imageRoot + "player_upgraded.png");
 
         UPGRADE_0 = new Image(imageRoot + "upgrade_speed.png");
