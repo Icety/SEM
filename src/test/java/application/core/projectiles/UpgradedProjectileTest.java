@@ -1,7 +1,6 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
-import application.core.projectiles.UpgradedProjectile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test for UpgradedProjectile.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class UpgradedProjectileTest {
     private UpgradedProjectile testProjectile;

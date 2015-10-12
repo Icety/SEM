@@ -1,21 +1,20 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
-import application.core.upgrades.PlayerUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 /**
- * Test class for PlayerUpgrade.java.
- * @author Arthur Breurkes
+ * Test class for HealthUpgrade.java.
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
 })
-public class PlayerUpgradeTest {
-    private PlayerUpgrade testUpgrade;
+public class WeaponUpgradeTest {
+    private WeaponUpgrade testUpgrade;
 
     /**
      * Test whether the constructor works with difficulty 1.
@@ -24,7 +23,8 @@ public class PlayerUpgradeTest {
     @Test
     public void testConstructorWithDifficultyOne() throws Exception {
         Main.DIFFICULTY = 1;
-        testUpgrade = new PlayerUpgrade(0, 0);
+
+        testUpgrade = new WeaponUpgrade(0, 0);
 
         assertEquals(2, testUpgrade.getSpeed());
     }
@@ -36,7 +36,8 @@ public class PlayerUpgradeTest {
     @Test
     public void testConstructorWithDifficultyTwo() throws Exception {
         Main.DIFFICULTY = 2;
-        testUpgrade = new PlayerUpgrade(0, 0);
+
+        testUpgrade = new WeaponUpgrade(0, 0);
 
         assertEquals(2, testUpgrade.getSpeed());
     }
@@ -48,7 +49,8 @@ public class PlayerUpgradeTest {
     @Test
     public void testConstructorWithDifficultyThree() throws Exception {
         Main.DIFFICULTY = 3;
-        testUpgrade = new PlayerUpgrade(0, 0);
+
+        testUpgrade = new WeaponUpgrade(0, 0);
 
         assertEquals(4, testUpgrade.getSpeed());
     }
@@ -59,7 +61,7 @@ public class PlayerUpgradeTest {
      */
     @Test
     public void testGetImage() throws Exception {
-        testUpgrade = new PlayerUpgrade(0, 0);
+        testUpgrade = new WeaponUpgrade(0, 0);
 
         assertNull(testUpgrade.getImage());
     }

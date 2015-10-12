@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 
 /**
  * Test class for Sprite.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"

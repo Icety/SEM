@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for Player.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"

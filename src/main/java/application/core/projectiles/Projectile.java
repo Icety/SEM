@@ -11,7 +11,6 @@ import application.core.Sprite;
         "checkstyle:magicnumber",
         "checkstyle:visibilitymodifier"
 })
-
 public class Projectile extends Sprite {
     protected int tSpeed = 15;
     protected int tHealth = 1;

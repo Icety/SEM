@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for HighScoreManager.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class HighScoreManagerTest {
     private HighScoreManager testScoreManager;

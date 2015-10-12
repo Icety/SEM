@@ -1,7 +1,6 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
-import application.core.projectiles.BachelliProjectile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for BachelliProjectile.java.
- * @author Arthur Breurkes.
+ * @author Arthur Breurkes..
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",

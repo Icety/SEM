@@ -1,16 +1,13 @@
 package application.core.projectiles;
 
-import application.core.projectiles.Projectile;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * Test class for Projectile.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class ProjectileTest {
     private Projectile testProjectile;
@@ -57,6 +54,39 @@ public class ProjectileTest {
         assertFalse(testProjectile.isRemoved());
 
         testProjectile.tRemoved = true;
+        assertTrue(testProjectile.isRemoved());
+    }
+
+    /**
+     * Test whether getHealth() and setHealth() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetAndSetHealth() throws Exception {
+        testProjectile.setHealth(1);
+
+        assertEquals(1, testProjectile.getHealth());
+    }
+
+    /**
+     * Test whether getDirectionY() and setDirectionY() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetAndSetDirectionY() throws Exception {
+        testProjectile.setDirectionY(1.0f);
+
+        assertEquals(1.0f, testProjectile.getDirectionY(), 0.0);
+    }
+
+    /**
+     * Test whether setRemoved() and isRemoved() workd correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSetAndIsRemoved() throws Exception {
+        testProjectile.setRemoved(true);
+
         assertTrue(testProjectile.isRemoved());
     }
 }
