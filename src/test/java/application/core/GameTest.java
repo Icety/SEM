@@ -1,7 +1,6 @@
 package application.core;
 
 import application.core.aliens.Alien;
-import application.core.aliens.SmallAlien;
 import application.core.projectiles.Projectile;
 import application.core.projectiles.SmallProjectile;
 import application.core.upgrades.HealthUpgrade;
@@ -15,9 +14,7 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -31,6 +28,7 @@ import static org.mockito.Mockito.mock;
 })
 public class GameTest {
     private Game testGame;
+    private Game testMultiPlayerGame;
     private Alien testAlien;
     private Logger testLogger;
     private Level nonMockedLevel;
@@ -53,9 +51,11 @@ public class GameTest {
         testLogger = new Logger();
         testAliens.add(testAlien);
         testGame = new Game(10, 10, testLogger, false);
+        testMultiPlayerGame = new Game(10, 10, testLogger, true);
         nonMockedLevel = new Level();
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
+        testMultiPlayerGame.tLogger = testLogger;
         nonMockedLevel.tPlayer = testPlayer;
         nonMockedLevel.tAliens = testAliens;
         nonMockedPlayer = new Player();
@@ -381,5 +381,83 @@ public class GameTest {
         testGame.setPlayerName("John");
 
         assertEquals("John", testGame.tPlayerName);
+    }
+
+    /**
+     * Test whether multiplayer games are initialized correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testMultiPlayerGame() throws Exception {
+        assertNotNull(testMultiPlayerGame.tPlayer2);
+    }
+
+    /**
+     * Test whether update() works correctly with a multiplayer game.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testUpdateWithMultiPlayer() throws Exception {
+        testMultiPlayerGame.tLevel = testLevel;
+        testMultiPlayerGame.update();
+
+        assertFalse(testMultiPlayerGame.hasWon());
+        assertFalse(testMultiPlayerGame.hasLost());
+    }
+
+    /**
+     * Test whether getPlayers() returns the correct list of Players.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetPlayers() throws Exception {
+        ArrayList<Player> testPlayers = new ArrayList<>();
+        testPlayers.add(new Player());
+        testPlayers.add(new Player());
+        testMultiPlayerGame.tPlayers = testPlayers;
+
+        assertEquals(testPlayers, testMultiPlayerGame.getPlayers());
+    }
+
+    /**
+     * Test whether isMultiplayerGame() returns the correct value.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testIsMultiPlayerGame() throws Exception {
+        assertTrue(testMultiPlayerGame.isMultiplayerGame());
+    }
+
+    /**
+     * Test whether getPlayer2() returns the correct Player.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetPlayer2() throws Exception {
+        testMultiPlayerGame.tPlayer2 = testPlayer;
+
+        assertEquals(testPlayer, testMultiPlayerGame.getPlayer2());
+    }
+
+    /**
+     * Test whether isNextLevel() returns the correct value.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testIsNextLevel() throws Exception {
+        testGame.tNextLevel = true;
+
+        assertTrue(testGame.isNextLevel());
+    }
+
+    /**
+     * Test whether the sounds work.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSounds() throws Exception {
+        testGame.playerDeathSound();
+        testGame.invaderKilledSound();
+        testGame.motherShipKilled();
     }
 }

@@ -311,4 +311,13 @@ public class PlayerTest {
 
         assertEquals(0, testPlayer.tY);
     }
+
+    /**
+     * Test whether the sound works.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSounds() throws Exception {
+        testPlayer.laserSound();
+    }
 }

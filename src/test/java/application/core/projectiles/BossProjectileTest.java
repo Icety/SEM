@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for BossProjectile.java.
- * @author Arthur
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",

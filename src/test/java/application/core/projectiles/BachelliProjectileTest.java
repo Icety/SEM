@@ -9,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for BachelliProjectile.java.
- * @author Arthur Breurkes..
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",
