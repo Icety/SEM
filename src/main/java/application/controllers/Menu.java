@@ -69,9 +69,8 @@ public class Menu extends BasicGameState {
         g.drawString("3. Quit", 50, 140);
         g.drawString("4: Levelbuilder", 50, 160);
         g.drawString("5: Multiplayer", 50, 180);
-
-        //g.drawString("5: Change difficulty", 50, 180);
-        //g.drawString("   Current: "+ Main.DIFFICULTY, 50, 200);
+        g.drawString("6: Change difficulty", 50, 200);
+        g.drawString("   Current: "+ Main.DIFFICULTY, 50, 220);
 
 
     }
@@ -122,10 +121,11 @@ public class Menu extends BasicGameState {
                 tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_5:
-               //tMain.changeDifficulty();
-               // break;
                 tMain.newGame(true);
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            case Input.KEY_6:
+                tMain.changeDifficulty();
+                break;
             default:
                 break;
         }
