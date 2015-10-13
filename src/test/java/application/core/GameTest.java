@@ -450,14 +450,14 @@ public class GameTest {
         assertTrue(testGame.isNextLevel());
     }
 
-    /**
-     * Test whether the sounds work.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testSounds() throws Exception {
-        testGame.playerDeathSound();
-        testGame.invaderKilledSound();
-        testGame.motherShipKilled();
-    }
+//    /**
+//     * Test whether the sounds work.
+//     * @throws Exception possible Exception.
+//     */
+//    @Test
+//    public void testSounds() throws Exception {
+//        testGame.playerDeathSound();
+//        testGame.invaderKilledSound();
+//        testGame.motherShipKilled();
+//    }
 }
