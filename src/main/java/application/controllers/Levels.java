@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.Barier;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
@@ -79,6 +80,10 @@ public class Levels extends BasicGameState {
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
             for (int i = 1; i <= lives; i++) {
                 p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
+            }
+
+            for(Barier b : tMain.getGame().getLevel().getBariers()) {
+                b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
             }
 
             //Draw all aliens and its upgrades

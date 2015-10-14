@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Barier;
 import application.core.aliens.Alien;
 
 import java.util.ArrayList;
@@ -15,6 +16,20 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected Player tPlayer;
     protected String tBackground;
+
+    protected ArrayList<Barier> tBariers;
+
+    /**
+     * This contructor is for testing Barier only
+     */
+    public Level() {
+        tBariers = new ArrayList<>();
+        tBariers.add(new Barier(300, 900));
+
+        tBariers.add(new Barier(500, 900));
+
+        tBariers.add(new Barier(700, 900));
+    }
 
     /**
      * Getter method for the Aliens in the Level.
@@ -87,5 +102,9 @@ public class Level {
             }
         }
         return result;
+    }
+
+    public ArrayList<Barier> getBariers() {
+        return tBariers;
     }
 }

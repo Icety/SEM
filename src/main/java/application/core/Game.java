@@ -3,6 +3,7 @@ package application.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import application.Barier;
 import application.core.aliens.Alien;
 import application.core.aliens.MothershipAlien;
 import application.core.projectiles.Projectile;
@@ -251,6 +252,27 @@ public class Game {
             checkPlayerUpgradeCollisions(alien.getUpgrades().iterator());
             checkDeadAlien(alien, it);
         }
+           Iterator<Barier> bit = tLevel.getBariers().iterator();
+            checkBarierCollisions(bit);
+    }
+
+    private void checkBarierCollisions(Iterator<Barier> bit) {
+        while(bit.hasNext()) {
+            Barier b = bit.next();
+            Iterator<Projectile> it = tPlayer.getProjectiles().iterator();
+            while (it.hasNext()) {
+                Projectile projectile = it.next();
+                if(b.intersects(projectile)) {
+                    b.hit();
+                    tLogger.setLog("Barier has been hit", 2);
+                    projectile.hit();
+                    it.remove();
+                    }
+                if(b.noLives()) {
+                    bit.remove();
+                }
+            }
+        }
     }
 
     /**
@@ -273,6 +295,20 @@ public class Game {
                     }
                     if (projectile.noLives()) {
                         it.remove();
+                    }
+                }
+            }
+            Iterator<Barier> bit = tLevel.getBariers().iterator();
+            while(bit.hasNext()) {
+                Barier b = bit.next();
+                if(projectile.intersects(b)){
+                    b.hit();
+                    projectile.hit();
+                    if (projectile.noLives()) {
+                        it.remove();
+                    }
+                    if (b.noLives()) {
+                        bit.remove();
                     }
                 }
             }
