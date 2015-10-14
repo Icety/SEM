@@ -169,4 +169,7 @@ public class Main extends StateBasedGame {
         return tGame;
     }
 
+    public void setGame(Game game) {
+        tGame = game;
+    }
 }

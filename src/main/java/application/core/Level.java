@@ -88,4 +88,8 @@ public class Level {
         }
         return result;
     }
+
+    public void settAliens(ArrayList<Alien> list) {
+        tAliens = list;
+    }
 }

@@ -376,4 +376,15 @@ public class Game {
         this.tPlayerName = tPlayerName;
     }
 
+    public void setHasWon(boolean bool) {
+        tWon = bool;
+    }
+
+    public void setHasLost(boolean bool) {
+        tLost = bool;
+    }
+
+    public void setLevel(Level level) {
+        tLevel = level;
+    }
 }

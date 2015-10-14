@@ -48,8 +48,8 @@ public class GameTest {
     public void setUp() {
         testAlien = new Alien();
         ArrayList<Alien> testAliens = new ArrayList<>();
-        testLogger = new Logger();
         testAliens.add(testAlien);
+        testLogger = new Logger();
         testGame = new Game(10, 10, testLogger, false);
         testMultiPlayerGame = new Game(10, 10, testLogger, true);
         nonMockedLevel = new Level();
@@ -212,7 +212,7 @@ public class GameTest {
     public void testUpdateAlienNoDirectionSwitchAndAtEndOfScreen() throws Exception {
         testGame.tLevel = nonMockedLevel;
         testAlien.tX = 10;
-        testAlien.setDirection(1);
+        testAlien.setDirection(-1);
         testGame.update();
 
         assertEquals(1, testAlien.getDirection());

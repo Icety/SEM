@@ -269,4 +269,12 @@ public class Player extends Sprite {
     public void moveUp(int y) {
         tY -= y;
     }
+
+    public boolean getGoLeft() {
+        return tGoLeft;
+    }
+
+    public boolean getGoRight() {
+        return tGoRight;
+    }
 }
