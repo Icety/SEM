@@ -82,7 +82,7 @@ public class LevelBuilder extends BasicGameState {
         tMain = (Main) game;
         circlex = Main.WIDTH / 2;
         circley =  Main.HEIGHT / 3;
-        circle = new Circle(circlex, circley, 70);
+        circle = new Circle(circlex, circley, 40);
         menuHeight = 150;
         selected = null;
 
