@@ -69,44 +69,36 @@ public class Levels extends BasicGameState {
             throws SlickException {
         container.setPaused(pause);
         if (!pause) {
-            Player p = tMain.getGame().getPlayer();
-            int lives = p.getHealth();
-            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-            g.setColor(Color.white);
-            //Display Score in top left.
-            g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
-            //Display Lives in top right.
-            g.drawString("LIVES: ", container.getWidth() - 500, 50);
-            for (int i = 1; i <= lives; i++) {
-                p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
-            }
-
-            //Draw all aliens and its upgrades
-            for (Alien alien : tMain.getGame().getLevel().getAliens()) {
-                if (!alien.isDead()) {
-                    (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
-                }
-                drawProjectiles(alien.getProjectiles());
-                drawUpgrades(alien.getUpgrades());
-            }
-            //Draw the player
-            p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-            drawProjectiles(p.getProjectiles());
-
-            if(tMain.getGame().isMultiplayerGame()) {
-                Player p2 = tMain.getGame().getPlayer2();
-                int lives2 = p2.getHealth();
-
-                // Draw lives of Player 2
-                g.drawString("LIVES player 2: ", container.getWidth() - 1050, 50);
-                for (int i = 1; i <= lives2; i++) {
-                    p2.getImage().draw(container.getWidth()- 1000 + i*110, 50, p.getWidth(), p.getHeight());
+            for(Player p : tMain.getGame().getPlayerController().getPlayers()) {
+                int lives = p.getHealth();
+                tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+                g.setColor(Color.white);
+                //Display Score in top left.
+                g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+                //Display Lives in top right.
+                g.drawString("LIVES: ", container.getWidth() - 500, 50);
+                for (int i = 1; i <= lives; i++) {
+                    p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
                 }
 
-                // Draw Player 2
-                p2.getImage().draw(p2.getX(),p2.getY(), p2.getWidth(), p2.getHeight());
-                drawProjectiles(p2.getProjectiles());
-            }
+                //Draw all aliens and its upgrades
+                for (Alien alien : tMain.getGame().getLevel().getAliens()) {
+                    if (!alien.isDead()) {
+                        (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    }
+                    drawProjectiles(alien.getProjectiles());
+                    drawUpgrades(alien.getUpgrades());
+                }
+
+                for (Player x : tMain.getGame().getPlayerController().getPlayers()) {
+                    System.out.println(tMain.getGame().getPlayerController().getPlayers().size());
+                    //Draw the player
+                    x.getImage().draw(x.getX(), x.getY(), x.getWidth(), x.getHeight());
+                    drawProjectiles(x.getProjectiles());
+                }
+
+                }
+
         } else {
             g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
         }
@@ -158,13 +150,13 @@ public class Levels extends BasicGameState {
     public void keyPressed(int key, char c) {
             switch (key) {
                 case Input.KEY_LEFT:
-                    tMain.getGame().getPlayer().leftArrowPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).leftArrowPressed(true);
                     break;
                 case Input.KEY_RIGHT:
-                    tMain.getGame().getPlayer().rightArrowPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).rightArrowPressed(true);
                     break;
                 case Input.KEY_UP:
-                    tMain.getGame().getPlayer().fireButtonPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).fireButtonPressed(true);
                     break;
                 case Input.KEY_ESCAPE:
                     pause = !pause;
@@ -172,16 +164,16 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
-        if (tMain.getGame().isMultiplayerGame()) {
+        if (tMain.getGame().getPlayerController().getPlayers().size() > 1 ) {
             switch (key) {
                 case Input.KEY_A:
-                    tMain.getGame().getPlayer2().leftArrowPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(true);
                     break;
                 case Input.KEY_D:
-                    tMain.getGame().getPlayer2().rightArrowPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(1).rightArrowPressed(true);
                     break;
                 case Input.KEY_W:
-                    tMain.getGame().getPlayer2().fireButtonPressed(true);
+                    tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(true);
                     break;
             }
         }
@@ -197,29 +189,27 @@ public class Levels extends BasicGameState {
     public void keyReleased(int key, char c) {
             switch (key) {
                 case Input.KEY_LEFT:
-                    tMain.getGame().getPlayer().leftArrowPressed(false);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).leftArrowPressed(false);
                     break;
                 case Input.KEY_RIGHT:
-                    tMain.getGame().getPlayer().rightArrowPressed(false);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).rightArrowPressed(false);
                     break;
                 case Input.KEY_UP:
-                    tMain.getGame().getPlayer().fireButtonPressed(false);
+                    tMain.getGame().getPlayerController().getPlayers().get(0).fireButtonPressed(false);
                     break;
                 default:
                     break;
             }
-        if(tMain.getGame().isMultiplayerGame()) {
+        if (tMain.getGame().getPlayerController().getPlayers().size() > 1) {
             switch (key) {
                 case Input.KEY_A:
-                    tMain.getGame().getPlayer2().leftArrowPressed(false);
+                    tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(false);
                     break;
                 case Input.KEY_D:
-                    tMain.getGame().getPlayer2().rightArrowPressed(false);
+                    tMain.getGame().getPlayerController().getPlayers().get(1).rightArrowPressed(false);
                     break;
                 case Input.KEY_W:
-                    tMain.getGame().getPlayer2().fireButtonPressed(false);
-                    break;
-                default:
+                    tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(false);
                     break;
             }
         }
