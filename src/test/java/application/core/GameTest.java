@@ -53,7 +53,7 @@ public class GameTest {
         testLogger = new Logger();
         testAliens.add(testAlien);
         testGame = new Game(10, 10, testLogger, 1);
-        nonMockedLevel = new Level();
+        //nonMockedLevel = new Level();
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
         //nonMockedLevel.tPlayer = testPlayer;

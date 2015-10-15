@@ -1,6 +1,5 @@
 package application.controllers;
 
-import application.Main;
 import application.core.Player;
 import org.newdawn.slick.SlickException;
 
@@ -13,7 +12,6 @@ public class PlayerController {
 
     private ArrayList<Player> tPlayers;
     private int tPlayerCount;
-    private Main tMain;
 
 
     public PlayerController(int numOfPlayers){

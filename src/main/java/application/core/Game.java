@@ -34,6 +34,7 @@ public class Game {
     protected boolean tWon = false;
     protected boolean tLost = false;
     protected boolean tNextLevel = false;
+    protected int tPlayers;
     //protected boolean tNextLevelTransition = false;
     protected Logger tLogger;
     protected String tPlayerName;
@@ -51,6 +52,7 @@ public class Game {
         playerController = new PlayerController(players);
         highScoreManager = new HighScoreManager();
         levelNumber = 0;
+        tPlayers = players;
         tPaused = false;
         tLogger = logger;
 
@@ -77,7 +79,7 @@ public class Game {
      */
     public void nextLevel() {
         tNextLevel = false;
-        tLevel = levelFactory.buildLevel(levelNumber);
+        tLevel = levelFactory.buildLevel(levelNumber, tPlayers );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         levelNumber++;
     }

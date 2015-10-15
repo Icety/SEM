@@ -33,6 +33,7 @@ public class Levels extends BasicGameState {
     protected Image tBackground;
     protected String tBackgroundString = "background.jpg";
     protected boolean pause = false;
+    protected ArrayList<Player> tPlayers;
 
     /**
      * Constructor method for this controller.
@@ -51,10 +52,8 @@ public class Levels extends BasicGameState {
     @Override
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
-
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
-
     }
 
     /**
@@ -68,36 +67,36 @@ public class Levels extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
         container.setPaused(pause);
+        tPlayers = tMain.getGame().getPlayerController().getPlayers();
         if (!pause) {
-            for(Player p : tMain.getGame().getPlayerController().getPlayers()) {
+            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+            g.setColor(Color.white);
+            //Display Score in top left.
+            g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+
+            //Draw all aliens and its upgrades
+            for (Alien alien : tMain.getGame().getLevel().getAliens()) {
+                if (!alien.isDead()) {
+                    (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                }
+                drawProjectiles(alien.getProjectiles());
+                drawUpgrades(alien.getUpgrades());
+            }
+
+
+            for(Player p : tPlayers) {
                 int lives = p.getHealth();
-                tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-                g.setColor(Color.white);
-                //Display Score in top left.
-                g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
-                //Display Lives in top right.
+
                 g.drawString("LIVES: ", container.getWidth() - 500, 50);
                 for (int i = 1; i <= lives; i++) {
                     p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
                 }
 
-                //Draw all aliens and its upgrades
-                for (Alien alien : tMain.getGame().getLevel().getAliens()) {
-                    if (!alien.isDead()) {
-                        (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
-                    }
-                    drawProjectiles(alien.getProjectiles());
-                    drawUpgrades(alien.getUpgrades());
-                }
+                //Draw the player
+                p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                drawProjectiles(p.getProjectiles());
 
-                for (Player x : tMain.getGame().getPlayerController().getPlayers()) {
-                    System.out.println(tMain.getGame().getPlayerController().getPlayers().size());
-                    //Draw the player
-                    x.getImage().draw(x.getX(), x.getY(), x.getWidth(), x.getHeight());
-                    drawProjectiles(x.getProjectiles());
-                }
-
-                }
+            }
 
         } else {
             g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
@@ -164,7 +163,6 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
-        if (tMain.getGame().getPlayerController().getPlayers().size() > 1 ) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(true);
@@ -175,7 +173,6 @@ public class Levels extends BasicGameState {
                 case Input.KEY_W:
                     tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(true);
                     break;
-            }
         }
     }
 
@@ -200,7 +197,6 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
-        if (tMain.getGame().getPlayerController().getPlayers().size() > 1) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(false);
@@ -211,10 +207,7 @@ public class Levels extends BasicGameState {
                 case Input.KEY_W:
                     tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(false);
                     break;
-            }
         }
-
-
     }
 
     /**

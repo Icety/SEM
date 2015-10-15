@@ -28,7 +28,7 @@ public class LevelTest {
      */
     @Before
     public void setUp() throws Exception {
-        testLevel = new Level();
+        //testLevel = new Level();
     }
 
     /**

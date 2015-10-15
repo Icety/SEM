@@ -60,16 +60,14 @@ public class LevelFactory {
      * @param levelNumber the number belonging to the Level.
      * @return the built Level.
      */
-    public Level buildLevel(int levelNumber) {
-        Level level = new Level();
+    public Level buildLevel(int levelNumber, int players) {
+        Level level = new Level(players);
 
         Element levelXml = (Element) tLevels.item(levelNumber);
 
         ArrayList<Alien> aliens = loadAliens(levelXml);
         level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
         level.addAliens(aliens);
-        level.setStartPlayer();
-
         return level;
     }
 

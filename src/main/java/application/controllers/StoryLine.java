@@ -37,9 +37,12 @@ public class StoryLine extends BasicGameState {
     protected boolean tStart = true;
     protected int tCount = 0;
     protected int tTextHeight = -300;
+    protected ArrayList<Player> tPlayers;
+
 
     /**
      * Constructor method for the controller.
+     *
      * @param id the given ID for the controller.
      */
     public StoryLine(int id) {
@@ -48,8 +51,9 @@ public class StoryLine extends BasicGameState {
 
     /**
      * Initialization method for the controller.
+     *
      * @param container required GameController.
-     * @param game the current game.
+     * @param game      the current game.
      * @throws SlickException possible Exception.
      */
     @Override
@@ -58,121 +62,132 @@ public class StoryLine extends BasicGameState {
 
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
+        tStart = false;
 
     }
 
     /**
      * Render method for the controller.
+     *
      * @param container required GameController.
-     * @param game the current game.
-     * @param g required Graphics.
+     * @param game      the current game.
+     * @param g         required Graphics.
      * @throws SlickException possible Exception.
      */
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
 
-        Player p = tMain.getGame().getPlayer();
-        int lives = p.getHealth();
+        tPlayers = tMain.getGame().getPlayerController().getPlayers();
 
-        if (tStart) {
-            tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
-        }
-        else {
-            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-            if (tDone) {
-                g.drawString(this.getStory(), Main.WIDTH - 600, tTextHeight);
+        for (Player p : tPlayers) {
+            int lives = p.getHealth();
+
+            if (tStart) {
+                tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
+            } else {
+                tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+                if (tDone) {
+                    g.drawString(this.getStory(), Main.WIDTH - 600, tTextHeight);
+                }
+            }
+
+            g.setColor(Color.white);
+
+            //Display Score in top left.
+            g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+
+            //Display Lives in top right.
+            g.drawString("LIVES: ", container.getWidth() - 500, 50);
+            for (int i = 1; i <= lives; i++) {
+                p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
             }
         }
 
-        g.setColor(Color.white);
-
-        //Display Score in top left.
-        g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
-
-        //Display Lives in top right.
-        g.drawString("LIVES: ", container.getWidth() - 500, 50);
-        for (int i = 1; i <= lives; i++) {
-            p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
+        for (Player x : tPlayers) {
+            //Draw the player
+            x.getImage().draw(x.getX(), x.getY(), x.getWidth(), x.getHeight());
         }
 
-        //Draw the player
-        p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
 
     }
 
     /**
      * Update method for the controller.
+     *
      * @param container required GameContainer.
-     * @param game the current game.
-     * @param delta a given integer.
+     * @param game      the current game.
+     * @param delta     a given integer.
      * @throws SlickException possible Exception.
      */
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
         tCount++;
-        Player p = tMain.getGame().getPlayer();
-        if (tStart) {
-            //When just started counting, set the background
-            if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/" + tMain.getGame().getLevel().getBackground());
-            }
-            if (tCount % 2 == 0) {
-                p.moveUp((int) (tCount / 50) * 2);
-            }
-            if (p.getY() < -150) {
-                System.out.println(p.getY());
-                p.setX(250);
-                p.setY(Main.HEIGHT + 120);
-                tStart = false;
-                tCount = 0;
-                game.enterState(7, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-            }
-        } else {
-            if (!tDone) {
-                if (tCount % 2 == 0) {
-                    p.moveUp(Math.max(2, 10 - (int) (tCount / 25)));
+        tPlayers = tMain.getGame().getPlayerController().getPlayers();
+        for (Player p : tPlayers) {
+            if (tStart) {
+                //When just started counting, set the background
+                if (tCount == 1) {
+                    tBackground2 = new Image("src/main/java/application/images/" + tMain.getGame().getLevel().getBackground());
                 }
-                if (p.getY() < Main.HEIGHT / 2) {
-                    tDone = true;
+                if (tCount % 2 == 0) {
+                    p.moveUp((int) (tCount / 50) * 2);
+                }
+                if (p.getY() < -150) {
+                    p.setX(250);
+                    p.setY(Main.HEIGHT + 120);
+                    tStart = false;
                     tCount = 0;
+                    System.out.println("state 7");
+                    game.enterState(7, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 }
-            }
-            else {
-                if (tCount % 2 == 0) {
-                    tTextHeight++;
-                }
-                if (tTextHeight > Main.HEIGHT / 2) {
-                    if (tCount > 500) {
+            } else {
+                if (!tDone) {
+                    if (tCount % 2 == 0) {
+                        p.moveUp(Math.max(2, 10 - (int) (tCount / 25)));
+                    }
+                    if (p.getY() < Main.HEIGHT / 2) {
+                        tDone = true;
                         tCount = 0;
                     }
+                } else {
                     if (tCount % 2 == 0) {
-                        p.moveUp((int) (tCount / 50) * 2);
+                        tTextHeight++;
                     }
-                    if (p.getY() < -150) {
-                        p.setX(Main.WIDTH - p.getWidth());
-                        p.setY(Main.HEIGHT - p.getHeight() - 50);
-                        this.resetValues();
-                        tMain.getGame().nextLevel();
-                        game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
-                    }
-                }
-                else {
-                    if (tCount % 3 == 0) {
-                        if (tCount % 60 < 30) {
-                            p.moveLeft();
-                        } else if (tCount % 60 < 60) {
-                            p.moveRight();
+                    if (tTextHeight > Main.HEIGHT / 2) {
+                        if (tCount > 500) {
+                            tCount = 0;
+                        }
+                        if (tCount % 2 == 0) {
+                            p.moveUp((int) (tCount / 50) * 2);
+                        }
+                        if (p.getY() < -150) {
+                            p.setX(Main.WIDTH - p.getWidth());
+                            p.setY(Main.HEIGHT - p.getHeight() - 50);
+                            this.resetValues();
+                            tMain.getGame().nextLevel();
+                            System.out.println("state 1");
+                            game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                        }
+                    } else {
+                        if (tCount % 3 == 0) {
+                            if (tCount % 60 < 30) {
+                                p.moveLeft();
+                            } else if (tCount % 60 < 60) {
+                                p.moveRight();
+                            }
                         }
                     }
                 }
+
             }
         }
     }
 
     /**
      * Getter method for the ID of the controller.
+     *
      * @return the controller ID.
      */
     @Override
@@ -191,6 +206,7 @@ public class StoryLine extends BasicGameState {
 
     /**
      * Method to give the made up Story.
+     *
      * @return The made up story in a String.
      */
     protected String getStory() {
@@ -203,42 +219,5 @@ public class StoryLine extends BasicGameState {
                 + "planet was under attack, they would have to \n\n"
                 + "it became clear to the SEMmians that their \n\n"
                 + "After destroying the first layer of aliens";
-    }
-
-    /**
-     * Method to check whether a key is pressed.
-     * @param key integer value for the key.
-     * @param c character value for the key.
-     */
-    public void keyPressed(int key, char c) {
-        switch (key) {
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(true);
-                //TODO
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Method to check whether a key is released.
-     * @param key integer value for the key.
-     * @param c character value for the key.
-     */
-    public void keyReleased(int key, char c) {
-        switch (key) {
-            case Input.KEY_LEFT:
-                tMain.getGame().getPlayer().leftArrowPressed(false);
-                break;
-            case Input.KEY_RIGHT:
-                tMain.getGame().getPlayer().rightArrowPressed(false);
-                break;
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(false);
-                break;
-            default:
-                break;
-        }
     }
 }
