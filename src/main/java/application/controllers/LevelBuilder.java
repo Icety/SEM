@@ -45,7 +45,6 @@ import javax.xml.transform.stream.StreamResult;
         "checkstyle:methodlength"
 })
 public class LevelBuilder extends BasicGameState {
-
     protected Main tMain;
     protected int tId;
     protected Image tBackground;
@@ -401,7 +400,7 @@ public class LevelBuilder extends BasicGameState {
      * @param selected the selected Alien.
      * @return the String name value for the Alien.
      */
-    private String classToXML(Alien selected) {
+    protected String classToXML(Alien selected) {
         if (selected instanceof MiniAlien) {
             return "mini";
         } else if (selected instanceof SmallAlien) {
