@@ -183,6 +183,8 @@ public class Levels extends BasicGameState {
                 case Input.KEY_Q:
                     tMain.getGame().getPlayer2().fireButtonPressed(true);
                     break;
+                default:
+                    break;
             }
         }
     }

@@ -270,11 +270,15 @@ public class Player extends Sprite {
         tY -= y;
     }
 
-    public boolean getGoLeft() {
+    public boolean isGoLeft() {
         return tGoLeft;
     }
 
-    public boolean getGoRight() {
+    public boolean isGoRight() {
         return tGoRight;
+    }
+
+    public boolean isShoot() {
+        return tShoot;
     }
 }

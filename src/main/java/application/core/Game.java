@@ -387,4 +387,16 @@ public class Game {
     public void setLevel(Level level) {
         tLevel = level;
     }
+
+    public void settMultiplayerGame(boolean bool) {
+        tMultiplayerGame = bool;
+    }
+
+    public void setPlayer(Player player) {
+        tPlayer = player;
+    }
+
+    public void setPlayer2(Player player) {
+        tPlayer2 = player;
+    }
 }
