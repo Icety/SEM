@@ -1,11 +1,7 @@
 package application.core;
 
 import application.core.aliens.Alien;
-import application.core.aliens.SmallAlien;
 import application.core.projectiles.Projectile;
-import application.core.projectiles.SmallProjectile;
-import application.core.upgrades.HealthUpgrade;
-import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -13,16 +9,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 /**
  * Test class for Game.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:visibilitymodifier",
@@ -31,11 +24,12 @@ import static org.mockito.Mockito.mock;
 })
 public class GameTest {
     private Game testGame;
+    private Game testMultiPlayerGame;
     private Alien testAlien;
     private Logger testLogger;
     private Level nonMockedLevel;
     private Player nonMockedPlayer;
-    private Projectile nonMockedProjectile;
+
     @Mock
     public final Level testLevel = mock(Level.class);
     @Mock
@@ -50,16 +44,15 @@ public class GameTest {
     public void setUp() {
         testAlien = new Alien();
         ArrayList<Alien> testAliens = new ArrayList<>();
-        testLogger = new Logger();
         testAliens.add(testAlien);
+        testLogger = new Logger();
         testGame = new Game(10, 10, testLogger, 1);
-        //nonMockedLevel = new Level();
+        testMultiPlayerGame = new Game(10, 10, testLogger, 2);
+        nonMockedLevel = new Level(1, testGame.getPlayerController());
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
-        //nonMockedLevel.tPlayer = testPlayer;
+        testMultiPlayerGame.tLogger = testLogger;
         nonMockedLevel.tAliens = testAliens;
-        nonMockedPlayer = new Player();
-        nonMockedProjectile = new SmallProjectile(10, 10);
         testLogger.startLogging();
     }
 
@@ -138,17 +131,6 @@ public class GameTest {
     }
 
     /**
-     * Test whether getPlayer() return the correct player.
-     * @throws Exception possible Exception.
-     */
-//    @Test
-//    public void testGetPlayer() throws Exception {
-//        testGame.getPlayerController().getPlayers().get(0) = testPlayer;
-//
-//        assertEquals(testPlayer, testGame.getPlayerController().getPlayers().get(0));
-//    }
-
-    /**
      * Test whether isPaused() returns the correct boolean value.
      * @throws Exception possible Exception.
      */
@@ -212,7 +194,7 @@ public class GameTest {
     public void testUpdateAlienNoDirectionSwitchAndAtEndOfScreen() throws Exception {
         testGame.tLevel = nonMockedLevel;
         testAlien.tX = 10;
-        testAlien.setDirection(1);
+        testAlien.setDirection(-1);
         testGame.update();
 
         assertEquals(1, testAlien.getDirection());
@@ -250,87 +232,6 @@ public class GameTest {
         assertTrue(testGame.hasWon());
     }
 
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Alien is hit.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionBetweenAlienAndProjectile() throws Exception {
-//    testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        ArrayList<Player> testPlayers = new ArrayList<>();
-//        nonMockedPlayer.addProjectile(nonMockedProjectile);
-//        testPlayers.add(nonMockedPlayer);
-//        testGame.tPlayers = testPlayers;
-//        testGame.checkCollision();
-//
-//        assertFalse(nonMockedPlayer.getProjectiles().contains(nonMockedProjectile));
-//    }
-//
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Player is hit.
-//     * Does not die.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionBetweenPlayerAndProjectile() throws Exception {
-//        testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        nonMockedPlayer.tX = 10;
-//        nonMockedPlayer.tY = 10;
-//        testGame.tPlayer = nonMockedPlayer;
-//        smallAlien.addProjectile(nonMockedProjectile);
-//        testGame.checkCollision();
-//
-//        assertFalse(smallAlien.getProjectiles().contains(nonMockedProjectile));
-//    }
-//
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Player is hit.
-//     * Dies.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionKillPlayer() throws Exception {
-//        ArrayList<Player> testPlayers = new ArrayList<>();
-//        testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        nonMockedPlayer.tX = 10;
-//        nonMockedPlayer.tY = 10;
-//        nonMockedPlayer.tHealth = 1;
-//        nonMockedPlayer.addProjectile(nonMockedProjectile);
-//        testPlayers.add(nonMockedPlayer);
-//        smallAlien.addProjectile(nonMockedProjectile);
-//        testGame.tPlayers = testPlayers;
-//        testGame.checkCollision();
-//
-//        assertTrue(testGame.tLost);
-//    }
-
     /**
      * Test whether getHighScoreManager() returns the correct HighScoreManager.
      * @throws Exception possible Exception.
@@ -343,5 +244,27 @@ public class GameTest {
         assertEquals(testHighScoreManager, testGame.getHighScoreManager());
     }
 
-//
+    /**
+     * Test whether update() works correctly with a multiplayer game.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testUpdateWithMultiPlayer() throws Exception {
+        testMultiPlayerGame.tLevel = testLevel;
+        testMultiPlayerGame.update();
+
+        assertFalse(testMultiPlayerGame.hasWon());
+        assertFalse(testMultiPlayerGame.hasLost());
+    }
+
+    /**
+     * Test whether isNextLevel() returns the correct value.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testIsNextLevel() throws Exception {
+        testGame.tNextLevel = true;
+
+        assertTrue(testGame.isNextLevel());
+    }
 }

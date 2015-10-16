@@ -1,7 +1,6 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
-import application.core.aliens.FinalBoss;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +10,7 @@ import static org.junit.Assert.assertFalse;
 
 /**
  * Test class for FinalBoss.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
@@ -49,7 +48,7 @@ public class FinalBossTest {
         for (int i = 0; i < 10000; i++) {
             testBoss.shoot();
         }
-        assertTrue(testBoss.tProjectiles.size() > 0);
+        assertTrue(testBoss.getProjectiles().size() > 0);
     }
 
     /**
@@ -58,10 +57,11 @@ public class FinalBossTest {
      */
     @Test
     public void testEndOfScreen() throws Exception {
-        testBoss.tX = 10;
+        testBoss.setX(10);
+        testBoss.setDirection(-1);
         assertTrue(testBoss.endOfScreen());
 
-        testBoss.tX = 0;
+        testBoss.setX(11);
         assertFalse(testBoss.endOfScreen());
     }
 
@@ -83,7 +83,7 @@ public class FinalBossTest {
         testBoss.setSecondShot(151);
 
         assertEquals(Main.BOSS_CHARGE, testBoss.getImage());
-        assertEquals(250, testBoss.tHeight);
+        assertEquals(167, testBoss.getHeight());
     }
 
     /**
@@ -92,9 +92,20 @@ public class FinalBossTest {
      */
     @Test
     public void testToString() throws Exception {
-        testBoss.tX = 1;
-        testBoss.tY = 1;
+        testBoss.setX(1);
+        testBoss.setY(1);
 
         assertEquals("FinalBoss on coords: 1, 1", testBoss.toString());
+    }
+
+    /**
+     * Test whether getSecondShot() and setSecondShot() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetAndSetSecondShot() throws Exception {
+        testBoss.setSecondShot(1);
+
+        assertEquals(1, testBoss.getSecondShot());
     }
 }

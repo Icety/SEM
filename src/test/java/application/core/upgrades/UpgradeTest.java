@@ -1,7 +1,5 @@
-package application.core;
+package application.core.upgrades;
 
-import application.core.upgrades.HealthUpgrade;
-import application.core.upgrades.Upgrade;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for Upgrade.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class UpgradeTest {
     private Upgrade testUpgrade;
@@ -42,7 +40,7 @@ public class UpgradeTest {
     @Test
     public void testIsOutOfBounds() throws Exception {
         assertFalse(testUpgrade.isOutOfBounds());
-        testUpgrade.tY = -1;
+        testUpgrade.setY(-1);
 
         assertTrue(testUpgrade.isOutOfBounds());
     }
@@ -53,12 +51,12 @@ public class UpgradeTest {
      */
     @Test
     public void testUpdate() throws Exception {
-        testUpgrade.tY = 0;
+        testUpgrade.setY(0);
         testUpgrade.setSpeed(1);
         testUpgrade.setDirection(1);
         testUpgrade.update();
 
-        assertEquals(1, testUpgrade.tY);
+        assertEquals(1, testUpgrade.getY());
     }
 
     /**
@@ -67,8 +65,8 @@ public class UpgradeTest {
      */
     @Test
     public void testToString() throws Exception {
-        testUpgrade.tX = 0;
-        testUpgrade.tY = 0;
+        testUpgrade.setX(0);
+        testUpgrade.setY(0);
 
         assertEquals("Upgrade on coords: 0, 0", testUpgrade.toString());
     }
@@ -147,5 +145,38 @@ public class UpgradeTest {
         testUpgrade.setToDraw(false);
 
         assertFalse(testUpgrade.toDraw());
+    }
+
+    /**
+     * Test whether getTime() and setTime() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetAndSetTime() throws Exception {
+        testUpgrade.setTime(1);
+
+        assertEquals(1, testUpgrade.getTime());
+    }
+
+    /**
+     * Test whether getDuration() and setDuration() work correctly.
+     * @throws Exception possible Exception
+     */
+    @Test
+    public void testGetAndSetDuration() throws Exception {
+        testUpgrade.setDuration(1);
+
+        assertEquals(1, testUpgrade.getDuration());
+    }
+
+    /**
+     * Test whether setToDraw() and isToDraw() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSetAndIsToDraw() throws Exception {
+        testUpgrade.setToDraw(true);
+
+        assertTrue(testUpgrade.isToDraw());
     }
 }

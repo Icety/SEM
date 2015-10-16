@@ -21,7 +21,6 @@ import org.newdawn.slick.SlickException;
 })
 public class Game {
     private Main tMain;
-
     protected int tScore;
     protected LevelFactory levelFactory;
     protected PlayerController playerController;
@@ -35,7 +34,6 @@ public class Game {
     protected boolean tLost = false;
     protected boolean tNextLevel = false;
     protected int tPlayers;
-    //protected boolean tNextLevelTransition = false;
     protected Logger tLogger;
     protected String tPlayerName;
 
@@ -309,21 +307,15 @@ public class Game {
         return playerController;
     }
 
+    public void setHasWon(boolean bool) {
+        tWon = bool;
+    }
 
-//    /**
-//     * Getter method for the name of the Player.
-//     * @return the String value.
-//     */
-//    public String getPlayerName() {
-//        return tPlayerName;
-//    }
-//
-//    /**
-//     * Setter method for the name of the Player.
-//     * @param tPlayerName the desired String value
-//     */
-//    public void setPlayerName(String tPlayerName) {
-//        this.tPlayerName = tPlayerName;
-//    }
+    public void setHasLost(boolean bool) {
+        tLost = bool;
+    }
 
+    public void setLevel(Level level) {
+        tLevel = level;
+    }
 }

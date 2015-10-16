@@ -35,6 +35,17 @@ public class PlayerController {
        }
     }
 
+    public void setPlayers(int size, ArrayList<Player> players) {
+        tPlayers = players;
+        int j = 0;
+        for (int k = 0; k <= size -1; k++) {
+            Player p = tPlayers.get(k);
+            p.setX(1400 / 4 + j);
+            p.setY(1080 - (p.getHeight() + 50));
+            j = j + 100;
+        }
+    }
+
     public ArrayList<Player> getPlayers() {
         return tPlayers;
     }

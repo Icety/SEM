@@ -12,6 +12,8 @@ env:
   - BUILD_PR_BRANCH=true
   - BUILD_PR_BRANCH=false
 matrix:
+  exclude:
+    - file: src/test/java/application/core/MavenExcludedTests.java
   allow_failures:
     - env:
       - BUILD_PR_BRANCH=true
