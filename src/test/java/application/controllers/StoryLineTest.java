@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -38,9 +40,12 @@ public class StoryLineTest {
      */
     @Before
     public void setUp() throws Exception {
+        ArrayList<Player> playerList = new ArrayList<>();
+        playerList.add(mockedPlayer);
         testStoryLine = new StoryLine(1);
         testStoryLine.tMain = mockedGame;
         testGame = new Game(0, 0, mockedLogger, 1);
+        testGame.getPlayerController().setPlayers(1, playerList);
 
         when(mockedPlayer.getY()).thenReturn(-151);
         when(mockedGame.getGame()).thenReturn(testGame);
@@ -213,73 +218,5 @@ public class StoryLineTest {
                         + "it became clear to the SEMmians that their \n\n"
                         + "After destroying the first layer of aliens",
                 testStoryLine.getStory());
-    }
-
-    /**
-     * Test whether keyPressed() works correctly.
-     * Key: space.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyPressedSpace() throws Exception {
-        testStoryLine.keyPressed(Input.KEY_SPACE, 'a');
-
-        verify(mockedPlayer).fireButtonPressed(true);
-    }
-
-    /**
-     * Test whether keyPressed() works correctly.
-     * Key: yen.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyPressedDefault() throws Exception {
-        testStoryLine.keyPressed(Input.KEY_YEN, 'a');
-    }
-
-    /**
-     * Test whether keyReleased() works correctly.
-     * Key: left.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyReleasedLeft() throws Exception {
-        testStoryLine.keyReleased(Input.KEY_LEFT, 'a');
-
-        verify(mockedPlayer).leftArrowPressed(false);
-    }
-
-    /**
-     * Test whether keyReleased() works correctly.
-     * Key: right.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyReleasedRight() throws Exception {
-        testStoryLine.keyReleased(Input.KEY_RIGHT, 'a');
-
-        verify(mockedPlayer).rightArrowPressed(false);
-    }
-
-    /**
-     * Test whether keyReleased() works correctly.
-     * Key: space.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyReleasedSpace() throws Exception {
-        testStoryLine.keyReleased(Input.KEY_SPACE, 'a');
-
-        verify(mockedPlayer).fireButtonPressed(false);
-    }
-
-    /**
-     * Test whether keyReleased() works correctly.
-     * Key: yen.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testKeyReleasedDefault() throws Exception {
-        testStoryLine.keyReleased(Input.KEY_YEN, 'a');
     }
 }

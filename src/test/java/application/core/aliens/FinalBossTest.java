@@ -58,9 +58,10 @@ public class FinalBossTest {
     @Test
     public void testEndOfScreen() throws Exception {
         testBoss.setX(10);
+        testBoss.setDirection(-1);
         assertTrue(testBoss.endOfScreen());
 
-        testBoss.setX(0);
+        testBoss.setX(11);
         assertFalse(testBoss.endOfScreen());
     }
 
@@ -82,7 +83,7 @@ public class FinalBossTest {
         testBoss.setSecondShot(151);
 
         assertEquals(Main.BOSS_CHARGE, testBoss.getImage());
-        assertEquals(250, testBoss.getHeight());
+        assertEquals(167, testBoss.getHeight());
     }
 
     /**
