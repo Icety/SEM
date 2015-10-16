@@ -151,8 +151,6 @@ public class FinalBoss extends Alien {
                 tY -= tChargeHeight - tHeight;
             }
             tHeight = tChargeHeight;
-            System.out.println("no Charge");
         }
-        System.out.println(tHeight);
     }
 }

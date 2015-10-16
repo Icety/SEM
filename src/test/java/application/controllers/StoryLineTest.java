@@ -148,7 +148,7 @@ public class StoryLineTest {
         testStoryLine.tTextHeight = Integer.MAX_VALUE;
         testStoryLine.update(mockedContainer, mockedGame, 0);
 
-        verify(mockedGame, times(2)).getGame();
+        verify(mockedGame, times(3)).getGame();
     }
 
     /**

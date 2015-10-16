@@ -3,11 +3,5 @@
 <background>moving.jpg</background>
 <music>normalmusic.wav</music>
 <theme>classic</theme>
-<aliens>
-<alien>
-<x>10</x>
-<y>10</y>
-<type>big</type>
-</alien>
-</aliens>
+<aliens/>
 </level>
