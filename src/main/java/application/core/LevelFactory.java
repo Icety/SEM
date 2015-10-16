@@ -134,6 +134,9 @@ public class LevelFactory {
                 case "boss":
                     alien = new FinalBoss();
                     break;
+                case "daphne":
+                    alien = new DaphnalienBoss();
+                    break;
                 default: break;
             }
             alien.readXml(eElement);

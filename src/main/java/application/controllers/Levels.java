@@ -3,6 +3,7 @@ package application.controllers;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
+import application.core.aliens.AnimatedBoss;
 import application.core.projectiles.Projectile;
 import application.core.upgrades.Upgrade;
 import org.newdawn.slick.*;
@@ -80,7 +81,11 @@ public class Levels extends BasicGameState {
             //Draw all aliens and its upgrades
             for (Alien alien : tMain.getGame().getLevel().getAliens()) {
                 if (!alien.isDead()) {
-                    (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    if (alien.isAnimated()) {
+                        (((AnimatedBoss) alien).getAnimation()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    } else {
+                        (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    }
                 }
                 drawProjectiles(alien.getProjectiles());
                 drawUpgrades(alien.getUpgrades());
@@ -100,7 +105,7 @@ public class Levels extends BasicGameState {
                 }
 
                 // Draw Player 2
-                p2.getImage().draw(p2.getX(),p2.getY(), p2.getWidth(), p2.getHeight());
+                p2.getImage().draw(p2.getX(), p2.getY(), p2.getWidth(), p2.getHeight());
                 drawProjectiles(p2.getProjectiles());
             }
         } else {

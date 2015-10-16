@@ -71,7 +71,7 @@ public class FinalBossTest {
      */
     @Test
     public void testGetImageNormal() throws Exception {
-        assertEquals(Main.BOSS_BACHELLI, testBoss.getImage());
+        assertEquals(Main.BOSS, testBoss.getImage());
     }
 
     /**
@@ -82,7 +82,7 @@ public class FinalBossTest {
     public void testGetImageCharge() throws Exception {
         testBoss.setSecondShot(151);
 
-        assertEquals(Main.BOSS_BACHELLI_CHARGE, testBoss.getImage());
+        assertEquals(Main.BOSS_CHARGE, testBoss.getImage());
         assertEquals(250, testBoss.tHeight);
     }
 
