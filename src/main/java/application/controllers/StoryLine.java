@@ -82,7 +82,7 @@ public class StoryLine extends BasicGameState {
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
             if (tDone) {
-                g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 600, tTextHeight);
+                g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
             }
         }
 
