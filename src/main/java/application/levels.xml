@@ -1,7 +1,9 @@
 <levels>
-    <level>levelHalloween</level>
-    <level>daphne</level>
     <level>level1</level>
     <level>panda</level>
-
+    <level>daphne</level>
+    <level>levelHalloween</level>
+    <level>dogelevel</level>
+    <level>dannylevel</level>
+    <level>bachelli</level>
 </levels>
