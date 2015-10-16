@@ -1,5 +1,6 @@
 package application.core;
 
+import application.controllers.PlayerController;
 import application.core.aliens.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -60,14 +61,15 @@ public class LevelFactory {
      * @param levelNumber the number belonging to the Level.
      * @return the built Level.
      */
-    public Level buildLevel(int levelNumber, int players) {
-        Level level = new Level(players);
+    public Level buildLevel(int levelNumber, int players, PlayerController controller) {
+        Level level = new Level(players, controller);
 
         Element levelXml = (Element) tLevels.item(levelNumber);
 
         ArrayList<Alien> aliens = loadAliens(levelXml);
         level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
         level.addAliens(aliens);
+        level.setStartPlayers();
         return level;
     }
 

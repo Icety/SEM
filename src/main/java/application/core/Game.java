@@ -79,7 +79,7 @@ public class Game {
      */
     public void nextLevel() {
         tNextLevel = false;
-        tLevel = levelFactory.buildLevel(levelNumber, tPlayers );
+        tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         levelNumber++;
     }

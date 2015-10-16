@@ -89,8 +89,11 @@ public class Levels extends BasicGameState {
                 int lives = p.getHealth();
                 int j = 250;
 
+                //Draw the player
+                p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                drawProjectiles(p.getProjectiles());
+
                 for (int k = 0; k <= z; k++){
-                    int n = z+1;
                     g.drawString("LIVES: ", container.getWidth() - ((k+1)*500), 50);
 
                     for (int i = 1; i <= lives; i++) {
@@ -98,15 +101,6 @@ public class Levels extends BasicGameState {
                         j = j + 250;
                     }
                 }
-
-
-
-
-                //Draw the player
-                p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-                drawProjectiles(p.getProjectiles());
-
-
             }
 
         } else {
@@ -174,6 +168,7 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
+        if (tMain.getGame().getPlayerController().getNumPlayers() > 1 ) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(true);
@@ -184,7 +179,9 @@ public class Levels extends BasicGameState {
                 case Input.KEY_W:
                     tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(true);
                     break;
+            }
         }
+
     }
 
 
@@ -208,6 +205,7 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
+        if(tMain.getGame().getPlayerController().getNumPlayers() > 1) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(false);
@@ -218,6 +216,8 @@ public class Levels extends BasicGameState {
                 case Input.KEY_W:
                     tMain.getGame().getPlayerController().getPlayers().get(1).fireButtonPressed(false);
                     break;
+        }
+
         }
     }
 

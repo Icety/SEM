@@ -19,8 +19,9 @@ public class Level {
     protected String tBackground;
     protected PlayerController playerController;
 
-    public Level (int numOfPlayers){
+    public Level (int numOfPlayers, PlayerController controller){
         tNumOfPlayers = numOfPlayers;
+        playerController = controller;
     }
 
     /**
@@ -43,7 +44,6 @@ public class Level {
      * Setter method for the Player of the Level.
      */
     public void setStartPlayers() {
-       playerController = new PlayerController(tNumOfPlayers);
         playerController.setPlayers(tNumOfPlayers);
     }
 
