@@ -158,18 +158,10 @@ public class Main extends StateBasedGame {
     /**
      * Let Main start a new game.
      */
-    public void newGame(boolean multiplayer){
-        tGame = new Game(WIDTH, HEIGHT, tLogger, multiplayer);
+    public void newGame(int numPlayers){
+        tGame = new Game(WIDTH, HEIGHT, tLogger, numPlayers);
         tGame.nextLevel();
 
-        int j = 0;
-
-        for (int i = 0; i < tGame.getPlayers().size(); i++) {
-            Player p = tGame.getPlayers().get(i);
-            p.setX(tGame.getWidth() / 4 + j);
-            p.setY(tGame.getHeight() - (p.getHeight() + 50));
-            j = j + 100;
-        }
     }
 
     /**

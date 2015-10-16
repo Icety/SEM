@@ -26,6 +26,7 @@ public class Lost extends BasicGameState {
     protected int tId;
     protected Image tBackground;
     protected Image tWon;
+    protected boolean tExit;
 
     /**
      * Constructor method for Lost.
@@ -47,6 +48,7 @@ public class Lost extends BasicGameState {
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/moving.jpg");
         tWon = new Image("src/main/java/application/images/gameover.png");
+        tExit = false;
     }
 
     /**
@@ -80,6 +82,9 @@ public class Lost extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
+        if(tExit){
+            container.exit();
+        }
     }
 
     /**
@@ -99,14 +104,14 @@ public class Lost extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_1:
-                tMain.newGame(tMain.getGame().isMultiplayerGame());
+                tMain.newGame(tMain.getGame().getPlayerController().getNumPlayers());
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
-                // TODO: Implement later
+                tMain.enterState(6, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_3:
-                // TODO: Implement later
+                tExit = true;
                 break;
             case Input.KEY_SPACE:
                 tMain.enterState(5);

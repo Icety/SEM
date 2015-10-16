@@ -107,7 +107,7 @@ public class Menu extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_1:
-                tMain.newGame(false);
+                tMain.newGame(1);
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
@@ -117,11 +117,11 @@ public class Menu extends BasicGameState {
                 tExit = true;
                 break;
             case Input.KEY_4:
-                tMain.newGame(false);
+                tMain.newGame(0);
                 tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_5:
-                tMain.newGame(true);
+                tMain.newGame(2);
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             case Input.KEY_6:
                 tMain.changeDifficulty();

@@ -1,6 +1,6 @@
 package application.core;
 
-import org.newdawn.slick.Music;
+import application.controllers.PlayerController;
 import application.core.aliens.Alien;
 import java.util.ArrayList;
 
@@ -13,8 +13,15 @@ import java.util.ArrayList;
 })
 public class Level {
     protected ArrayList<Alien> tAliens;
-    protected Player tPlayer;
+    protected ArrayList<Player> tPlayers;
+    protected int tNumOfPlayers;
     protected String tBackground;
+    protected PlayerController playerController;
+
+    public Level (int numOfPlayers, PlayerController controller){
+        tNumOfPlayers = numOfPlayers;
+        playerController = controller;
+    }
     protected String tMusic;
     protected String tTheme;
 
@@ -55,8 +62,8 @@ public class Level {
     /**
      * Setter method for the Player of the Level.
      */
-    public void setStartPlayer() {
-        tPlayer = new Player();
+    public void setStartPlayers() {
+        playerController.setPlayers(tNumOfPlayers);
     }
 
     /**

@@ -1,5 +1,6 @@
 package application.core;
 
+import application.controllers.PlayerController;
 import org.w3c.dom.NodeList;
 import application.Main;
 import application.core.aliens.*;
@@ -62,8 +63,8 @@ public class LevelFactory {
      * @param levelNumber the number belonging to the Level.
      * @return the built Level.
      */
-    public Level buildLevel(int levelNumber) {
-        Level level = new Level();
+    public Level buildLevel(int levelNumber, int players, PlayerController controller) {
+        Level level = new Level(players, controller);
 
         Element levelName = (Element) tLevels.item(levelNumber);
         try {
@@ -78,7 +79,7 @@ public class LevelFactory {
             //Set aliens
             ArrayList<Alien> aliens = loadAliens(levelXml);
             level.addAliens(aliens);
-            level.setStartPlayer();
+            level.setStartPlayers();
             //Set background music
             if (levelXml.getElementsByTagName("background").getLength() != 0) {
                 level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
