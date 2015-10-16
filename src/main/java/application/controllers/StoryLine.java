@@ -99,7 +99,6 @@ public class StoryLine extends BasicGameState {
 
         //Draw the player
         p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-
     }
 
     /**
@@ -112,6 +111,9 @@ public class StoryLine extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
+        if (tMain.getGame().getLevel().getStoryLine().equals(null)) {
+            tSkip = true;
+        }
         tCount++;
         Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
         if (tStart) {

@@ -10,8 +10,7 @@
         <alien>
             <x>-1000</x>
             <y>200</y>
-            <type>daphne</type>
+            <type>boss</type>
         </alien>
     </aliens>
-    <story>story</story>
 </level>
