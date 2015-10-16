@@ -68,6 +68,10 @@ public class Main extends StateBasedGame {
     protected Game tGame;
     protected Logger tLogger;
     public static Music tBackgroundmusic;
+    public static Sound tPlayerDeathSound;
+    public static Sound tInvaderKilledSound;
+    public static Sound tMotherShipKilledSound;
+
     protected Image tBackground;
     protected boolean tTransition;
 
@@ -105,6 +109,10 @@ public class Main extends StateBasedGame {
         this.addState(new HighScoreBoard(HIGHSCORE));
         this.addState(new StoryLine(STORYLINE));
         this.addState(new HighScoreForm(ENTERNAME));
+
+        tPlayerDeathSound = new Sound("src/main/java/application/sound/explosion.wav");
+        tInvaderKilledSound = new Sound("src/main/java/application/sound/invaderkilled.wav");
+        tMotherShipKilledSound = new Sound("src/main/java/application/sound/mothership.wav");
         tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
         tBackgroundmusic.loop();
 

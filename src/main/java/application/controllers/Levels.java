@@ -180,7 +180,7 @@ public class Levels extends BasicGameState {
                 case Input.KEY_RIGHT:
                     tMain.getGame().getPlayer().rightArrowPressed(true);
                     break;
-                case Input.KEY_SPACE:
+                case Input.KEY_UP:
                     tMain.getGame().getPlayer().fireButtonPressed(true);
                     break;
                 case Input.KEY_ESCAPE:
@@ -197,7 +197,7 @@ public class Levels extends BasicGameState {
                 case Input.KEY_D:
                     tMain.getGame().getPlayer2().rightArrowPressed(true);
                     break;
-                case Input.KEY_Q:
+                case Input.KEY_W:
                     tMain.getGame().getPlayer2().fireButtonPressed(true);
                     break;
             }
@@ -219,7 +219,7 @@ public class Levels extends BasicGameState {
                 case Input.KEY_RIGHT:
                     tMain.getGame().getPlayer().rightArrowPressed(false);
                     break;
-                case Input.KEY_SPACE:
+                case Input.KEY_UP:
                     tMain.getGame().getPlayer().fireButtonPressed(false);
                     break;
                 default:
@@ -233,7 +233,7 @@ public class Levels extends BasicGameState {
                 case Input.KEY_D:
                     tMain.getGame().getPlayer2().rightArrowPressed(false);
                     break;
-                case Input.KEY_Q:
+                case Input.KEY_W:
                     tMain.getGame().getPlayer2().fireButtonPressed(false);
                     break;
                 default:
