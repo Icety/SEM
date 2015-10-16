@@ -54,24 +54,6 @@ public class PlayerTest {
         assertEquals(25, testPlayer.getX());
     }
 
-//    /**
-//     * Test whether update works correctly.
-//     * Amount of Projectiles should be zero, because updateProjectiles() was called.
-//     *
-//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void testUpdateWithShoot() throws Exception {
-//        testPlayer.tLastShot = Integer.MIN_VALUE;
-//        testPlayer.tReloadTime = Integer.MIN_VALUE;
-//        testPlayer.tShoot = true;
-//        testPlayer.update();
-//
-//        assertEquals(0, testPlayer.getProjectiles().size());
-//    }
-
     /**
      * Test whether moveLeft() works correctly.
      * @throws Exception possible Exception.
@@ -225,55 +207,6 @@ public class PlayerTest {
         assertEquals(500, testPlayer.tReloadTime);
     }
 
-//    /**
-//     * Test shoot() with an upgraded weapon 0.
-//     *
-//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void testShootWeaponZeroLastSideZero() throws Exception {
-//        testPlayer.tUpgraded = true;
-//        testPlayer.tLastSide = 0;
-//        testPlayer.shoot();
-//
-//        assertTrue(testPlayer.getProjectiles().size() >= 1);
-//    }
-//
-//    /**
-//     * Test shoot() with an upgraded weapon 0 with lastSide non 0.
-//     *
-//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void testShootWeaponZeroLastSideNotZero() throws Exception {
-//        testPlayer.tUpgraded = true;
-//        testPlayer.tLastSide = 1;
-//        testPlayer.shoot();
-//
-//        assertTrue(testPlayer.getProjectiles().size() >= 1);
-//    }
-
-//    /**
-//     * Test shoot() with an upgraded weapon 1.
-//     *
-//     * GIVES ERRORS WITH MAVEN, COULD NOT BE RESOLVED!
-//     *
-//     * @throws Exception
-//     */
-//    @Test
-//    public void testShootWeaponOne() throws Exception {
-//        testPlayer.tUpgraded = true;
-//        Upgrade testUpgrade = new WeaponUpgrade(0, 0);
-//        testPlayer.tActiveUpgrades.add(testUpgrade);
-//        testPlayer.shoot();
-//
-//        assertTrue(testPlayer.getProjectiles().size() >= 1);
-//    }
-
     /**
      * Test whether HealthUpgrade is correctly applied to Player.
      * @throws Exception possible Exception.
@@ -311,13 +244,4 @@ public class PlayerTest {
 
         assertEquals(0, testPlayer.tY);
     }
-
-//    /**
-//     * Test whether the sound works.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testSounds() throws Exception {
-//        testPlayer.laserSound();
-//    }
 }

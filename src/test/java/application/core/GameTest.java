@@ -33,7 +33,7 @@ public class GameTest {
     private Logger testLogger;
     private Level nonMockedLevel;
     private Player nonMockedPlayer;
-    private Projectile nonMockedProjectile;
+
     @Mock
     public final Level testLevel = mock(Level.class);
     @Mock
@@ -58,8 +58,6 @@ public class GameTest {
         testMultiPlayerGame.tLogger = testLogger;
         nonMockedLevel.tPlayer = testPlayer;
         nonMockedLevel.tAliens = testAliens;
-        nonMockedPlayer = new Player();
-        nonMockedProjectile = new SmallProjectile(10, 10);
         testLogger.startLogging();
     }
 
@@ -250,87 +248,6 @@ public class GameTest {
         assertTrue(testGame.hasWon());
     }
 
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Alien is hit.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionBetweenAlienAndProjectile() throws Exception {
-//    testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        ArrayList<Player> testPlayers = new ArrayList<>();
-//        nonMockedPlayer.addProjectile(nonMockedProjectile);
-//        testPlayers.add(nonMockedPlayer);
-//        testGame.tPlayers = testPlayers;
-//        testGame.checkCollision();
-//
-//        assertFalse(nonMockedPlayer.getProjectiles().contains(nonMockedProjectile));
-//    }
-//
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Player is hit.
-//     * Does not die.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionBetweenPlayerAndProjectile() throws Exception {
-//        testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        nonMockedPlayer.tX = 10;
-//        nonMockedPlayer.tY = 10;
-//        testGame.tPlayer = nonMockedPlayer;
-//        smallAlien.addProjectile(nonMockedProjectile);
-//        testGame.checkCollision();
-//
-//        assertFalse(smallAlien.getProjectiles().contains(nonMockedProjectile));
-//    }
-//
-//    /**
-//     * Test whether checkCollision() works correctly.
-//     * Player is hit.
-//     * Dies.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testCheckCollisionKillPlayer() throws Exception {
-//        ArrayList<Player> testPlayers = new ArrayList<>();
-//        testGame.tWon = false;
-//        ArrayList<Alien> smallAliens = new ArrayList<>();
-//        Alien smallAlien = new SmallAlien();
-//        smallAlien.tX = 10;
-//        smallAlien.tY = 10;
-//        smallAliens.add(smallAlien);
-//        nonMockedLevel = new Level();
-//        nonMockedLevel.addAliens(smallAliens);
-//        testGame.tLevel = nonMockedLevel;
-//        nonMockedPlayer.tX = 10;
-//        nonMockedPlayer.tY = 10;
-//        nonMockedPlayer.tHealth = 1;
-//        nonMockedPlayer.addProjectile(nonMockedProjectile);
-//        testPlayers.add(nonMockedPlayer);
-//        smallAlien.addProjectile(nonMockedProjectile);
-//        testGame.tPlayers = testPlayers;
-//        testGame.checkCollision();
-//
-//        assertTrue(testGame.tLost);
-//    }
-
     /**
      * Test whether getHighScoreManager() returns the correct HighScoreManager.
      * @throws Exception possible Exception.
@@ -449,15 +366,4 @@ public class GameTest {
 
         assertTrue(testGame.isNextLevel());
     }
-
-//    /**
-//     * Test whether the sounds work.
-//     * @throws Exception possible Exception.
-//     */
-//    @Test
-//    public void testSounds() throws Exception {
-//        testGame.playerDeathSound();
-//        testGame.invaderKilledSound();
-//        testGame.motherShipKilled();
-//    }
 }

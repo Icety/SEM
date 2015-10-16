@@ -1,9 +1,7 @@
 package application.controllers;
 
 import application.Main;
-import application.core.HighScoreManager;
 import application.core.aliens.*;
-import application.logger.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -29,11 +27,7 @@ public class LevelBuilderTest {
     @Mock
     public final Main mockedGame = mock(Main.class);
     @Mock
-    public final Logger mockedLogger = mock(Logger.class);
-    @Mock
     public final GameContainer mockedContainer = mock(GameContainer.class);
-    @Mock
-    public final HighScoreManager mockedManager = mock(HighScoreManager.class);
     @Mock
     public final TextField mockedTextField = mock(TextField.class);
 
