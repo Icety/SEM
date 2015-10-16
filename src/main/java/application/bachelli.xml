@@ -1,0 +1,17 @@
+<level>
+    <background>
+        background.jpg
+    </background>
+    <music>
+        normalmusic.mp3
+    </music>
+    <theme>classic</theme>
+    <aliens>
+        <alien>
+            <x>-1000</x>
+            <y>200</y>
+            <type>daphne</type>
+        </alien>
+    </aliens>
+    <story>story</story>
+</level>

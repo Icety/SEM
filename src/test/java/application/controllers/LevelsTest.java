@@ -51,7 +51,7 @@ public class LevelsTest {
     public void testInit() throws Exception {
         try {
             testLevels.init(mockedContainer, mockedGame);
-            Image actualImage = new Image("src/main/java/application/images/moving.jpg");
+            Image actualImage = new Image("src/main/java/application/images/backgrounds/moving.jpg");
 
             assertNotNull(testLevels.tMain);
             assertEquals(actualImage, testLevels.tBackground);

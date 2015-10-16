@@ -118,6 +118,10 @@ public class Game {
         this.alienUpdate();
         this.checkCollision();
 
+        if (tLevel.getTheme() != Main.imageTheme) {
+            Main.imageTheme = tLevel.getTheme();
+        }
+
         if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {
                 tNextLevel = true;

@@ -44,7 +44,8 @@ public class HighScoreBoard extends BasicGameState {
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
-        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
+
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
     /**

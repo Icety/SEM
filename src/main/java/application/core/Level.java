@@ -2,7 +2,6 @@ package application.core;
 
 import application.controllers.PlayerController;
 import application.core.aliens.Alien;
-
 import java.util.ArrayList;
 
 /**
@@ -23,6 +22,26 @@ public class Level {
         tNumOfPlayers = numOfPlayers;
         playerController = controller;
     }
+    protected String tMusic;
+    protected String tTheme;
+
+    public String getTheme() {
+        return tTheme;
+    }
+
+    public void setTheme(String tTheme) {
+        this.tTheme = tTheme;
+    }
+
+    public String getStoryLine() {
+        return tStoryLine;
+    }
+
+    public void setStoryLine(String tStoryLine) {
+        this.tStoryLine = tStoryLine;
+    }
+
+    protected String tStoryLine;
 
     /**
      * Getter method for the Aliens in the Level.
@@ -89,11 +108,20 @@ public class Level {
      */
     public boolean hasWon() {
         boolean result = true;
-        for (Alien alien: tAliens) {
+        for (Alien alien : tAliens) {
             if (!alien.isDead() && !alien.isBonusAlien()) {
                 result = false;
             }
         }
         return result;
+    }
+
+
+    public String getMusic() {
+        return tMusic;
+    }
+
+    public void setMusic(String music) {
+        this.tMusic = music.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
 }
