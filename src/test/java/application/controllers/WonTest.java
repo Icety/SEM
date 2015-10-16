@@ -1,6 +1,8 @@
 package application.controllers;
 
 import application.Main;
+import application.core.Game;
+import application.logger.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -10,6 +12,7 @@ import org.newdawn.slick.Input;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Test class for Won.java.
@@ -22,6 +25,8 @@ public class WonTest {
     public final Main mockedGame = mock(Main.class);
     @Mock
     public final GameContainer mockedContainer = mock(GameContainer.class);
+    @Mock
+    public final Logger mockedLogger = mock(Logger.class);
 
     /**
      * Initialize variables for the test process.
@@ -31,6 +36,8 @@ public class WonTest {
     public void setUp() throws Exception {
         testWon = new Won(1);
         testWon.tMain = mockedGame;
+
+        when(mockedGame.getGame()).thenReturn(new Game(0, 0, mockedLogger, 1));
     }
 
     /**

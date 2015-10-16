@@ -1,5 +1,6 @@
 package application.core;
 
+import application.controllers.PlayerController;
 import application.core.aliens.Alien;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +8,6 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -28,7 +28,7 @@ public class LevelTest {
      */
     @Before
     public void setUp() throws Exception {
-        //testLevel = new Level();
+        testLevel = new Level(1, new PlayerController(1));
     }
 
     /**
