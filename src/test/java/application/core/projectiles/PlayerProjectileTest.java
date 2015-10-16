@@ -1,7 +1,6 @@
-package application.core;
+package application.core.projectiles;
 
 import application.Main;
-import application.core.projectiles.PlayerProjectile;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertNotNull;
 
 /**
  * Test class for PlayerProjectile.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:visibilitymodifier"

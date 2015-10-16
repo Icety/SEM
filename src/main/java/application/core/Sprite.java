@@ -209,4 +209,8 @@ public class Sprite {
     public void incrementHealth() {
         this.tHealth++;
     }
+
+    public void setDifficulty(int difficulty) {
+        this.tDifficulty = difficulty;
+    }
 }

@@ -268,4 +268,16 @@ public class Player extends Sprite {
     public void moveUp(int y) {
         tY -= y;
     }
+
+    public boolean isGoLeft() {
+        return tGoLeft;
+    }
+
+    public boolean isGoRight() {
+        return tGoRight;
+    }
+
+    public boolean isShoot() {
+        return tShoot;
+    }
 }

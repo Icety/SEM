@@ -23,7 +23,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Test class for Alien.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",
@@ -200,11 +200,9 @@ public class AlienTest {
     @Test
     public void testSetLowerLevel() throws Exception {
         ArrayList<Alien> testAliens = testFactory.loadAliens(testElement);
-//        testAlien.tX = 100;
-//        testAlien.tY = 105;
+        testAlien.setX(10);
+        testAlien.setY(150);
         testAliens.add(testAlien);
-        testAlien.setX(100);
-        testAlien.setY(20);
         testAlien.setLowerLevel(testAliens);
 
         assertTrue(testAlien.canShoot());
@@ -290,5 +288,38 @@ public class AlienTest {
         testAlien.updateUpgrades();
 
         assertEquals(1, testUpgrade.getY());
+    }
+
+    /**
+     * Test whether hit() works correctly when the Alien dies.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testHitAndDie() throws Exception{
+        testAlien.setHealth(1);
+
+        assertEquals(testAlien.getKillScore(), testAlien.hit());
+    }
+
+    /**
+     * Test whether hit() works correctly when Alien remains alive.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testHitAndLive() throws Exception{
+        testAlien.setHealth(2);
+
+        assertEquals(testAlien.getHitScore(), testAlien.hit());
+    }
+
+    /**
+     * Test whether getSpeed() and setSpeed() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetAndSetSpeed() throws Exception {
+        testAlien.setSpeed(1.0);
+
+        assertEquals(1.0, testAlien.getSpeed(), 0.0);
     }
 }

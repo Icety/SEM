@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for Score.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class ScoreTest {
     private Score testScore;

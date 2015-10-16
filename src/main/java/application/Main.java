@@ -9,9 +9,15 @@ import application.controllers.HighScoreBoard;
 import application.controllers.StoryLine;
 import application.controllers.HighScoreForm;
 import application.core.Game;
-import application.core.Player;
 import application.logger.Logger;
-import org.newdawn.slick.*;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.Animation;
+import org.newdawn.slick.Sound;
+import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -172,6 +178,10 @@ public class Main extends StateBasedGame {
         return tGame;
     }
 
+    public void setGame(Game game) {
+        tGame = game;
+    }
+
     public void setAlienImages (String theme) throws SlickException {
         MINI_ALIEN = new Image(imageRoot + imageTheme + "/miniAlien.png");
         SMALL_ALIEN = new Image(imageRoot + imageTheme + "/smallAlien.png");
@@ -200,7 +210,3 @@ public class Main extends StateBasedGame {
         }
     }
 }
-
-
-
-

@@ -11,9 +11,6 @@ import org.newdawn.slick.SlickException;
 import application.core.HighScoreManager;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
-import org.newdawn.slick.state.transition.FadeInTransition;
-import org.newdawn.slick.state.transition.FadeOutTransition;
-
 
 /**
  * Controller class for HighScoreForm.
@@ -25,14 +22,14 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
 })
 public class HighScoreForm extends BasicGameState {
 
-    private HighScoreManager highScoreManager;
-    private Main tMain;
-    private int tId;
-    private Image tBackground;
-    private String tBackgroundString = "moving.jpg";
-    private boolean tPause = false;
-    private TextField tTextField;
-    private String tName;
+    protected HighScoreManager highScoreManager;
+    protected Main tMain;
+    protected int tId;
+    protected Image tBackground;
+    protected String tBackgroundString = "moving.jpg";
+    protected boolean tPause = false;
+    protected TextField tTextField;
+    protected String tName;
 
 
     /**
@@ -118,7 +115,7 @@ public class HighScoreForm extends BasicGameState {
      */
     @Override
     public int getID() {
-        return 5;
+        return tId;
     }
 
     /**

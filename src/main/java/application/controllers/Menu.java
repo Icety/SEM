@@ -22,7 +22,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
         "checkstyle:linelength"
 })
 public class Menu extends BasicGameState {
-    private Main tMain;
+    protected Main tMain;
     protected int tId;
     protected Image tBackground;
     protected boolean tExit;

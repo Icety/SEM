@@ -1,7 +1,6 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
-import application.core.aliens.MiniAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for MiniAlien.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class MiniAlienTest {
     private MiniAlien testAlien;
@@ -41,8 +40,8 @@ public class MiniAlienTest {
      */
     @Test
     public void testToString() throws Exception {
-        testAlien.tX = 1;
-        testAlien.tY = 1;
+        testAlien.setX(1);
+        testAlien.setY(1);
 
         assertEquals("MiniAlien on coords: 1, 1", testAlien.toString());
     }

@@ -1,26 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <level>
-    <background>
-        background.jpg
-    </background>
-    <music>
-        daphne.mp3
-    </music>
-    <theme>daphne</theme>
-    <aliens>
-        <!-- TOP ROW -->
-        <alien>
-            <x>-1000</x>
-            <y>200</y>
-            <type>daphne</type>
-        </alien>
-    </aliens>
-    <story> &#xA;
-        Those aliens, are they?? Pandaliens?? &#xA;
-        Now the ship is on it's way. But wait! What are &#xA;
-        the aliens, so it could be destroyed. &#xA;
-        left it's safe home, in search for the planet of &#xA;
-        retaliate! Their most powerful ship: The Thomas &#xA;
-        planet was under attack, they would have to &#xA;
-        it became clear to the SEMmians that their &#xA;
-        After destroying the first layer of aliens</story>
+<background>moving.jpg</background>
+<music>normalmusic.wav</music>
+<theme>classic</theme>
+<aliens/>
 </level>

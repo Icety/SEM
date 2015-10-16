@@ -1,7 +1,6 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
-import application.core.aliens.BigAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * Test class for BigAlien.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 public class BigAlienTest {
     private BigAlien testAlien;
@@ -49,8 +48,8 @@ public class BigAlienTest {
      */
     @Test
     public void testToString() throws Exception {
-        testAlien.tX = 1;
-        testAlien.tY = 1;
+        testAlien.setX(1);
+        testAlien.setY(1);
 
         assertEquals("BigAlien on coords: 1, 1", testAlien.toString());
     }

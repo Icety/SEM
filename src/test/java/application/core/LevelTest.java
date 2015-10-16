@@ -12,7 +12,7 @@ import static org.mockito.Mockito.mock;
 
 /**
  * Test class for Level.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:visibilitymodifier"

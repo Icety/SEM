@@ -1,7 +1,6 @@
-package application.core;
+package application.core.aliens;
 
 import application.Main;
-import application.core.aliens.MothershipAlien;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +11,7 @@ import static org.junit.Assert.assertFalse;
 //ToDo: Write testSwitchDirection() (Dependency unreachable)
 /**
  * Test class for MothershipAlien.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
@@ -36,7 +35,7 @@ public class MothershipAlienTest {
     public void testIsAlive() throws Exception {
         assertTrue(testAlien.isAlive());
 
-        testAlien.tHealth = 0;
+        testAlien.setHealth(0);
         assertFalse(testAlien.isAlive());
     }
 
@@ -46,8 +45,8 @@ public class MothershipAlienTest {
      */
     @Test
     public void testToString() throws Exception {
-        testAlien.tX = 1;
-        testAlien.tY = 1;
+        testAlien.setX(1);
+        testAlien.setY(1);
 
         assertEquals("MotherShipAlien on coords: 1, 1", testAlien.toString());
     }
@@ -68,7 +67,7 @@ public class MothershipAlienTest {
     @Test
     public void testSwitchDirection() throws Exception {
         testAlien.setDirection(1);
-        testAlien.tX = -2001;
+        testAlien.setX(-2001);
         testAlien.switchDirection();
 
         assertEquals(-1, testAlien.getDirection());

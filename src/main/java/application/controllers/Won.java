@@ -22,7 +22,7 @@ import org.newdawn.slick.state.transition.FadeOutTransition;
         "checkstyle:linelength"
 })
 public class Won extends BasicGameState {
-    private Main tMain; // stored for later use
+    protected Main tMain; // stored for later use
     protected int tId;
     protected Image tBackground;
     protected Image tWon;

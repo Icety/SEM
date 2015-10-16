@@ -1,14 +1,13 @@
-package application.core;
+package application.core.upgrades;
 
 import application.Main;
-import application.core.upgrades.SpeedUpgrade;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * Test class for SpeedUpgrade.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
