@@ -1,6 +1,7 @@
 package application.core;
 
 import application.Barier;
+import application.Main;
 import application.core.aliens.Alien;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ public class Level {
      */
     public Level() {
         tBariers = new ArrayList<>();
-        tBariers.add(new Barier(300, 900));
+        tBariers.add(new Barier(200, 900));
 
-        tBariers.add(new Barier(500, 900));
+        tBariers.add(new Barier(Main.WIDTH/2-35, 900));
 
-        tBariers.add(new Barier(700, 900));
+        tBariers.add(new Barier(Main.WIDTH-200-70, 900));
     }
 
     /**

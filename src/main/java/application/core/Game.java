@@ -268,9 +268,9 @@ public class Game {
                     projectile.hit();
                     it.remove();
                     }
-                if(b.noLives()) {
-                    bit.remove();
-                }
+            }
+            if(b.noLives()) {
+                bit.remove();
             }
         }
     }
