@@ -207,6 +207,16 @@ public class StoryLine extends BasicGameState {
                 + "it became clear to the SEMmians that their \n\n"
                 + "After destroying the first layer of aliens";
     }
+
+    public void keyPressed(int key, char c) {
+        switch (key) {
+            case Input.KEY_SPACE:
+                tSkip = true;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 //package application.controllers;
