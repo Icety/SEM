@@ -43,7 +43,7 @@ public class BachelliProjectileTest {
      */
     @Test
     public void testGetImage() throws Exception {
-        assertEquals(Main.BACHELLI_PROJECTILE, testProjectile.getImage());
+        assertEquals(Main.BOSS_PROJECTILE_SPECIAL, testProjectile.getImage());
     }
 
     /**

@@ -45,7 +45,7 @@ public class Menu extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/moving.jpg");
+        tBackground = new Image("src/main/java/application/images/backgrounds/moving.jpg");
         tExit = false;
     }
 
@@ -69,6 +69,8 @@ public class Menu extends BasicGameState {
         g.drawString("3. Quit", 50, 140);
         g.drawString("4: Levelbuilder", 50, 160);
         g.drawString("5: Multiplayer", 50, 180);
+        g.drawString("6: Change difficulty", 50, 200);
+        g.drawString("   Current: "+ Main.DIFFICULTY, 50, 220);
 
 
     }
@@ -105,7 +107,7 @@ public class Menu extends BasicGameState {
     public void keyReleased(int key, char c) {
         switch (key) {
             case Input.KEY_1:
-                tMain.newGame(false);
+                tMain.newGame(1);
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_2:
@@ -115,12 +117,15 @@ public class Menu extends BasicGameState {
                 tExit = true;
                 break;
             case Input.KEY_4:
-                tMain.newGame(false);
+                tMain.newGame(0);
                 tMain.enterState(4, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                 break;
             case Input.KEY_5:
-                tMain.newGame(true);
+                tMain.newGame(2);
                 tMain.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+            case Input.KEY_6:
+                tMain.changeDifficulty();
+                break;
             default:
                 break;
         }

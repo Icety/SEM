@@ -2,9 +2,6 @@ package application.core;
 
 import application.core.aliens.Alien;
 import application.core.projectiles.Projectile;
-import application.core.projectiles.SmallProjectile;
-import application.core.upgrades.HealthUpgrade;
-import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +9,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
@@ -50,13 +46,12 @@ public class GameTest {
         ArrayList<Alien> testAliens = new ArrayList<>();
         testAliens.add(testAlien);
         testLogger = new Logger();
-        testGame = new Game(10, 10, testLogger, false);
-        testMultiPlayerGame = new Game(10, 10, testLogger, true);
-        nonMockedLevel = new Level();
+        testGame = new Game(10, 10, testLogger, 1);
+        testMultiPlayerGame = new Game(10, 10, testLogger, 2);
+        nonMockedLevel = new Level(1, testGame.getPlayerController());
         nonMockedPlayer = new Player();
         testGame.tLogger = testLogger;
         testMultiPlayerGame.tLogger = testLogger;
-        nonMockedLevel.tPlayer = testPlayer;
         nonMockedLevel.tAliens = testAliens;
         testLogger.startLogging();
     }
@@ -133,17 +128,6 @@ public class GameTest {
         testGame.newGame();
 
         assertEquals(1, testGame.levelNumber);
-    }
-
-    /**
-     * Test whether getPlayer() return the correct player.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testGetPlayer() throws Exception {
-        testGame.tPlayer = testPlayer;
-
-        assertEquals(testPlayer, testGame.getPlayer());
     }
 
     /**
@@ -261,55 +245,6 @@ public class GameTest {
     }
 
     /**
-     * Test whether upgrade hits are handled correctly.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testCheckPlayerUpgradeCollisions() throws Exception {
-        ArrayList<Upgrade> testUpgrades = new ArrayList<>();
-        Upgrade testUpgrade = new HealthUpgrade(0, 0);
-        testUpgrades.add(testUpgrade);
-        Iterator<Upgrade> testIterator = testUpgrades.iterator();
-        nonMockedPlayer.tX = 0;
-        nonMockedPlayer.tY = 0;
-        testGame.tPlayer = nonMockedPlayer;
-        testGame.checkPlayerUpgradeCollisions(testIterator);
-
-        assertFalse(testUpgrade.toDraw());
-    }
-
-    /**
-     * Test whether getPlayerName() returns the correct String value.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testGetPlayerName() throws Exception {
-        testGame.tPlayerName = "Mark";
-
-        assertEquals("Mark", testGame.getPlayerName());
-    }
-
-    /**
-     * Test whether setPlayerName() works correctly.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testSetPlayerName() throws Exception {
-        testGame.setPlayerName("John");
-
-        assertEquals("John", testGame.tPlayerName);
-    }
-
-    /**
-     * Test whether multiplayer games are initialized correctly.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testMultiPlayerGame() throws Exception {
-        assertNotNull(testMultiPlayerGame.tPlayer2);
-    }
-
-    /**
      * Test whether update() works correctly with a multiplayer game.
      * @throws Exception possible Exception.
      */
@@ -320,40 +255,6 @@ public class GameTest {
 
         assertFalse(testMultiPlayerGame.hasWon());
         assertFalse(testMultiPlayerGame.hasLost());
-    }
-
-    /**
-     * Test whether getPlayers() returns the correct list of Players.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testGetPlayers() throws Exception {
-        ArrayList<Player> testPlayers = new ArrayList<>();
-        testPlayers.add(new Player());
-        testPlayers.add(new Player());
-        testMultiPlayerGame.tPlayers = testPlayers;
-
-        assertEquals(testPlayers, testMultiPlayerGame.getPlayers());
-    }
-
-    /**
-     * Test whether isMultiplayerGame() returns the correct value.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testIsMultiPlayerGame() throws Exception {
-        assertTrue(testMultiPlayerGame.isMultiplayerGame());
-    }
-
-    /**
-     * Test whether getPlayer2() returns the correct Player.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testGetPlayer2() throws Exception {
-        testMultiPlayerGame.tPlayer2 = testPlayer;
-
-        assertEquals(testPlayer, testMultiPlayerGame.getPlayer2());
     }
 
     /**

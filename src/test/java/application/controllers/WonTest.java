@@ -60,7 +60,7 @@ public class WonTest {
     public void testKeyReleased1() throws Exception {
         testWon.keyReleased(Input.KEY_1, 'a');
 
-        verify(mockedGame).newGame(false);
+        verify(mockedGame).newGame(1);
     }
 
     /**

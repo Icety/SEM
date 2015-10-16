@@ -1,15 +1,15 @@
 package application.core;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
+import application.Main;
+import application.controllers.PlayerController;
 import application.core.aliens.Alien;
 import application.core.aliens.MothershipAlien;
 import application.core.projectiles.Projectile;
 import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.Sound;
 
 /**
  * Class for Game.
@@ -20,22 +20,20 @@ import org.newdawn.slick.Sound;
         "checkstyle:linelength"
 })
 public class Game {
+    private Main tMain;
     protected int tScore;
     protected LevelFactory levelFactory;
+    protected PlayerController playerController;
     protected HighScoreManager highScoreManager;
     protected int levelNumber;
     protected Level tLevel;
-    protected Player tPlayer;
-    protected Player tPlayer2;
-    protected ArrayList<Player> tPlayers;
     protected int tScreenWidth;
     protected int tScreenHeight;
     protected boolean tPaused;
     protected boolean tWon = false;
     protected boolean tLost = false;
     protected boolean tNextLevel = false;
-    //protected boolean tNextLevelTransition = false;
-    protected boolean tMultiplayerGame;
+    protected int tPlayers;
     protected Logger tLogger;
     protected String tPlayerName;
 
@@ -45,26 +43,17 @@ public class Game {
      * @param height the height of the game.
      * @param logger the Logger to be bound to the game.
      */
-    public Game(int width, int height, Logger logger, boolean multiplayerGame) {
+    public Game(int width, int height, Logger logger, int players) {
         tScreenWidth = width;
         tScreenHeight = height;
         levelFactory = LevelFactory.getFactory();
-        //levelFactory = new LevelFactory(tScreenWidth, tScreenHeight);
+        playerController = new PlayerController(players);
         highScoreManager = new HighScoreManager();
         levelNumber = 0;
+        tPlayers = players;
         tPaused = false;
         tLogger = logger;
-        tMultiplayerGame = multiplayerGame;
 
-        tPlayer = new Player();
-        tPlayers = new ArrayList<>();
-        tPlayers.add(tPlayer);
-
-        if(tMultiplayerGame) {
-            tPlayer2 = new Player();
-            tPlayers.add(tPlayer2);
-
-        }
     }
 
     /**
@@ -88,7 +77,7 @@ public class Game {
      */
     public void nextLevel() {
         tNextLevel = false;
-        tLevel = levelFactory.buildLevel(levelNumber);
+        tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         levelNumber++;
     }
@@ -119,24 +108,17 @@ public class Game {
     }
 
     /**
-     * Getter method for the playing Player.
-     * @return the Player.
-     */
-    public Player getPlayer() {
-        return tPlayer;
-    }
-
-    /**
      * The update method for the Game.
      * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
-        if(tMultiplayerGame) {
-            tPlayer2.update();
-        }
-        tPlayer.update();
+        playerController.update();
         this.alienUpdate();
         this.checkCollision();
+
+        if (tLevel.getTheme() != Main.imageTheme) {
+            Main.imageTheme = tLevel.getTheme();
+        }
 
         if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {
@@ -172,18 +154,6 @@ public class Game {
      */
     public int getWidth() {
         return tScreenWidth;
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return tPlayers;
-    }
-
-    public boolean isMultiplayerGame() {
-        return tMultiplayerGame;
-    }
-
-    public Player getPlayer2() {
-        return tPlayer2;
     }
 
     /**
@@ -261,12 +231,12 @@ public class Game {
         while (it.hasNext()) {
             Projectile projectile = it.next();
 
-            for(Player p : tPlayers) {
+            for(Player p : playerController.getPlayers()) {
                 if (p.intersects(projectile)) {
                     tLogger.setLog("Player has been hit.", 2);
                     projectile.hit();
                     p.hit();
-                    playerDeathSound();
+                    tMain.tPlayerDeathSound.play();
                     if (p.noLives()) {
                         tLogger.setLog("Player has lost.", 2);
                         tLost = true;
@@ -286,7 +256,7 @@ public class Game {
     public void checkPlayerUpgradeCollisions(Iterator<Upgrade> uit) {
         while (uit.hasNext()) {
             Upgrade u = uit.next();
-            for(Player p : tPlayers){
+            for(Player p : playerController.getPlayers()){
                 if (p.intersects(u)) {
                     p.upgrade(u);
                     u.hit();
@@ -304,7 +274,7 @@ public class Game {
         boolean wasHit = false;
         //If the alien is dead, it can't collide with player projectiles, so it should be skipped
         if (!alien.isDead()) {
-            for (Player p : tPlayers) {
+            for (Player p : playerController.getPlayers()) {
                 it = p.getProjectiles().iterator();
                 wasHit = false;
                 while (it.hasNext()) {
@@ -322,58 +292,19 @@ public class Game {
                 if (wasHit && alien.isDead()) {
                     tLogger.setLog("Alien has died.", 2);
                     if (alien instanceof MothershipAlien) {
-                        motherShipKilled();
+                        tMain.tMotherShipKilledSound.play();
                     } else {
-                        invaderKilledSound();
+                        tMain.tInvaderKilledSound.play();
                     }
 
                 }
             }
         }
+
     }
 
-    /**
-     * The sound belonging to the shots fired.
-     * @throws SlickException possible Exception.
-     */
-    public void playerDeathSound() throws SlickException {
-        Sound death = new Sound("src/main/java/application/sound/explosion.wav");
-        death.play();
-    }
-
-    /**
-     * The sound belonging to the death of an alien
-     * @throws SlickException
-     */
-    public void invaderKilledSound() throws SlickException {
-        Sound invaderKilled = new Sound("src/main/java/application/sound/invaderkilled.wav");
-        invaderKilled.play();
-    }
-
-    /**
-     * The sound belonging to the death of an alien
-     * @throws SlickException
-     */
-    public void motherShipKilled() throws SlickException {
-        Sound motherShip = new Sound("src/main/java/application/sound/mothership.wav");
-        motherShip.play(1.0f,2.0f);
-    }
-
-
-    /**
-     * Getter method for the name of the Player.
-     * @return the String value.
-     */
-    public String getPlayerName() {
-        return tPlayerName;
-    }
-
-    /**
-     * Setter method for the name of the Player.
-     * @param tPlayerName the desired String value
-     */
-    public void setPlayerName(String tPlayerName) {
-        this.tPlayerName = tPlayerName;
+    public PlayerController getPlayerController() {
+        return playerController;
     }
 
     public void setHasWon(boolean bool) {
@@ -386,17 +317,5 @@ public class Game {
 
     public void setLevel(Level level) {
         tLevel = level;
-    }
-
-    public void settMultiplayerGame(boolean bool) {
-        tMultiplayerGame = bool;
-    }
-
-    public void setPlayer(Player player) {
-        tPlayer = player;
-    }
-
-    public void setPlayer2(Player player) {
-        tPlayer2 = player;
     }
 }

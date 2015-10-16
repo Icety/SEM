@@ -1,5 +1,8 @@
 package application.core;
 
+import application.controllers.PlayerController;
+import org.w3c.dom.NodeList;
+import application.Main;
 import application.core.aliens.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -60,15 +63,46 @@ public class LevelFactory {
      * @param levelNumber the number belonging to the Level.
      * @return the built Level.
      */
-    public Level buildLevel(int levelNumber) {
-        Level level = new Level();
+    public Level buildLevel(int levelNumber, int players, PlayerController controller) {
+        Level level = new Level(players, controller);
 
-        Element levelXml = (Element) tLevels.item(levelNumber);
+        Element levelName = (Element) tLevels.item(levelNumber);
+        try {
+            File file = new File("src/main/java/application/" + levelName.getTextContent() + ".xml");
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = null;
+            dBuilder = dbFactory.newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            doc.getDocumentElement().normalize();
+            Element levelXml = doc.getDocumentElement();
 
-        ArrayList<Alien> aliens = loadAliens(levelXml);
-        level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
-        level.addAliens(aliens);
-        level.setStartPlayer();
+            //Set aliens
+            ArrayList<Alien> aliens = loadAliens(levelXml);
+            level.addAliens(aliens);
+            level.setStartPlayers();
+            //Set background music
+            if (levelXml.getElementsByTagName("background").getLength() != 0) {
+                level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
+            }
+
+            //Set Story
+            if (levelXml.getElementsByTagName("story").getLength() != 0) {
+                level.setStoryLine(levelXml.getElementsByTagName("story").item(0).getTextContent());
+            }
+
+            //Set Music
+            if (levelXml.getElementsByTagName("music").getLength() != 0) {
+                level.setMusic(levelXml.getElementsByTagName("music").item(0).getTextContent());
+            }
+
+            //Set Theme
+            if (levelXml.getElementsByTagName("theme").getLength() != 0) {
+                level.setTheme(levelXml.getElementsByTagName("theme").item(0).getTextContent());
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return level;
     }
@@ -100,6 +134,9 @@ public class LevelFactory {
                     break;
                 case "boss":
                     alien = new FinalBoss();
+                    break;
+                case "daphne":
+                    alien = new DaphnalienBoss();
                     break;
                 default: break;
             }

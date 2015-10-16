@@ -49,7 +49,9 @@ public class HighScoreForm extends BasicGameState {
      */
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
-        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
+
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+
 
         tTextField = new TextField(gameContainer, gameContainer.getDefaultFont(), 420, 400, 500, 80);
         tTextField.setBorderColor(Color.transparent);

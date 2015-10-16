@@ -43,7 +43,7 @@ public class HighScoreFormTest {
         testForm.highScoreManager = testManager;
         testForm.tTextField = mockedTextField;
         testForm.tMain = mockedGame;
-        testGame = new Game(0, 0, mockedLogger, false);
+        testGame = new Game(0, 0, mockedLogger, 1);
         testGame.setScore(0);
 
         when(mockedGame.getGame()).thenReturn(testGame);

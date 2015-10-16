@@ -45,7 +45,7 @@ public class MainTest {
     @Test
     public void testNewGame() throws Exception {
         testMain.tGame = null;
-        testMain.newGame(false);
+        testMain.newGame(1);
 
         assertNotNull(testMain.getGame());
     }
@@ -56,7 +56,7 @@ public class MainTest {
      */
     @Test
     public void testGetGame() throws Exception {
-        Game testGame = new Game(0, 0, testLogger, false);
+        Game testGame = new Game(0, 0, testLogger, 1);
         testMain.tGame = testGame;
 
         assertEquals(testGame, testMain.getGame());

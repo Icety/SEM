@@ -142,7 +142,6 @@ public class Player extends Sprite {
             y = tY;
             dirx = x - (tX + tWidth / 3);
             diry = tHeight / 2;
-            System.out.println(x +", "+ y +", "+ dirx / diry +", "+ -1);
             this.addProjectile(
                     new UpgradedProjectile(
                             x, y,

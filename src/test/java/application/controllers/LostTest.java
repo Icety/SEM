@@ -36,7 +36,7 @@ public class LostTest {
     @Before
     public void setUp() throws Exception {
         testLost = new Lost(1);
-        testGame = new Game(0, 0, mockedLogger, false);
+        testGame = new Game(0, 0, mockedLogger, 1);
         testLost.tMain = mockedGame;
 
         when(mockedGame.getGame()).thenReturn(testGame);

@@ -183,11 +183,13 @@ public class AlienTest {
      */
     @Test
     public void testSwitchDirection() throws Exception {
+        testAlien.setY(15);
+
         testAlien.setDirection(1);
 
         testAlien.switchDirection();
 
-        assertEquals(15, testAlien.getY());
+        assertEquals(30, testAlien.getY());
         assertEquals(-1, testAlien.getDirection());
     }
 

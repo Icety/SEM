@@ -32,6 +32,6 @@ public class BachelliProjectile extends ExtendedProjectile {
      * @return Image belonging to the BachelliProjectile.
      */
     public Image getImage() {
-        return Main.BACHELLI_PROJECTILE;
+        return Main.BOSS_PROJECTILE_SPECIAL;
     }
 }

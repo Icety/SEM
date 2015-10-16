@@ -40,8 +40,7 @@ public class StoryLineTest {
     public void setUp() throws Exception {
         testStoryLine = new StoryLine(1);
         testStoryLine.tMain = mockedGame;
-        testGame = new Game(0, 0, mockedLogger, false);
-        testGame.setPlayer(mockedPlayer);
+        testGame = new Game(0, 0, mockedLogger, 1);
 
         when(mockedPlayer.getY()).thenReturn(-151);
         when(mockedGame.getGame()).thenReturn(testGame);
