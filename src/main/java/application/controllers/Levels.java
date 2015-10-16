@@ -84,17 +84,28 @@ public class Levels extends BasicGameState {
             }
 
 
-            for(Player p : tPlayers) {
+            for(int z = 0; z < tPlayers.size(); z++) {
+                Player p = tPlayers.get(z);
                 int lives = p.getHealth();
+                int j = 250;
 
-                g.drawString("LIVES: ", container.getWidth() - 500, 50);
-                for (int i = 1; i <= lives; i++) {
-                    p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
+                for (int k = 0; k <= z; k++){
+                    int n = z+1;
+                    g.drawString("LIVES: ", container.getWidth() - ((k+1)*500), 50);
+
+                    for (int i = 1; i <= lives; i++) {
+                        p.getImage().draw(container.getWidth() - (k*500 + i * 110), 50, p.getWidth(), p.getHeight());
+                        j = j + 250;
+                    }
                 }
+
+
+
 
                 //Draw the player
                 p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
                 drawProjectiles(p.getProjectiles());
+
 
             }
 
