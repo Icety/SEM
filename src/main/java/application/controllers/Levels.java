@@ -3,14 +3,10 @@ package application.controllers;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
+import application.core.aliens.AnimatedBoss;
 import application.core.projectiles.Projectile;
 import application.core.upgrades.Upgrade;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -32,7 +28,9 @@ public class Levels extends BasicGameState {
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "background.jpg";
+    protected String tMusicString = "normalmusic.wav";
     protected boolean pause = false;
+    protected String tTheme;
 
     /**
      * Constructor method for this controller.
@@ -53,8 +51,7 @@ public class Levels extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
-
+        tBackground = new Image("src/main/java/application/images/"+ Main.imageTheme + "/"+ tBackgroundString);
     }
 
     /**
@@ -84,7 +81,11 @@ public class Levels extends BasicGameState {
             //Draw all aliens and its upgrades
             for (Alien alien : tMain.getGame().getLevel().getAliens()) {
                 if (!alien.isDead()) {
-                    (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    if (alien.isAnimated()) {
+                        (((AnimatedBoss) alien).getAnimation()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    } else {
+                        (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                    }
                 }
                 drawProjectiles(alien.getProjectiles());
                 drawUpgrades(alien.getUpgrades());
@@ -104,7 +105,7 @@ public class Levels extends BasicGameState {
                 }
 
                 // Draw Player 2
-                p2.getImage().draw(p2.getX(),p2.getY(), p2.getWidth(), p2.getHeight());
+                p2.getImage().draw(p2.getX(), p2.getY(), p2.getWidth(), p2.getHeight());
                 drawProjectiles(p2.getProjectiles());
             }
         } else {
@@ -131,12 +132,28 @@ public class Levels extends BasicGameState {
                 game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
             if (tMain.getGame().isNextLevel()) {
-                game.enterState(7);
+                game.enterState(20);
             }
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
-                tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
+                tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
             }
+            if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
+                //tMusicString = tMain.getGame().getLevel().getMusic();
+                tMain.tBackgroundmusic.stop();
+                tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMusicString);
+                tMain.tBackgroundmusic.loop();
+            }
+
+            //Change the theme if the new theme does not match the current theme.
+            if (!tMain.getGame().getLevel().getTheme().equals(tTheme)) {
+                tTheme = tMain.getGame().getLevel().getTheme();
+
+                //Method in main to change the images according to the theme
+                tMain.setAlienImages(tTheme);
+            }
+
+
         }
 
     }

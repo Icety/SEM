@@ -50,6 +50,8 @@ public class LevelBuilder extends BasicGameState {
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "moving.jpg";
+    protected String tMusic = "normalmusic.wav";
+    protected String tTheme = "classic";
     protected Alien selected = new Alien();
     protected int menuHeight;
     protected Circle circle;
@@ -80,10 +82,12 @@ public class LevelBuilder extends BasicGameState {
         tMain = (Main) game;
         circlex = Main.WIDTH / 2;
         circley =  Main.HEIGHT / 3;
-        circle = new Circle(circlex, circley, 70);
+        circle = new Circle(circlex, circley, 40);
         menuHeight = 150;
         selected = null;
-        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
+
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+
         saveGame = false;
         Font font = container.getDefaultFont();
         saveName = new TextField(container,
@@ -357,7 +361,18 @@ public class LevelBuilder extends BasicGameState {
 
             // background element
             Element background = doc.createElement("background");
+            background.appendChild(doc.createTextNode(tBackgroundString));
             rootElement.appendChild(background);
+
+            // music element
+            Element music = doc.createElement("music");
+            music.appendChild(doc.createTextNode(tMusic));
+            rootElement.appendChild(music);
+
+            // theme element
+            Element theme = doc.createElement("theme");
+            theme.appendChild(doc.createTextNode(tTheme));
+            rootElement.appendChild(theme);
 
             // aliens elements
             Element aliens = doc.createElement("aliens");
