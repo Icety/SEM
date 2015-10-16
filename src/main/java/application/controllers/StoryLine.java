@@ -3,11 +3,7 @@ package application.controllers;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -207,5 +203,15 @@ public class StoryLine extends BasicGameState {
                 + "planet was under attack, they would have to \n\n"
                 + "it became clear to the SEMmians that their \n\n"
                 + "After destroying the first layer of aliens";
+    }
+
+    public void keyPressed(int key, char c) {
+        switch (key) {
+            case Input.KEY_SPACE:
+                tSkip = true;
+                break;
+            default:
+                break;
+        }
     }
 }
