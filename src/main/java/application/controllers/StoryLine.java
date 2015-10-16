@@ -122,7 +122,6 @@ public class StoryLine extends BasicGameState {
                 p.moveUp((int) (tCount / 50) * 2);
             }
             if (p.getY() < -150) {
-                System.out.println(p.getY());
                 p.setX(250);
                 p.setY(Main.HEIGHT + 120);
                 tStart = false;

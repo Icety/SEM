@@ -298,7 +298,6 @@ public class LevelBuilder extends BasicGameState {
                 return a;
             }
         }
-        System.out.println("collision is null");
         return null;
     }
 
@@ -400,8 +399,6 @@ public class LevelBuilder extends BasicGameState {
             StreamResult result = new StreamResult(new File("src/main/java/application/" +  docname + ".xml"));
 
             transformer.transform(source, result);
-
-            System.out.println("File saved!");
 
         } catch (ParserConfigurationException pce) {
             pce.printStackTrace();
