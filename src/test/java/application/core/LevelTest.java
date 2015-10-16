@@ -44,6 +44,17 @@ public class LevelTest {
     }
 
     /**
+     * Test whether getStoryLine() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testGetStoryLine() throws Exception {
+        testLevel.tStoryLine = "Test";
+
+        assertEquals("Test", testLevel.getStoryLine());
+    }
+
+    /**
      * Test whether addAliens() works correctly.
      * @throws Exception possible Exception.
      */

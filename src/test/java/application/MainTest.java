@@ -61,4 +61,16 @@ public class MainTest {
 
         assertEquals(testGame, testMain.getGame());
     }
+
+    /**
+     * Test whether changeDifficulty() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testChangeDifficulty() throws Exception {
+        testMain.DIFFICULTY = 3;
+        testMain.changeDifficulty();
+
+        assertEquals(1, testMain.DIFFICULTY);
+    }
 }

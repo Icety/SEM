@@ -106,7 +106,9 @@ public class StoryLine extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        if (tMain.getGame().getLevel().getStoryLine().equals(null)) {
+        if (tMain.getGame().getLevel() != null &&
+                tMain.getGame().getLevel().getStoryLine() != null &&
+                tMain.getGame().getLevel().getStoryLine().equals("")) {
             tSkip = true;
         }
         tCount++;

@@ -20,7 +20,7 @@ import org.newdawn.slick.SlickException;
         "checkstyle:linelength"
 })
 public class Game {
-    private Main tMain;
+    protected Main tMain;
     protected int tScore;
     protected LevelFactory levelFactory;
     protected PlayerController playerController;
