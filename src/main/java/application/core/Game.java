@@ -3,7 +3,6 @@ package application.core;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.aliens.MothershipAlien;
@@ -22,6 +21,8 @@ import org.newdawn.slick.Sound;
         "checkstyle:linelength"
 })
 public class Game {
+    private Main tMain;
+
     protected int tScore;
     protected LevelFactory levelFactory;
     protected HighScoreManager highScoreManager;
@@ -272,7 +273,7 @@ public class Game {
                     tLogger.setLog("Player has been hit.", 2);
                     projectile.hit();
                     p.hit();
-                    playerDeathSound();
+                    tMain.tPlayerDeathSound.play();
                     if (p.noLives()) {
                         tLogger.setLog("Player has lost.", 2);
                         tLost = true;
@@ -328,41 +329,14 @@ public class Game {
                 if (wasHit && alien.isDead()) {
                     tLogger.setLog("Alien has died.", 2);
                     if (alien instanceof MothershipAlien) {
-                        motherShipKilled();
+                        tMain.tMotherShipKilledSound.play();
                     } else {
-                        invaderKilledSound();
+                        tMain.tInvaderKilledSound.play();
                     }
 
                 }
             }
         }
-    }
-
-    /**
-     * The sound belonging to the shots fired.
-     * @throws SlickException possible Exception.
-     */
-    public void playerDeathSound() throws SlickException {
-        Sound death = new Sound("src/main/java/application/sound/explosion.wav");
-        death.play();
-    }
-
-    /**
-     * The sound belonging to the death of an alien
-     * @throws SlickException
-     */
-    public void invaderKilledSound() throws SlickException {
-        Sound invaderKilled = new Sound("src/main/java/application/sound/invaderkilled.wav");
-        invaderKilled.play();
-    }
-
-    /**
-     * The sound belonging to the death of an alien
-     * @throws SlickException
-     */
-    public void motherShipKilled() throws SlickException {
-        Sound motherShip = new Sound("src/main/java/application/sound/mothership.wav");
-        motherShip.play(1.0f,2.0f);
     }
 
 
