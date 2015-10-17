@@ -32,6 +32,8 @@ public class Levels extends BasicGameState {
     protected boolean pause = false;
     protected ArrayList<Player> tPlayers;
     protected String tTheme;
+    protected long tTimer;
+    protected int tCount;
 
     /**
      * Constructor method for this controller.
@@ -52,6 +54,8 @@ public class Levels extends BasicGameState {
             throws SlickException {
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tTimer = container.getTime();
+        tCount = 0;
     }
 
     /**
@@ -67,10 +71,20 @@ public class Levels extends BasicGameState {
         container.setPaused(pause);
         tPlayers = tMain.getGame().getPlayerController().getPlayers();
         if (!pause) {
+            tCount++;
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+            if (tCount < 100) {
+                g.drawString("+" + (4-tMain.DIFFICULTY)*tMain.getGame().getLevel().getTime() + " seconds!", container.getWidth()/2, container.getHeight()/2);
+            }
+            g.resetLineWidth();
             g.setColor(Color.white);
             //Display Score in top left.
-            g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+            g.drawString(("SCORE"), 140, 50);
+            g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
+
+            //Display Time
+            g.drawString("TIME LEFT", 240, 50);
+            g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
 
             //Draw all aliens and its upgrades
             for (Alien alien: tMain.getGame().getLevel().getAliens()) {

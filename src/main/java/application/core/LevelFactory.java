@@ -100,6 +100,12 @@ public class LevelFactory {
                 level.setTheme(levelXml.getElementsByTagName("theme").item(0).getTextContent());
             }
 
+            //Set level time
+            if (levelXml.getElementsByTagName("time").getLength() != 0) {
+                level.setTime(Integer.parseInt(levelXml.getElementsByTagName("time").item(0).getTextContent()));
+                System.out.println(levelXml.getElementsByTagName("time").item(0).getTextContent());
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

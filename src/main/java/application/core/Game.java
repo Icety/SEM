@@ -1,6 +1,8 @@
 package application.core;
 
+import java.time.Clock;
 import java.util.Iterator;
+import java.util.Timer;
 
 import application.Main;
 import application.controllers.PlayerController;
@@ -35,7 +37,8 @@ public class Game {
     protected boolean tNextLevel = false;
     protected int tPlayers;
     protected Logger tLogger;
-    protected String tPlayerName;
+    protected int tTime;
+    protected long tTimer;
 
     /**
      * Constructor for Game.
@@ -53,7 +56,20 @@ public class Game {
         tPlayers = players;
         tPaused = false;
         tLogger = logger;
+        tTime = 0;
+        tTimer = System.currentTimeMillis();
+    }
 
+    /**
+     *
+     * @return
+     */
+    public int getTime() {
+        return tTime;
+    }
+
+    public void addTime(int tTime) {
+        this.tTime += tTime;
     }
 
     /**
@@ -79,6 +95,7 @@ public class Game {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
+        this.addTime((4-tMain.DIFFICULTY)*tLevel.getTime());
         levelNumber++;
     }
 
@@ -112,6 +129,7 @@ public class Game {
      * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
+        this.timerUpdate();
         playerController.update();
         this.alienUpdate();
         this.checkCollision();
@@ -207,6 +225,17 @@ public class Game {
 
                 alien.setLowerLevel(tLevel.getAliens());
             }
+        }
+    }
+
+    protected void timerUpdate() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - tTimer >= 1000) {
+            tTimer = currentTime;
+            tTime--;
+        }
+        if (tTime == 0) {
+            tLost = true;
         }
     }
 

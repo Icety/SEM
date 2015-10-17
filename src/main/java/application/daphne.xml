@@ -3,6 +3,7 @@
 <background>moving.jpg</background>
 <music>normalmusic.wav</music>
 <theme>daphne</theme>
+    <time>7</time>
 <aliens>
 <alien>
 <x>645</x>

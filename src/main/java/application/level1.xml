@@ -6,6 +6,7 @@
         backgroundmusic.wav
     </music>
     <theme>classic</theme>
+    <time>30</time>
     <aliens>
         <!-- TOP ROW -->
         <alien>

@@ -53,7 +53,6 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
@@ -84,13 +83,18 @@ public class StoryLine extends BasicGameState {
         g.setColor(Color.white);
 
         //Display Score in top left.
-        g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+        g.drawString(("SCORE"), 140, 50);
+        g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
 
         //Display Lives in top right.
         g.drawString("LIVES: ", container.getWidth() - 500, 50);
         for (int i = 1; i <= lives; i++) {
             p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
         }
+
+        //Display Time
+        g.drawString("TIME LEFT", 240, 50);
+        g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
 
         //Draw the player
         p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());

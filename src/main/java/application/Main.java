@@ -80,6 +80,7 @@ public class Main extends StateBasedGame {
 
     protected Image tBackground;
     protected boolean tTransition;
+    protected int tStartTime = 80;
 
     /**
      * Constructor for Main.
@@ -167,7 +168,6 @@ public class Main extends StateBasedGame {
     public void newGame(int numPlayers){
         tGame = new Game(WIDTH, HEIGHT, tLogger, numPlayers);
         tGame.nextLevel();
-
     }
 
     /**
