@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.Main;
+import application.core.HighScoreManager;
 import application.core.Score;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 })
 public class HighScoreBoard extends BasicGameState {
     protected Main tMain;
+    protected HighScoreManager tHighScoreManager;
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "moving.jpg";
@@ -65,7 +67,14 @@ public class HighScoreBoard extends BasicGameState {
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
             graphics.drawString("Press Enter to return to menu", 550, 150);
 
-            ArrayList<Score> list = tMain.getGame().getHighScoreManager().getScores();
+
+            if(tMain.getGame() == null) {
+                tHighScoreManager = new HighScoreManager();
+            } else {
+                tHighScoreManager = tMain.getGame().getHighScoreManager();
+            }
+
+            ArrayList<Score> list = tHighScoreManager.getScores();
             int x = 400;
             int y = 300;
             int j = 1;
