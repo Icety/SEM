@@ -32,6 +32,7 @@ public class HighScoreManager {
 
     /**
      * Load scores from files, sort in descending order and return.
+     *
      * @return ArrayList of scores currently saved in file.
      */
     public ArrayList<Score> getScores() {
@@ -51,8 +52,9 @@ public class HighScoreManager {
 
     /**
      * Add new score to list.
+     *
      * @param newPlayer name of player the score belongs to.
-     * @param newScore score.
+     * @param newScore  score.
      */
     public void addScores(String newPlayer, int newScore) {
         loadScoreFile();
@@ -102,5 +104,6 @@ public class HighScoreManager {
                 e.printStackTrace();
             }
         }
+
     }
 }
