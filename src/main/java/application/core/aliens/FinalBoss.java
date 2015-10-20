@@ -19,6 +19,7 @@ public class FinalBoss extends Alien {
     protected int tChargeHeight;
     protected int tNormalHeight;
     protected boolean tChargeUp;
+    protected boolean tCharging = false;
 
     /**
      * Constructor method for FinalBoss.
@@ -76,11 +77,11 @@ public class FinalBoss extends Alien {
      */
     protected void handleSpecial() {
         if (tSecondShot == 151) {
-            this.changeImageY(false);
+            this.changeImageY();
         }
         if (tSecondShot > 250) {
             tSecondShot = 0;
-            this.changeImageY(true);
+            this.changeImageY();
             int x, y;
             float dirx, diry;
             for (int i=0; i<10; i++) {
@@ -140,17 +141,20 @@ public class FinalBoss extends Alien {
         this.tSecondShot = tSecondShot;
     }
 
-    protected void changeImageY(boolean charge) {
-        if (charge) {
+    protected void changeImageY() {
+        if (!tCharging) {
             if (tChargeUp) {
-                tY += tChargeHeight - tHeight;
-            }
-            tHeight = tNormalHeight;
-        } else {
-            if (tChargeUp) {
-                tY -= tChargeHeight - tHeight;
+                System.out.println("Charge"+ tY+ "--"+ (tChargeHeight - tNormalHeight));
+                tY -= (tChargeHeight - tNormalHeight);
             }
             tHeight = tChargeHeight;
+        } else {
+            if (tChargeUp) {
+                System.out.println("Uncharge"+ tY+ "--"+ (tChargeHeight - tNormalHeight));
+                tY += (tChargeHeight - tNormalHeight);
+            }
+            tHeight = tNormalHeight;
         }
+        tCharging = !tCharging;
     }
 }
