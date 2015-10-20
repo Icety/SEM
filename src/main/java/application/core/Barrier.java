@@ -1,13 +1,20 @@
-package application;
+package application.core;
 
-import application.core.Sprite;
+import application.Main;
 import org.newdawn.slick.Image;
 
 /**
- * Created by Ties on 13-10-2015.
+ * Class for Barrier.
+ * @author Ties Westerborg.
  */
-public class Barier extends Sprite {
-    public Barier(int x, int y) {
+public class Barrier extends Sprite {
+
+    /**
+     * Constructor method for Barrier.
+     * @param x x-coordinate of the barrier.
+     * @param y y-coordinate of the barrier.
+     */
+    public Barrier(int x, int y) {
         tX = x;
         tY = y;
         tWidth = 70;
@@ -15,6 +22,10 @@ public class Barier extends Sprite {
         tHealth = 8;
     }
 
+    /**
+     * Getter method for the Image of the Barrier.
+     * @return the Image.
+     */
     public Image getImage() {
         switch (tHealth) {
             case 8: return Main.Barier_1;
@@ -29,6 +40,10 @@ public class Barier extends Sprite {
         }
     }
 
+    /**
+     * Handler method for hit.
+     * @return the amount of health the Barrier has.
+     */
     public int hit() {
         tHealth--;
         return tHealth;
