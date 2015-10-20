@@ -24,6 +24,7 @@ public class Alien extends Sprite {
     protected double tSpeed;
     protected boolean tCanShoot = false;
     protected boolean tBonusAlien = false;
+    protected boolean tAnimate = false;
     protected ArrayList<Upgrade> tUpgrades = new ArrayList<>();
 
     /**
@@ -121,16 +122,15 @@ public class Alien extends Sprite {
      * @return a boolean value.
      */
     public boolean endOfScreen() {
-        return (getX() >= (Main.WIDTH - getWidth() - 10)
+        return (tX >= (Main.WIDTH - tWidth - 10)
                 && tDirection == 1)
-                || (getX() <= 10 && tDirection == -1);
+                || (tX <= 10 && tDirection == -1);
     }
 
     /**
      * Method to make the Alien switch direction.
      */
     public void switchDirection() {
-        setY(getY() + 15);
         tDirection *= -1;
     }
 
@@ -304,5 +304,13 @@ public class Alien extends Sprite {
      */
     public void setUpgrades(ArrayList<Upgrade> tUpgrades) {
         this.tUpgrades = tUpgrades;
+    }
+
+    /**
+     * Return whether the alien is an animated sprite
+     * @return Whether the alien is animated
+     */
+    public boolean isAnimated() {
+        return tAnimate;
     }
 }
