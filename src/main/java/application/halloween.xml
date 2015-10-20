@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+<background>halloween.jpg</background>
+<music>halloween.wav</music>
+<theme>halloween</theme>
+<aliens>
+<alien>
+<x>77</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>181</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>285</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>389</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>493</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>597</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>701</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>805</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1013</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1117</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>1221</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>913</x>
+<y>221</y>
+<type>big</type>
+</alien>
+<alien>
+<x>181</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>285</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>393</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>497</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>601</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>705</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>809</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>913</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>1017</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>1121</x>
+<y>333</y>
+<type>mini</type>
+</alien>
+<alien>
+<x>43</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+<alien>
+<x>631</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+<alien>
+<x>1307</x>
+<y>465</y>
+<type>mother</type>
+</alien>
+    <alien>
+        <x>77</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>181</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>285</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>389</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>493</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>597</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>701</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>805</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1013</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1117</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>1260</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+    <alien>
+        <x>913</x>
+        <y>560</y>
+        <type>big</type>
+    </alien>
+</aliens>
+    <story> &#xA;
+        Do you think we are in danger, young SEMian? &#xA;
+        “Many hate, so attack, much soon, wow”. &#xA;
+        There was one weird top comment though, it read: &#xA;
+        because you have shown to be truly one of a kind. &#xA;
+        They are loving you! And they have all the right for that,&#xA;
+        “The defender of our galaxy”. That must be you, young fighter. &#xA;
+        You know, last time I checked reddit, there was a megathread about &#xA;
+        Good to have you with us, brave SEMian. &#xA;
+        Man, I thought you atleast knock the door before Trick or Shoot-ing.&#xA;
+    </story>
+</level>
