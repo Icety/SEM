@@ -1,10 +1,8 @@
 package application.core.projectiles;
 
-import application.Main;
-
 /**
- * Class for projectile.
- * @author Niek van der Laan
+ * Class for ExtendedProjectile.
+ * @author Niek van der Laan.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",

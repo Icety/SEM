@@ -1,7 +1,7 @@
 package application.core;
 
+import application.controllers.PlayerController;
 import application.core.aliens.Alien;
-
 import java.util.ArrayList;
 
 /**
@@ -13,8 +13,35 @@ import java.util.ArrayList;
 })
 public class Level {
     protected ArrayList<Alien> tAliens;
-    protected Player tPlayer;
+    protected ArrayList<Player> tPlayers;
+    protected int tNumOfPlayers;
     protected String tBackground;
+    protected PlayerController playerController;
+
+    public Level (int numOfPlayers, PlayerController controller){
+        tNumOfPlayers = numOfPlayers;
+        playerController = controller;
+    }
+    protected String tMusic;
+    protected String tTheme;
+
+    public String getTheme() {
+        return tTheme;
+    }
+
+    public void setTheme(String tTheme) {
+        this.tTheme = tTheme;
+    }
+
+    public String getStoryLine() {
+        return tStoryLine;
+    }
+
+    public void setStoryLine(String tStoryLine) {
+        this.tStoryLine = tStoryLine;
+    }
+
+    protected String tStoryLine;
 
     /**
      * Getter method for the Aliens in the Level.
@@ -35,8 +62,8 @@ public class Level {
     /**
      * Setter method for the Player of the Level.
      */
-    public void setStartPlayer() {
-        tPlayer = new Player();
+    public void setStartPlayers() {
+        playerController.setPlayers(tNumOfPlayers);
     }
 
     /**
@@ -81,11 +108,23 @@ public class Level {
      */
     public boolean hasWon() {
         boolean result = true;
-        for (Alien alien: tAliens) {
+        for (Alien alien : tAliens) {
             if (!alien.isDead() && !alien.isBonusAlien()) {
                 result = false;
             }
         }
         return result;
+    }
+
+    public void settAliens(ArrayList<Alien> list) {
+        tAliens = list;
+    }
+
+    public String getMusic() {
+        return tMusic;
+    }
+
+    public void setMusic(String music) {
+        this.tMusic = music.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
 }

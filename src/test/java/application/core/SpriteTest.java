@@ -14,7 +14,7 @@ import static org.junit.Assert.assertFalse;
 
 /**
  * Test class for Sprite.java.
- * @author Arthur Breurkes
+ * @author Arthur Breurkes.
  */
 @SuppressWarnings({
         "checkstyle:magicnumber"
@@ -125,10 +125,10 @@ public class SpriteTest {
      * @throws Exception possible Exception.
      */
     @Test
-    public void testGetProjectiles() throws Exception {
+    public void testSetAndGetProjectiles() throws Exception {
         ArrayList<Projectile> testProjectiles = new ArrayList<>();
         testProjectiles.add(testProjectile);
-        testSprite.addProjectile(testProjectile);
+        testSprite.setProjectiles(testProjectiles);
 
         assertEquals(testProjectiles, testSprite.getProjectiles());
     }
@@ -218,5 +218,38 @@ public class SpriteTest {
 
         assertTrue(testSprite.intersects(testSprite));
         assertFalse(testSprite.intersects(intersectSprite));
+    }
+
+    /**
+     * Test whether setDifficulty() and getDifficulty() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSetAndGetDifficulty() throws Exception {
+        testSprite.setDifficulty(1);
+
+        assertEquals(1, testSprite.getDifficulty());
+    }
+
+    /**
+     * Test whether setKillScore() and getKillScore() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSetAndGetKillScore() throws Exception {
+        testSprite.setKillScore(1);
+
+        assertEquals(1, testSprite.getKillScore());
+    }
+
+    /**
+     * Test whether setHitScore() and getHitScore() work correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testSetAndGetHitScore() throws Exception {
+        testSprite.setHitScore(1);
+
+        assertEquals(1, testSprite.getHitScore());
     }
 }

@@ -3,12 +3,7 @@ package application.controllers;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.Input;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -35,6 +30,7 @@ public class StoryLine extends BasicGameState {
     protected String tBackgroundString = "moving.jpg";
     protected boolean tDone = false;
     protected boolean tStart = true;
+    protected boolean tSkip = false;
     protected int tCount = 0;
     protected int tTextHeight = -300;
 
@@ -57,8 +53,8 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/" + tBackgroundString);
 
+        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
     /**
@@ -72,7 +68,7 @@ public class StoryLine extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
 
-        Player p = tMain.getGame().getPlayer();
+        Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
         int lives = p.getHealth();
 
         if (tStart) {
@@ -81,7 +77,7 @@ public class StoryLine extends BasicGameState {
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
             if (tDone) {
-                g.drawString(this.getStory(), Main.WIDTH - 600, tTextHeight);
+                g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
             }
         }
 
@@ -98,7 +94,6 @@ public class StoryLine extends BasicGameState {
 
         //Draw the player
         p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-
     }
 
     /**
@@ -111,26 +106,31 @@ public class StoryLine extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
+        if (tMain.getGame().getLevel() != null &&
+                tMain.getGame().getLevel().getStoryLine() != null &&
+                tMain.getGame().getLevel().getStoryLine().equals("")) {
+            tSkip = true;
+        }
         tCount++;
-        Player p = tMain.getGame().getPlayer();
+        Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/" + tMain.getGame().getLevel().getBackground());
+                tBackground2 = new Image("src/main/java/application/images/backgrounds/"+ tMain.getGame().getLevel().getBackground());
             }
             if (tCount % 2 == 0) {
                 p.moveUp((int) (tCount / 50) * 2);
             }
             if (p.getY() < -150) {
-                System.out.println(p.getY());
                 p.setX(250);
                 p.setY(Main.HEIGHT + 120);
                 tStart = false;
                 tCount = 0;
-                game.enterState(7, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+
+                game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
-            if (!tDone) {
+            if (!tDone && !tSkip) {
                 if (tCount % 2 == 0) {
                     p.moveUp(Math.max(2, 10 - (int) (tCount / 25)));
                 }
@@ -143,7 +143,7 @@ public class StoryLine extends BasicGameState {
                 if (tCount % 2 == 0) {
                     tTextHeight++;
                 }
-                if (tTextHeight > Main.HEIGHT / 2) {
+                if (tTextHeight > Main.HEIGHT / 2 || tSkip) {
                     if (tCount > 500) {
                         tCount = 0;
                     }
@@ -186,6 +186,7 @@ public class StoryLine extends BasicGameState {
     protected void resetValues() {
         tCount = 0;
         tDone = false;
+        tSkip = false;
         tTextHeight = -300;
     }
 
@@ -205,37 +206,10 @@ public class StoryLine extends BasicGameState {
                 + "After destroying the first layer of aliens";
     }
 
-    /**
-     * Method to check whether a key is pressed.
-     * @param key integer value for the key.
-     * @param c character value for the key.
-     */
     public void keyPressed(int key, char c) {
         switch (key) {
             case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(true);
-                //TODO
-                break;
-            default:
-                break;
-        }
-    }
-
-    /**
-     * Method to check whether a key is released.
-     * @param key integer value for the key.
-     * @param c character value for the key.
-     */
-    public void keyReleased(int key, char c) {
-        switch (key) {
-            case Input.KEY_LEFT:
-                tMain.getGame().getPlayer().leftArrowPressed(false);
-                break;
-            case Input.KEY_RIGHT:
-                tMain.getGame().getPlayer().rightArrowPressed(false);
-                break;
-            case Input.KEY_SPACE:
-                tMain.getGame().getPlayer().fireButtonPressed(false);
+                tSkip = true;
                 break;
             default:
                 break;
