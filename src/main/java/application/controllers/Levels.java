@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.Barier;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
@@ -71,6 +72,10 @@ public class Levels extends BasicGameState {
             g.setColor(Color.white);
             //Display Score in top left.
             g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+
+            for(Barier b : tMain.getGame().getLevel().getBariers()) {
+                b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
+            }
 
             //Draw all aliens and its upgrades
             for (Alien alien: tMain.getGame().getLevel().getAliens()) {
