@@ -219,11 +219,11 @@ public class Game {
         for (Alien alien : tLevel.getAliens()) {
             Iterator<Projectile> it = alien.getProjectiles().iterator();
             checkAlienCollisions(it);
-            checkPlayerUpgradeCollisions(alien.getUpgrades().iterator());
+            checkPlayerUpgradeCollisions(alien.getIterator());
             checkDeadAlien(alien, it);
         }
-           Iterator<Barier> bit = tLevel.getBariers().iterator();
-            checkBarierCollisions(bit);
+        Iterator<Barier> bit = tLevel.getBariers().iterator();
+        checkBarierCollisions(bit);
     }
 
     private void checkBarierCollisions(Iterator<Barier> bit) {
@@ -291,9 +291,9 @@ public class Game {
      * Checker method for collisions of players with upgrades.
      * @param uit Iterator over upgrades.
      */
-    public void checkPlayerUpgradeCollisions(Iterator<Upgrade> uit) {
+    public void checkPlayerUpgradeCollisions(application.Iterator uit) {
         while (uit.hasNext()) {
-            Upgrade u = uit.next();
+            Upgrade u = (Upgrade)uit.next();
             for(Player p : playerController.getPlayers()){
                 if (p.intersects(u)) {
                     p.upgrade(u);
