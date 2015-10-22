@@ -1,6 +1,5 @@
 package application.core;
 
-import application.Barier;
 import application.Main;
 import application.controllers.PlayerController;
 import application.core.aliens.Alien;
@@ -23,10 +22,10 @@ public class Level {
     public Level (int numOfPlayers, PlayerController controller){
         tNumOfPlayers = numOfPlayers;
         playerController = controller;
-        tBariers = new ArrayList<>();
-        tBariers.add(new Barier(200, 900));
-        tBariers.add(new Barier(Main.WIDTH/2-35, 900));
-        tBariers.add(new Barier(Main.WIDTH-200-70, 900));
+        tBarriers = new ArrayList<>();
+        tBarriers.add(new Barrier(200, 900));
+        tBarriers.add(new Barrier(Main.WIDTH/2-35, 900));
+        tBarriers.add(new Barrier(Main.WIDTH-200-70, 900));
     }
     protected String tMusic;
     protected String tTheme;
@@ -49,7 +48,7 @@ public class Level {
 
     protected String tStoryLine;
 
-    protected ArrayList<Barier> tBariers;
+    protected ArrayList<Barrier> tBarriers;
 
     /**
      * Getter method for the Aliens in the Level.
@@ -124,8 +123,8 @@ public class Level {
         return result;
     }
 
-    public ArrayList<Barier> getBariers() {
-        return tBariers;
+    public ArrayList<Barrier> getBariers() {
+        return tBarriers;
     }
     public void settAliens(ArrayList<Alien> list) {
         tAliens = list;
