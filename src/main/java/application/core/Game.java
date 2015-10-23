@@ -2,7 +2,6 @@ package application.core;
 
 import java.util.Iterator;
 
-import application.Barier;
 import application.Main;
 import application.controllers.PlayerController;
 import application.core.aliens.Alien;
@@ -222,13 +221,14 @@ public class Game {
             checkPlayerUpgradeCollisions(alien.getIterator());
             checkDeadAlien(alien, it);
         }
-        Iterator<Barier> bit = tLevel.getBariers().iterator();
+        Iterator<Barrier> bit = tLevel.getBariers().iterator();
         checkBarierCollisions(bit);
+
     }
 
-    private void checkBarierCollisions(Iterator<Barier> bit) {
+    private void checkBarierCollisions(Iterator<Barrier> bit) {
         while(bit.hasNext()) {
-            Barier b = bit.next();
+            Barrier b = bit.next();
             for(Player p : getPlayerController().getPlayers()) {
                 Iterator<Projectile> it = p.getProjectiles().iterator();
                 while (it.hasNext()) {
@@ -270,9 +270,9 @@ public class Game {
                     }
                 }
             }
-            Iterator<Barier> bit = tLevel.getBariers().iterator();
+            Iterator<Barrier> bit = tLevel.getBariers().iterator();
             while(bit.hasNext()) {
-                Barier b = bit.next();
+                Barrier b = bit.next();
                 if(projectile.intersects(b)){
                     b.hit();
                     projectile.hit();
