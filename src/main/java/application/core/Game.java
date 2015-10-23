@@ -1,6 +1,8 @@
 package application.core;
 
+import java.time.Clock;
 import java.util.Iterator;
+import java.util.Timer;
 
 import application.Main;
 import application.controllers.PlayerController;
@@ -35,7 +37,9 @@ public class Game {
     protected boolean tNextLevel = false;
     protected int tPlayers;
     protected Logger tLogger;
-    protected String tPlayerName;
+    protected int tTime;
+    protected long tTimer;
+    protected int tStartScore;
 
     /**
      * Constructor for Game.
@@ -53,7 +57,34 @@ public class Game {
         tPlayers = players;
         tPaused = false;
         tLogger = logger;
+        tTime = 0;
+        tTimer = System.currentTimeMillis();
+        tStartScore = 0;
+    }
 
+
+    /**
+     * Getter method for the score at the start of the current level.
+     * @return the value of the starting score.
+     */
+    public int getStartScore() {
+        return tStartScore;
+    }
+
+    /**
+     *  Getter method for the Game time.
+     * @return
+     */
+    public int getTime() {
+        return tTime;
+    }
+
+    /**
+     * Method to add time to the current Game time.
+     * @param tTime the value to be added to the time.
+     */
+    public void addTime(int tTime) {
+        this.tTime += tTime;
     }
 
     /**
@@ -79,6 +110,9 @@ public class Game {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
+        this.addTime((4 - tMain.DIFFICULTY) * tLevel.getTime());
+        tStartScore = tScore;
+        System.out.println("wtf");
         levelNumber++;
     }
 
@@ -112,6 +146,7 @@ public class Game {
      * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
+        this.timerUpdate();
         playerController.update();
         this.alienUpdate();
         this.checkCollision();
@@ -203,6 +238,17 @@ public class Game {
 
                 alien.setLowerLevel(tLevel.getAliens());
             }
+        }
+    }
+
+    protected void timerUpdate() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - tTimer >= 1000) {
+            tTimer = currentTime;
+            tTime--;
+        }
+        if (tTime == 0) {
+            tLost = true;
         }
     }
 

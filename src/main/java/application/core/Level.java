@@ -16,8 +16,11 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected ArrayList<Player> tPlayers;
     protected int tNumOfPlayers;
+    protected int tTime;
     protected String tBackground;
     protected PlayerController playerController;
+    protected String tMusic;
+    protected String tTheme;
 
     public Level (int numOfPlayers, PlayerController controller){
         tNumOfPlayers = numOfPlayers;
@@ -27,8 +30,22 @@ public class Level {
         tBarriers.add(new Barrier(Main.WIDTH/2-35, 900));
         tBarriers.add(new Barrier(Main.WIDTH-200-70, 900));
     }
-    protected String tMusic;
-    protected String tTheme;
+
+    /**
+     * Getter method for the Time for the level
+     * @return the integer value of time
+     */
+    public int getTime() {
+        return tTime;
+    }
+
+    /**
+     * Setter method for the Time for the level
+     * @param tTime
+     */
+    public void setTime(int tTime) {
+        this.tTime = tTime;
+    }
 
     public String getTheme() {
         return tTheme;

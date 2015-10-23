@@ -3,6 +3,7 @@
 <background>panda.jpg</background>
 <music>panda.wav</music>
 <theme>panda</theme>
+    <time>30</time>
 <aliens>
 <alien>
 <x>33</x>

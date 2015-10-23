@@ -31,9 +31,15 @@ public class StoryLine extends BasicGameState {
     protected boolean tDone = false;
     protected boolean tStart = true;
     protected boolean tSkip = false;
+    protected boolean tScoreUpdated = false;
     protected boolean tOverlay = false;
     protected int tCount = 0;
     protected int tTextHeight = -300;
+    protected int tTimeLeft;
+    protected int tDifficulty;
+    protected int tPointsEarned;
+    protected int tNewScore;
+
 
 
     /**
@@ -55,7 +61,6 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
     }
 
@@ -74,19 +79,23 @@ public class StoryLine extends BasicGameState {
                 Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
             int lives = p.getHealth();
 
-            if (tStart) {
-                tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
-            } else {
-                tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-                if (tDone) {
-                    g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
+        if (tStart) {
+            tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
+        }
+        else {
+            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+            if (tDone) {
+                g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
+                if (!tScoreUpdated) {
+                    showPoints(g, container);
                 }
             }
 
             g.setColor(Color.white);
 
-            //Display Score in top left.
-            g.drawString(("SCORE: " + Integer.toString(tMain.getGame().getScore())), 140, 50);
+        //Display Score in top left.
+        g.drawString(("SCORE"), 140, 50);
+        g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
 
             //Display Lives in top right.
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
@@ -94,9 +103,14 @@ public class StoryLine extends BasicGameState {
                 p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
             }
 
+        //Display Time
+        g.drawString("TIME LEFT", 240, 50);
+        g.drawString( Integer.toString(tTimeLeft), 250, 80);
+
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
+    }
     }
 
     /**
@@ -114,12 +128,24 @@ public class StoryLine extends BasicGameState {
                 tMain.getGame().getLevel().getStoryLine().equals("")) {
             tSkip = true;
         }
+
         tCount++;
         Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
+
+
+        //Calculate new values.
+        if (tCount == 1) {
+            tPointsEarned = tMain.getGame().getScore() - tMain.getGame().getStartScore();
+            System.out.println("Earned points this level: " + tPointsEarned);
+            tTimeLeft = tMain.getGame().getTime();
+            tNewScore  = tPointsEarned + tTimeLeft * 10 * tDifficulty;
+        }
+
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
                 tBackground2 = new Image("src/main/java/application/images/backgrounds/"+ tMain.getGame().getLevel().getBackground());
+                tDifficulty = tMain.DIFFICULTY;
                 Main.BACKGROUNDMUSIC.stop();
                 Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/storyline.wav");
                 Main.BACKGROUNDMUSIC.loop();
@@ -127,6 +153,7 @@ public class StoryLine extends BasicGameState {
             if (tCount % 2 == 0) {
                 p.moveUp((int) (tCount / 50) * 2);
             }
+
             if (p.getY() < -150) {
                 p.setX(250);
                 p.setY(Main.HEIGHT + 120);
@@ -203,6 +230,7 @@ public class StoryLine extends BasicGameState {
         tSkip = false;
         tStart = true;
         tTextHeight = -300;
+        tScoreUpdated = false;
     }
 
     /**
@@ -228,6 +256,51 @@ public class StoryLine extends BasicGameState {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void showPoints(Graphics g, GameContainer container) {
+        //Show total points earned in the past level
+        if (tCount == 1) {
+            tMain.getGame().setScore(-tPointsEarned + tNewScore);
+            tScoreUpdated = true;
+        }
+        if (10 < tCount) {
+            g.drawString("Points earned:", container.getWidth()/2 - 400, container.getHeight()/2);
+            g.drawString(Integer.toString(tPointsEarned), container.getWidth()/2 - 400, container.getHeight()/2 + 50);
+        }
+
+        //Draw +
+        if (60 < tCount) {
+            g.drawString("+", container.getWidth()/2 - 300, container.getHeight()/2 + 50);
+        }
+
+        //Show time bonus
+        if (110 < tCount) {
+            g.drawString("Time bonus:", container.getWidth()/2 - 200, container.getHeight()/2);
+            g.drawString(Integer.toString(tTimeLeft*10), container.getWidth()/2 - 200, container.getHeight()/2 + 50);
+        }
+
+        //Draw x
+        if (160 < tCount) {
+            g.drawString("x", container.getWidth()/2 - 100, container.getHeight()/2 + 50);
+        }
+
+        //Show time multiplier
+        if (210 < tCount) {
+            g.drawString("Difficulty multiplier:", container.getWidth() / 2, container.getHeight() / 2);
+            g.drawString(Integer.toString(tDifficulty),  container.getWidth()/2, container.getHeight()/2 + 50);
+        }
+
+        //Draw =
+        if (260 < tCount) {
+            g.drawString("=", container.getWidth()/2 + 200, container.getHeight()/2 + 50);
+        }
+
+        //Show total score
+        if (310 < tCount) {
+            g.drawString("Total:", container.getWidth()/2 + 400, container.getHeight()/2);
+            g.drawString(Integer.toString(tNewScore), container.getWidth()/2 + 400, container.getHeight()/2 + 50);
         }
     }
 }
