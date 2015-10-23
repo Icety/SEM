@@ -67,6 +67,7 @@ public class Main extends StateBasedGame {
     public static Animation DAPHNALIEN;
     public static String imageRoot;
     public static String imageTheme;
+    public static boolean sNewLevel;
 
     public static Image Barier_1;
     public static Image Barier_2;
@@ -82,7 +83,7 @@ public class Main extends StateBasedGame {
 
     protected Game tGame;
     protected Logger tLogger;
-    public static Music tBackgroundmusic;
+    public static Music BACKGROUNDMUSIC;
     public static Sound tPlayerDeathSound;
     public static Sound tInvaderKilledSound;
     public static Sound tMotherShipKilledSound;
@@ -128,8 +129,8 @@ public class Main extends StateBasedGame {
         tPlayerDeathSound = new Sound("src/main/java/application/sound/explosion.wav");
         tInvaderKilledSound = new Sound("src/main/java/application/sound/invaderkilled.wav");
         tMotherShipKilledSound = new Sound("src/main/java/application/sound/mothership.wav");
-        tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
-        tBackgroundmusic.loop();
+        BACKGROUNDMUSIC = new Music("src/main/java/application/sound/normal.wav");
+        BACKGROUNDMUSIC.loop();
 
         imageRoot = "src/main/java/application/images/";
         imageTheme = "classic";
@@ -202,15 +203,15 @@ public class Main extends StateBasedGame {
     }
 
     public void setAlienImages (String theme) throws SlickException {
-        MINI_ALIEN = new Image(imageRoot + imageTheme + "/miniAlien.png");
-        SMALL_ALIEN = new Image(imageRoot + imageTheme + "/smallAlien.png");
-        BIG_ALIEN = new Image(imageRoot + imageTheme + "/bigAlien.png");
-        MOTHERSHIP_ALIEN = new Image(imageRoot + imageTheme + "/mothership.png");
-        BOSS = new Image(imageRoot + imageTheme + "/boss.png");
-        BOSS_CHARGE = new Image(imageRoot + imageTheme + "/bossCharge.png");
-        BOSS_PROJECTILE_SPECIAL = new Image(imageRoot + imageTheme + "/bossWeaponSpecial.png");
-        BOSS_PROJECTILE = new Image(imageRoot + imageTheme + "/bossProjectile.png");
-        BOSS_BEAM_PROJECTILE = new Image(imageRoot + imageTheme + "/bossBeamProjectile.png");
+        MINI_ALIEN = new Image(imageRoot + theme + "/miniAlien.png");
+        SMALL_ALIEN = new Image(imageRoot + theme + "/smallAlien.png");
+        BIG_ALIEN = new Image(imageRoot + theme + "/bigAlien.png");
+        MOTHERSHIP_ALIEN = new Image(imageRoot + theme + "/mothership.png");
+        BOSS = new Image(imageRoot + theme + "/boss.png");
+        BOSS_CHARGE = new Image(imageRoot + theme + "/bossCharge.png");
+        BOSS_PROJECTILE_SPECIAL = new Image(imageRoot + theme + "/bossWeaponSpecial.png");
+        BOSS_PROJECTILE = new Image(imageRoot + theme + "/bossProjectile.png");
+        BOSS_BEAM_PROJECTILE = new Image(imageRoot + theme + "/bossBeamProjectile.png");
         PLAYER = new Image(imageRoot + "player.png");
         PLAYER_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         SMALL_PROJECTILE = new Image(imageRoot + "smallbullet.png");

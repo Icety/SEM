@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <level>
-<background>moving.jpg</background>
-<music>normalmusic.wav</music>
+<background>daphne.jpg</background>
+<music>daphne3.wav</music>
 <theme>daphne</theme>
 <aliens>
 <alien>
