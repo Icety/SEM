@@ -120,7 +120,9 @@ public class StoryLine extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        if (tMain.getGame().getLevel().getStoryLine().equals(null)) {
+        if (tMain.getGame().getLevel() != null &&
+                tMain.getGame().getLevel().getStoryLine() != null &&
+                tMain.getGame().getLevel().getStoryLine().equals("")) {
             tSkip = true;
         }
 
@@ -147,7 +149,6 @@ public class StoryLine extends BasicGameState {
             }
 
             if (p.getY() < -150) {
-                System.out.println(p.getY());
                 p.setX(250);
                 p.setY(Main.HEIGHT + 120);
                 tStart = false;

@@ -1,5 +1,6 @@
 package application.controllers;
 
+import application.core.Barrier;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
@@ -83,6 +84,10 @@ public class Levels extends BasicGameState {
             //Display Time
             g.drawString("TIME LEFT", 240, 50);
             g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
+
+            for(Barrier b : tMain.getGame().getLevel().getBariers()) {
+                b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
+            }
 
             //Draw all aliens and its upgrades
             for (Alien alien: tMain.getGame().getLevel().getAliens()) {
