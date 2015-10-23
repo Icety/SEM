@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+<background>moving.jpg</background>
+<music>normalmusic.wav</music>
+<theme>classic</theme>
+    <time>30</time>
+    <story>testtesttesttesttest</story>
+<aliens>
+<alien>
+<x>665</x>
+<y>357</y>
+<type>mini</type>
+</alien>
+    <alien>
+        <x>675</x>
+        <y>357</y>
+        <type>mini</type>
+    </alien>
+</aliens>
+</level>

@@ -32,7 +32,6 @@ public class Levels extends BasicGameState {
     protected boolean pause = false;
     protected ArrayList<Player> tPlayers;
     protected String tTheme;
-    protected long tTimer;
     protected int tCount;
 
     /**
@@ -54,7 +53,6 @@ public class Levels extends BasicGameState {
             throws SlickException {
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
-        tTimer = container.getTime();
         tCount = 0;
     }
 
@@ -143,6 +141,7 @@ public class Levels extends BasicGameState {
                 game.enterState(3, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
             if (tMain.getGame().isNextLevel()) {
+                tCount = 0;
                 game.enterState(20);
             }
             if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {

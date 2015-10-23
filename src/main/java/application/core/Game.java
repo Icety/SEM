@@ -39,6 +39,7 @@ public class Game {
     protected Logger tLogger;
     protected int tTime;
     protected long tTimer;
+    protected int tStartScore;
 
     /**
      * Constructor for Game.
@@ -58,16 +59,30 @@ public class Game {
         tLogger = logger;
         tTime = 0;
         tTimer = System.currentTimeMillis();
+        tStartScore = 0;
+    }
+
+
+    /**
+     * Getter method for the score at the start of the current level.
+     * @return the value of the starting score.
+     */
+    public int getStartScore() {
+        return tStartScore;
     }
 
     /**
-     *
+     *  Getter method for the Game time.
      * @return
      */
     public int getTime() {
         return tTime;
     }
 
+    /**
+     * Method to add time to the current Game time.
+     * @param tTime the value to be added to the time.
+     */
     public void addTime(int tTime) {
         this.tTime += tTime;
     }
@@ -95,7 +110,9 @@ public class Game {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
-        this.addTime((4-tMain.DIFFICULTY)*tLevel.getTime());
+        this.addTime((4 - tMain.DIFFICULTY) * tLevel.getTime());
+        tStartScore = tScore;
+        System.out.println("wtf");
         levelNumber++;
     }
 
