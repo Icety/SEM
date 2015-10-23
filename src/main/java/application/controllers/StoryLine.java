@@ -32,12 +32,14 @@ public class StoryLine extends BasicGameState {
     protected boolean tStart = true;
     protected boolean tSkip = false;
     protected boolean tScoreUpdated = false;
+    protected boolean tOverlay = false;
     protected int tCount = 0;
     protected int tTextHeight = -300;
     protected int tTimeLeft;
     protected int tDifficulty;
     protected int tPointsEarned;
     protected int tNewScore;
+
 
 
     /**
@@ -73,8 +75,9 @@ public class StoryLine extends BasicGameState {
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
 
-        Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
-        int lives = p.getHealth();
+        if (!tOverlay) {
+                Player p = tMain.getGame().getPlayerController().getPlayers().get(0);
+            int lives = p.getHealth();
 
         if (tStart) {
             tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
@@ -87,27 +90,27 @@ public class StoryLine extends BasicGameState {
                     showPoints(g, container);
                 }
             }
-        }
 
-        g.setColor(Color.white);
-
+            g.setColor(Color.white);
 
         //Display Score in top left.
         g.drawString(("SCORE"), 140, 50);
         g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
 
-        //Display Lives in top right.
-        g.drawString("LIVES: ", container.getWidth() - 500, 50);
-        for (int i = 1; i <= lives; i++) {
-            p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
-        }
+            //Display Lives in top right.
+            g.drawString("LIVES: ", container.getWidth() - 500, 50);
+            for (int i = 1; i <= lives; i++) {
+                p.getImage().draw(container.getWidth() - 500 + i * 110, 50, p.getWidth(), p.getHeight());
+            }
 
         //Display Time
         g.drawString("TIME LEFT", 240, 50);
         g.drawString( Integer.toString(tTimeLeft), 250, 80);
 
-        //Draw the player
-        p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+            //Draw the player
+            p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+        }
+    }
     }
 
     /**
@@ -143,6 +146,9 @@ public class StoryLine extends BasicGameState {
             if (tCount == 1) {
                 tBackground2 = new Image("src/main/java/application/images/backgrounds/"+ tMain.getGame().getLevel().getBackground());
                 tDifficulty = tMain.DIFFICULTY;
+                Main.BACKGROUNDMUSIC.stop();
+                Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/storyline.wav");
+                Main.BACKGROUNDMUSIC.loop();
             }
             if (tCount % 2 == 0) {
                 p.moveUp((int) (tCount / 50) * 2);
@@ -152,11 +158,13 @@ public class StoryLine extends BasicGameState {
                 p.setX(250);
                 p.setY(Main.HEIGHT + 120);
                 tStart = false;
+                tOverlay = true;
                 tCount = 0;
 
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
+            tOverlay = false;
             if (!tDone && !tSkip) {
                 if (tCount % 2 == 0) {
                     p.moveUp(Math.max(2, 10 - (int) (tCount / 25)));
@@ -182,6 +190,12 @@ public class StoryLine extends BasicGameState {
                         p.setY(Main.HEIGHT - p.getHeight() - 50);
                         this.resetValues();
                         tMain.getGame().nextLevel();
+
+                        String theme = tMain.getGame().getLevel().getTheme();
+                        //Method in main to change the images according to the theme
+                        tMain.setAlienImages(theme);
+
+                        Main.sNewLevel = true;
                         game.enterState(1, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
                     }
                 }
@@ -214,6 +228,7 @@ public class StoryLine extends BasicGameState {
         tCount = 0;
         tDone = false;
         tSkip = false;
+        tStart = true;
         tTextHeight = -300;
         tScoreUpdated = false;
     }

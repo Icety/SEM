@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <level>
-<background>moving.jpg</background>
-<music>normalmusic.wav</music>
+<background>panda.jpg</background>
+<music>panda.wav</music>
 <theme>panda</theme>
     <time>30</time>
 <aliens>

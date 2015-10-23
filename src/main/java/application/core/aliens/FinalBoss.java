@@ -144,13 +144,11 @@ public class FinalBoss extends Alien {
     protected void changeImageY() {
         if (!tCharging) {
             if (tChargeUp) {
-                System.out.println("Charge"+ tY+ "--"+ (tChargeHeight - tNormalHeight));
                 tY -= (tChargeHeight - tNormalHeight);
             }
             tHeight = tChargeHeight;
         } else {
             if (tChargeUp) {
-                System.out.println("Uncharge"+ tY+ "--"+ (tChargeHeight - tNormalHeight));
                 tY += (tChargeHeight - tNormalHeight);
             }
             tHeight = tNormalHeight;

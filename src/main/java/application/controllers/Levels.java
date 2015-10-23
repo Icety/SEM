@@ -28,9 +28,10 @@ public class Levels extends BasicGameState {
     protected Main tMain;
     protected int tId;
     protected Image tBackground;
-    protected String tBackgroundString = "background.jpg";
-    protected String tMusicString = "normalmusic.wav";
+    protected String tBackgroundString = "earth.jpg";
+    protected String tMusicString = "normal.wav";
     protected boolean pause = false;
+    protected boolean tOverlay = false;
     protected ArrayList<Player> tPlayers;
     protected String tTheme;
     protected int tCount;
@@ -67,63 +68,65 @@ public class Levels extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g)
             throws SlickException {
-        container.setPaused(pause);
-        tPlayers = tMain.getGame().getPlayerController().getPlayers();
-        if (!pause) {
-            tCount++;
-            tBackground.draw(0, 0, container.getWidth(), container.getHeight());
-            if (tCount < 100) {
-                g.drawString("+" + (4-tMain.DIFFICULTY)*tMain.getGame().getLevel().getTime() + " seconds!", container.getWidth()/2, container.getHeight()/2);
-            }
-            g.resetLineWidth();
-            g.setColor(Color.white);
-            //Display Score in top left.
-            g.drawString(("SCORE"), 140, 50);
-            g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
+        if (!Main.sNewLevel) {
+            container.setPaused(pause);
+            tPlayers = tMain.getGame().getPlayerController().getPlayers();
+            if (!pause) {
+                tCount++;
+                tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+                if (tCount < 100) {
+                    g.drawString("+" + (4-tMain.DIFFICULTY)*tMain.getGame().getLevel().getTime() + " seconds!", container.getWidth()/2, container.getHeight()/2);
+                }
+                g.resetLineWidth();
+                g.setColor(Color.white);
+                //Display Score in top left.
+                g.drawString(("SCORE"), 140, 50);
+                g.drawString(Integer.toString(tMain.getGame().getScore()), 150, 80);
 
-            //Display Time
-            g.drawString("TIME LEFT", 240, 50);
-            g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
+                //Display Time
+                g.drawString("TIME LEFT", 240, 50);
+                g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
 
-            for(Barrier b : tMain.getGame().getLevel().getBariers()) {
-                b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
-            }
+                for(Barrier b : tMain.getGame().getLevel().getBariers()) {
+                    b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
+                }
 
-            //Draw all aliens and its upgrades
-            for (Alien alien: tMain.getGame().getLevel().getAliens()) {
-                if (!alien.isDead()) {
-                    if (alien.isAnimated()) {
-                        (((AnimatedBoss) alien).getAnimation()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
-                    } else {
-                        (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                //Draw all aliens and its upgrades
+                for (Alien alien: tMain.getGame().getLevel().getAliens()) {
+                    if (!alien.isDead()) {
+                        if (alien.isAnimated()) {
+                            (((AnimatedBoss) alien).getAnimation()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                        } else {
+                            (alien.getImage()).draw(alien.getX(), alien.getY(), alien.getWidth(), alien.getHeight());
+                        }
+                    }
+                    drawProjectiles(alien.getProjectiles());
+                    drawUpgrades(alien.getUpgrades());
+                }
+
+
+                for (int z = 0; z < tPlayers.size(); z++) {
+                    Player p = tPlayers.get(z);
+                    int lives = p.getHealth();
+                    int j = 250;
+
+                    //Draw the player
+                    p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
+                    drawProjectiles(p.getProjectiles());
+
+                    for (int k = 0; k <= z; k++) {
+                        g.drawString("LIVES: ", container.getWidth() - ((k + 1) * 500), 50);
+
+                        for (int i = 1; i <= lives; i++) {
+                            p.getImage().draw(container.getWidth() - (k * 500 + i * 110), 50, p.getWidth(), p.getHeight());
+                            j = j + 250;
+                        }
                     }
                 }
-                drawProjectiles(alien.getProjectiles());
-                drawUpgrades(alien.getUpgrades());
+
+            } else {
+                g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
             }
-
-
-            for(int z = 0; z < tPlayers.size(); z++) {
-                Player p = tPlayers.get(z);
-                int lives = p.getHealth();
-                int j = 250;
-
-                //Draw the player
-                p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
-                drawProjectiles(p.getProjectiles());
-
-                for (int k = 0; k <= z; k++){
-                    g.drawString("LIVES: ", container.getWidth() - ((k+1)*500), 50);
-
-                    for (int i = 1; i <= lives; i++) {
-                        p.getImage().draw(container.getWidth() - (k*500 + i * 110), 50, p.getWidth(), p.getHeight());
-                        j = j + 250;
-                    }
-                }
-            }
-
-        } else {
-            g.drawString("PAUSED", container.getWidth() / 2, container.getHeight() / 2);
         }
     }
 
@@ -149,26 +152,16 @@ public class Levels extends BasicGameState {
                 tCount = 0;
                 game.enterState(20);
             }
-            if (!tMain.getGame().getLevel().getBackground().equals(tBackgroundString)) {
+            if (Main.sNewLevel) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
                 tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+
+                tMusicString = tMain.getGame().getLevel().getMusic();
+                Main.BACKGROUNDMUSIC.stop();
+                Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/" + tMusicString);
+                Main.BACKGROUNDMUSIC.loop();
+                Main.sNewLevel = false;
             }
-            if (!tMain.getGame().getLevel().getMusic().equals(tMusicString)) {
-                //tMusicString = tMain.getGame().getLevel().getMusic();
-                tMain.tBackgroundmusic.stop();
-                tMain.tBackgroundmusic = new Music("src/main/java/application/sound/" + tMusicString);
-                tMain.tBackgroundmusic.loop();
-            }
-
-            //Change the theme if the new theme does not match the current theme.
-            if (!tMain.getGame().getLevel().getTheme().equals(tTheme)) {
-                tTheme = tMain.getGame().getLevel().getTheme();
-
-                //Method in main to change the images according to the theme
-                tMain.setAlienImages(tTheme);
-            }
-
-
         }
 
     }

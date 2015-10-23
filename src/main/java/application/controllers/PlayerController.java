@@ -19,7 +19,7 @@ public class PlayerController {
      * @param numOfPlayers given Number of Players active in the game
      */
     public PlayerController(int numOfPlayers){
-       tPlayerCount = numOfPlayers;
+        tPlayerCount = numOfPlayers;
 
         setPlayers(tPlayerCount);
 
@@ -32,16 +32,16 @@ public class PlayerController {
      */
     public void setPlayers(int size) {
         tPlayers = new ArrayList<>();
-       for (int i = 1; i <= size; i++) {
-           tPlayers.add(i-1, new Player());
-           }
+        for (int i = 1; i <= size; i++) {
+            tPlayers.add(i-1, new Player());
+        }
         int j = 0;
         for (int k = 0; k <= size -1; k++) {
             Player p = tPlayers.get(k);
             p.setX(1400 / 4 + j);
             p.setY(1080 - (p.getHeight() + 50));
             j = j + 100;
-       }
+        }
     }
 
     /**
