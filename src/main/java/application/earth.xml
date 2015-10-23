@@ -2,6 +2,7 @@
     <background>background.jpg</background>
     <music>normal.wav</music>
     <theme>classic</theme>
+    <time>30</time>
     <aliens>
 
         <alien>
