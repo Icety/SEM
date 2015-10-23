@@ -217,6 +217,29 @@ public class Game {
             checkPlayerUpgradeCollisions(alien.getUpgrades().iterator());
             checkDeadAlien(alien, it);
         }
+           Iterator<Barrier> bit = tLevel.getBariers().iterator();
+            checkBarierCollisions(bit);
+    }
+
+    private void checkBarierCollisions(Iterator<Barrier> bit) {
+        while(bit.hasNext()) {
+            Barrier b = bit.next();
+            for(Player p : getPlayerController().getPlayers()) {
+                Iterator<Projectile> it = p.getProjectiles().iterator();
+                while (it.hasNext()) {
+                    Projectile projectile = it.next();
+                    if (b.intersects(projectile)) {
+                        b.hit();
+                        tLogger.setLog("Barrier has been hit", 2);
+                        projectile.hit();
+                        it.remove();
+                    }
+                }
+                if (b.noLives()) {
+                    bit.remove();
+                }
+            }
+        }
     }
 
     /**
@@ -239,6 +262,20 @@ public class Game {
                     }
                     if (projectile.noLives()) {
                         it.remove();
+                    }
+                }
+            }
+            Iterator<Barrier> bit = tLevel.getBariers().iterator();
+            while(bit.hasNext()) {
+                Barrier b = bit.next();
+                if(projectile.intersects(b)){
+                    b.hit();
+                    projectile.hit();
+                    if (projectile.noLives()) {
+                        it.remove();
+                    }
+                    if (b.noLives()) {
+                        bit.remove();
                     }
                 }
             }

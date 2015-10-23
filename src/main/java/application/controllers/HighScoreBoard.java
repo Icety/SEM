@@ -1,6 +1,7 @@
 package application.controllers;
 
 import application.Main;
+import application.core.HighScoreManager;
 import application.core.Score;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 })
 public class HighScoreBoard extends BasicGameState {
     protected Main tMain;
+    protected HighScoreManager tHighScoreManager;
     protected int tId;
     protected Image tBackground;
     protected String tBackgroundString = "moving.jpg";
@@ -65,7 +67,14 @@ public class HighScoreBoard extends BasicGameState {
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
             graphics.drawString("Press Enter to return to menu", 550, 150);
 
-            ArrayList<Score> list = tMain.getGame().getHighScoreManager().getScores();
+
+            if(tMain.getGame() == null) {
+                tHighScoreManager = new HighScoreManager();
+            } else {
+                tHighScoreManager = tMain.getGame().getHighScoreManager();
+            }
+
+            ArrayList<Score> list = tHighScoreManager.getScores();
             int x = 400;
             int y = 300;
             int j = 1;
@@ -81,8 +90,13 @@ public class HighScoreBoard extends BasicGameState {
 
     }
 
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for a key.
+     * @param c character value for a key.
+     */
     public void keyReleased(int key, char c) {
-        switch (key) {
+            switch (key) {
             default: break;
             case Input.KEY_ENTER:
                 tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
