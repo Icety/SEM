@@ -112,7 +112,6 @@ public class Game {
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         this.addTime((4 - tMain.DIFFICULTY) * tLevel.getTime());
         tStartScore = tScore;
-        System.out.println("wtf");
         levelNumber++;
     }
 

@@ -136,7 +136,6 @@ public class StoryLine extends BasicGameState {
         //Calculate new values.
         if (tCount == 1) {
             tPointsEarned = tMain.getGame().getScore() - tMain.getGame().getStartScore();
-            System.out.println("Earned points this level: " + tPointsEarned);
             tTimeLeft = tMain.getGame().getTime();
             tNewScore  = tPointsEarned + tTimeLeft * 10 * tDifficulty;
         }
