@@ -1,5 +1,7 @@
 package application.core.aliens;
 
+import application.Container;
+import application.Iterator;
 import application.Main;
 import application.core.*;
 import application.core.projectiles.SmallProjectile;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
         "checkstyle:visibilitymodifier"
 })
 
-public class Alien extends Sprite {
+public class Alien extends Sprite implements Container {
     protected boolean tDead = false;
     protected int tShootChance;
     protected int tDirection;
@@ -26,6 +28,38 @@ public class Alien extends Sprite {
     protected boolean tBonusAlien = false;
     protected boolean tAnimate = false;
     protected ArrayList<Upgrade> tUpgrades = new ArrayList<>();
+
+    /**
+     * Iterator for Upgrades in this class
+     * @return an Iterator
+     */
+    @Override
+    public Iterator getIterator() {
+        return new UpgradeIterator();
+    }
+
+    private class UpgradeIterator implements Iterator {
+
+        int index;
+
+        @Override
+        public boolean hasNext() {
+
+            if(index < tUpgrades.size()){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Object next() {
+
+            if(this.hasNext()){
+                return tUpgrades.get(index++);
+            }
+            return null;
+        }
+    }
 
     /**
      * Constructor for Alien.
