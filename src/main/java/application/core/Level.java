@@ -140,17 +140,34 @@ public class Level {
         return result;
     }
 
+    /**
+     * Getter method for all Barriers in this level.
+     * @return a list of Barriers.
+     */
     public ArrayList<Barrier> getBariers() {
         return tBarriers;
     }
+
+    /**
+     * Setter method to set all Aliens in this level.
+     * @param list the list of Aliens.
+     */
     public void settAliens(ArrayList<Alien> list) {
         tAliens = list;
     }
 
+    /**
+     * Getter method for the music that should be played in this level.
+     * @return the Music.
+     */
     public String getMusic() {
         return tMusic;
     }
 
+    /**
+     * Setter method fot the Music.
+     * @param music the String to set tMusic to.
+     */
     public void setMusic(String music) {
         this.tMusic = music.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }
