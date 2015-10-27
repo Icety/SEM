@@ -1,7 +1,5 @@
 package application.core.aliens;
 
-import application.Container;
-import application.Iterator;
 import application.Main;
 import application.core.*;
 import application.core.projectiles.SmallProjectile;

@@ -1,8 +1,6 @@
 package application.core;
 
-import java.time.Clock;
 import java.util.Iterator;
-import java.util.Timer;
 
 import application.Main;
 import application.controllers.PlayerController;
@@ -332,7 +330,7 @@ public class Game {
      * Checker method for collisions of players with upgrades.
      * @param uit Iterator over upgrades.
      */
-    public void checkPlayerUpgradeCollisions(application.Iterator uit) {
+    public void checkPlayerUpgradeCollisions(application.core.aliens.Iterator uit) {
         while (uit.hasNext()) {
             Upgrade u = (Upgrade)uit.next();
             for(Player p : playerController.getPlayers()){

@@ -1,7 +1,8 @@
-package application;
+package application.core.aliens;
+
 
 /**
- * Created by Ties on 20-10-2015.
+ * Interface for Interator Design Pattern.
  */
 public interface Iterator {
     boolean hasNext();
