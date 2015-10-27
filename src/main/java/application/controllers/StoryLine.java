@@ -81,6 +81,7 @@ public class StoryLine extends BasicGameState {
 
         if (tStart) {
             tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
+            p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
