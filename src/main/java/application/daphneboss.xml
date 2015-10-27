@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<level>
+<background>daphne.jpg</background>
+<music>daphne3.wav</music>
+<theme>daphne</theme>
+    <time>30</time>
+<aliens>
+<alien>
+<x>512</x>
+<y>333</y>
+<type>daphne</type>
+</alien>
+</aliens>
+    <story> &#xA;
+        I can sense them already.. Here we go! &#xA;
+        We must prepare for our next enemy. &#xA;
+        Anyway, there is no time to think about it now, young fighter. &#xA;
+        Maybe even dance to it! &#xA;
+        our people. Make them sing devilish songs? &#xA;
+        imagine what these scary bears would have done to  &#xA;
+        would have taken over our planet. I don’t want to  &#xA;
+        and their infernal queen Daphne, &#xA;
+        these creations of the devil, these Daphnaliens, &#xA;
+        Way to go, young SEMian! If it weren’t for you, </story>
+</level>
