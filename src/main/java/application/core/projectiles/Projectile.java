@@ -85,30 +85,58 @@ public class Projectile extends Sprite {
         return tRemoved;
     }
 
+    /**
+     * Getter method for the speed of the Projectile.
+     * @return speed.
+     */
     public int getSpeed() {
         return tSpeed;
     }
 
+    /**
+     * Setter method for the speed of the Projectile.
+     * @param tSpeed the speed of this Projectile.
+     */
     public void setSpeed(int tSpeed) {
         this.tSpeed = tSpeed;
     }
 
+    /**
+     * Getter method for the health of the Projectile.
+     * @return health of the Projectile.
+     */
     public int getHealth() {
         return tHealth;
     }
 
+    /**
+     * Setter method for the health of the Projectile.
+     * @param tHealth health to set to.
+     */
     public void setHealth(int tHealth) {
         this.tHealth = tHealth;
     }
 
+    /**
+     * Setter method for the x-coordinate of the Projectile.
+     * @param tX the coordinate to set te x-coordinate to.
+     */
     public void setX(float tX) {
         this.tX = tX;
     }
 
+    /**
+     * Setter method for the y-coordinate of the Projectile.
+     * @param tY the coordinate to set te y-coordinate to.
+     */
     public void setY(float tY) {
         this.tY = tY;
     }
 
+    /**
+     * Getter method for the direction of the Projectile.
+     * @return the direction
+     */
     public float getDirectionY() {
         return tDirectionY;
     }
