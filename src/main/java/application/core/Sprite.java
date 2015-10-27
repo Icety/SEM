@@ -154,62 +154,120 @@ public class Sprite {
         return getBoundingBox() != null && getBoundingBox().intersects(sprite.getBoundingBox());
     }
 
+    /**
+     * Getter method for the Sprites Health
+     * @return
+     */
     public int getHealth() {
         return tHealth;
     }
 
+    /**
+     * Getter method for the random chance
+     * @return random chance
+     */
     public double getRandomChance() {
         return tRandomChance;
     }
 
+    /**
+     * Getter method for the difficulty
+     * @return difficulty
+     */
     public int getDifficulty() {
         return tDifficulty;
     }
 
+    /**
+     * Getter method for the points earned when killed
+     * @return points earned when killed
+     */
     public int getKillScore() {
         return tKillScore;
     }
 
+    /**
+     * Getter method for the points earned when hit
+     * @return  points earned when hit
+     */
     public int getHitScore() {
         return tHitScore;
     }
 
+    /**
+     * Setter method for the Health of this Sprite
+     * @param tHealth
+     */
     public void setHealth(int tHealth) {
         this.tHealth = tHealth;
     }
 
+    /**
+     * Setter method for the random chance of this Sprite
+     * @param tRandomChance
+     */
     public void setRandomChance(double tRandomChance) {
         this.tRandomChance = tRandomChance;
     }
 
+    /**
+     * Setter method for the width of this Sprite
+     * @param tWidth
+     */
     public void setWidth(int tWidth) {
         this.tWidth = tWidth;
     }
 
+    /**
+     * Setter method for the height of this Sprite
+     * @param tHeight
+     */
     public void setHeight(int tHeight) {
         this.tHeight = tHeight;
     }
 
+    /**
+     * Setter method for the points earned when killed
+     * @param tKillScore
+     */
     public void setKillScore(int tKillScore) {
         this.tKillScore = tKillScore;
     }
 
+    /**
+     * Setter method for the points earned when hit
+     * @param tHitScore
+     */
     public void setHitScore(int tHitScore) {
         this.tHitScore = tHitScore;
     }
 
+    /**
+     * Setter method for the projectiles of this alien
+     * @param tProjectiles
+     */
     public void setProjectiles(ArrayList<Projectile> tProjectiles) {
         this.tProjectiles = tProjectiles;
     }
 
+    /**
+     * Method to decrease the Health of this Sprite by 1.
+     */
     public void decrementHealth() {
         this.tHealth--;
     }
 
+    /**
+     * Method to increase the Health of this Sprite by 1.
+     */
     public void incrementHealth() {
         this.tHealth++;
     }
 
+    /**
+     * Setter method for the difficulty
+     * @param difficulty
+     */
     public void setDifficulty(int difficulty) {
         this.tDifficulty = difficulty;
     }
