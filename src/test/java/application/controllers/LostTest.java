@@ -48,6 +48,7 @@ public class LostTest {
      */
     @Test
     public void testUpdate() throws Exception {
+        testLost.tExit = true;
         testLost.update(mockedContainer, mockedGame, 0);
     }
 

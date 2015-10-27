@@ -2,6 +2,7 @@ package application.controllers;
 
 import application.Main;
 import application.core.Game;
+import application.core.Level;
 import application.core.Player;
 import application.logger.Logger;
 import org.junit.Before;
@@ -28,6 +29,8 @@ public class StoryLineTest {
     @Mock
     public final Main mockedGame = mock(Main.class);
     @Mock
+    public final Level mockedLevel = mock(Level.class);
+    @Mock
     public final Player mockedPlayer = mock(Player.class);
     @Mock
     public final Logger mockedLogger = mock(Logger.class);
@@ -49,6 +52,20 @@ public class StoryLineTest {
 
         when(mockedPlayer.getY()).thenReturn(-151);
         when(mockedGame.getGame()).thenReturn(testGame);
+        when(mockedLevel.getStoryLine()).thenReturn("");
+    }
+
+    /**
+     * Test whether update() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testUpdateSkip() throws Exception {
+        testStoryLine.tCount = 1;
+        testGame.setLevel(mockedLevel);
+        testStoryLine.update(mockedContainer, mockedGame, 0);
+
+        assertTrue(testStoryLine.tSkip);
     }
 
     /**
@@ -218,5 +235,25 @@ public class StoryLineTest {
                         + "it became clear to the SEMmians that their \n\n"
                         + "After destroying the first layer of aliens",
                 testStoryLine.getStory());
+    }
+
+    /**
+     * Test whether keyPressed() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedSpace() throws Exception {
+        testStoryLine.keyPressed(Input.KEY_SPACE, 'a');
+
+        assertTrue(testStoryLine.tSkip);
+    }
+
+    /**
+     * Test whether keyPressed() works correctly.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedDefault() throws Exception {
+        testStoryLine.keyPressed(Input.KEY_YEN, 'a');
     }
 }

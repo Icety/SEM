@@ -225,7 +225,7 @@ public class Game {
             checkBarierCollisions(bit);
     }
 
-    private void checkBarierCollisions(Iterator<Barrier> bit) {
+    public void checkBarierCollisions(Iterator<Barrier> bit) {
         while(bit.hasNext()) {
             Barrier b = bit.next();
             for(Player p : getPlayerController().getPlayers()) {

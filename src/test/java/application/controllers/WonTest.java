@@ -46,6 +46,7 @@ public class WonTest {
      */
     @Test
     public void testUpdate() throws Exception {
+        testWon.tExit = true;
         testWon.update(mockedContainer, mockedGame, 0);
     }
 

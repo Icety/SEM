@@ -132,6 +132,52 @@ public class LevelsTest {
     }
 
     /**
+     * Test whether keyPressed() works correctly with left button pressed.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedMultiPlayerA() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyPressed(Input.KEY_A, 'a');
+
+        assertTrue(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isGoLeft());
+    }
+
+    /**
+     * Test whether keyPressed() works correctly with right button pressed.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedMultiPlayerD() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyPressed(Input.KEY_D, 'a');
+
+        assertTrue(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isGoRight());
+    }
+
+    /**
+     * Test whether keyPressed() works correctly with up pressed.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedMultiPlayerW() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyPressed(Input.KEY_W, 'a');
+
+        assertTrue(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isShoot());
+    }
+
+    /**
+     * Test whether keyPressed() works correctly with up pressed.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyPressedMultiPlayerDefault() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyPressed(Input.KEY_YEN, 'a');
+    }
+
+    /**
      * Test whether keyPressed() works correctly with the escapeKey pressed.
      * @throws Exception possible Exception.
      */
@@ -156,10 +202,78 @@ public class LevelsTest {
      * @throws Exception possible Exception.
      */
     @Test
-    public void testKeyReleasedEscape() throws Exception {
-        testLevels.keyReleased(Input.KEY_ESCAPE, 'a');
+    public void testKeyReleasedLeft() throws Exception {
+        testLevels.keyReleased(Input.KEY_LEFT, 'a');
 
-        assertFalse(testLevels.pause);
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(0).isGoLeft());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with the escape key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedRight() throws Exception {
+        testLevels.keyReleased(Input.KEY_RIGHT, 'a');
+
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(0).isGoRight());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with the escape key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedUp() throws Exception {
+        testLevels.keyReleased(Input.KEY_UP, 'a');
+
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(0).isShoot());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with the escape key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedMultiPlayerLeft() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyReleased(Input.KEY_A, 'a');
+
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isGoLeft());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with the escape key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedMutliPlayerRight() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyReleased(Input.KEY_D, 'a');
+
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isGoRight());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with the escape key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedMutliPlayerW() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyReleased(Input.KEY_W, 'a');
+
+        assertFalse(testLevels.tMain.getGame().getPlayerController().getPlayers().get(1).isShoot());
+    }
+
+    /**
+     * Test whether keyReleased() works correctly with an unused key.
+     * @throws Exception possible Exception.
+     */
+    @Test
+    public void testKeyReleasedMultiPlayerDefault() throws Exception {
+        testGame.getPlayerController().setPlayers(2);
+        testLevels.keyReleased(Input.KEY_YEN, 'a');
     }
 
     /**
