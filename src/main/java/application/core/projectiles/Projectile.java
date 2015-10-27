@@ -135,17 +135,24 @@ public class Projectile extends Sprite {
 
     /**
      * Getter method for the direction of the Projectile.
-     * @return the direction
+     * @return the direction.
      */
     public float getDirectionY() {
         return tDirectionY;
     }
 
+    /**
+     * Setter method for the direction of the Projectile.
+     * @param tDirectionY the direction to set tDirection to.
+     */
     public void setDirectionY(float tDirectionY) {
         this.tDirectionY = tDirectionY;
     }
 
-
+    /**
+     * setter method to set if the Projectile is removed.
+     * @param tRemoved true if this projectile should be removed.
+     */
     public void setRemoved(boolean tRemoved) {
         this.tRemoved = tRemoved;
     }

@@ -22,6 +22,10 @@ public class AnimatedBoss extends FinalBoss {
         return Main.BOSS;
     }
 
+    /**
+     * Makes sure an animated image is used.
+     * @return null.
+     */
     public Animation getAnimation() {
         if (tSecondShot < 150) {
             tAnimate = false;

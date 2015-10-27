@@ -85,42 +85,82 @@ public abstract class Upgrade extends Sprite {
         return tToDraw;
     }
 
+    /**
+     * Getter method for the Direction.
+     * @return the Direction
+     */
     public int getDirection() {
         return tDirection;
     }
 
+    /**
+     * Getter method for the Speed.
+     * @return the Speed
+     */
     public int getSpeed() {
         return tSpeed;
     }
 
+    /**
+     * Setter method to set the Speed.
+     * @param tSpeed to speed to set tSpeed to.
+     */
     public void setSpeed(int tSpeed) {
         this.tSpeed = tSpeed;
     }
 
+    /**
+     * Setter method to set if this Upgrade should be removed.
+     * @param tRemoved the value to set tRemoved to.
+     */
     public void setRemoved(boolean tRemoved) {
         this.tRemoved = tRemoved;
     }
 
+    /**
+     * Getter method for the Time.
+     * @return the Time
+     */
     public long getTime() {
         return tTime;
     }
 
+    /**
+     * Setter method to set the Time.
+     * @param tTime the value to set tTime to.
+     */
     public void setTime(long tTime) {
         this.tTime = tTime;
     }
 
+    /**
+     * Getter method for the Duration of the Upgrade.
+     * @return the Duration
+     */
     public long getDuration() {
         return tDuration;
     }
 
+    /**
+     * Setter method to set the Duration of the Upgrade.
+     * @param tDuration duration of the Upgrade.
+     */
     public void setDuration(long tDuration) {
         this.tDuration = tDuration;
     }
 
+    /**
+     * Getter method to check if this Upgrade should be drawn.
+     * @return true if to draw.
+     */
     public boolean isToDraw() {
         return tToDraw;
     }
 
+    /**
+     * Setter to set if this Upgrade should be drawn.
+     * @param tToDraw the value to set tToDraw to to.
+     */
     public void setToDraw(boolean tToDraw) {
         this.tToDraw = tToDraw;
     }
