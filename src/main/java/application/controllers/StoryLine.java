@@ -62,12 +62,6 @@ public class StoryLine extends BasicGameState {
 
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
-
-        //If there is no story, a boss is appearing. In this case,
-        // we do not change the background as the "level" has not finished yet.
-        if (tMain.getGame().getLevel().getStoryLine() == "") {
-            tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
-        }
     }
 
     /**
@@ -169,6 +163,16 @@ public class StoryLine extends BasicGameState {
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
+
+
+
+            //If there is no story, a boss is appearing. In this case,
+            // we do not change the background as the "level" has not finished yet.
+            if (tMain.getGame().getLevel().getTheme().equals("daphne")) {
+                tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
+            } else {
+                tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+            }
             tOverlay = false;
             if (!tDone && !tSkip) {
                 if (tCount % 2 == 0) {
