@@ -3,6 +3,7 @@
 <background>earth.jpg</background>
 <music>danny.wav</music>
 <theme>danny</theme>
+    <time>20</time>
 <aliens>
 <alien>
 <x>273</x>

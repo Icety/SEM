@@ -3,6 +3,7 @@
 <background>doge.jpg</background>
 <music>doge.wav</music>
 <theme>doge</theme>
+    <time>20</time>
 <aliens>
 <alien>
 <x>105</x>
