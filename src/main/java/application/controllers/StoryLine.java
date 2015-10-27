@@ -81,10 +81,10 @@ public class StoryLine extends BasicGameState {
 
         if (tStart) {
             tBackground2.draw(0, 0, container.getWidth(), container.getHeight());
-            p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+        }
             if (tDone) {
                 g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
                 if (!tScoreUpdated) {
@@ -111,7 +111,6 @@ public class StoryLine extends BasicGameState {
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
-    }
     }
 
     /**
