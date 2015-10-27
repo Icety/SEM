@@ -3,6 +3,7 @@
 <background>halloween.jpg</background>
 <music>halloween.wav</music>
 <theme>halloween</theme>
+    <time>7</time>
 <aliens>
 <alien>
 <x>77</x>

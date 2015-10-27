@@ -31,7 +31,7 @@ public class StoryLine extends BasicGameState {
     protected boolean tDone = false;
     protected boolean tStart = true;
     protected boolean tSkip = false;
-    protected boolean tScoreUpdated = false;
+    protected boolean tScoreUpdate = false;
     protected boolean tOverlay = false;
     protected int tCount = 0;
     protected int tTextHeight = -300;
@@ -62,6 +62,12 @@ public class StoryLine extends BasicGameState {
 
         tMain = (Main) game;
         tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+
+        //If there is no story, a boss is appearing. In this case,
+        // we do not change the background as the "level" has not finished yet.
+        if (tMain.getGame().getLevel().getStoryLine() == "") {
+            tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
+        }
     }
 
     /**
@@ -84,9 +90,10 @@ public class StoryLine extends BasicGameState {
         }
         else {
             tBackground.draw(0, 0, container.getWidth(), container.getHeight());
+        }
             if (tDone) {
                 g.drawString(tMain.getGame().getLevel().getStoryLine(), Main.WIDTH - 750, tTextHeight);
-                if (!tScoreUpdated) {
+                if (tScoreUpdate && tCount < 500) {
                     showPoints(g, container);
                 }
             }
@@ -110,7 +117,6 @@ public class StoryLine extends BasicGameState {
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
         }
-    }
     }
 
     /**
@@ -159,7 +165,7 @@ public class StoryLine extends BasicGameState {
                 tStart = false;
                 tOverlay = true;
                 tCount = 0;
-
+                tScoreUpdate = true;
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
@@ -229,7 +235,7 @@ public class StoryLine extends BasicGameState {
         tSkip = false;
         tStart = true;
         tTextHeight = -300;
-        tScoreUpdated = false;
+        tScoreUpdate = false;
     }
 
     /**
@@ -262,7 +268,6 @@ public class StoryLine extends BasicGameState {
         //Show total points earned in the past level
         if (tCount == 1) {
             tMain.getGame().setScore(-tPointsEarned + tNewScore);
-            tScoreUpdated = true;
         }
         if (10 < tCount) {
             g.drawString("Points earned:", container.getWidth()/2 - 400, container.getHeight()/2);

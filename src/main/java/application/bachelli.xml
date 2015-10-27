@@ -2,6 +2,7 @@
     <background>
         earth.jpg
     </background>
+    <time>30</time>
     <music>
         bachelli.wav
     </music>

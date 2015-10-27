@@ -79,7 +79,6 @@ public class LevelFactory {
             //Set aliens
             ArrayList<Alien> aliens = loadAliens(levelXml);
             level.addAliens(aliens);
-            level.setStartPlayers();
             //Set background music
             if (levelXml.getElementsByTagName("background").getLength() != 0) {
                 level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
