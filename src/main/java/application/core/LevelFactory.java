@@ -35,7 +35,7 @@ public class LevelFactory {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
-            File file = new File("src/main/java/application/levels.xml");
+            File file = new File("src/main/java/application/levels/levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
@@ -68,7 +68,7 @@ public class LevelFactory {
 
         Element levelName = (Element) tLevels.item(levelNumber);
         try {
-            File file = new File("src/main/java/application/" + levelName.getTextContent() + ".xml");
+            File file = new File("src/main/java/application/levels/" + levelName.getTextContent() + ".xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
