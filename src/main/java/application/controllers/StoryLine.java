@@ -170,7 +170,7 @@ public class StoryLine extends BasicGameState {
             // we do not change the background as the "level" has not finished yet.
             if (tMain.getGame().getLevel().getTheme().equals("daphne")) {
                 tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
-            } else {
+            } else if(!tMain.getGame().getLevel().getTheme().equals("")) {
                 tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
             }
             tOverlay = false;

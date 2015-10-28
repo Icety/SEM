@@ -24,7 +24,9 @@ import static org.mockito.Mockito.*;
  */
 public class StoryLineTest {
     private Game testGame;
+    private Level testLevel;
     private StoryLine testStoryLine;
+    private PlayerController testController;
 
     @Mock
     public final Main mockedGame = mock(Main.class);
@@ -48,6 +50,10 @@ public class StoryLineTest {
         testStoryLine = new StoryLine(1);
         testStoryLine.tMain = mockedGame;
         testGame = new Game(0, 0, mockedLogger, 1);
+        testController = new PlayerController(1);
+        testLevel = new Level(1, testController);
+        testLevel.setTheme("");
+        testGame.setLevel(testLevel);
         testGame.getPlayerController().setPlayers(1, playerList);
 
         when(mockedPlayer.getY()).thenReturn(-151);
@@ -165,7 +171,7 @@ public class StoryLineTest {
         testStoryLine.tTextHeight = Integer.MAX_VALUE;
         testStoryLine.update(mockedContainer, mockedGame, 0);
 
-        verify(mockedGame, times(4)).getGame();
+        verify(mockedGame, times(7)).getGame();
     }
 
     /**
