@@ -257,7 +257,6 @@ public class GameTest {
         testMultiPlayerGame.update();
 
         assertFalse(testMultiPlayerGame.hasWon());
-        assertFalse(testMultiPlayerGame.hasLost());
     }
 
     /**

@@ -16,8 +16,11 @@ public class Level {
     protected ArrayList<Alien> tAliens;
     protected ArrayList<Player> tPlayers;
     protected int tNumOfPlayers;
+    protected int tTime;
     protected String tBackground;
     protected PlayerController playerController;
+    protected String tMusic;
+    protected String tTheme;
 
     public Level (int numOfPlayers, PlayerController controller){
         tNumOfPlayers = numOfPlayers;
@@ -27,8 +30,22 @@ public class Level {
         tBarriers.add(new Barrier(Main.WIDTH/2-35, 900));
         tBarriers.add(new Barrier(Main.WIDTH-200-70, 900));
     }
-    protected String tMusic;
-    protected String tTheme;
+
+    /**
+     * Getter method for the Time for the level
+     * @return the integer value of time
+     */
+    public int getTime() {
+        return tTime;
+    }
+
+    /**
+     * Setter method for the Time for the level
+     * @param tTime
+     */
+    public void setTime(int tTime) {
+        this.tTime = tTime;
+    }
 
     public String getTheme() {
         return tTheme;
@@ -123,17 +140,34 @@ public class Level {
         return result;
     }
 
+    /**
+     * Getter method for all Barriers in this level.
+     * @return a list of Barriers.
+     */
     public ArrayList<Barrier> getBariers() {
         return tBarriers;
     }
+
+    /**
+     * Setter method to set all Aliens in this level.
+     * @param list the list of Aliens.
+     */
     public void settAliens(ArrayList<Alien> list) {
         tAliens = list;
     }
 
+    /**
+     * Getter method for the music that should be played in this level.
+     * @return the Music.
+     */
     public String getMusic() {
         return tMusic;
     }
 
+    /**
+     * Setter method fot the Music.
+     * @param music the String to set tMusic to.
+     */
     public void setMusic(String music) {
         this.tMusic = music.replaceAll("\t", "").trim().replaceAll("\n ", "");
     }

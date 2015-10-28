@@ -67,6 +67,7 @@ public class Main extends StateBasedGame {
     public static Animation DAPHNALIEN;
     public static String imageRoot;
     public static String imageTheme;
+    public static boolean sNewLevel;
 
     public static Image BARRIER_1;
     public static Image BARRIER_2;
@@ -82,13 +83,14 @@ public class Main extends StateBasedGame {
 
     protected Game tGame;
     protected Logger tLogger;
-    public static Music tBackgroundmusic;
+    public static Music BACKGROUNDMUSIC;
     public static Sound tPlayerDeathSound;
     public static Sound tInvaderKilledSound;
     public static Sound tMotherShipKilledSound;
 
     protected Image tBackground;
     protected boolean tTransition;
+    protected int tStartTime = 80;
 
     /**
      * Constructor for Main.
@@ -128,8 +130,8 @@ public class Main extends StateBasedGame {
         tPlayerDeathSound = new Sound("src/main/java/application/sound/explosion.wav");
         tInvaderKilledSound = new Sound("src/main/java/application/sound/invaderkilled.wav");
         tMotherShipKilledSound = new Sound("src/main/java/application/sound/mothership.wav");
-        tBackgroundmusic = new Music("src/main/java/application/sound/normalmusic.wav");
-        tBackgroundmusic.loop();
+        BACKGROUNDMUSIC = new Music("src/main/java/application/sound/normal.wav");
+        BACKGROUNDMUSIC.loop();
 
         imageRoot = "src/main/java/application/images/";
         imageTheme = "classic";
@@ -145,19 +147,21 @@ public class Main extends StateBasedGame {
         PLAYER_PROJECTILE = new Image(root + "smallbullet.png");
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         UPGRADED_PLAYER = new Image(root + "player_upgraded.png");
-        UPGRADE_0 = new Image(root + "upgrade_speed.png");
-        UPGRADE_1 = new Image(root + "upgrade_weapon.png");
-        UPGRADE_2 = new Image(root + "upgrade_health.png");
-        UPGRADE_3 = new Image(root + "upgrade.png");
 
-        BARRIER_1 = new Image(root + "barier_1.png");
-        BARRIER_2 = new Image(root + "barier_2.png");
-        BARRIER_3 = new Image(root + "barier_3.png");
-        BARRIER_4 = new Image(root + "barier_4.png");
-        BARRIER_5 = new Image(root + "barier_5.png");
-        BARRIER_6 = new Image(root + "barier_6.png");
-        BARRIER_7 = new Image(root + "barier_7.png");
-        BARRIER_8 = new Image(root + "barier_8.png");
+        BARRIER_1 = new Image(root + "barrier/barier_1.png");
+        BARRIER_2 = new Image(root + "barrier/barier_2.png");
+        BARRIER_3 = new Image(root + "barrier/barier_3.png");
+        BARRIER_4 = new Image(root + "barrier/barier_4.png");
+        BARRIER_5 = new Image(root + "barrier/barier_5.png");
+        BARRIER_6 = new Image(root + "barrier/barier_6.png");
+        BARRIER_7 = new Image(root + "barrier/barier_7.png");
+        BARRIER_8 = new Image(root + "barrier/barier_8.png");
+
+        UPGRADE_0 = new Image(root + "upgrades/upgrade_speed.png");
+        UPGRADE_1 = new Image(root + "upgrades/upgrade_weapon.png");
+        UPGRADE_2 = new Image(root + "upgrades/upgrade_health.png");
+        UPGRADE_3 = new Image(root + "upgrades/upgrade.png");
+
 
         SpriteSheet spriteSheet = new SpriteSheet(root + "daphne/bossAnimation.png", 320, 358);
         DAPHNALIEN = new Animation(spriteSheet, 30);
@@ -186,7 +190,6 @@ public class Main extends StateBasedGame {
     public void newGame(int numPlayers){
         tGame = new Game(WIDTH, HEIGHT, tLogger, numPlayers);
         tGame.nextLevel();
-
     }
 
     /**
@@ -202,24 +205,19 @@ public class Main extends StateBasedGame {
     }
 
     public void setAlienImages (String theme) throws SlickException {
-        MINI_ALIEN = new Image(imageRoot + imageTheme + "/miniAlien.png");
-        SMALL_ALIEN = new Image(imageRoot + imageTheme + "/smallAlien.png");
-        BIG_ALIEN = new Image(imageRoot + imageTheme + "/bigAlien.png");
-        MOTHERSHIP_ALIEN = new Image(imageRoot + imageTheme + "/mothership.png");
-        BOSS = new Image(imageRoot + imageTheme + "/boss.png");
-        BOSS_CHARGE = new Image(imageRoot + imageTheme + "/bossCharge.png");
-        BOSS_PROJECTILE_SPECIAL = new Image(imageRoot + imageTheme + "/bossWeaponSpecial.png");
-        BOSS_PROJECTILE = new Image(imageRoot + imageTheme + "/bossProjectile.png");
-        BOSS_BEAM_PROJECTILE = new Image(imageRoot + imageTheme + "/bossBeamProjectile.png");
+        MINI_ALIEN = new Image(imageRoot + theme + "/miniAlien.png");
+        SMALL_ALIEN = new Image(imageRoot + theme + "/smallAlien.png");
+        BIG_ALIEN = new Image(imageRoot + theme + "/bigAlien.png");
+        MOTHERSHIP_ALIEN = new Image(imageRoot + theme + "/mothership.png");
+        BOSS = new Image(imageRoot + theme + "/boss.png");
+        BOSS_CHARGE = new Image(imageRoot + theme + "/bossCharge.png");
+        BOSS_PROJECTILE_SPECIAL = new Image(imageRoot + theme + "/bossWeaponSpecial.png");
+        BOSS_PROJECTILE = new Image(imageRoot + theme + "/bossProjectile.png");
+        BOSS_BEAM_PROJECTILE = new Image(imageRoot + theme + "/bossBeamProjectile.png");
         PLAYER = new Image(imageRoot + "player.png");
         PLAYER_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         SMALL_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         UPGRADED_PLAYER = new Image(imageRoot + "player_upgraded.png");
-
-        UPGRADE_0 = new Image(imageRoot + "upgrade_speed.png");
-        UPGRADE_1 = new Image(imageRoot + "upgrade_weapon.png");
-        UPGRADE_2 = new Image(imageRoot + "upgrade_health.png");
-        UPGRADE_3 = new Image(imageRoot + "upgrade.png");
     }
 
     public void changeDifficulty() {

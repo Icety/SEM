@@ -19,6 +19,7 @@ public class FinalBoss extends Alien {
     protected int tChargeHeight;
     protected int tNormalHeight;
     protected boolean tChargeUp;
+    protected boolean tCharging = false;
 
     /**
      * Constructor method for FinalBoss.
@@ -76,11 +77,11 @@ public class FinalBoss extends Alien {
      */
     protected void handleSpecial() {
         if (tSecondShot == 151) {
-            this.changeImageY(false);
+            this.changeImageY();
         }
         if (tSecondShot > 250) {
             tSecondShot = 0;
-            this.changeImageY(true);
+            this.changeImageY();
             int x, y;
             float dirx, diry;
             for (int i=0; i<10; i++) {
@@ -132,25 +133,37 @@ public class FinalBoss extends Alien {
         return "FinalBoss on coords: " + tX + ", " + tY;
     }
 
+    /**
+     * Used to change image of boss.
+     * @return tSecondShot.
+     */
     public int getSecondShot() {
         return tSecondShot;
     }
 
+    /**
+     * Setter for tSecondShot.
+     * @param tSecondShot the value to set tSecondShot to.
+     */
     public void setSecondShot(int tSecondShot) {
         this.tSecondShot = tSecondShot;
     }
 
-    protected void changeImageY(boolean charge) {
-        if (charge) {
+    /**
+     * Method to align alien properly when 'upgraded'.
+     */
+    protected void changeImageY() {
+        if (!tCharging) {
             if (tChargeUp) {
-                tY += tChargeHeight - tHeight;
-            }
-            tHeight = tNormalHeight;
-        } else {
-            if (tChargeUp) {
-                tY -= tChargeHeight - tHeight;
+                tY -= (tChargeHeight - tNormalHeight);
             }
             tHeight = tChargeHeight;
+        } else {
+            if (tChargeUp) {
+                tY += (tChargeHeight - tNormalHeight);
+            }
+            tHeight = tNormalHeight;
         }
+        tCharging = !tCharging;
     }
 }

@@ -1,0 +1,17 @@
+<level>
+    <background>
+        earth.jpg
+    </background>
+    <time>30</time>
+    <music>
+        bachelli.wav
+    </music>
+    <theme>classic</theme>
+    <aliens>
+        <alien>
+            <x>500</x>
+            <y>200</y>
+            <type>boss</type>
+        </alien>
+    </aliens>
+</level>

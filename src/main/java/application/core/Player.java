@@ -269,14 +269,26 @@ public class Player extends Sprite {
         tY -= y;
     }
 
+    /**
+     * Getter method to check if player should move left.
+     * @return tGoLeft.
+     */
     public boolean isGoLeft() {
         return tGoLeft;
     }
 
+    /**
+     * Getter method to check if player should move right.
+     * @return tGoRight.
+     */
     public boolean isGoRight() {
         return tGoRight;
     }
 
+    /**
+     * Getter method to check if player should shoot.
+     * @return tShoot.
+     */
     public boolean isShoot() {
         return tShoot;
     }

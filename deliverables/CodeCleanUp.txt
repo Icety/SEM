@@ -1,0 +1,23 @@
+- fxml weg ---> Daphne
+- documenten 
+- levels in een map ---> Niek
+- commented .java files weg ---> Daphne
+- Iterator en container naar core ---> Ties
+- Projectile + Alien + Upgrade map clean up en JavaDoc ---> Ties
+- Controller map ---> Daphne
+- CheckStyle, test coverage omhoog ---> Arthur
+- Rest van core documenten ---> Niek
+- Jar file ---> Thomas
+- Barrier images in een map ---> Ties
+- Upgrade images in een map ---> Ties
+- psd files weg ---> Ties
+- Player images weg ---> Ties
+- background.jpg ---> Niek
+- Readme weg ---> Daphne
+- pandalienbackground weg ---> Daphne
+- icon.png weg
+- FB.png weg 
+- NiekPanda weg
+- Niek: Daphne boss
+
+

@@ -77,28 +77,6 @@ public class LevelsTest {
     }
 
     /**
-     * Test whether update() works correctly when the level is won.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testUpdateHasWon() throws Exception {
-        testLevels.pause = false;
-        testGame.setHasWon(true);
-        testLevels.update(mockedContainer, mockedGame, 0);
-    }
-
-    /**
-     * Test whether update() works correctly when the level is lost.
-     * @throws Exception possible Exception.
-     */
-    @Test
-    public void testUpdateHasLost() throws Exception {
-        testLevels.pause = false;
-        testGame.setHasLost(true);
-        testLevels.update(mockedContainer, mockedGame, 0);
-    }
-
-    /**
      * Test whether keyPressed() works correctly with left button pressed.
      * @throws Exception possible Exception.
      */

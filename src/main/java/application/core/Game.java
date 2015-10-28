@@ -35,7 +35,9 @@ public class Game {
     protected boolean tNextLevel = false;
     protected int tPlayers;
     protected Logger tLogger;
-    protected String tPlayerName;
+    protected int tTime;
+    protected long tTimer;
+    protected int tStartScore;
 
     /**
      * Constructor for Game.
@@ -53,7 +55,34 @@ public class Game {
         tPlayers = players;
         tPaused = false;
         tLogger = logger;
+        tTime = 0;
+        tTimer = System.currentTimeMillis();
+        tStartScore = 0;
+    }
 
+
+    /**
+     * Getter method for the score at the start of the current level.
+     * @return the value of the starting score.
+     */
+    public int getStartScore() {
+        return tStartScore;
+    }
+
+    /**
+     *  Getter method for the Game time.
+     * @return
+     */
+    public int getTime() {
+        return tTime;
+    }
+
+    /**
+     * Method to add time to the current Game time.
+     * @param tTime the value to be added to the time.
+     */
+    public void addTime(int tTime) {
+        this.tTime += tTime;
     }
 
     /**
@@ -79,6 +108,8 @@ public class Game {
         tNextLevel = false;
         tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
+        this.addTime((4 - tMain.DIFFICULTY) * tLevel.getTime());
+        tStartScore = tScore;
         levelNumber++;
     }
 
@@ -112,13 +143,10 @@ public class Game {
      * @throws SlickException possible Exception.
      */
     public void update() throws SlickException {
+        this.timerUpdate();
         playerController.update();
         this.alienUpdate();
         this.checkCollision();
-
-        if (tLevel.getTheme() != Main.imageTheme) {
-            Main.imageTheme = tLevel.getTheme();
-        }
 
         if (tLevel.hasWon() && !tNextLevel) {
             if (hasNextLevel()) {
@@ -211,6 +239,20 @@ public class Game {
     }
 
     /**
+     * Method to update te timer in Game.
+     */
+    protected void timerUpdate() {
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - tTimer >= 1000) {
+            tTimer = currentTime;
+            tTime--;
+        }
+        if (tTime == 0) {
+            tLost = true;
+        }
+    }
+
+    /**
      * Check whether there was a collision in the Game.
      * @throws SlickException possible Exception.
      */
@@ -218,14 +260,19 @@ public class Game {
         for (Alien alien : tLevel.getAliens()) {
             Iterator<Projectile> it = alien.getProjectiles().iterator();
             checkAlienCollisions(it);
-            checkPlayerUpgradeCollisions(alien.getUpgrades().iterator());
+            checkPlayerUpgradeCollisions(alien.getIterator());
             checkDeadAlien(alien, it);
         }
-           Iterator<Barrier> bit = tLevel.getBariers().iterator();
-            checkBarierCollisions(bit);
+        Iterator<Barrier> bit = tLevel.getBariers().iterator();
+        checkBarierCollisions(bit);
+
     }
 
-    public void checkBarierCollisions(Iterator<Barrier> bit) {
+    /**
+     * Method to check if a Barier is hit by a Projectile.
+     * @param bit the Iterator to iterate with.
+     */
+    protected void checkBarierCollisions(Iterator<Barrier> bit) {
         while(bit.hasNext()) {
             Barrier b = bit.next();
             for(Player p : getPlayerController().getPlayers()) {
@@ -290,9 +337,9 @@ public class Game {
      * Checker method for collisions of players with upgrades.
      * @param uit Iterator over upgrades.
      */
-    public void checkPlayerUpgradeCollisions(Iterator<Upgrade> uit) {
+    public void checkPlayerUpgradeCollisions(application.core.aliens.Iterator uit) {
         while (uit.hasNext()) {
-            Upgrade u = uit.next();
+            Upgrade u = (Upgrade)uit.next();
             for(Player p : playerController.getPlayers()){
                 if (p.intersects(u)) {
                     p.upgrade(u);
@@ -340,18 +387,34 @@ public class Game {
 
     }
 
+    /**
+     * Getter to get the PlayerController.
+     * @return the PlayerController.
+     */
     public PlayerController getPlayerController() {
         return playerController;
     }
 
+    /**
+     * Setter to set if the Game is won.
+     * @param bool the bool to set tWon to.
+     */
     public void setHasWon(boolean bool) {
         tWon = bool;
     }
 
+    /**
+     * Setter to set if the Game is lost.
+     * @param bool the bool to set tLost to.
+     */
     public void setHasLost(boolean bool) {
         tLost = bool;
     }
 
+    /**
+     * Setter to set the current level.
+     * @param level the level to play.
+     */
     public void setLevel(Level level) {
         tLevel = level;
     }

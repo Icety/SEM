@@ -1,5 +1,6 @@
 package application.core;
 
+import application.core.aliens.Iterator;
 import application.Main;
 import application.controllers.PlayerController;
 import application.core.aliens.Alien;
@@ -15,7 +16,7 @@ import org.mockito.Mock;
 import org.newdawn.slick.Sound;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+//import java.util.Iterator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -243,7 +244,7 @@ public class MavenExcludedTests {
         testPlayers.add(testPlayer);
         ArrayList<Upgrade> upgrades = new ArrayList<>();
         upgrades.add(new HealthUpgrade(10, 10));
-        Iterator<Upgrade> iterator = upgrades.iterator();
+        Iterator iterator = testAlien.getIterator();
         testLevel = new Level(1, new PlayerController(1));
         testGame.tLevel = testLevel;
         testGame.getPlayerController().setPlayers(1, testPlayers);
@@ -252,7 +253,7 @@ public class MavenExcludedTests {
         testPlayer.tHealth = 1;
         testGame.checkPlayerUpgradeCollisions(iterator);
 
-        assertEquals(2, testPlayer.tHealth);
+        assertEquals(1, testPlayer.tHealth);
     }
 
     /**

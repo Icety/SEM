@@ -90,8 +90,13 @@ public class HighScoreBoard extends BasicGameState {
 
     }
 
+    /**
+     * Method to check whether a key is released.
+     * @param key integer value for a key.
+     * @param c character value for a key.
+     */
     public void keyReleased(int key, char c) {
-        switch (key) {
+            switch (key) {
             default: break;
             case Input.KEY_ENTER:
                 tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));

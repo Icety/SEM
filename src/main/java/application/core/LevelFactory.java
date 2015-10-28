@@ -35,7 +35,7 @@ public class LevelFactory {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
-            File file = new File("src/main/java/application/levels.xml");
+            File file = new File("src/main/java/application/levels/levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
@@ -68,7 +68,7 @@ public class LevelFactory {
 
         Element levelName = (Element) tLevels.item(levelNumber);
         try {
-            File file = new File("src/main/java/application/" + levelName.getTextContent() + ".xml");
+            File file = new File("src/main/java/application/levels/" + levelName.getTextContent() + ".xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = null;
             dBuilder = dbFactory.newDocumentBuilder();
@@ -79,7 +79,6 @@ public class LevelFactory {
             //Set aliens
             ArrayList<Alien> aliens = loadAliens(levelXml);
             level.addAliens(aliens);
-            level.setStartPlayers();
             //Set background music
             if (levelXml.getElementsByTagName("background").getLength() != 0) {
                 level.setBackground(levelXml.getElementsByTagName("background").item(0).getTextContent());
@@ -98,6 +97,12 @@ public class LevelFactory {
             //Set Theme
             if (levelXml.getElementsByTagName("theme").getLength() != 0) {
                 level.setTheme(levelXml.getElementsByTagName("theme").item(0).getTextContent());
+            }
+
+            //Set level time
+            if (levelXml.getElementsByTagName("time").getLength() != 0) {
+                level.setTime(Integer.parseInt(levelXml.getElementsByTagName("time").item(0).getTextContent()));
+                System.out.println(levelXml.getElementsByTagName("time").item(0).getTextContent());
             }
 
         } catch (Exception e) {
