@@ -147,19 +147,19 @@ public class Main extends StateBasedGame {
         PLAYER_PROJECTILE = new Image(root + "smallbullet.png");
         SMALL_PROJECTILE = new Image(root + "smallbullet.png");
         UPGRADED_PLAYER = new Image(root + "player_upgraded.png");
-        UPGRADE_0 = new Image(root + "upgrade_speed.png");
-        UPGRADE_1 = new Image(root + "upgrade_weapon.png");
-        UPGRADE_2 = new Image(root + "upgrade_health.png");
-        UPGRADE_3 = new Image(root + "upgrade.png");
+        UPGRADE_0 = new Image(root + "upgrades/upgrade_speed.png");
+        UPGRADE_1 = new Image(root + "upgrades/upgrade_weapon.png");
+        UPGRADE_2 = new Image(root + "upgrades/upgrade_health.png");
+        UPGRADE_3 = new Image(root + "upgrades/upgrade.png");
 
-        Barier_1 = new Image(root + "barier_1.png");
-        Barier_2 = new Image(root + "barier_2.png");
-        Barier_3 = new Image(root + "barier_3.png");
-        Barier_4 = new Image(root + "barier_4.png");
-        Barier_5 = new Image(root + "barier_5.png");
-        Barier_6 = new Image(root + "barier_6.png");
-        Barier_7 = new Image(root + "barier_7.png");
-        Barier_8 = new Image(root + "barier_8.png");
+        Barier_1 = new Image(root + "barrier/barier_1.png");
+        Barier_2 = new Image(root + "barrier/barier_2.png");
+        Barier_3 = new Image(root + "barrier/barier_3.png");
+        Barier_4 = new Image(root + "barrier/barier_4.png");
+        Barier_5 = new Image(root + "barrier/barier_5.png");
+        Barier_6 = new Image(root + "barrier/barier_6.png");
+        Barier_7 = new Image(root + "barrier/barier_7.png");
+        Barier_8 = new Image(root + "barrier/barier_8.png");
 
         SpriteSheet spriteSheet = new SpriteSheet(root + "daphne/bossAnimation.png", 320, 358);
         DAPHNALIEN = new Animation(spriteSheet, 30);
@@ -216,11 +216,6 @@ public class Main extends StateBasedGame {
         PLAYER_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         SMALL_PROJECTILE = new Image(imageRoot + "smallbullet.png");
         UPGRADED_PLAYER = new Image(imageRoot + "player_upgraded.png");
-
-        UPGRADE_0 = new Image(imageRoot + "upgrade_speed.png");
-        UPGRADE_1 = new Image(imageRoot + "upgrade_weapon.png");
-        UPGRADE_2 = new Image(imageRoot + "upgrade_health.png");
-        UPGRADE_3 = new Image(imageRoot + "upgrade.png");
     }
 
     public void changeDifficulty() {

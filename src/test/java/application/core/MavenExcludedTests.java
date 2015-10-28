@@ -1,6 +1,6 @@
 package application.core;
 
-import application.Iterator;
+import application.core.aliens.Iterator;
 import application.Main;
 import application.controllers.PlayerController;
 import application.core.aliens.Alien;

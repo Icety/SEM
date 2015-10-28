@@ -1,8 +1,6 @@
 package application.core;
 
-import java.time.Clock;
 import java.util.Iterator;
-import java.util.Timer;
 
 import application.Main;
 import application.controllers.PlayerController;
@@ -240,6 +238,9 @@ public class Game {
         }
     }
 
+    /**
+     * Method to update te timer in Game.
+     */
     protected void timerUpdate() {
         long currentTime = System.currentTimeMillis();
         if (currentTime - tTimer >= 1000) {
@@ -267,6 +268,10 @@ public class Game {
 
     }
 
+    /**
+     * Method to check if a Barier is hit by a Projectile.
+     * @param bit the Iterator to iterate with.
+     */
     private void checkBarierCollisions(Iterator<Barrier> bit) {
         while(bit.hasNext()) {
             Barrier b = bit.next();
@@ -332,7 +337,7 @@ public class Game {
      * Checker method for collisions of players with upgrades.
      * @param uit Iterator over upgrades.
      */
-    public void checkPlayerUpgradeCollisions(application.Iterator uit) {
+    public void checkPlayerUpgradeCollisions(application.core.aliens.Iterator uit) {
         while (uit.hasNext()) {
             Upgrade u = (Upgrade)uit.next();
             for(Player p : playerController.getPlayers()){
@@ -382,18 +387,34 @@ public class Game {
 
     }
 
+    /**
+     * Getter to get the PlayerController.
+     * @return the PlayerController.
+     */
     public PlayerController getPlayerController() {
         return playerController;
     }
 
+    /**
+     * Setter to set if the Game is won.
+     * @param bool the bool to set tWon to.
+     */
     public void setHasWon(boolean bool) {
         tWon = bool;
     }
 
+    /**
+     * Setter to set if the Game is lost.
+     * @param bool the bool to set tLost to.
+     */
     public void setHasLost(boolean bool) {
         tLost = bool;
     }
 
+    /**
+     * Setter to set the current level.
+     * @param level the level to play.
+     */
     public void setLevel(Level level) {
         tLevel = level;
     }

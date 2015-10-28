@@ -133,14 +133,25 @@ public class FinalBoss extends Alien {
         return "FinalBoss on coords: " + tX + ", " + tY;
     }
 
+    /**
+     * Used to change image of boss.
+     * @return tSecondShot.
+     */
     public int getSecondShot() {
         return tSecondShot;
     }
 
+    /**
+     * Setter for tSecondShot.
+     * @param tSecondShot the value to set tSecondShot to.
+     */
     public void setSecondShot(int tSecondShot) {
         this.tSecondShot = tSecondShot;
     }
 
+    /**
+     * Method to align alien properly when 'upgraded'.
+     */
     protected void changeImageY() {
         if (!tCharging) {
             if (tChargeUp) {
