@@ -20,6 +20,9 @@ import static org.mockito.Mockito.when;
  * Test class for HighScoreForm.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class HighScoreFormTest {
     private HighScoreForm testForm;
     private Game testGame;
@@ -36,6 +39,10 @@ public class HighScoreFormTest {
     @Mock
     public final TextField mockedTextField = mock(TextField.class);
 
+    /**
+     * Initialize variables for the test process.
+     * @throws Exception possible Exception.
+     */
     @Before
     public void setUp() throws Exception {
         testForm = new HighScoreForm(1);
@@ -85,11 +92,19 @@ public class HighScoreFormTest {
         testForm.keyReleased(Input.KEY_ENTER, 'a');
     }
 
+    /**
+     * Test whether getID() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testGetID() throws Exception {
         assertEquals(1, testForm.getID());
     }
 
+    /**
+     * TEst whether getName() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testGetName() throws Exception {
         testForm.tName = "Test";
@@ -97,6 +112,10 @@ public class HighScoreFormTest {
         assertEquals("Test", testForm.getName());
     }
 
+    /**
+     * Test whether setName() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testSetName() throws Exception {
         testForm.setName("Test");

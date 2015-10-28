@@ -81,10 +81,9 @@ public class Won extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        if(tExit){
+        if (tExit) {
             container.exit();
         }
-
     }
 
     /**

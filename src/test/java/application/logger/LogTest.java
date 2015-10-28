@@ -9,6 +9,9 @@ import static junit.framework.Assert.assertEquals;
  * Test class for Log.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class LogTest {
     private Log testLog;
 

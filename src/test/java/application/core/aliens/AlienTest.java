@@ -291,7 +291,7 @@ public class AlienTest {
      * @throws Exception possible Exception.
      */
     @Test
-    public void testHitAndDie() throws Exception{
+    public void testHitAndDie() throws Exception {
         testAlien.setHealth(1);
 
         assertEquals(testAlien.getKillScore(), testAlien.hit());
@@ -302,7 +302,7 @@ public class AlienTest {
      * @throws Exception possible Exception.
      */
     @Test
-    public void testHitAndLive() throws Exception{
+    public void testHitAndLive() throws Exception {
         testAlien.setHealth(2);
 
         assertEquals(testAlien.getHitScore(), testAlien.hit());

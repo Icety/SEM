@@ -8,15 +8,15 @@ import application.core.aliens.MothershipAlien;
 import application.core.aliens.SmallAlien;
 import application.core.projectiles.Projectile;
 import application.core.projectiles.SmallProjectile;
-import application.core.upgrades.*;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.WeaponUpgrade;
+import application.core.upgrades.Upgrade;
 import application.logger.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.newdawn.slick.Sound;
-
 import java.util.ArrayList;
-//import java.util.Iterator;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,6 +27,10 @@ import static org.mockito.Mockito.mock;
  * Test class for tests that should be ignored by Maven.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class MavenExcludedTests {
     private Game testGame;
     private Game testMultiPlayerGame;
@@ -37,7 +41,7 @@ public class MavenExcludedTests {
     private Main testMain;
 
     @Mock
-    public final Player MockedPlayer = mock(Player.class);
+    public final Player mockedPlayer = mock(Player.class);
     @Mock
     public final Logger mockedLogger = mock(Logger.class);
     @Mock
@@ -72,7 +76,7 @@ public class MavenExcludedTests {
     /**
      * Test whether update works correctly.
      * Amount of Projectiles should be zero, because updateProjectiles() was called.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testUpdateWithShoot() throws Exception {
@@ -86,7 +90,7 @@ public class MavenExcludedTests {
 
     /**
      * Test shoot() with an upgraded weapon 0.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testShootWeaponZeroLastSideZero() throws Exception {
@@ -99,7 +103,7 @@ public class MavenExcludedTests {
 
     /**
      * Test shoot() with an upgraded weapon 0 with lastSide non 0.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testShootWeaponZeroLastSideNotZero() throws Exception {
@@ -112,7 +116,7 @@ public class MavenExcludedTests {
 
     /**
      * Test shoot() with an upgraded weapon 1.
-     * @throws Exception
+     * @throws Exception possible Exception.
      */
     @Test
     public void testShootWeaponOne() throws Exception {

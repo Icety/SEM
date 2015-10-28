@@ -1,7 +1,6 @@
 package application.core.aliens;
 
 import application.Main;
-import application.core.projectiles.BossBeamProjectile;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 
@@ -9,6 +8,9 @@ import org.newdawn.slick.Image;
  * Class for DaphnalienBoss.
  * @author Thomas Oomens
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class AnimatedBoss extends FinalBoss {
 
     /**

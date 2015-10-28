@@ -3,7 +3,13 @@ package application.controllers;
 import application.Main;
 import application.core.aliens.Alien;
 import application.core.Player;
-import org.newdawn.slick.*;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -61,7 +67,7 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
     }
 
     /**
@@ -96,7 +102,7 @@ public class StoryLine extends BasicGameState {
 
         //Display Score in top left.
         g.drawString(("SCORE"), 140, 50);
-        g.drawString( Integer.toString(tMain.getGame().getScore()), 150, 80);
+        g.drawString(Integer.toString(tMain.getGame().getScore()), 150, 80);
 
             //Display Lives in top right.
             g.drawString("LIVES: ", container.getWidth() - 500, 50);
@@ -106,7 +112,7 @@ public class StoryLine extends BasicGameState {
 
         //Display Time
         g.drawString("TIME LEFT", 240, 50);
-        g.drawString( Integer.toString(tTimeLeft), 250, 80);
+        g.drawString(Integer.toString(tTimeLeft), 250, 80);
 
             //Draw the player
             p.getImage().draw(p.getX(), p.getY(), p.getWidth(), p.getHeight());
@@ -123,9 +129,9 @@ public class StoryLine extends BasicGameState {
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta)
             throws SlickException {
-        if (tMain.getGame().getLevel() != null &&
-                tMain.getGame().getLevel().getStoryLine() != null &&
-                tMain.getGame().getLevel().getStoryLine().equals("")) {
+        if (tMain.getGame().getLevel() != null
+                && tMain.getGame().getLevel().getStoryLine() != null
+                && tMain.getGame().getLevel().getStoryLine().equals("")) {
             tSkip = true;
         }
 
@@ -143,7 +149,7 @@ public class StoryLine extends BasicGameState {
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/backgrounds/"+ tMain.getGame().getLevel().getBackground());
+                tBackground2 = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
                 tDifficulty = tMain.DIFFICULTY;
                 Main.BACKGROUNDMUSIC.stop();
                 Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/storyline.wav");
@@ -163,15 +169,12 @@ public class StoryLine extends BasicGameState {
                 game.enterState(20, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
             }
         } else {
-
-
-
             //If there is no story, a boss is appearing. In this case,
             // we do not change the background as the "level" has not finished yet.
             if (tMain.getGame().getLevel().getTheme().equals("daphne")) {
                 tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
-            } else if(!tMain.getGame().getLevel().getTheme().equals("")) {
-                tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+            } else if (!tMain.getGame().getLevel().getTheme().equals("")) {
+                tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
             }
             tOverlay = false;
             if (!tDone && !tSkip) {
@@ -258,6 +261,11 @@ public class StoryLine extends BasicGameState {
                 + "After destroying the first layer of aliens";
     }
 
+    /**
+     * Check whether a key is pressed.
+     * @param key the pressed key.
+     * @param c the belonging character.
+     */
     public void keyPressed(int key, char c) {
         switch (key) {
             case Input.KEY_SPACE:
@@ -268,47 +276,52 @@ public class StoryLine extends BasicGameState {
         }
     }
 
+    /**
+     * Method to visualize the points.
+     * @param g required Graphics.
+     * @param container required GameContainer.
+     */
     private void showPoints(Graphics g, GameContainer container) {
         //Show total points earned in the past level
         if (tCount == 1) {
             tMain.getGame().setScore(-tPointsEarned + tNewScore);
         }
         if (10 < tCount) {
-            g.drawString("Points earned:", container.getWidth()/2 - 400, container.getHeight()/2);
-            g.drawString(Integer.toString(tPointsEarned), container.getWidth()/2 - 400, container.getHeight()/2 + 50);
+            g.drawString("Points earned:", container.getWidth() / 2 - 400, container.getHeight() / 2);
+            g.drawString(Integer.toString(tPointsEarned), container.getWidth() / 2 - 400, container.getHeight() / 2 + 50);
         }
 
         //Draw +
         if (60 < tCount) {
-            g.drawString("+", container.getWidth()/2 - 300, container.getHeight()/2 + 50);
+            g.drawString("+", container.getWidth() / 2 - 300, container.getHeight() / 2 + 50);
         }
 
         //Show time bonus
         if (110 < tCount) {
-            g.drawString("Time bonus:", container.getWidth()/2 - 200, container.getHeight()/2);
-            g.drawString(Integer.toString(tTimeLeft*10), container.getWidth()/2 - 200, container.getHeight()/2 + 50);
+            g.drawString("Time bonus:", container.getWidth() / 2 - 200, container.getHeight() / 2);
+            g.drawString(Integer.toString(tTimeLeft * 10), container.getWidth() / 2 - 200, container.getHeight() / 2 + 50);
         }
 
         //Draw x
         if (160 < tCount) {
-            g.drawString("x", container.getWidth()/2 - 100, container.getHeight()/2 + 50);
+            g.drawString("x", container.getWidth() / 2 - 100, container.getHeight() / 2 + 50);
         }
 
         //Show time multiplier
         if (210 < tCount) {
             g.drawString("Difficulty multiplier:", container.getWidth() / 2, container.getHeight() / 2);
-            g.drawString(Integer.toString(tDifficulty),  container.getWidth()/2, container.getHeight()/2 + 50);
+            g.drawString(Integer.toString(tDifficulty),  container.getWidth() / 2, container.getHeight() / 2 + 50);
         }
 
         //Draw =
         if (260 < tCount) {
-            g.drawString("=", container.getWidth()/2 + 200, container.getHeight()/2 + 50);
+            g.drawString("=", container.getWidth() / 2 + 200, container.getHeight() / 2 + 50);
         }
 
         //Show total score
         if (310 < tCount) {
-            g.drawString("Total:", container.getWidth()/2 + 400, container.getHeight()/2);
-            g.drawString(Integer.toString(tNewScore), container.getWidth()/2 + 400, container.getHeight()/2 + 50);
+            g.drawString("Total:", container.getWidth() / 2 + 400, container.getHeight() / 2);
+            g.drawString(Integer.toString(tNewScore), container.getWidth() / 2 + 400, container.getHeight() / 2 + 50);
         }
     }
 }

@@ -3,7 +3,6 @@ package application.core;
 import application.core.aliens.Alien;
 import application.core.projectiles.PlayerProjectile;
 import application.core.projectiles.Projectile;
-import application.core.projectiles.SmallProjectile;
 import application.logger.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -13,7 +12,9 @@ import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
 /**
@@ -270,6 +271,10 @@ public class GameTest {
         assertTrue(testGame.isNextLevel());
     }
 
+    /**
+     * Test whether checkBarrierCollisions() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testCheckBarrierCollisions() throws Exception {
         ArrayList<Barrier> testBarriers = new ArrayList<>();
@@ -283,7 +288,6 @@ public class GameTest {
         testBarrier.tHealth = 1;
         testBarriers.add(testBarrier);
         Iterator<Barrier> it = testBarriers.iterator();
-
 
         testGame.checkBarierCollisions(it);
         assertEquals(1, testBarrier.getHealth());

@@ -18,6 +18,10 @@ import static org.mockito.Mockito.when;
  * Test class for Won.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class WonTest {
     private Won testWon;
 

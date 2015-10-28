@@ -33,7 +33,7 @@ public abstract class Upgrade extends Sprite {
      * @return the boolean value.
      */
     public boolean isOutOfBounds() {
-        return ((getY() < 0) || (getY()> Main.HEIGHT));
+        return ((getY() < 0) || (getY() > Main.HEIGHT));
     }
 
     /**

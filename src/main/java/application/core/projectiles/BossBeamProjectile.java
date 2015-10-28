@@ -8,7 +8,8 @@ import org.newdawn.slick.Image;
  * @author Niek van der Laan.
  */
 @SuppressWarnings({
-        "checkstyle:magicnumber"
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
 })
 public class BossBeamProjectile extends Projectile {
     protected int tCount = 0;
@@ -25,7 +26,8 @@ public class BossBeamProjectile extends Projectile {
     }
 
     /**
-     * Update method for the beam, making the beam bigger the first 50 ticks, after that move it down.
+     * Update method for the beam, making the beam bigger the first 50 ticks,
+     * after that move it down.
      */
     public void update() {
         if (tCount < 30) {

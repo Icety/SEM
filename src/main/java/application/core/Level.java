@@ -10,7 +10,8 @@ import java.util.ArrayList;
  * @author Thomas Oomens.
  */
 @SuppressWarnings({
-        "checkstyle:visibilitymodifier"
+        "checkstyle:visibilitymodifier",
+        "checkstyle:magicnumber"
 })
 public class Level {
     protected ArrayList<Alien> tAliens;
@@ -21,51 +22,70 @@ public class Level {
     protected PlayerController playerController;
     protected String tMusic;
     protected String tTheme;
+    protected String tStoryLine;
+    protected ArrayList<Barrier> tBarriers;
 
-    public Level (int numOfPlayers, PlayerController controller){
+    /**
+     * Constructor method for Level.
+     * @param numOfPlayers amount of players.
+     * @param controller the PlayerController.
+     */
+    public Level(int numOfPlayers, PlayerController controller) {
         tNumOfPlayers = numOfPlayers;
         playerController = controller;
         tBarriers = new ArrayList<>();
         tBarriers.add(new Barrier(200, 900));
-        tBarriers.add(new Barrier(Main.WIDTH/2-35, 900));
-        tBarriers.add(new Barrier(Main.WIDTH-200-70, 900));
+        tBarriers.add(new Barrier(Main.WIDTH / 2 - 35, 900));
+        tBarriers.add(new Barrier(Main.WIDTH - 200 - 70, 900));
     }
 
     /**
-     * Getter method for the Time for the level
-     * @return the integer value of time
+     * Getter method for the Time for the level.
+     * @return the integer value of time.
      */
     public int getTime() {
         return tTime;
     }
 
     /**
-     * Setter method for the Time for the level
-     * @param tTime
+     * Setter method for the Time for the level.
+     * @param tTime the current time.
      */
     public void setTime(int tTime) {
         this.tTime = tTime;
     }
 
+    /**
+     * Getter method for the theme.
+     * @return the theme.
+     */
     public String getTheme() {
         return tTheme;
     }
 
+    /**
+     * Setter method for the theme.
+     * @param tTheme the wanted theme.
+     */
     public void setTheme(String tTheme) {
         this.tTheme = tTheme;
     }
 
+    /**
+     * Getter method for the storyLine.
+     * @return the storyline.
+     */
     public String getStoryLine() {
         return tStoryLine;
     }
 
+    /**
+     * Setter for the theme of the storyLine.
+     * @param tStoryLine the wanted storyline.
+     */
     public void setStoryLine(String tStoryLine) {
         this.tStoryLine = tStoryLine;
     }
-
-    protected String tStoryLine;
-
-    protected ArrayList<Barrier> tBarriers;
 
     /**
      * Getter method for the Aliens in the Level.

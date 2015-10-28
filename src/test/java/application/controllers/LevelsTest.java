@@ -12,7 +12,10 @@ import org.newdawn.slick.Input;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -21,7 +24,8 @@ import static org.mockito.Mockito.when;
  * @author Arthur Breurkes.
  */
 @SuppressWarnings({
-        "checkstyle:visibilitymodifier"
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
 })
 public class LevelsTest {
     private Levels testLevels;

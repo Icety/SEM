@@ -18,6 +18,10 @@ import static org.mockito.Mockito.when;
  * Test class for Lost.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class LostTest {
     private Lost testLost;
     private Game testGame;

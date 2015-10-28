@@ -18,10 +18,10 @@ import org.newdawn.slick.state.StateBasedGame;
  */
 @SuppressWarnings({
         "checkstyle:linelength",
-        "checkstyle:magicnumber"
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
 })
 public class HighScoreForm extends BasicGameState {
-
     protected HighScoreManager highScoreManager;
     protected Main tMain;
     protected int tId;
@@ -30,7 +30,6 @@ public class HighScoreForm extends BasicGameState {
     protected boolean tPause = false;
     protected TextField tTextField;
     protected String tName;
-
 
     /**
      * Constructor method for HighScoreForm.
@@ -50,7 +49,7 @@ public class HighScoreForm extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
 
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
 
 
         tTextField = new TextField(gameContainer, gameContainer.getDefaultFont(), 420, 400, 500, 80);

@@ -19,6 +19,9 @@ import static org.mockito.Mockito.when;
  * Test class for tests that should be ignored by Maven.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class MavenExcludedTests {
     private Levels testLevels;
     private Game testGame;

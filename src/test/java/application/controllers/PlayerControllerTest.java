@@ -16,6 +16,10 @@ import static org.mockito.Mockito.verify;
  * Test class for PlayerController.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class PlayerControllerTest {
     PlayerController testController;
 

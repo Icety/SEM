@@ -12,6 +12,9 @@ import static org.junit.Assert.assertEquals;
  * Test class for HtmlFormatter.java.
  * @author Arthur Breurkes
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class HtmlFormatterTest {
     private Log testLog;
     private HtmlFormatter testFormatter;
@@ -36,10 +39,10 @@ public class HtmlFormatterTest {
         Date resultDate = new Date(testLog.getTime());
         String dateTime = dateFormat.format(resultDate);
 
-        String wanted = "<tr>\n" +
-                "\t<th style=\"color: purple\">CONFIG<th>\n" +
-                "<td>Test</td>\n" +
-                "<td>"+ dateTime +"</td></tr>\n";
+        String wanted = "<tr>\n"
+                + "\t<th style=\"color: purple\">CONFIG<th>\n"
+                + "<td>Test</td>\n"
+                + "<td>"+ dateTime + "</td></tr>\n";
 
         assertEquals(wanted, testFormatter.format(testLog));
     }

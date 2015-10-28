@@ -10,6 +10,9 @@ import static org.junit.Assert.assertNotNull;
  * Test class for ExtendedProjectile.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class ExtendedProjectileTest {
     private ExtendedProjectile testProjectile;
 

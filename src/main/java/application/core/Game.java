@@ -17,7 +17,9 @@ import org.newdawn.slick.SlickException;
  */
 @SuppressWarnings({
         "checkstyle:visibilitymodifier",
-        "checkstyle:linelength"
+        "checkstyle:linelength",
+        "checkstyle:methodlength",
+        "checkstyle:magicnumber"
 })
 public class Game {
     protected Main tMain;
@@ -44,6 +46,7 @@ public class Game {
      * @param width the width of the game.
      * @param height the height of the game.
      * @param logger the Logger to be bound to the game.
+     * @param players the amount of players.
      */
     public Game(int width, int height, Logger logger, int players) {
         tScreenWidth = width;
@@ -70,8 +73,8 @@ public class Game {
     }
 
     /**
-     *  Getter method for the Game time.
-     * @return
+     * Getter method for the Game time.
+     * @return the current time.
      */
     public int getTime() {
         return tTime;
@@ -106,7 +109,7 @@ public class Game {
      */
     public void nextLevel() {
         tNextLevel = false;
-        tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController );
+        tLevel = levelFactory.buildLevel(levelNumber, tPlayers, playerController);
         tLogger.setLog("The level with number: '" + levelNumber + "' was build.", 2);
         this.addTime((4 - tMain.DIFFICULTY) * tLevel.getTime());
         tStartScore = tScore;
@@ -273,9 +276,9 @@ public class Game {
      * @param bit the Iterator to iterate with.
      */
     protected void checkBarierCollisions(Iterator<Barrier> bit) {
-        while(bit.hasNext()) {
+        while (bit.hasNext()) {
             Barrier b = bit.next();
-            for(Player p : getPlayerController().getPlayers()) {
+            for (Player p : getPlayerController().getPlayers()) {
                 Iterator<Projectile> it = p.getProjectiles().iterator();
                 while (it.hasNext()) {
                     Projectile projectile = it.next();
@@ -296,12 +299,13 @@ public class Game {
     /**
      * Checker method for collisions of Aliens with projectiles.
      * @param it the Iterator over Projectiles.
+     * @throws SlickException possible Exception.
      */
     public void checkAlienCollisions(Iterator<Projectile> it) throws SlickException {
         while (it.hasNext()) {
             Projectile projectile = it.next();
 
-            for(Player p : playerController.getPlayers()) {
+            for (Player p : playerController.getPlayers()) {
                 if (p.intersects(projectile)) {
                     tLogger.setLog("Player has been hit.", 2);
                     projectile.hit();
@@ -317,9 +321,9 @@ public class Game {
                 }
             }
             Iterator<Barrier> bit = tLevel.getBariers().iterator();
-            while(bit.hasNext()) {
+            while (bit.hasNext()) {
                 Barrier b = bit.next();
-                if(projectile.intersects(b)){
+                if (projectile.intersects(b)) {
                     b.hit();
                     projectile.hit();
                     if (projectile.noLives()) {
@@ -339,8 +343,8 @@ public class Game {
      */
     public void checkPlayerUpgradeCollisions(application.core.aliens.Iterator uit) {
         while (uit.hasNext()) {
-            Upgrade u = (Upgrade)uit.next();
-            for(Player p : playerController.getPlayers()){
+            Upgrade u = (Upgrade) uit.next();
+            for (Player p : playerController.getPlayers()) {
                 if (p.intersects(u)) {
                     p.upgrade(u);
                     u.hit();
@@ -353,6 +357,7 @@ public class Game {
      * Checker method for dead Aliens.
      * @param alien a given Alien.
      * @param it the Iterator over Aliens.
+     * @throws SlickException possible Exception.
      */
     public void checkDeadAlien(Alien alien, Iterator<Projectile> it) throws SlickException {
         boolean wasHit = false;

@@ -10,6 +10,9 @@ import static org.junit.Assert.assertEquals;
  * Test class for Barrier.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class BarrierTest {
     private Barrier testBarrier;
 
@@ -88,6 +91,10 @@ public class BarrierTest {
         assertEquals(Main.BARRIER_5, testBarrier.getImage());
     }
 
+    /**
+     * Test whether getImage() works correctly.
+     * @throws Exception possible Exception.
+     */
     @Test
     public void testGetImage3() throws Exception {
         testBarrier.tHealth = 3;

@@ -14,6 +14,10 @@ import static org.mockito.Mockito.mock;
  * Test class for Main.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class MainTest {
     private Main testMain;
 
@@ -34,7 +38,7 @@ public class MainTest {
      * @throws Exception possible Exception.
      */
     @Test
-    public void testMainNotNull() throws Exception{
+    public void testMainNotNull() throws Exception {
         assertNotNull(testMain);
     }
 

@@ -7,7 +7,13 @@ import application.core.Player;
 import application.core.aliens.AnimatedBoss;
 import application.core.projectiles.Projectile;
 import application.core.upgrades.Upgrade;
-import org.newdawn.slick.*;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Music;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -22,7 +28,8 @@ import java.util.ArrayList;
 @SuppressWarnings({
         "checkstyle:magicnumber",
         "checkstyle:visibilitymodifier",
-        "checkstyle:linelength"
+        "checkstyle:linelength",
+        "checkstyle:methodlength"
 })
 public class Levels extends BasicGameState {
     protected Main tMain;
@@ -54,7 +61,7 @@ public class Levels extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
         tCount = 0;
     }
 
@@ -75,7 +82,7 @@ public class Levels extends BasicGameState {
                 tCount++;
                 tBackground.draw(0, 0, container.getWidth(), container.getHeight());
                 if (tCount < 100) {
-                    g.drawString("+" + (4-tMain.DIFFICULTY)*tMain.getGame().getLevel().getTime() + " seconds!", container.getWidth()/2, container.getHeight()/2);
+                    g.drawString("+" + (4 - tMain.DIFFICULTY) * tMain.getGame().getLevel().getTime() + " seconds!", container.getWidth() / 2, container.getHeight() / 2);
                 }
                 g.resetLineWidth();
                 g.setColor(Color.white);
@@ -85,10 +92,10 @@ public class Levels extends BasicGameState {
 
                 //Display Time
                 g.drawString("TIME LEFT", 240, 50);
-                g.drawString( Integer.toString(tMain.getGame().getTime()), 250, 80);
+                g.drawString(Integer.toString(tMain.getGame().getTime()), 250, 80);
 
-                for(Barrier b : tMain.getGame().getLevel().getBariers()) {
-                    b.getImage().draw(b.getX(),b.getY(),b.getWidth(),b.getHeight());
+                for (Barrier b : tMain.getGame().getLevel().getBariers()) {
+                    b.getImage().draw(b.getX(), b.getY(), b.getWidth(), b.getHeight());
                 }
 
                 //Draw all aliens and its upgrades
@@ -154,7 +161,7 @@ public class Levels extends BasicGameState {
             }
             if (Main.sNewLevel) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
-                tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+                tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
 
                 tMusicString = tMain.getGame().getLevel().getMusic();
                 Main.BACKGROUNDMUSIC.stop();
@@ -197,7 +204,7 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
-        if (tMain.getGame().getPlayerController().getNumPlayers() > 1 ) {
+        if (tMain.getGame().getPlayerController().getNumPlayers() > 1) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(true);
@@ -212,7 +219,6 @@ public class Levels extends BasicGameState {
                     break;
             }
         }
-
     }
 
 
@@ -236,7 +242,7 @@ public class Levels extends BasicGameState {
                 default:
                     break;
             }
-        if(tMain.getGame().getPlayerController().getNumPlayers() > 1) {
+        if (tMain.getGame().getPlayerController().getNumPlayers() > 1) {
             switch (key) {
                 case Input.KEY_A:
                     tMain.getGame().getPlayerController().getPlayers().get(1).leftArrowPressed(false);
@@ -249,8 +255,7 @@ public class Levels extends BasicGameState {
                     break;
                 default:
                     break;
-        }
-
+            }
         }
     }
 

@@ -1,7 +1,11 @@
 package application.core;
 
 import application.Main;
-import application.core.upgrades.*;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.PlayerUpgrade;
+import application.core.upgrades.SpeedUpgrade;
+import application.core.upgrades.WeaponUpgrade;
+import application.core.upgrades.Upgrade;
 import org.junit.Before;
 import org.junit.Test;
 

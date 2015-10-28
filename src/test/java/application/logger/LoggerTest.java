@@ -7,12 +7,17 @@ import org.mockito.Mock;
 import java.io.PrintWriter;
 
 import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 /**
  * Test class for Logger.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class LoggerTest {
     private Log testLog;
     private Logger testLogger;

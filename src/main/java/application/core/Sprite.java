@@ -155,96 +155,96 @@ public class Sprite {
     }
 
     /**
-     * Getter method for the Sprites Health
-     * @return
+     * Getter method for the Sprites Health.
+     * @return health.
      */
     public int getHealth() {
         return tHealth;
     }
 
     /**
-     * Getter method for the random chance
-     * @return random chance
+     * Getter method for the random chance.
+     * @return random chance.
      */
     public double getRandomChance() {
         return tRandomChance;
     }
 
     /**
-     * Getter method for the difficulty
-     * @return difficulty
+     * Getter method for the difficulty.
+     * @return difficulty.
      */
     public int getDifficulty() {
         return tDifficulty;
     }
 
     /**
-     * Getter method for the points earned when killed
-     * @return points earned when killed
+     * Getter method for the points earned when killed.
+     * @return points earned when killed.
      */
     public int getKillScore() {
         return tKillScore;
     }
 
     /**
-     * Getter method for the points earned when hit
-     * @return  points earned when hit
+     * Getter method for the points earned when hit.
+     * @return  points earned when hit.
      */
     public int getHitScore() {
         return tHitScore;
     }
 
     /**
-     * Setter method for the Health of this Sprite
-     * @param tHealth
+     * Setter method for the Health of this Sprite.
+     * @param tHealth the amount of health.
      */
     public void setHealth(int tHealth) {
         this.tHealth = tHealth;
     }
 
     /**
-     * Setter method for the random chance of this Sprite
-     * @param tRandomChance
+     * Setter method for the random chance of this Sprite.
+     * @param tRandomChance the random chance.
      */
     public void setRandomChance(double tRandomChance) {
         this.tRandomChance = tRandomChance;
     }
 
     /**
-     * Setter method for the width of this Sprite
-     * @param tWidth
+     * Setter method for the width of this Sprite.
+     * @param tWidth the width.
      */
     public void setWidth(int tWidth) {
         this.tWidth = tWidth;
     }
 
     /**
-     * Setter method for the height of this Sprite
-     * @param tHeight
+     * Setter method for the height of this Sprite.
+     * @param tHeight the height.
      */
     public void setHeight(int tHeight) {
         this.tHeight = tHeight;
     }
 
     /**
-     * Setter method for the points earned when killed
-     * @param tKillScore
+     * Setter method for the points earned when killed.
+     * @param tKillScore the killScore.
      */
     public void setKillScore(int tKillScore) {
         this.tKillScore = tKillScore;
     }
 
     /**
-     * Setter method for the points earned when hit
-     * @param tHitScore
+     * Setter method for the points earned when hit.
+     * @param tHitScore the hitScore.
      */
     public void setHitScore(int tHitScore) {
         this.tHitScore = tHitScore;
     }
 
     /**
-     * Setter method for the projectiles of this alien
-     * @param tProjectiles
+     * Setter method for the projectiles of this alien.
+     * @param tProjectiles a list of Projectiles.
      */
     public void setProjectiles(ArrayList<Projectile> tProjectiles) {
         this.tProjectiles = tProjectiles;
@@ -265,8 +265,8 @@ public class Sprite {
     }
 
     /**
-     * Setter method for the difficulty
-     * @param difficulty
+     * Setter method for the difficulty.
+     * @param difficulty the level of difficulty.
      */
     public void setDifficulty(int difficulty) {
         this.tDifficulty = difficulty;

@@ -1,9 +1,13 @@
 package application.core.aliens;
 
 import application.Main;
-import application.core.*;
+import application.core.Sprite;
 import application.core.projectiles.SmallProjectile;
-import application.core.upgrades.*;
+import application.core.upgrades.HealthUpgrade;
+import application.core.upgrades.PlayerUpgrade;
+import application.core.upgrades.SpeedUpgrade;
+import application.core.upgrades.WeaponUpgrade;
+import application.core.upgrades.Upgrade;
 import org.w3c.dom.Element;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -14,7 +18,8 @@ import java.util.ArrayList;
  */
 @SuppressWarnings({
         "checkstyle:magicnumber",
-        "checkstyle:visibilitymodifier"
+        "checkstyle:visibilitymodifier",
+        "checkstyle:linelength"
 })
 
 public class Alien extends Sprite implements Container {
@@ -28,31 +33,36 @@ public class Alien extends Sprite implements Container {
     protected ArrayList<Upgrade> tUpgrades = new ArrayList<>();
 
     /**
-     * Iterator for Upgrades in this class
-     * @return an Iterator
+     * Iterator for Upgrades in this class.
+     * @return an Iterator.
      */
     @Override
     public Iterator getIterator() {
         return new UpgradeIterator();
     }
 
+    /**
+     * Iterator for upgrades.
+     */
     private class UpgradeIterator implements Iterator {
-
         int index;
 
+        /**
+         * Check whether iterator has a next item.
+         * @return boolean value.
+         */
         @Override
         public boolean hasNext() {
-
-            if(index < tUpgrades.size()){
-                return true;
-            }
-            return false;
+            return index < tUpgrades.size();
         }
 
+        /**
+         * Get the next item in the iterator.
+         * @return the next item.
+         */
         @Override
         public Object next() {
-
-            if(this.hasNext()){
+            if (this.hasNext()) {
                 return tUpgrades.get(index++);
             }
             return null;
@@ -339,8 +349,8 @@ public class Alien extends Sprite implements Container {
     }
 
     /**
-     * Return whether the alien is an animated sprite
-     * @return Whether the alien is animated
+     * Return whether the alien is an animated sprite.
+     * @return Whether the alien is animated.
      */
     public boolean isAnimated() {
         return tAnimate;

@@ -2,12 +2,16 @@ package application.core;
 
 import application.controllers.PlayerController;
 import org.w3c.dom.NodeList;
-import application.Main;
-import application.core.aliens.*;
+import application.core.aliens.BigAlien;
+import application.core.aliens.SmallAlien;
+import application.core.aliens.MothershipAlien;
+import application.core.aliens.MiniAlien;
+import application.core.aliens.FinalBoss;
+import application.core.aliens.Alien;
+import application.core.aliens.DaphnalienBoss;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
@@ -18,9 +22,11 @@ import java.util.ArrayList;
  * @author Thomas Oomens
  */
 @SuppressWarnings({
-        "checkstyle:visibilitymodifier"
+        "checkstyle:visibilitymodifier",
+        "checkstyle:methodlength",
+        "linelength"
 })
-public class LevelFactory {
+public final class LevelFactory {
     protected NodeList tLevels;
     private static LevelFactory tUniqueFactory;
     protected static int tScreenWidth;
@@ -50,6 +56,10 @@ public class LevelFactory {
         }
     }
 
+    /**
+     * Get the LevelFactory belonging to the level.
+     * @return the LevelFactory.
+     */
     public static synchronized LevelFactory getFactory() {
         if (tUniqueFactory == null) {
             tUniqueFactory = new LevelFactory(tScreenWidth, tScreenHeight);
@@ -57,10 +67,11 @@ public class LevelFactory {
         return tUniqueFactory;
     }
 
-
     /**
      * Build the parsed Level.
      * @param levelNumber the number belonging to the Level.
+     * @param players the amount of players.
+     * @param controller the PlayerController.
      * @return the built Level.
      */
     public Level buildLevel(int levelNumber, int players, PlayerController controller) {

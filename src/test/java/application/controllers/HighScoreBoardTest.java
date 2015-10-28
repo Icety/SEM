@@ -15,6 +15,9 @@ import static org.mockito.Mockito.mock;
  * Test class for HighScoreBoard.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:visibilitymodifier"
+})
 public class HighScoreBoardTest {
     private HighScoreBoard testBoard;
 

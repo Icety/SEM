@@ -26,7 +26,8 @@ import org.newdawn.slick.state.StateBasedGame;
 @SuppressWarnings({
         "checkstyle:staticvariablename",
         "checkstyle:visibilitymodifier",
-        "checkstyle:magicnumber"
+        "checkstyle:magicnumber",
+        "checkstyle:methodlength"
 })
 public class Main extends StateBasedGame {
 
@@ -186,8 +187,9 @@ public class Main extends StateBasedGame {
 
     /**
      * Let Main start a new game.
+     * @param numPlayers the amount of playing players.
      */
-    public void newGame(int numPlayers){
+    public void newGame(int numPlayers) {
         tGame = new Game(WIDTH, HEIGHT, tLogger, numPlayers);
         tGame.nextLevel();
     }
@@ -200,11 +202,20 @@ public class Main extends StateBasedGame {
         return tGame;
     }
 
+    /**
+     * Set the game.
+     * @param game the game.
+     */
     public void setGame(Game game) {
         tGame = game;
     }
 
-    public void setAlienImages (String theme) throws SlickException {
+    /**
+     * Setter method for the image files of the Aliens.
+     * @param theme the theme of the current level.
+     * @throws SlickException possible Exception.
+     */
+    public void setAlienImages(String theme) throws SlickException {
         MINI_ALIEN = new Image(imageRoot + theme + "/miniAlien.png");
         SMALL_ALIEN = new Image(imageRoot + theme + "/smallAlien.png");
         BIG_ALIEN = new Image(imageRoot + theme + "/bigAlien.png");
@@ -220,6 +231,9 @@ public class Main extends StateBasedGame {
         UPGRADED_PLAYER = new Image(imageRoot + "player_upgraded.png");
     }
 
+    /**
+     * Method to change difficulty of the game.
+     */
     public void changeDifficulty() {
         DIFFICULTY++;
         if (DIFFICULTY > 3) {

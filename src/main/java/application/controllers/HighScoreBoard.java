@@ -3,7 +3,12 @@ package application.controllers;
 import application.Main;
 import application.core.HighScoreManager;
 import application.core.Score;
-import org.newdawn.slick.*;
+import org.newdawn.slick.Image;
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.transition.FadeInTransition;
@@ -47,7 +52,7 @@ public class HighScoreBoard extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
 
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
     }
 
     /**
@@ -67,8 +72,7 @@ public class HighScoreBoard extends BasicGameState {
             graphics.drawString("HIGH SCORE BOARD", 600, 100);
             graphics.drawString("Press Enter to return to menu", 550, 150);
 
-
-            if(tMain.getGame() == null) {
+            if (tMain.getGame() == null) {
                 tHighScoreManager = new HighScoreManager();
             } else {
                 tHighScoreManager = tMain.getGame().getHighScoreManager();
@@ -83,9 +87,7 @@ public class HighScoreBoard extends BasicGameState {
                 graphics.drawString(j + ". " + aList.getPlayer() + ": " + Integer.toString(aList.getScore()) + "\n", x, y);
                 y = y + 25;
                 j = j + 1;
-
             }
-
            }
 
     }

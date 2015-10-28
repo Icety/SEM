@@ -7,6 +7,9 @@ import org.newdawn.slick.Image;
  * Class for Barrier.
  * @author Ties Westerborg.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber"
+})
 public class Barrier extends Sprite {
 
     /**

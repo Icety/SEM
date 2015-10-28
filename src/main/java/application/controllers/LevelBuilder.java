@@ -85,7 +85,7 @@ public class LevelBuilder extends BasicGameState {
         menuHeight = 150;
         selected = null;
 
-        tBackground = new Image("src/main/java/application/images/backgrounds/"+ tBackgroundString);
+        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
 
         saveGame = false;
         Font font = container.getDefaultFont();
@@ -252,6 +252,7 @@ public class LevelBuilder extends BasicGameState {
                 break;
             case Input.KEY_TAB:
                 tMain.enterState(0, new FadeOutTransition(Color.black), new FadeInTransition(Color.black));
+                break;
             default:
                 break;
         }

@@ -1,7 +1,11 @@
 package application.controllers;
 
 import application.Main;
-import application.core.aliens.*;
+import application.core.aliens.BigAlien;
+import application.core.aliens.MiniAlien;
+import application.core.aliens.SmallAlien;
+import application.core.aliens.FinalBoss;
+import application.core.aliens.MothershipAlien;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -12,7 +16,10 @@ import org.newdawn.slick.gui.TextField;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +27,10 @@ import static org.mockito.Mockito.when;
  * Test class for LevelBuilder.java.
  * @author Arthur Breurkes.
  */
+@SuppressWarnings({
+        "checkstyle:magicnumber",
+        "checkstyle:visibilitymodifier"
+})
 public class LevelBuilderTest {
     private BigAlien testAlien;
     private LevelBuilder testBuilder;
