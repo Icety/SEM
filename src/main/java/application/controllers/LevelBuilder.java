@@ -85,7 +85,7 @@ public class LevelBuilder extends BasicGameState {
         menuHeight = 150;
         selected = null;
 
-        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+        tBackground = new Image("images/backgrounds/" + tBackgroundString);
 
         saveGame = false;
         Font font = container.getDefaultFont();

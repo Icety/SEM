@@ -46,8 +46,8 @@ public class Lost extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/moving.jpg");
-        tWon = new Image("src/main/java/application/images/gameover.png");
+        tBackground = new Image("images/backgrounds/moving.jpg");
+        tWon = new Image("images/gameover.png");
         tExit = false;
     }
 

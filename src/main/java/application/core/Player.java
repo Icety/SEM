@@ -196,7 +196,7 @@ public class Player extends Sprite {
      * @throws SlickException possible Exception.
      */
     public void laserSound() throws SlickException {
-        Sound laser = new Sound("src/main/java/application/sound/shoot.wav");
+        Sound laser = new Sound("sound/shoot.wav");
         laser.play();
     }
 

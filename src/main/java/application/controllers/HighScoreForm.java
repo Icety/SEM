@@ -49,7 +49,7 @@ public class HighScoreForm extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         tMain = (Main) stateBasedGame;
 
-        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+        tBackground = new Image("images/backgrounds/" + tBackgroundString);
 
 
         tTextField = new TextField(gameContainer, gameContainer.getDefaultFont(), 420, 400, 500, 80);

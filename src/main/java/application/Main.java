@@ -128,43 +128,44 @@ public class Main extends StateBasedGame {
         this.addState(new StoryLine(STORYLINE));
         this.addState(new HighScoreForm(ENTERNAME));
 
-        tPlayerDeathSound = new Sound("src/main/java/application/sound/explosion.wav");
-        tInvaderKilledSound = new Sound("src/main/java/application/sound/invaderkilled.wav");
-        tMotherShipKilledSound = new Sound("src/main/java/application/sound/mothership.wav");
-        BACKGROUNDMUSIC = new Music("src/main/java/application/sound/normal.wav");
+        String soundRoot = "sound/";
+        tPlayerDeathSound = new Sound(soundRoot + "explosion.wav");
+        tInvaderKilledSound = new Sound(soundRoot + "invaderkilled.wav");
+        tMotherShipKilledSound = new Sound(soundRoot + "mothership.wav");
+        BACKGROUNDMUSIC = new Music(soundRoot + "normal.wav");
         BACKGROUNDMUSIC.loop();
 
-        imageRoot = "src/main/java/application/images/";
+        imageRoot = "images/";
         imageTheme = "classic";
         setAlienImages(imageTheme);
 
-        String root = "src/main/java/application/images/";
-        MINI_ALIEN = new Image(root + "classic/minialien.png");
-        SMALL_ALIEN = new Image(root + "classic/smallAlien.png");
-        BIG_ALIEN = new Image(root + "classic/bigalien.png");
-        MOTHERSHIP_ALIEN = new Image(root + "classic/mothership.png");
-        PLAYER = new Image(root + "player.png");
-        BOSS_PROJECTILE = new Image(root + "classic/bossProjectile.png");
-        PLAYER_PROJECTILE = new Image(root + "smallbullet.png");
-        SMALL_PROJECTILE = new Image(root + "smallbullet.png");
-        UPGRADED_PLAYER = new Image(root + "player_upgraded.png");
+        String imageRoot = "images/";
+        MINI_ALIEN = new Image(imageRoot + "classic/miniAlien.png");
+        SMALL_ALIEN = new Image(imageRoot + "classic/smallAlien.png");
+        BIG_ALIEN = new Image(imageRoot + "classic/bigAlien.png");
+        MOTHERSHIP_ALIEN = new Image(imageRoot + "classic/mothership.png");
+        PLAYER = new Image(imageRoot + "player.png");
+        BOSS_PROJECTILE = new Image(imageRoot + "classic/bossProjectile.png");
+        PLAYER_PROJECTILE = new Image(imageRoot + "smallbullet.png");
+        SMALL_PROJECTILE = new Image(imageRoot + "smallbullet.png");
+        UPGRADED_PLAYER = new Image(imageRoot + "player_upgraded.png");
 
-        BARRIER_1 = new Image(root + "barrier/barier_1.png");
-        BARRIER_2 = new Image(root + "barrier/barier_2.png");
-        BARRIER_3 = new Image(root + "barrier/barier_3.png");
-        BARRIER_4 = new Image(root + "barrier/barier_4.png");
-        BARRIER_5 = new Image(root + "barrier/barier_5.png");
-        BARRIER_6 = new Image(root + "barrier/barier_6.png");
-        BARRIER_7 = new Image(root + "barrier/barier_7.png");
-        BARRIER_8 = new Image(root + "barrier/barier_8.png");
+        BARRIER_1 = new Image(imageRoot + "barrier/barier_1.png");
+        BARRIER_2 = new Image(imageRoot + "barrier/barier_2.png");
+        BARRIER_3 = new Image(imageRoot + "barrier/barier_3.png");
+        BARRIER_4 = new Image(imageRoot + "barrier/barier_4.png");
+        BARRIER_5 = new Image(imageRoot + "barrier/barier_5.png");
+        BARRIER_6 = new Image(imageRoot + "barrier/barier_6.png");
+        BARRIER_7 = new Image(imageRoot + "barrier/barier_7.png");
+        BARRIER_8 = new Image(imageRoot + "barrier/barier_8.png");
 
-        UPGRADE_0 = new Image(root + "upgrades/upgrade_speed.png");
-        UPGRADE_1 = new Image(root + "upgrades/upgrade_weapon.png");
-        UPGRADE_2 = new Image(root + "upgrades/upgrade_health.png");
-        UPGRADE_3 = new Image(root + "upgrades/upgrade.png");
+        UPGRADE_0 = new Image(imageRoot + "upgrades/upgrade_speed.png");
+        UPGRADE_1 = new Image(imageRoot + "upgrades/upgrade_weapon.png");
+        UPGRADE_2 = new Image(imageRoot + "upgrades/upgrade_health.png");
+        UPGRADE_3 = new Image(imageRoot + "upgrades/upgrade.png");
 
 
-        SpriteSheet spriteSheet = new SpriteSheet(root + "daphne/bossAnimation.png", 320, 358);
+        SpriteSheet spriteSheet = new SpriteSheet(imageRoot + "daphne/bossAnimation.png", 320, 358);
         DAPHNALIEN = new Animation(spriteSheet, 30);
     }
 

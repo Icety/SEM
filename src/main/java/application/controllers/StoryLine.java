@@ -67,7 +67,7 @@ public class StoryLine extends BasicGameState {
             throws SlickException {
 
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+        tBackground = new Image("images/backgrounds/" + tBackgroundString);
     }
 
     /**
@@ -149,10 +149,10 @@ public class StoryLine extends BasicGameState {
         if (tStart) {
             //When just started counting, set the background
             if (tCount == 1) {
-                tBackground2 = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
+                tBackground2 = new Image("images/backgrounds/" + tMain.getGame().getLevel().getBackground());
                 tDifficulty = tMain.DIFFICULTY;
                 Main.BACKGROUNDMUSIC.stop();
-                Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/storyline.wav");
+                Main.BACKGROUNDMUSIC = new Music("sound/storyline.wav");
                 Main.BACKGROUNDMUSIC.loop();
             }
             if (tCount % 2 == 0) {
@@ -172,9 +172,9 @@ public class StoryLine extends BasicGameState {
             //If there is no story, a boss is appearing. In this case,
             // we do not change the background as the "level" has not finished yet.
             if (tMain.getGame().getLevel().getTheme().equals("daphne")) {
-                tBackground = new Image("src/main/java/application/images/backgrounds/" + tMain.getGame().getLevel().getBackground());
+                tBackground = new Image("images/backgrounds/" + tMain.getGame().getLevel().getBackground());
             } else if (!tMain.getGame().getLevel().getTheme().equals("")) {
-                tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+                tBackground = new Image("images/backgrounds/" + tBackgroundString);
             }
             tOverlay = false;
             if (!tDone && !tSkip) {

@@ -45,7 +45,7 @@ public class Menu extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/moving.jpg");
+        tBackground = new Image("images/backgrounds/moving.jpg");
         tExit = false;
     }
 

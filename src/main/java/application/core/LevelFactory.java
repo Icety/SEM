@@ -1,5 +1,6 @@
 package application.core;
 
+import application.Main;
 import application.controllers.PlayerController;
 import org.w3c.dom.NodeList;
 import application.core.aliens.BigAlien;
@@ -15,6 +16,8 @@ import org.w3c.dom.Node;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -41,11 +44,11 @@ public final class LevelFactory {
         try {
             tScreenWidth = width;
             tScreenHeight = height;
-            File file = new File("src/main/java/application/levels/levels.xml");
+            URL fileURL = Main.class.getResource("/levels/levels.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = null;
+            DocumentBuilder dBuilder;
             dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(file);
+            Document doc = dBuilder.parse(fileURL.toURI().toString());
             doc.getDocumentElement().normalize();
 
             //Start xml parsing
@@ -79,11 +82,11 @@ public final class LevelFactory {
 
         Element levelName = (Element) tLevels.item(levelNumber);
         try {
-            File file = new File("src/main/java/application/levels/" + levelName.getTextContent() + ".xml");
+            URL fileURL = Main.class.getResource("/levels/" + levelName.getTextContent() + ".xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder dBuilder = null;
+            DocumentBuilder dBuilder;
             dBuilder = dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse(file);
+            Document doc = dBuilder.parse(fileURL.toURI().toString());
             doc.getDocumentElement().normalize();
             Element levelXml = doc.getDocumentElement();
 

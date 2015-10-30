@@ -61,7 +61,7 @@ public class Levels extends BasicGameState {
     public void init(GameContainer container, StateBasedGame game)
             throws SlickException {
         tMain = (Main) game;
-        tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+        tBackground = new Image("images/backgrounds/" + tBackgroundString);
         tCount = 0;
     }
 
@@ -161,11 +161,11 @@ public class Levels extends BasicGameState {
             }
             if (Main.sNewLevel) {
                 tBackgroundString = tMain.getGame().getLevel().getBackground();
-                tBackground = new Image("src/main/java/application/images/backgrounds/" + tBackgroundString);
+                tBackground = new Image("images/backgrounds/" + tBackgroundString);
 
                 tMusicString = tMain.getGame().getLevel().getMusic();
                 Main.BACKGROUNDMUSIC.stop();
-                Main.BACKGROUNDMUSIC = new Music("src/main/java/application/sound/" + tMusicString);
+                Main.BACKGROUNDMUSIC = new Music("sound/" + tMusicString);
                 Main.BACKGROUNDMUSIC.loop();
                 Main.sNewLevel = false;
             }
