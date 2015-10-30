@@ -175,7 +175,7 @@ public class Main extends StateBasedGame {
      */
     public static void main(String[] args) {
         try {
-            AppGameContainer app = new AppGameContainer(new Main("My Game v" + VERSION));
+            AppGameContainer app = new AppGameContainer(new Main("Space Invaders" + VERSION));
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(true);
